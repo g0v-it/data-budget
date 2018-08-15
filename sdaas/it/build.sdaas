@@ -2,11 +2,11 @@
 set -a
 GRAPH="urn:g0v:it"
 
-SD_INCLUDE lexical_proximity_reasoner
-
 
 ####################################################
 SD_LOG  "Step 0: booting knowledge base and facts learning..."
 ####################################################
+SD_LOAD_RDF_FILE urn:sdaas:config data/kees.ttl
+SD_LOAD_RDF_FILE urn:sdaas:config data/catalog.ttl
 
-SDTHATS_ALL_FOLKS
+SD_THATS_ALL_FOLKS

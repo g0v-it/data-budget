@@ -1,2 +1,1 @@
-g0v-data ingestion platform
--------------
+# g0v-data smart data management platform

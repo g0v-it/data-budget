@@ -1,7 +1,7 @@
 # g0v-data rdf repository
 
 
-this implementation is based on [Docker Blazegraph](https://github.com/lyrasis/docker-blazegraph)
+the rdf datastore implementation is based on [Docker Blazegraph](https://github.com/lyrasis/docker-blazegraph)
 
 ## Quickstart
 
