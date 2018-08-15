@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -a
+GRAPH="urn:g0v:it"
+
+SD_INCLUDE lexical_proximity_reasoner
+
+
+####################################################
+SD_LOG  "Step 0: booting knowledge base and facts learning..."
+####################################################
+
+SDTHATS_ALL_FOLKS

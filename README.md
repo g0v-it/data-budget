@@ -43,11 +43,7 @@ The api exposes http enpoints at 8080 port (try http://localhost:8080/v1)
 To load raw data for italian government budget, type:
 
 ```bash
-cd sdaas
-docker build -t linkeddatacenter/sdaas:v1.0 .
-docker run --name sdaas  \
-  -v ../gov-ap:/data \
-  linkeddatacenter/sdaas:v1.0
+docker run --name sdaas -v sdaas/it:/sdaas linkeddatacenter/sdaas:v2.0
 ```
 
 then get data in a json format with http://localhost:8080/v1/metrics

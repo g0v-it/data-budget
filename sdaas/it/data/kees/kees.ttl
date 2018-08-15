@@ -1,0 +1,23 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix kees: <http://linkeddata.center/kees/v1#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sdaas: <http://linkeddata.center/sdaas/v1#> .
+@prefix resource: <http://data.digital360.it/resource/> .
+@prefix graph: <http://data.digital360.it/graph/> .
+@prefix d360: <http://schema.digital360.it/> .
+@base <https://bitbucket.org/linkeddatacenter/digital4merge/raw/master/> .
+	
+#######################################################
+# Config facts
+#######################################################
+resource:graph_kees a kees:KBConfigGraph ;
+	sd:name <urn:sdaas:config> ;
+	dct:source <data/kees/kees.ttl>,<data/kees/catalog.ttl>.
+
+#######################################################
+# Learned facts
+#######################################################
+SD_LOAD_RDF_FILE urn:sdaas:config data/kees/kees.ttl
+SD_LOAD_RDF_FILE urn:sdaas:config data/kees/catalog.ttl
