@@ -25,17 +25,35 @@ The deploy of g0v-data is based on a [stack of docker containers](https://www.dr
 
 The ingestion platform should be executed just to update the knoledge base contained into rdf repository.
 
-The rdf graph database exposes SPARQL enpoint on 9999 port
-
-The api exposes http enpoints at 8080 port
+The government budget raw data must be provided as a web link as [3,4 or 5 stars linked data]() . All required ETL processes are implemented by the ingestion platform using custom data gateways drived by the build script.
 
 
-External components used:
+## Quickstart
 
-- the RDF datastore and SPARQL endpoint  is based on the community edition of [Blazegraph](https://www.blazegraph.com/)
-- the ingestion platform is based on [SDaaS Platform](https://bitbucket.org/linkeddatacenter/sdaas/wiki/Home) by LinkedData.Center . The required SDaaS license is kindly provided for free by LinkedData.Center to the g0v community non commercial projects
-- the data catalog contains nmetadata about used datasets and must be provided as an rdf file according with [Data Catalog Vocabulary](https://www.w3.org/TR/vocab-dcat/) as descrived in g0v-ap ontology.
-- the government budget raw data must be provided as a web link as [3,4 or 5 stars linked data]() . All required ETL processes are implemented by the ingestion platform using custom data gateways drived by the build script.
+To run api ad rdf store type
+
+```bash
+docker-compose up
+```
+
+The rdf graph database exposes SPARQL enpoint on 9999 port (try: http://localhost:9999/bigdata )
+
+The api exposes http enpoints at 8080 port (try http://localhost:8080/v1)
+
+To load raw data for italian government budget, type:
+
+```bash
+cd sdaas
+docker build -t linkeddatacenter/sdaas:v1.0 .
+docker run --name sdaas  \
+  -v ../gov-ap:/data \
+  linkeddatacenter/sdaas:v1.0
+```
+
+then get data in a json format with http://localhost:8080/v1/metrics
+
+v1 api format is compatible with [budget.taipei application](https://github.com/tony1223/tw-budget-platform)
+ 
 
 
 ## Support
@@ -45,8 +63,9 @@ For answers you may not find in here or in the Wiki, avoid posting issues. Feel 
 ## Credits
 
 - [All Contributors](../../contributors)
-- [Blazegraph project](https://www.blazegraph.com/)
-- [LinkedData.Center](http://linkeddata.center/)
+- the RDF datastore and SPARQL endpoint  is based on the community edition of [Blazegraph](https://www.blazegraph.com/)
+- the ingestion platform is based on [SDaaS Platform](https://bitbucket.org/linkeddatacenter/sdaas/wiki/Home) by LinkedData.Center . The required SDaaS license is kindly provided for free by LinkedData.Center to the g0v community for non commercial projects.
+
 
 ## License
 
