@@ -4,8 +4,6 @@ services:
     image: lyrasis/blazegraph:2.1.4
     ports:
       - "9999:8080"
-  sdaas:
-    image: httpd:2.4
   api:
     image: httpd:2.4
     ports:

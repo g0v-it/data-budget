@@ -13,7 +13,7 @@ This project aims to create a smart data management platform to feed budget visu
 
 The project contains four logical components:
 
-- an ontology (g0v-ap) designed as an application profile of the [W3C RDF Data Cube Vocabulary](https://www.w3.org/TR/vocab-data-cube), the [Data Catalog Vocabulary](https://www.w3.org/TR/vocab-dcat/) and [SKOS](https://www.w3.org/TR/skos-primer). Find files and documentation in [gov-ap directory](gov-ap)
+- an ontology (g0v-ap) designed as an application profile of the [W3C RDF Data Cube Vocabulary](https://www.w3.org/TR/vocab-data-cube), the [Data Catalog Vocabulary](https://www.w3.org/TR/vocab-dcat/) and [SKOS](https://www.w3.org/TR/skos-primer). Find files and documentation in [g0v-ap directory](gov-ap)
 - a process providing a RDF store and a [SPARQL endpoint](https://www.w3.org/TR/sparql11-overview), see docs in [rdfstore directory](rdfstore)
 - a set of gateways to transform raw Government budget data into linked data according with g0v-ap ontology and a build script that drives an automated data ingestion engine that populate the RDF store. Gateways and build scripts for italian budget data [BDAP](http://www.bdap.tesoro.it/sites/openbdap) are provided. See files and docs in [sdaas directory](sdaas)
 - a set of APIs that query the SPARQL endpoint provided by rdfstore and produce json data with a schema suitable to be used to a Government Budget Visualization application. Following applications are supported: budget.taipei and budget.g0v.it . See files and docs in [apis directory](apis)
