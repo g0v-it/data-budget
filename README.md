@@ -37,10 +37,10 @@ docker-compose up -d
 docker run \
 	--network g0v-data_default \
 	-v sdaas/it:/dmp \
-	--env SD_BG_ENDPOINT=rdfstore:8080 \
+	--env SD_BG_ENDPOINT=http://rdfstore:8080 \
 	--env SD_BG_NAMESPACE=kb \
 	linkeddatacenter/sdaas \
-	/dmp/build.sdaas -k blazegraph
+	sdaas -f /dmp/build.sdaas -k blazegraph
 ```
 
 The rdf store exposes a SPARQL endpoint on 9999 port (try: http://localhost:9999/bigdata to access interactive SPARQL interface )
