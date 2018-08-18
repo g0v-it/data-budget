@@ -6,5 +6,8 @@ services:
       - "9999:8080"
   api:
     build: ./apis
+    command: nodemon
+    volumes:
+      - .:/usr/src/app
     ports:
       - "8080:80"
