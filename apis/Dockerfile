@@ -1,19 +1,26 @@
 FROM node:8
 
 #Variables
-ENV WORK_DIR /usr/src/app
+ENV WORK_DIR /usr/src/app/
 
 #Set working diractory
 WORKDIR $WORK_DIR
+
+#FOR develop
+RUN npm install -g nodemon
 
 # Install app dependencies
 COPY package*.json ./
 RUN npm install
 
-#FOR PRODUCTION
-RUN npm install -g nodemon
+#FOR_DEV
+RUN mv $WORK_DIR/node_modules /node_modules
 
 COPY . .
-EXPOSE 80
+# EXPOSE 80
 
 CMD [ "npm", "start" ]
+
+#command: [ "nodemon", "./app.js" ]
+    # volumes:
+      # - .:/usr/src/app

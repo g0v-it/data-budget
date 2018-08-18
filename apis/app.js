@@ -18,7 +18,7 @@ app.use(function(req, res, next) {
 
 //First get
 app.get('/', (req, res) => {
-  res.send('ekkle\n');
+  res.send('poiiko\n');
 });
 
 app.listen(PORT, () => {

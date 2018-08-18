@@ -5,7 +5,8 @@
   "author": "Yassine Ouahidi",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "dev": "nodemon"
   },
   "dependencies": {
     "express": "^4.16.3"
