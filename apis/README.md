@@ -39,7 +39,16 @@ returns data suitable to be used with AccountDetails vue component
 To test api server you need:
 
 - run the data store and api server provider 
-- populate the graph database with data (see example data in [datastore](../datasore/README.MD))
-- test api using a browser or any api client.
+- populate the graph database with example data (see how in [datastore](../datasore/README.MD))
+- test api using a browser or any api client pointing it to:
+
+
+```
+curl http://localhost:8080/v1/it/accounts
+
+curl http://localhost:8080/v1/it/account/0200120001
+```
+
+
 
 
