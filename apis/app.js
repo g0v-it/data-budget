@@ -1,6 +1,9 @@
 'use strict';
 
-const express = require('express');
+const express = require('express'),
+CORS = require('./middleware/cors.js'),
+accountRouter = require('./routes/account-route.js');
+
 
 // Constants
 const PORT = 80;
@@ -10,16 +13,17 @@ const HOST = 'localhost';
 const app = express();
 
 //CORS
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+app.use(CORS);
+
+
 
 //First get
 app.get('/', (req, res) => {
   res.send('poiiko\n');
 });
+
+//Routes
+app.use('/v1', accountRouter);
 
 app.listen(PORT, () => {
     console.log(`Running on http://${HOST}:${PORT}`);

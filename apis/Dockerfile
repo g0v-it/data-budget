@@ -21,6 +21,3 @@ COPY . .
 
 CMD [ "npm", "start" ]
 
-#command: [ "nodemon", "./app.js" ]
-    # volumes:
-      # - .:/usr/src/app
