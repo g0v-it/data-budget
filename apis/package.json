@@ -1,0 +1,14 @@
+{
+  "name": "data-budget-apis",
+  "version": "1.0.0",
+  "description": "ekkle",
+  "author": "Yassine Ouahidi",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon"
+  },
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}

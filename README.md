@@ -35,7 +35,7 @@ To run the rdf store and loading it with data for italian government budget, typ
 docker-compose up -d
 # run the ingestion processor
 docker run \
-	--network g0v-data_default \
+	--network data-budget_default \
 	-v sdaas/it:/dmp \
 	--env SD_BG_ENDPOINT=http://rdfstore:8080 \
 	--env SD_BG_NAMESPACE=kb \
