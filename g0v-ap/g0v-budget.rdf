@@ -1,0 +1,738 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY void "http://rdfs.org/ns/void#" >
+    <!ENTITY dct "http://purl.org/dc/terms/" >
+    <!ENTITY prov "http://www.w3.org/ns/prov#" >
+    <!ENTITY dcat "http://www.w3.org/ns/dcat#" >
+    <!ENTITY foaf "http://xmlns.com/foaf/0.1/" >
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY dc "http://purl.org/dc/elements/1.1/" >
+    <!ENTITY qb "http://purl.org/linked-data/cube#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY interval "http://reference.data.gov.uk/def/intervals/" >
+    <!ENTITY sdmx-measure "http://purl.org/linked-data/sdmx/2009/measure#" >
+    <!ENTITY sdmx-dimension "http://purl.org/linked-data/sdmx/2009/dimension#" >
+]>
+
+
+<rdf:RDF xmlns="http://data.budget.g0v.it/g0v-budget/v1#"
+     xml:base="http://data.budget.g0v.it/g0v-budget/v1"
+     xmlns:void="http://rdfs.org/ns/void#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:qb="http://purl.org/linked-data/cube#"
+     xmlns:sdmx-measure="http://purl.org/linked-data/sdmx/2009/measure#"
+     xmlns:dct="http://purl.org/dc/terms/"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:interval="http://reference.data.gov.uk/def/intervals/"
+     xmlns:dcat="http://www.w3.org/ns/dcat#"
+     xmlns:prov="http://www.w3.org/ns/prov#"
+     xmlns:sdmx-dimension="http://purl.org/linked-data/sdmx/2009/dimension#"
+     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <owl:Ontology rdf:about="http://data.budget.g0v.it/g0v-budget/v1">
+        <rdfs:label xml:lang="en">g0v-budget Ontology</rdfs:label>
+        <dc:creator xml:lang="en">Enrico Fagnoni enrico@linkeddata.center</dc:creator>
+        <dc:title xml:lang="en">The g0v-budget vocabulary for knowledge  base management</dc:title>
+        <owl:versionInfo>V 1.0.0 Release 2018-08-19</owl:versionInfo>
+        <dc:rights xml:lang="en">The g0v-budget ontology is available under the Creative Commons Attribution 3.0 Unported license; see http://creativecommons.org/licenses/by/3.0/. In a nutshell, you are free to copy, distribute and transmit the work; to remix/adapt the work (e.g. to import the ontology and create specializations of its elements), as long as you attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work). Proper Attribution: Simply include the statement &quot;This work is based on the g0v-budget ontology, developed by Enrico Fagnoni&quot; and link back to http://linkeddata.center/</dc:rights>
+        <dc:subject xml:lang="en">g0v-budget Ontology.</dc:subject>
+        <dc:description xml:lang="en">g0v-budget ontology describes some classes used in g0v-ap application profile. g0v-ap is used to
+	model government budget data for http://budget.g0v.it/ application.</dc:description>
+        <dct:license rdf:resource="http://creativecommons.org/licenses/by/4.0/"/>
+        <foaf:homepage rdf:resource="http://data.budget.g0v.it/g0v-budget"/>
+        <rdfs:seeAlso rdf:resource="https://www.draw.io/?lightbox=1&amp;highlight=0000ff&amp;edit=_blank&amp;layers=1&amp;nav=1&amp;title=g0v-uml-diagram#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fe-artspace.com%2Fuc%3Fid%3D1Qa_zoF1Nl8ULUg9uChN-OH3ep2Lta4PY%26export%3Ddownload"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/contributor -->
+
+    <owl:AnnotationProperty rdf:about="&dc;contributor"/>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/creator -->
+
+    <owl:AnnotationProperty rdf:about="&dc;creator"/>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/description -->
+
+    <owl:AnnotationProperty rdf:about="&dc;description"/>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/modifed -->
+
+    <owl:AnnotationProperty rdf:about="&dc;modifed"/>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/rights -->
+
+    <owl:AnnotationProperty rdf:about="&dc;rights"/>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/subject -->
+
+    <owl:AnnotationProperty rdf:about="&dc;subject"/>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/title -->
+
+    <owl:AnnotationProperty rdf:about="&dc;title"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/license -->
+
+    <owl:AnnotationProperty rdf:about="&dct;license"/>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#deprecated -->
+
+    <owl:AnnotationProperty rdf:about="&owl;deprecated"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/homepage -->
+
+    <owl:AnnotationProperty rdf:about="&foaf;homepage"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#byteCount -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#byteCount">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">byte count</rdfs:label>
+        <rdfs:comment xml:lang="en">is the number of bytes processed by an ingestion activity.</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;nonNegativeInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#constructQuery -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#constructQuery">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">construct query</rdfs:label>
+        <rdfs:comment xml:lang="en">The SPARQL 1.1.  query to extract data from a SPARQL endpoint. No paging constructs allowed ( OFSET and LIMIT ), use pageSize, fromPage and toPage instead. If not specified &quot;CONSTRUCT { ?s ?p ?o }  WHERE { ?s ?p ?o }&quot; apply</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#createsGraphName -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#createsGraphName">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label>creates graph name</rdfs:label>
+        <rdfs:comment xml:lang="en">The related uri is used as as the name of the graph produced according the described accrual policy. If not specified the same value of g0v-budget:url is inferred.</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;anyURI"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#executionPriority -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#executionPriority">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">execution priority</rdfs:label>
+        <rdfs:comment xml:lang="en">An optional integer that determine the ordere of execution of a rule ( ascending).</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#expectedParts -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#expectedParts">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">expected parts</rdfs:label>
+        <rdfs:comment xml:lang="en">the number of expected resource partitions (i.e pages).</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;nonNegativeInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#expectedTriples -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#expectedTriples">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">expected triples</rdfs:label>
+        <rdfs:comment xml:lang="en">the expected maximum number of triple to be indexed by an activity.</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;nonNegativeInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#forceAccept -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#forceAccept">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">force accept</rdfs:label>
+        <rdfs:comment xml:lang="en">Define specified http accept header in requesting source. The sintax must be complain to RFC 2616 for HTTP 1.1. accept header. If not specified &apos;application/n-triples,application/ld+json,application/rdf+xml,text/turtle,*/*;q=0.4&apos; it is used.</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#fromPage -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#fromPage">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">from page</rdfs:label>
+        <rdfs:comment xml:lang="en">The first page returned by a SPARQL in a query iteration. Defaults to 1 if not present.</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;positiveInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#generatesGraphType -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#generatesGraphType">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">generates  graph type</rdfs:label>
+        <rdfs:comment xml:lang="en">The  described accrual policy has the objective to generate/maintain a knowledge graph of the related type. If the property is not specified, nor explicitely nor implicitely (by axioms), g0v-budget:LinkedDataGraph is inferred.</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;anyURI"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#hasFrequencyPeriod -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#hasFrequencyPeriod">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">has frequency period</rdfs:label>
+        <rdfs:comment xml:lang="en">Frequency period in seconds.</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;nonNegativeInteger"/>
+        <rdfs:seeAlso rdf:resource="http://www.w3.org/TR/swbp-xsch-datatypes/#section-duration"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#hasLimit -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#hasLimit">
+        <rdfs:label xml:lang="en">has limit</rdfs:label>
+        <rdfs:comment xml:lang="en">the max size in RDF triple of a paged resource</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#hasOffset -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#hasOffset">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">has offset</rdfs:label>
+        <rdfs:comment xml:lang="en">first record ofset of a page.</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;nonNegativeInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#hasResilience -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#hasResilience">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">has resilience</rdfs:label>
+        <rdfs:comment xml:lang="en">The number of times  ABOX graph is retained in storage after a failure in fetchin it. The default is 0 that means that when a graph fails to load it is removed from the knowledge base. If the value of this attribute is, for instance 3, this means that the Graph will be keept in the knowledge base untill its loading fails for three consecutive  times (the fourth error drives a graph drop). A succesfull loading reset the fail counter.N.B. a &quot;not modified&quot; message does not reset the fail counter.</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;nonNegativeInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#havingTargetGraphName -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#havingTargetGraphName">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">having target graph name</rdfs:label>
+        <rdfs:comment xml:lang="en">States that the described ingestion plan is about the creation/maintenance of a graph named as the referenced object.</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;anyURI"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#includes -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#includes">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">include</rdfs:label>
+        <rdfs:comment xml:lang="en">The URL of a web resource exposing a g0v-budget configuration data.</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#url"/>
+        <rdfs:range rdf:resource="&xsd;anyURI"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#isLastPage -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#isLastPage">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">is the last page</rdfs:label>
+        <rdfs:comment xml:lang="en">states that the referenced page is the last one. If not present defautlt is false.</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#lodLaundromatUrl -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#lodLaundromatUrl">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">lod laundromat url</rdfs:label>
+        <rdfs:comment xml:lang="en">An url of a resource stored in the  lod laundromat wardrobe. similar to llo:url.</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#url"/>
+        <rdfs:seeAlso rdf:resource="http://lodlaundromat.org/"/>
+        <rdfs:range rdf:resource="&xsd;anyURI"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#pageNum -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#pageNum">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">page number</rdfs:label>
+        <rdfs:comment xml:lang="en">A page sequence number .</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;positiveInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#pageSize -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#pageSize">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">page size</rdfs:label>
+        <rdfs:comment xml:lang="en">The size for a SPARQL query page. Equivalent  with LIMIT clause. Defaults to 1000 if not defined</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;positiveInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#password -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#password">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">password</rdfs:label>
+        <rdfs:comment xml:lang="en">Password in basic autentication method</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#policyName -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#policyName">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">policy name</rdfs:label>
+        <rdfs:comment xml:lang="en">a conventional name for a Policy. Should be univoque inside the knowledge base.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#queryMethod -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#queryMethod">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">query method</rdfs:label>
+        <rdfs:comment xml:lang="en">The http request method used in a SPARQL query. Accepted metods: &quot;POST&quot;  and &quot;GET&quot;. Defaults to &quot;POST&quot; if not specified.</rdfs:comment>
+        <rdfs:range>
+            <rdfs:Datatype>
+                <owl:oneOf>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="&rdf;List"/>
+                        <rdf:first>GET</rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="&rdf;List"/>
+                                <rdf:first>POST</rdf:first>
+                                <rdf:rest rdf:resource="&rdf;nil"/>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </owl:oneOf>
+            </rdfs:Datatype>
+        </rdfs:range>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#queryName -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#queryName">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">query name</rdfs:label>
+        <rdfs:comment xml:lang="en">The name of the graph that will contain a sparql query result. If not specfied hinerit the sparql service endpoint url.</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#createsGraphName"/>
+        <rdfs:range rdf:resource="&xsd;anyURI"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#queryText -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#queryText">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">query text</rdfs:label>
+        <rdfs:comment xml:lang="en">the text of a sparql query. In the query text you can inject variables with the form %varname=default value% where varname is a word a default value a string.</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#ruleName -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#ruleName">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">rule  name</rdfs:label>
+        <rdfs:comment xml:lang="en">a conventional name for a Reasoning Policy. Should be univoque inside the knowledge base.</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#policyName"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#ruleText -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#ruleText">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment xml:lang="en">The rule text body in the form:
+prefixes declaration
+IF { sparql where clause }
+THEN { sparql insert(delete clause }.
+
+Example:
+PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+PREFIX gr: &lt;http://purl.org/goodrelations/v1#&gt;
+PREFIX :&lt;urn:test:&gt;
+IF {
+           ?offering gr:hasPriceSpecification ?ps .
+           ?ps gr:hasCurrencyValue ?price .
+           FILTER (?price &gt;= 200.00).
+}
+THEN {
+           ?offering a :ExpensiveProduct .
+}
+
+</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#source -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#source">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">source</rdfs:label>
+        <rdfs:comment xml:lang="en">The URL of a web resource exposing RDF data facts.</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#url"/>
+        <rdfs:range rdf:resource="&xsd;anyURI"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#sparqlEndpoint -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#sparqlEndpoint">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">sparql endpoint</rdfs:label>
+        <rdfs:comment xml:lang="en">An url of a sparql service endpoint. similar to sd:endpoint</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#url"/>
+        <rdfs:range rdf:resource="&xsd;anyURI"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#supportsHttpCaching -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#supportsHttpCaching">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">supports http caching</rdfs:label>
+        <rdfs:comment xml:lang="en">Support http caching specification (RFC 2616 ) in sending HTTP requests. If not present, true is inferred.</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#supportsLDPPP -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#supportsLDPPP">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">supports LDPPP</rdfs:label>
+        <rdfs:comment xml:lang="en">The described accrual  policy supports the Linked Data Platform Paging Protocol following link=next in http headers. If not specified false is inferred false.</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#toPage -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#toPage">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">to page</rdfs:label>
+        <rdfs:comment xml:lang="en">The last page returned by a SPARQL query. If not present defaults to 1.</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;positiveInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#transactionCount -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#transactionCount">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment xml:lang="en">is the number of SPARQL uopdate transaction performed to complete a knowledge accrual activity.</rdfs:comment>
+        <rdfs:comment xml:lang="en">transaction count</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;nonNegativeInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#tripleCount -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#tripleCount">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment xml:lang="en">is the number of triples ingested by an accrual activity.</rdfs:comment>
+        <rdfs:comment xml:lang="en">triple count</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;nonNegativeInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#url -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#url">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">url</rdfs:label>
+        <rdfs:comment xml:lang="en">An url</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;anyURI"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#usedMemory -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#usedMemory">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">used memory</rdfs:label>
+        <rdfs:comment xml:lang="en">Extimated RAM bytes used by activity processing.</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;nonNegativeInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#username -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#username">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">username</rdfs:label>
+        <rdfs:comment xml:lang="en">Username in basic http autentication method</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#vocabulary -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#vocabulary">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">vocabulary</rdfs:label>
+        <rdfs:comment xml:lang="en">It&apos;s datasource for a resource that contains TBox statements.</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#url"/>
+        <rdfs:range rdf:resource="&xsd;anyURI"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#workflowStructure -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#workflowStructure">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:label xml:lang="en">workflow structure</rdfs:label>
+        <rdfs:comment xml:lang="en">A g0v-budget cycle description  in the form &quot;booting =&gt; learning =&gt; reasoning &quot; with some phases that can be omitted (i.e.  &quot;learning =&gt; reasoning &quot;)</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#Account -->
+
+    <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#Account">
+        <rdfs:label xml:lang="en">Account</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&qb;Observation"/>
+        <rdfs:comment xml:lang="en">An observation of a money amount in a reference period in a dataset</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#AccountPartial -->
+
+    <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#AccountPartial">
+        <rdfs:subClassOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#SimpleAccount"/>
+    </owl:Class>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#CompositeAccount -->
+
+    <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#CompositeAccount">
+        <rdfs:subClassOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#Account"/>
+    </owl:Class>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#CompositeAccountBudget -->
+
+    <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#CompositeAccountBudget">
+        <rdfs:subClassOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#CompositeAccount"/>
+    </owl:Class>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#CompositeAccountRecord -->
+
+    <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#CompositeAccountRecord">
+        <rdfs:subClassOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#CompositeAccount"/>
+    </owl:Class>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#Dataset -->
+
+    <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#Dataset">
+        <rdfs:label xml:lang="en">Dataset</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&qb;Dataset"/>
+        <rdfs:subClassOf rdf:resource="&dcat;Dataset"/>
+        <rdfs:comment xml:lang="en">A budget datasource document containing  goverment budget data.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#SimpleAccount -->
+
+    <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#SimpleAccount">
+        <rdfs:label xml:lang="en">Simple account</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#Account"/>
+        <rdfs:comment xml:lang="en">An account with an amount of money expressed with a simple value.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#SimpleAccountBudget -->
+
+    <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#SimpleAccountBudget">
+        <rdfs:subClassOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#SimpleAccount"/>
+    </owl:Class>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#SimpleAccountRecord -->
+
+    <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#SimpleAccountRecord">
+        <rdfs:subClassOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#SimpleAccount"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/linked-data/cube#Dataset -->
+
+    <owl:Class rdf:about="&qb;Dataset"/>
+    
+
+
+    <!-- http://purl.org/linked-data/cube#Observation -->
+
+    <owl:Class rdf:about="&qb;Observation"/>
+    
+
+
+    <!-- http://www.w3.org/ns/dcat#Dataset -->
+
+    <owl:Class rdf:about="&dcat;Dataset"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotations
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description rdf:about="&xsd;success">
+        <rdfs:label xml:lang="en">has input</rdfs:label>
+        <owl:priorVersion xml:lang="en">task  processor input as a json structure.</owl:priorVersion>
+    </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointProperties"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://data.budget.g0v.it/g0v-budget/v1#includes"/>
+            <rdf:Description rdf:about="http://data.budget.g0v.it/g0v-budget/v1#lodLaundromatUrl"/>
+            <rdf:Description rdf:about="http://data.budget.g0v.it/g0v-budget/v1#source"/>
+            <rdf:Description rdf:about="http://data.budget.g0v.it/g0v-budget/v1#sparqlEndpoint"/>
+            <rdf:Description rdf:about="http://data.budget.g0v.it/g0v-budget/v1#vocabulary"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.5.1) http://owlapi.sourceforge.net -->
+
