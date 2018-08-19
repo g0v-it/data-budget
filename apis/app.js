@@ -6,8 +6,8 @@ accountRouter = require('./routes/account-route.js');
 
 
 // Constants
-const PORT = 80;
-const HOST = 'localhost';
+const PORT = 80,
+HOST = 'localhost';
 
 // App
 const app = express();
@@ -16,14 +16,8 @@ const app = express();
 app.use(CORS);
 
 
-
-//First get
-app.get('/', (req, res) => {
-  res.send('poiiko\n');
-});
-
 //Routes
-app.use('/v1', accountRouter);
+app.use('/', accountRouter);
 
 app.listen(PORT, () => {
     console.log(`Running on http://${HOST}:${PORT}`);

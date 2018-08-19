@@ -6,11 +6,9 @@ vue components defined in [vue-budget repository]().
 
 ## usage
 
-### /v1/{lang}/accounts/{schema}
+### /accounts/{schema}
 
 returns  data in format suitable to be used with budget-bubbles vue component
-
-{lang} indicates the preferred language for data string litterals.
 
 
 {schema} indicates the data model provided. The following schemas are supported:
@@ -21,13 +19,11 @@ returns  data in format suitable to be used with budget-bubbles vue component
 In next releases new schemas model could be supported.
 
 
-### /v1/{lang}/account/{id}/{schema}/
+### /account/{id}/{schema}/
 
 
 returns data suitable to be used with AccountDetails vue component
 
-
-{lang} indicates the preferred language for data string litterals.
 
 {schema} indicates the data model provided. The following schemas are supported:
 
