@@ -1,0 +1,247 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY void "http://rdfs.org/ns/void#" >
+    <!ENTITY dct "http://purl.org/dc/terms/" >
+    <!ENTITY prov "http://www.w3.org/ns/prov#" >
+    <!ENTITY dcat "http://www.w3.org/ns/dcat#" >
+    <!ENTITY foaf "http://xmlns.com/foaf/0.1/" >
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY dc "http://purl.org/dc/elements/1.1/" >
+    <!ENTITY qb "http://purl.org/linked-data/cube#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY interval "http://reference.data.gov.uk/def/intervals/" >
+    <!ENTITY sdmx-measure "http://purl.org/linked-data/sdmx/2009/measure#" >
+    <!ENTITY sdmx-dimension "http://purl.org/linked-data/sdmx/2009/dimension#" >
+]>
+
+
+<rdf:RDF xmlns="http://data.budget.g0v.it/g0v-budget/v1#"
+     xml:base="http://data.budget.g0v.it/g0v-budget/v1"
+     xmlns:void="http://rdfs.org/ns/void#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:qb="http://purl.org/linked-data/cube#"
+     xmlns:sdmx-measure="http://purl.org/linked-data/sdmx/2009/measure#"
+     xmlns:dct="http://purl.org/dc/terms/"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:interval="http://reference.data.gov.uk/def/intervals/"
+     xmlns:dcat="http://www.w3.org/ns/dcat#"
+     xmlns:prov="http://www.w3.org/ns/prov#"
+     xmlns:sdmx-dimension="http://purl.org/linked-data/sdmx/2009/dimension#"
+     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <owl:Ontology rdf:about="http://data.budget.g0v.it/g0v-budget/v1">
+        <rdfs:label xml:lang="en">g0v-budget Ontology</rdfs:label>
+        <dc:creator xml:lang="en">Enrico Fagnoni enrico@linkeddata.center</dc:creator>
+        <dc:title xml:lang="en">The g0v-budget vocabulary for knowledge  base management</dc:title>
+        <owl:versionInfo>V 1.0.0 Release 2018-08-19</owl:versionInfo>
+        <dc:rights xml:lang="en">The g0v-budget ontology is available under the Creative Commons Attribution 3.0 Unported license; see http://creativecommons.org/licenses/by/3.0/. In a nutshell, you are free to copy, distribute and transmit the work; to remix/adapt the work (e.g. to import the ontology and create specializations of its elements), as long as you attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work). Proper Attribution: Simply include the statement &quot;This work is based on the g0v-budget ontology, developed by Enrico Fagnoni&quot; and link back to http://linkeddata.center/</dc:rights>
+        <dc:subject xml:lang="en">g0v-budget Ontology.</dc:subject>
+        <dc:description xml:lang="en">g0v-budget ontology describes some classes used in g0v-ap application profile. g0v-ap is used to
+	model government budget data for http://budget.g0v.it/ application.</dc:description>
+        <dct:license rdf:resource="http://creativecommons.org/licenses/by/4.0/"/>
+        <foaf:homepage rdf:resource="http://data.budget.g0v.it/g0v-budget"/>
+        <rdfs:seeAlso rdf:resource="https://www.draw.io/?lightbox=1&amp;highlight=0000ff&amp;edit=_blank&amp;layers=1&amp;nav=1&amp;title=g0v-uml-diagram#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fe-artspace.com%2Fuc%3Fid%3D1Qa_zoF1Nl8ULUg9uChN-OH3ep2Lta4PY%26export%3Ddownload"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/contributor -->
+
+    <owl:AnnotationProperty rdf:about="&dc;contributor"/>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/creator -->
+
+    <owl:AnnotationProperty rdf:about="&dc;creator"/>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/description -->
+
+    <owl:AnnotationProperty rdf:about="&dc;description"/>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/modifed -->
+
+    <owl:AnnotationProperty rdf:about="&dc;modifed"/>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/rights -->
+
+    <owl:AnnotationProperty rdf:about="&dc;rights"/>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/subject -->
+
+    <owl:AnnotationProperty rdf:about="&dc;subject"/>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/title -->
+
+    <owl:AnnotationProperty rdf:about="&dc;title"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/license -->
+
+    <owl:AnnotationProperty rdf:about="&dct;license"/>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#deprecated -->
+
+    <owl:AnnotationProperty rdf:about="&owl;deprecated"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/homepage -->
+
+    <owl:AnnotationProperty rdf:about="&foaf;homepage"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#Account -->
+
+    <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#Account">
+        <rdfs:label xml:lang="en">Account</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&qb;Observation"/>
+        <rdfs:comment xml:lang="en">An observation of a money amount in a reference period in a dataset</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#AccountPartial -->
+
+    <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#AccountPartial">
+        <rdfs:subClassOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#SimpleAccount"/>
+    </owl:Class>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#CompositeAccount -->
+
+    <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#CompositeAccount">
+        <rdfs:subClassOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#Account"/>
+    </owl:Class>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#CompositeAccountBudget -->
+
+    <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#CompositeAccountBudget">
+        <rdfs:subClassOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#CompositeAccount"/>
+    </owl:Class>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#CompositeAccountRecord -->
+
+    <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#CompositeAccountRecord">
+        <rdfs:subClassOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#CompositeAccount"/>
+    </owl:Class>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#Dataset -->
+
+    <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#Dataset">
+        <rdfs:label xml:lang="en">Dataset</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&qb;Dataset"/>
+        <rdfs:subClassOf rdf:resource="&dcat;Dataset"/>
+        <rdfs:comment xml:lang="en">A budget datasource document containing  goverment budget data.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#SimpleAccount -->
+
+    <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#SimpleAccount">
+        <rdfs:label xml:lang="en">Simple account</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#Account"/>
+        <rdfs:comment xml:lang="en">An account with an amount of money expressed with a simple value.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#SimpleAccountBudget -->
+
+    <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#SimpleAccountBudget">
+        <rdfs:subClassOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#SimpleAccount"/>
+    </owl:Class>
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#SimpleAccountRecord -->
+
+    <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#SimpleAccountRecord">
+        <rdfs:subClassOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#SimpleAccount"/>
+    </owl:Class>
+    
+
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotations
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.5.1) http://owlapi.sourceforge.net -->
+
