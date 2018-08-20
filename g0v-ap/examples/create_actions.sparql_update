@@ -21,7 +21,7 @@ DROP GRAPH :nodes ;
 INSERT {
   GRAPH :nodes { [] a :Azione ;
        :amount ?amount;
-       :actionId ?actionId;
+       :actionId ?action_id;
        :actionName ?action_name;
        :missione ?missione;
        :ministero ?ministero;
@@ -36,7 +36,7 @@ INSERT {
       ?capitolo_subject skos:broader ?action_subject .    
     } GROUP BY ?action_subject
   }
-   
+ 
  ?action_subject skos:prefLabel ?action_name ; skos:notation ?action_id ;
    skos:broader/skos:broader/skos:prefLabel ?missione;
    skos:narrow/skos:related/skos:prefLabel ?ministero

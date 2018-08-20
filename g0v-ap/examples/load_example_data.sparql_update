@@ -98,6 +98,7 @@ GRAPH :legge_bilancio_2018_graph {
 		 skos:notation "02.0012.0002";
 		 skos:prefLabel "azione 02.0012.0002"@it;
 		 skos:inScheme :tassonomia_missioni;
+		 skos:broader :programma_020012;
 		 skos:narrow :capitolo_02001200020001.
 	
 	:programma_020012 a skos:Concept ;
