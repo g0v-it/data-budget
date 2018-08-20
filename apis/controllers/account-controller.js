@@ -4,27 +4,27 @@ const DEFAULT_SCHEMA_ACCOUNTS = "bubbles",
 
 
 //Modules
-const https = require('https'),
+const http = require('http'),
+{URL} = require('url'),
+csv = require('csvtojson'),
 querystring = require('querystring');
 
 
 
 
 exports.getAccounts = (req, res) => {
-	let endpoint = "https://query.wikidata.org/sparql",
-	query = require('../queries/example.js'),
+	let endpoint = "http://172.18.0.3:8080/bigdata/sparql",
+	query = require('../queries/get-accounts.js'),
 	schema = req.params.schema;
 	
 	//Set schema
 	schema = (schema === undefined) ? DEFAULT_SCHEMA_ACCOUNTS : schema;
 
-	getQueryResult(endpoint, query).then((result) => {
-		res.send(result);
-	});
-	// console.log("ekkelo");
-	// let result = getQueryResult(endpoint, query);
-	// console.log("ekkelo2");
-	// res.send(result);
+	getQueryResult(endpoint, query).then(async (result) => {
+		let output = await buildJsonAccountsList(result);
+		res.send(output);
+	})
+	.catch((e) => console.error(`problem with request: ${e.message}`));
 }
 
 exports.getAccount = (req, res) => {
@@ -45,15 +45,22 @@ exports.getAccount = (req, res) => {
 */
 function getQueryResult(endpoint, query){
 	return new Promise((resolve, reject) => {
-		//ONLY PROOF OF CONCEPT
-		query.format='json';
-
-		let url = endpoint + '?' + querystring.stringify(query);
-		let result;
-		const options = {
-			method: 'GET'
+		let url = new URL(endpoint),
+		result,
+		options = {
+			host: url.hostname,
+			port: url.port,
+			path: url.pathname,
+			method: 'POST',
+			headers: {
+          		'Accept': 'text/csv',
+          		'Content-Type': 'application/x-www-form-urlencoded'
+      		}
 		};
-		const request = https.get(url, (res)=> {
+
+		query = querystring.stringify(query);
+
+		const request = http.request(options, (res)=> {
 			result = ""; //inizialize
 			res.on('data', (chunk) => {
 				result += chunk;
@@ -70,19 +77,32 @@ function getQueryResult(endpoint, query){
 			});
 		});
 
-		request.on('error', (e) => {
-  			console.error(`problem with request: ${e.message}`);
+		request.on('error', (e) => {	
   			reject(e);
 		});
 
+		request.write(query);
 		request.end();
 
 	});
 }
 
 
-function buildJsonAccounts(meta, accounts, schema){
-	return new Promise((resolve, reject) => {
+async function buildJsonAccountsList(data){
+	return new Promise(async (resolve, reject) =>{
+		let output = await csv().fromString(data);
+		output.map(account => {
+			//Set new tags
+			account.partition = {
+				missione: account.missione
+			}
+			account.tags = [account.ministero];
+
+			//remove old ones
+			delete account.missione;
+			delete account.ministero;
+		});
+		resolve(output);
 
 	});
 }
