@@ -1,6 +1,6 @@
 version: '3'
 services:
-  rdfstore:
+  sdaas:
     image: lyrasis/blazegraph:2.1.4
     ports:
       - "9999:8080"
