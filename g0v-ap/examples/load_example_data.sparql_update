@@ -1,26 +1,29 @@
 ##
 ## A sample knowledge base dump compliant with gov-ap
 ##
-@prefix g0v: <http://data.budget.g0v.it/g0v-budget/v1>.
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix skos:     <http://www.w3.org/2004/02/skos/core#> .
-@prefix dcat:      <http://www.w3.org/ns/dcat#> .
-@prefix dct:      <http://purl.org/dc/terms/> .
-@prefix foaf:     <http://xmlns.com/foaf/0.1/> .
-@prefix interval: <http://reference.data.gov.uk/def/intervals/> .
-@prefix qb:       <http://purl.org/linked-data/cube#> .
-@prefix sdmx-dimension:  <http://purl.org/linked-data/sdmx/2009/dimension#> .
-@prefix sdmx-measure:    <http://purl.org/linked-data/sdmx/2009/measure#> .
-@prefix sdmx-attribute:  <http://purl.org/linked-data/sdmx/2009/attribute#> .
-@prefix : <#> .
+PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+PREFIX skos:     <http://www.w3.org/2004/02/skos/core#> 
+PREFIX dcat:      <http://www.w3.org/ns/dcat#> 
+PREFIX dct:      <http://purl.org/dc/terms/> 
+PREFIX foaf:     <http://xmlns.com/foaf/0.1/> 
+PREFIX interval: <http://reference.data.gov.uk/def/intervals/> 
+PREFIX qb:       <http://purl.org/linked-data/cube#> 
+PREFIX sdmx-dimension:  <http://purl.org/linked-data/sdmx/2009/dimension#> 
+PREFIX sdmx-measure:    <http://purl.org/linked-data/sdmx/2009/measure#> 
+PREFIX sdmx-attribute:  <http://purl.org/linked-data/sdmx/2009/attribute#> 
+PREFIX : <urn:temp:>
 
-:catalog 	{
+DROP ALL;
+
+INSERT DATA {
+GRAPH :catalog 	{
 	:MEF a foaf:Organization; 
 		foaf:homepage <http://www.mef.gov.it>;
 		foaf:name "Minstero dell'Economia e delle Finanze"@it
 	.
 
-	:legge_bilancio_2018 a g0v:LeggeBilancio;
+	:legge_bilancio_2018 a g0v:Dataset;
 		dct:title       "2018 - DISEGNO LEGGE DI BILANCIO PRESENTATO ELABORABILE SPESE CAPITOLO"@it;
 		dct:publisher   [ a foaf:Organization; foaf:homepage <http://www.mef.gov.it>; foaf:name "Minstero dell'Economia e delle Finanze"@it ] ;
 		dct:issued      "2018-03-23"^^xsd:date;
@@ -32,7 +35,7 @@
 		]
 		.
 		
-	:rendiconto_2017 a g0v:Rendiconto;
+	:rendiconto_2017 a g0v:Dataset;
 		dct:title       "2017 - RENDICONTO PUBBLICATO ELABORABILE SPESE CAPITOLO"@it;
 		dct:publisher   :MEF;
 		dct:issued      "2018-03-23"^^xsd:date;
@@ -43,18 +46,20 @@
 			dcat:license <http://creativecommons.org/licenses/by/3.0>
 		]
 		.
-}
+}}
+;
 
-:legge_bilancio_2018_graph {
+INSERT DATA {
+GRAPH :legge_bilancio_2018_graph {
 
 	####  raw data
-	[] a qb:Observation;
+	[] a g0v:Budget;
 		dct:subject :capitolo_02001200010001;
 		qb:dataSet :legge_bilancio_2018 ;
 		sdmx-measure:obsValue 288149000000.00		
 		.
 	
-	[] a qb:Observation;
+	[] a g0v:Budget;
 		dct:subject :capitolo_02001200020001;
 		qb:dataSet :legge_bilancio_2018 ;
 		sdmx-measure:obsValue 88149000000.00		
@@ -86,13 +91,14 @@
 		 skos:notation "02.0012.0001";
 		 skos:prefLabel "azione 02.0012.0001"@it;
 		 skos:inScheme :tassonomia_missioni;
-		 skos:broader :programma_020012.
+		 skos:broader :programma_020012;
+		 skos:narrow :capitolo_02001200010001.
 	
 	:azione_0200120002 a skos:Concept ;
 		 skos:notation "02.0012.0002";
 		 skos:prefLabel "azione 02.0012.0002"@it;
 		 skos:inScheme :tassonomia_missioni;
-		 skos:broader :programma_020012.
+		 skos:narrow :capitolo_02001200020001.
 	
 	:programma_020012 a skos:Concept ;
 		 skos:notation "02.0012";
@@ -122,19 +128,20 @@
 		 skos:prefLabel "Ministero delle Finanze"@it;
 		 skos:inScheme :tassonomia_amministrazioni.
 	
-}
+}}
+;
 
-:rendiconto_2017_graph {
-	[] a qb:Observation ;
+INSERT DATA {
+GRAPH :rendiconto_2017_graph {
+	[] a g0v:Record ;
 		dct:relation :capitolo_02001200010001;
 		qb:dataSet :rendiconto_2017 ;
 		sdmx-measure:obsValue 288159000000.00		
 		.
-	[] a qb:Observation;
+	[] a g0v:Record;
 		dct:relation :capitolo_02001200020001;
 		qb:dataSet :rendiconto_2017 ;
 		sdmx-measure:obsValue 88159000000.00		
 		.
-}
+}}
 
-	

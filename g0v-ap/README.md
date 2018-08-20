@@ -26,7 +26,7 @@ This trig snippet is an example snapshot of a knowlege base that contains a budg
 ```
 ...
 
-:legge_bilancio_2018 a g0v:LeggeBilancio;
+:legge_bilancio_2018 a g0v:Dataset;
 	dct:title       "2018 - DISEGNO LEGGE DI BILANCIO PRESENTATO ELABORABILE SPESE CAPITOLO"@it;
 	dct:publisher   [ a foaf:Organization; foaf:homepage <http://www.mef.gov.it>; foaf:name "Minstero dell'Economia e delle Finanze"@it ] ;
 	dct:issued      "2018-03-23"^^xsd:date;
@@ -39,18 +39,18 @@ This trig snippet is an example snapshot of a knowlege base that contains a budg
 	.
 
 
-[] a qb:Observation;
+[] a g0v:Budget;
 	dct:subject :capitolo_02001200010001;
 	qb:dataSet :legge_bilancio_2018 ;
 	sdmx-measure:obsValue 288149000000.00		
 	.
 
-[] a qb:Observation;
+[] a g0v:Budget;
 	dct:subject :capitolo_02001200020001;
 	qb:dataSet :legge_bilancio_2018 ;
 	sdmx-measure:obsValue 88149000000.00		
 	.
 ```	
 
-see a [complete example data file](examples/data.trig)
+see a [complete sparql update example file](examples/data.update)
 

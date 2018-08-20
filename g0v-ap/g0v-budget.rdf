@@ -125,16 +125,6 @@
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
-    // Data properties
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-    
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
     // Classes
     //
     ///////////////////////////////////////////////////////////////////////////////////////
@@ -143,44 +133,10 @@
     
 
 
-    <!-- http://data.budget.g0v.it/g0v-budget/v1#Account -->
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#Budget -->
 
-    <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#Account">
-        <rdfs:label xml:lang="en">Account</rdfs:label>
+    <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#Budget">
         <rdfs:subClassOf rdf:resource="&qb;Observation"/>
-        <rdfs:comment xml:lang="en">An observation of a money amount in a reference period in a dataset</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://data.budget.g0v.it/g0v-budget/v1#AccountPartial -->
-
-    <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#AccountPartial">
-        <rdfs:subClassOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#SimpleAccount"/>
-    </owl:Class>
-    
-
-
-    <!-- http://data.budget.g0v.it/g0v-budget/v1#CompositeAccount -->
-
-    <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#CompositeAccount">
-        <rdfs:subClassOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#Account"/>
-    </owl:Class>
-    
-
-
-    <!-- http://data.budget.g0v.it/g0v-budget/v1#CompositeAccountBudget -->
-
-    <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#CompositeAccountBudget">
-        <rdfs:subClassOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#CompositeAccount"/>
-    </owl:Class>
-    
-
-
-    <!-- http://data.budget.g0v.it/g0v-budget/v1#CompositeAccountRecord -->
-
-    <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#CompositeAccountRecord">
-        <rdfs:subClassOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#CompositeAccount"/>
     </owl:Class>
     
 
@@ -196,49 +152,29 @@
     
 
 
-    <!-- http://data.budget.g0v.it/g0v-budget/v1#SimpleAccount -->
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#Record -->
 
-    <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#SimpleAccount">
-        <rdfs:label xml:lang="en">Simple account</rdfs:label>
-        <rdfs:subClassOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#Account"/>
-        <rdfs:comment xml:lang="en">An account with an amount of money expressed with a simple value.</rdfs:comment>
+    <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#Record">
+        <rdfs:subClassOf rdf:resource="&qb;Observation"/>
     </owl:Class>
     
 
 
-    <!-- http://data.budget.g0v.it/g0v-budget/v1#SimpleAccountBudget -->
+    <!-- http://purl.org/linked-data/cube#Dataset -->
 
-    <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#SimpleAccountBudget">
-        <rdfs:subClassOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#SimpleAccount"/>
-    </owl:Class>
+    <owl:Class rdf:about="&qb;Dataset"/>
     
 
 
-    <!-- http://data.budget.g0v.it/g0v-budget/v1#SimpleAccountRecord -->
+    <!-- http://purl.org/linked-data/cube#Observation -->
 
-    <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#SimpleAccountRecord">
-        <rdfs:subClassOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#SimpleAccount"/>
-    </owl:Class>
+    <owl:Class rdf:about="&qb;Observation"/>
     
 
 
+    <!-- http://www.w3.org/ns/dcat#Dataset -->
 
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Annotations
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // General axioms
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
+    <owl:Class rdf:about="&dcat;Dataset"/>
 </rdf:RDF>
 
 
