@@ -1,0 +1,20 @@
+##
+## AXIOM: create match between taxonomies
+##
+
+PREFIX skos:     <http://www.w3.org/2004/02/skos/core#>
+PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1>
+PREFIX : <urn:g0v:budget:example:resource:>
+
+INSERT {
+	GRAPH :close_match_graph {
+	  ?subject skos:closeMatch ?close_subject
+	}
+} WHERE {  
+	 ?subject a skos:Concept; skos:notation ?code; 
+		skos:inScheme/skos:subject g0v:Legge_di_bilancio .
+	 ?close_subject a skos:Concept; skos:notation ?code.
+	 FILTER(?subject != ?close_subject )
+}
+
+	

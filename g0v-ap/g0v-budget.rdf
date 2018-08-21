@@ -11,6 +11,7 @@
     <!ENTITY dc "http://purl.org/dc/elements/1.1/" >
     <!ENTITY qb "http://purl.org/linked-data/cube#" >
     <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY skos "http://www.w3.org/2004/02/skos/core#" >
     <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
     <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
     <!ENTITY interval "http://reference.data.gov.uk/def/intervals/" >
@@ -24,6 +25,7 @@
      xmlns:void="http://rdfs.org/ns/void#"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      xmlns:qb="http://purl.org/linked-data/cube#"
      xmlns:sdmx-measure="http://purl.org/linked-data/sdmx/2009/measure#"
@@ -201,9 +203,34 @@
     
 
 
+    <!-- http://www.w3.org/2004/02/skos/core#Concept -->
+
+    <owl:Class rdf:about="&skos;Concept"/>
+    
+
+
     <!-- http://www.w3.org/ns/dcat#Dataset -->
 
     <owl:Class rdf:about="&dcat;Dataset"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#Legge_di_bilancio -->
+
+    <owl:NamedIndividual rdf:about="http://data.budget.g0v.it/g0v-budget/v1#Legge_di_bilancio">
+        <rdf:type rdf:resource="&skos;Concept"/>
+    </owl:NamedIndividual>
 </rdf:RDF>
 
 

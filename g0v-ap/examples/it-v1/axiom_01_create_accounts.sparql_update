@@ -1,0 +1,80 @@
+##
+## AXIOM: create an account node suitable for easy api sparql query
+##
+PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+PREFIX skos:     <http://www.w3.org/2004/02/skos/core#> 
+PREFIX dcat:      <http://www.w3.org/ns/dcat#> 
+PREFIX dct:      <http://purl.org/dc/terms/> 
+PREFIX foaf:     <http://xmlns.com/foaf/0.1/> 
+PREFIX interval: <http://reference.data.gov.uk/def/intervals/> 
+PREFIX qb:       <http://purl.org/linked-data/cube#> 
+PREFIX sdmx-dimension:  <http://purl.org/linked-data/sdmx/2009/dimension#> 
+PREFIX sdmx-measure:    <http://purl.org/linked-data/sdmx/2009/measure#> 
+PREFIX sdmx-attribute:  <http://purl.org/linked-data/sdmx/2009/attribute#> 
+PREFIX : <urn:local:g0v:budget:example:>
+
+DROP GRAPH :accounts_graph ;
+
+INSERT {
+  GRAPH :accounts_graph { 
+	?accountUri a :Account ;
+       :amount ?amount;
+       :code ?code;
+       :name ?name;
+       :grandParentLabel ?best_grand_parent_label;
+       :parentLabel ?best_parent_label;
+	   dct:subject ?account_subject
+  }    
+} WHERE {
+  {
+    SELECT ?account_subject (SUM (?budget_amount) AS ?amount) WHERE {
+      ?budget a g0v:Budget;  
+                  g0v:subject ?budget_subject;
+                  g0v:obsValue ?budget_amount.
+      ?budget_subject skos:broader ?account_subject .    
+    } GROUP BY ?account_subject
+  }
+ 
+  ?account_subject skos:prefLabel ?name ; skos:notation ?code .
+  OPTIONAL {?account_subject skos:broader/skos:broader/skos:prefLabel ?parent_label}
+  OPTIONAL {?account_subject skos:broader/skos:broader/skos:prefLabel ?parent_Shortlabel}
+  OPTIONAL {?account_subject skos:broader/skos:broader/skos:broader/skos:prefLabel ?grand_parent_label}
+  OPTIONAL {?account_subject skos:broader/skos:broader/skos:broader/skos:altLabel ?grand_parent_short_label}
+  BIND( COALESCE(?grand_parent_short_label,?grand_parent_label) AS ?best_grand_parent_label)
+  BIND( COALESCE(?parent_short_label,?parent_label) AS ?best_parent_label)
+  BIND( UUID() AS ?accountUri )
+}
+;
+
+
+## create account record
+INSERT {
+	GRAPH :accounts_graph {
+	  ?accountUri a :AccountRecord;
+		   :amount  ?amount;
+		   :year ?year;
+		   :code ?code
+	}
+} WHERE {  
+
+  {
+    SELECT ?account_record_subject ?year(SUM (?record_amount) AS ?amount) WHERE {
+      ?budget a g0v:Budget; g0v:subject/skos:broader ?account_subject.
+      ?account_subject skos:closeMatch ?account_record_subject.
+         
+      ?record a g0v:Record;  
+                g0v:subject/skos:broader ?account_record_subject;
+                g0v:obsValue ?record_amount;
+                qb:dataSet/sdmx-dimension:refPeriod ?year.
+                  
+    } GROUP BY ?account_record_subject ?year 
+  }
+ 
+  ?account_record_subject skos:notation ?code 
+  BIND( UUID() AS ?accountUri )
+}
+
+
+
+	
