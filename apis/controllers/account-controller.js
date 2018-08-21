@@ -13,7 +13,7 @@ querystring = require('querystring');
 
 
 exports.getAccounts = (req, res) => {
-	let endpoint = "http://172.18.0.3:8080/bigdata/sparql",
+	let endpoint = "http://sdaas:8080/bigdata/sparql",
 	query = require('../queries/get-accounts.js'),
 	schema = req.params.schema;
 	
@@ -93,16 +93,16 @@ async function buildJsonAccountsList(data){
 		let output = await csv().fromString(data);
 		output.map(account => {
 			//Set new tags
+
 			account.partition = {
-				missione: account.missione
+				missione: account.missione,
+				ministero: account.ministero
 			}
-			account.tags = [account.ministero];
 
 			//remove old ones
 			delete account.missione;
 			delete account.ministero;
 		});
 		resolve(output);
-
 	});
 }

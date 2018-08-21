@@ -11,7 +11,7 @@ PREFIX sdmx-measure:    <http://purl.org/linked-data/sdmx/2009/measure#>
 PREFIX sdmx-attribute:  <http://purl.org/linked-data/sdmx/2009/attribute#> 
 PREFIX : <urn:temp:>
 
-SELECT  ?actionId ?action_name ?amount ?last_amount ?missione ?ministero 
+SELECT  ?code ?action_name ?amount ?last_amount ?missione ?ministero 
 WHERE {
   {
     SELECT ?actionId_history ?last_amount 
@@ -26,13 +26,12 @@ WHERE {
   
  
   ?s a :Azione.
-  OPTIONAL { ?s :actionId ?actionId}
+  OPTIONAL { ?s :actionId ?code}
   OPTIONAL { ?s :actionName ?action_name}
   OPTIONAL { ?s :amount ?amount }
   OPTIONAL { ?s :amount ?last_amount }
   OPTIONAL { ?s :missione ?missione}
   OPTIONAL { ?s :ministero ?ministero}
         
-  FILTER (?actionId = ?actionId_history)
-        
+  FILTER (?code = ?actionId_history)
 }
