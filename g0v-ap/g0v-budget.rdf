@@ -125,6 +125,27 @@
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#obsValue -->
+
+    <owl:DatatypeProperty rdf:about="http://data.budget.g0v.it/g0v-budget/v1#obsValue">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#Observation"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
     // Classes
     //
     ///////////////////////////////////////////////////////////////////////////////////////
@@ -136,7 +157,7 @@
     <!-- http://data.budget.g0v.it/g0v-budget/v1#Budget -->
 
     <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#Budget">
-        <rdfs:subClassOf rdf:resource="&qb;Observation"/>
+        <rdfs:subClassOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#Observation"/>
     </owl:Class>
     
 
@@ -152,10 +173,18 @@
     
 
 
+    <!-- http://data.budget.g0v.it/g0v-budget/v1#Observation -->
+
+    <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#Observation">
+        <rdfs:subClassOf rdf:resource="&qb;Observation"/>
+    </owl:Class>
+    
+
+
     <!-- http://data.budget.g0v.it/g0v-budget/v1#Record -->
 
     <owl:Class rdf:about="http://data.budget.g0v.it/g0v-budget/v1#Record">
-        <rdfs:subClassOf rdf:resource="&qb;Observation"/>
+        <rdfs:subClassOf rdf:resource="http://data.budget.g0v.it/g0v-budget/v1#Observation"/>
     </owl:Class>
     
 
