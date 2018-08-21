@@ -1,11 +1,11 @@
 g0v-data application profile (ontology)
 ---------------------------------------
 
-g0v-ap is an [OWL ontology](https://www.w3.org/TR/owl2-primer/) used to annotate italian government budget data.  
+g0v-ap is an general [OWL ontology](https://www.w3.org/TR/owl2-primer/) suitable  to annotate a government budget data with a pourpose to support budget visalization applications (e.g. http://budger.g0v.it/).  
 
 It captures different perspectives of  government budget data like historical trend, cross-department and component breakdown of tax by government.
 
-The main concept in g0v-ap is the **account** that is an observation of a money amount in a reference period (e.g. year 2018) for a specific subject (e.g. "capitolo di spesa" ) in a  taxonomy ( i.e. the budget breackdown structures).
+The main concept in g0v-ap is the **budget** that is an observation of a money amount in a reference period (e.g. year 2018) for a specific account defined in a  taxonomy ( i.e. the budget breackdown structures).
 
 g0v-ap is an semantic web application profile that builds upon the following existing RDF vocabularies:: 
 
@@ -14,7 +14,7 @@ g0v-ap is an semantic web application profile that builds upon the following exi
 - the [SKOS](https://www.w3.org/TR/skos-primer) to describe balance taxonomy.
 - The [DCMI Metadata Terms](http://dublincore.org/documents/dcmi-terms/)
 - some facilities from [sdmx ontologies] (https://sdmx.org/)
-- the [g0v-budget Vocabulary](g0v-budget.rdf) to define some class and bindings mainly derived from bdap data structure.
+- the [g0v-budget Vocabulary](g0v-budget.rdf) to define few  class, attribute  and bindings mainly.
 
 g0v-ap reuses  some reference linked open data provided by [UK e-gov](https://github.com/alphagov/datagovuk_reference) for reference period time intervals.
 
@@ -53,4 +53,8 @@ This trig snippet is an example snapshot of a knowlege base that contains a budg
 ```	
 
 see a [complete sparql update example file](examples/data.update)
+
+The g0v-ap profile is desiged to be easily processed by SPARLQ processor in order to produce data models suitable for a specific task (e.g. the version 1 of the api to feed vue-budget components with data). See [in this picture the intended dataflow](https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=g0v-budget-datafow#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fe-artspace.com%2Fuc%3Fid%3D1iXdW0V08-gUK_SL1EkYmnofGvs1L1UD4%26export%3Ddownload)
+
+
 
