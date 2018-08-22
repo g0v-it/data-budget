@@ -1,0 +1,41 @@
+if [ ! -z ${__module_w3c_load_by_insert+x} ]; then return ; else __module_w3c_load_by_insert=1 ; fi
+
+SD_REQUIRES_CMD SD_DEBUG_INFO SD_LOG SD_SPARQL_UPDATE rapper split mktemp 
+
+SD_LOAD_CHUNK_SIZE=${SD_LOAD_CHUNK_SIZE:=50000}
+
+
+function _SD_MK_INSERT_STATEMENT {
+	local graphUri="$1"
+	echo "INSERT DATA { GRAPH <$graphUri> {"
+	cat
+	echo "}}"
+}
+
+function SD_LOAD_RDF_FILE {
+	local graphUri="$1"
+	local inputFile="$2"
+	local format="${3:-guess}"
+	local tempDir="${4:-$(mktemp -d --tmpdir="$SD_CACHE" load_rdf_file.XXXXXXXXXX)}"
+	
+	local fileUri="file://${SD_HOSTNAME}$(realpath "$inputFile")" 
+	fileUri=${fileUri// /%20} 
+	SD_LOG "parsing $inputFile" 
+	SD_DEBUG_INFO  "SD_LOAD_RDF_FILE parsing '$graphUri' '$inputFile' '$format' using temp dir '$tempDir'" 
+	rapper -q -i "$format" -o ntriples "$inputFile" "$fileUri" >  "$tempDir/input.nt" || SD_FATAL_ERROR "Error parsing $tempDir/input.nt"
+	SD_DEBUG_INFO  "SD_LOAD_RDF_FILE splitting in chunks of $SD_LOAD_CHUNK_SIZE lines" 
+	split -l $SD_LOAD_CHUNK_SIZE --filter "_SD_MK_INSERT_STATEMENT \"$graphUri\" > \"\$FILE\"" $tempDir/input.nt $tempDir/chunk- || SD_FATAL_ERROR "Error splitting $tempDir/input.nt"
+	
+	local chunksCounter=1
+	local numberOfChunks=$(find "$tempDir" -type f -name "chunk-*" -print |wc -l)
+	for chunkFile in $(find "$tempDir" -type f -name "chunk-*" -print | sort) ; do
+		SD_LOG "Loading $inputFile - chunk ${chunksCounter}/${numberOfChunks}..."
+		SD_SPARQL_UPDATE "@$chunkFile"
+		let "chunksCounter++"
+	done
+	if [ $SD_DEBUG -eq 0 ]; then rm -rf "$tempDir" ; fi
+}
+
+# TODO: test sparql end point is working
+
+export -f _SD_MK_INSERT_STATEMENT

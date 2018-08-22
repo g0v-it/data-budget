@@ -1,0 +1,134 @@
+#!/usr/bin/env bash
+_SDAAS_DIR="$(dirname "$( realpath "$0" )")"
+_SDAAS_VERSION="2"
+_SDAAS_AGENT_NAME="Anassimandro"
+
+_SD_MUST_EXIT=0
+_SD_REBOOT=0
+SD_VERBOSE=${SD_VERBOSE:-1}
+SD_DEBUG=${SD_DEBUG:-0}
+SD_QUADSTORE=${SD_QUADSTORE:-kb}
+
+
+function _SDAAS_FATAL_ERROR {
+	>&2 cat <<-EOT
+		Smart Data as a Service (SDaaS) platform - '$_SDAAS_AGENT_NAME' edition
+		Copyright (C) 2018 http://linkeddata.center/
+			
+		valid options:
+		
+		-c, --create <name>
+			create a boilerplate project in a directory with name "name"
+		
+		-d, --debug
+		   allow to save debug informations in cache (SD_CACHE)
+		
+		-f, --file <sdaa script>
+			executes a build script
+		
+		-k, --graph-engine kb|ekb|blazegraph|neptune
+			defines the backed technology to be used. Supported technologies:
+				kb (default) : use the  local engine based on blazegraph (must be running locally)
+				blazegraph: use a remote blazegraph instance (you need setup env variables SD_BG_ENDPOINT and  SD_BG_NAMESPACE)
+				ekb: use a LinkedData.Center GDaaS instance (you need setup env variables SD_KBUSER and SD_KBPASSWORD)
+				neptune: use a aws neptune instance (you need setup SD_NEPTUNE_INSTANCE, only works on same VPN as neptune host)
+				
+			N.B. each graph engine may require additional special setup procedures.
+		   
+		-q, --quiet
+		   Do not show progress meter or  error  messages.
+			
+		--reboot
+		   WARNING!!! erase all knowledge base before executing the rebuild process
+			
+		--verbose <verbose_level>
+		   -v is equivalent to --verbose 1, --verbose 0 is an alias of -q
+			
+		--version
+			prints the platform version	
+	EOT
+	exit 1
+}
+
+
+### Parse command line options
+__parsed=$(getopt --options=qvdk:f:c: --longoptions=quiet,verbose:,debug,reboot,version,file:,graph-engine,create: --name "$0" -- "$@")	 || _SDAAS_FATAL_ERROR
+eval set -- "$__parsed"
+unset __parsed 
+
+while true; do
+	case "$1" in
+	    -q|--quiet)
+	    	SD_VERBOSE=0
+            shift
+	    	;;
+	    -v)
+	    	SD_VERBOSE=1
+            shift
+	    	;;
+	    --verbose)
+	    	SD_VERBOSE=$2
+            shift 2
+	    	;;
+	    -d|--debug)
+	    	SD_DEBUG=1
+            shift
+	    	;;
+	    -c|--create)
+	    	if [ -d "$2" ]; then
+	    		>&2 echo "Error: directory $2 already exists."
+	    		_SDAAS_FATAL_ERROR
+	    	fi
+	    	cp -rp "$_SDAAS_DIR/../boilerplate" "$2"
+            echo "Example project created in $2"
+            _SD_MUST_EXIT=1
+            shift 2
+	    	;;
+	    --reboot)
+	    	_SD_REBOOT=1
+            shift
+	    	;;
+	    --version)
+	    	echo "Smart Data as a Service Platform version $_SDAAS_VERSION providing the $_SDAAS_AGENT_NAME agent."
+            shift
+	    	;;
+	    -f|--file)
+			_SD_PROGRAMFILE="$2"
+	    	shift 2
+	    	;;
+	    -k|--graph-engine)
+			SD_QUADSTORE="$2"
+	    	shift 2
+	    	;;
+        --)
+            shift
+            break
+        ;;
+	    *)
+	        _SDAAS_FATAL_ERROR
+	    ;;
+	esac
+done
+
+if [  $_SD_MUST_EXIT -eq 1 ]; then exit; fi
+
+if [ -f "$_SD_PROGRAMFILE" ]; then
+	. "$_SDAAS_DIR/platform.include"
+	. "$_SD_PROGRAMFILE"
+else
+	inifile=$(mktemp)
+	if [ -f ~/.bashrc ]; then
+		cat ~/.bashrc > "$inifile"
+	fi
+	cat <<-EOT >> "$inifile"
+		_SD_REBOOT=${_SD_REBOOT}
+		SD_VERBOSE=${SD_VERBOSE}
+		SD_DEBUG=${SD_DEBUG}
+		SD_QUADSTORE=${SD_QUADSTORE}
+		. "$_SDAAS_DIR/platform.include"
+		PS1="sdaas > "
+	EOT
+	bash --init-file $inifile
+	rm -f "$inifile"
+fi
+

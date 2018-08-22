@@ -1,0 +1,11 @@
+if [ ! -z ${__module_ekb+x} ]; then return ; else __module_ekb=1 ; fi
+
+SD_REQUIRES_VAR SD_KBUSER SD_KBPASSWORD
+SD_KBENDPOINT=${SD_KBENDPOINT:="https://hub2.linkeddata.center/$SD_KBUSER"}
+
+SD_SPARQL_QUERY_ENDPOINT="$SD_KBENDPOINT/sparql"
+SD_SPARQL_UPDATE_ENDPOINT="$SD_SPARQL_QUERY_ENDPOINT/update"
+
+SD_INCLUDE w3c_query "--compressed -u $SD_KBUSER:$SD_KBPASSWORD --header 'Cache-Control: no-cache'"
+SD_INCLUDE w3c_update_uncompressed "-u $SD_KBUSER:$SD_KBPASSWORD"
+SD_INCLUDE w3c_load_by_insert

@@ -1,0 +1,24 @@
+if [ ! -z ${__module_reasoning+x} ]; then return ; else __module_reasoning=1 ; fi
+
+SD_REQUIRES_CMD mktemp SD_LOAD_RDF_FILE SD_SPARQL_QUERY
+
+function SD_REASONING_BY {
+	SD_REQUIRES_VAR 1 2
+	SD_LOG "Rebuilding graph $2"
+	if [ $_SD_REBOOT -eq 0 ]; then  SD_SPARQL_UPDATE "DROP SILENT GRAPH <$2>" ; fi
+	$@
+}
+
+function SD_EVAL_CONSTRUCTOR {
+	SD_REQUIRES_VAR 1 2
+	local graphName="$1"
+	local constructor="$2"
+	local queryResult=${3:-$(mktemp --tmpdir="$SD_CACHE" construction-XXXXXXXXXX.ttl)}
+	
+	SD_LOG "Evaluating axiom $(if [[ ${constructor:0:1} == "@" ]] ; then echo "$constructor"; else echo "$constructor" | tr '\n' ' '| cut -c 1-30; fi)..."
+	SD_DEBUG_INFO "EVAL_CONSTRUCTOR '$constructor' into '$queryResult'"
+	SD_SPARQL_QUERY "text/turtle" "$constructor" > "$queryResult"
+	SD_LOAD_RDF_FILE "$graphName" "$queryResult" turtle
+	if [ $SD_DEBUG -eq 0 ]; then rm -f "$queryResult" ; fi
+}
+

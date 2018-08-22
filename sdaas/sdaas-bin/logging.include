@@ -1,0 +1,54 @@
+if [ ! -z ${__module_logging+x} ]; then return ; else __module_logging=1 ; fi
+
+SD_REQUIRES_VAR SD_CACHE SD_VERBOSE
+SD_REQUIRES_CMD date
+
+SD_DEBUG=${SD_DEBUG:=0}
+SD_LOG_FILE=${SD_LOG_FILE:="$SD_CACHE/session_$$.log"}
+SD_DEBUG_FILE=${SD_DEBUG_FILE:="$SD_CACHE/session_$$.debug"}
+
+# Shows a string to std output if verbose > 0
+# $1 a string
+function SD_SHOW {
+	if [ "$SD_VERBOSE" -gt 0 ]; then 
+		echo "$1"
+	fi 
+}
+
+# $1 a string
+# if $2 exists log only to file
+function SD_LOG {
+	local log_string="sdaas $(date) - $1"
+	if [ -z "$2" ]; then
+		SD_SHOW "$log_string"
+	fi
+	echo "$log_string" >> "$SD_LOG_FILE"
+}
+
+# $1 a string or a file name 
+function SD_DEBUG_INFO {
+	if [ $SD_DEBUG -gt 0 ]; then
+		if [ -f "$1" ]; then
+			cat "$1" >> "$SD_DEBUG_FILE"
+		else
+			echo "$1" >> "$SD_DEBUG_FILE"
+		fi
+	fi
+}
+
+
+# $1 a string or a file name 
+function SD_MK_DEBUG_TMP_FILE {
+    local prefix=${1:-"debug"}
+    local tmpFile=$(mktemp -p "$SD_CACHE" "${prefix}.XXXXXXXXXXXX")
+	SD_DEBUG_INFO "SD_MK_DEBUG_TMP_FILE $tmpFile"
+	echo "$tmpFile"
+}
+
+
+function SD_START_LOGGING {
+	touch "$SD_LOG_FILE" || SD_FATAL_ERROR "Can't touch log file($SD_LOG_FILE). Is $SD_CACHE directory writable?"
+	touch "$SD_DEBUG_FILE" || SD_FATAL_ERROR "Can't touch debug file ($SD_DEBUG_FILE). Is $SD_CACHE directory writable?"
+	SD_LOG "SD_START_LOGGING logging $SD_LOG_FILE"
+	SD_LOG "SD_START_LOGGING debug info in $SD_DEBUG_FILE"
+} 

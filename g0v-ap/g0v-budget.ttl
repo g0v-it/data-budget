@@ -208,12 +208,6 @@ qb:Observation rdf:type owl:Class .
 
 
 
-###  http://www.w3.org/2004/02/skos/core#Concept
-
-skos:Concept rdf:type owl:Class .
-
-
-
 ###  http://www.w3.org/2004/02/skos/core#ConceptScheme
 
 skos:ConceptScheme rdf:type owl:Class .

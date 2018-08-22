@@ -1,0 +1,12 @@
+if [ ! -z ${__module_caching+x} ]; then return ; else __module_caching=1 ; fi
+SD_REQUIRES_CMD SD_FATAL_ERROR
+
+SD_CACHE=${SD_CACHE:=".cache"}
+
+function SD_CLEAN_CACHE {
+	if [ ! -d $SD_CACHE ]; then
+		mkdir -m 711 -p $SD_CACHE || SD_FATAL_ERROR "Can't create $SD_CACHE directory!"
+	else
+		rm -rf $SD_CACHE/* || SD_FATAL_ERROR "Can't delete $SD_CACHE directory!"
+	fi
+}
