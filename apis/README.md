@@ -40,9 +40,9 @@ To test api server you need:
 
 
 ```
-curl http://localhost:8080/v1/it/accounts
+curl http://localhost:8080/accounts
 
-curl http://localhost:8080/v1/it/account/0200120001
+curl http://localhost:8080/account/A1.02.0012.0001
 ```
 
 
