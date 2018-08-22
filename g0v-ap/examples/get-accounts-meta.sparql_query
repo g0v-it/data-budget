@@ -1,6 +1,4 @@
-//get accountsmeta
-module.exports = {
-	query : `PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1>
+PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1>
 PREFIX interval: <http://reference.data.gov.uk/def/intervals/>
 PREFIX dct:      <http://purl.org/dc/terms/> 
 PREFIX dcat:      <http://www.w3.org/ns/dcat#> 
@@ -21,5 +19,3 @@ WHERE {
 	OPTIONAL {?legge_di_bilancio sdmx-attribute:unitMeasure/dbpedia:isoCode ?um_from_dbpedia}
 	BIND (COALESCE(?um_from_dbpedia, "") AS ?um)
 } ORDER BY DESC(?year) LIMIT 1
-`
-}

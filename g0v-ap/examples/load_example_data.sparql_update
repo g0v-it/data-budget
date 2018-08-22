@@ -20,7 +20,7 @@ PREFIX : <urn:g0v:budget:example:resource:>
 DROP ALL;
 
 INSERT DATA {
-	GRAPH :catalog 	{
+	GRAPH :catalog_graph 	{
 		:MEF a foaf:Organization; 
 			foaf:homepage <http://www.mef.gov.it>;
 			foaf:name "Minstero dell'Economia e delle Finanze"@it
@@ -70,8 +70,7 @@ INSERT DATA {
 			
 
 		####  breakdown per amministrazioni	
-		y2018:tassonomia_spese_amministrazioni a skos:ConceptScheme;
-		    skos:subject g0v:Legge_di_bilancio ;
+		y2018:tassonomia_spese_amministrazioni a g0v:BudgetTaxonomy;
 			dct:src :legge_bilancio_2018 ; 
 			dct:title "Tassonomia capitoli di spesa per amministrazioni";
 			dct:description "Tassonomia amministrazioni/missioni/programmi/azioni/capitoli ricavata dalla legge di bilancio";
@@ -101,7 +100,6 @@ INSERT DATA {
 		y2018:azione_A10200120001 a skos:Concept ;
 			 skos:notation "A1.02.0012.0001";
 			 skos:prefLabel "azione 02.0012.0001"@it;
-			 skos:closeMatch y2017:azione_A10200120001; # N.B. mapping with previous 
 			 skos:inScheme y2018:tassonomia_spese_amministrazioni;
 			 skos:broader y2018:programma_A1020012;
 			 skos:narrow y2018:capitolo_A102001200010001.
@@ -109,7 +107,6 @@ INSERT DATA {
 		y2018:azione_A10200120002 a skos:Concept ;
 			 skos:notation "A1.02.0012.0002";
 			 skos:prefLabel "azione 02.0012.0002"@it;
-			 skos:closeMatch y2017:azione_A10200120002;
 			 skos:inScheme y2018:tassonomia_spese_amministrazioni;
 			 skos:broader y2018:programma_A1020012;
 			 skos:narrow y2018:capitolo_A102001200020001.
@@ -146,7 +143,7 @@ INSERT DATA {
 			
 
 		####  breakdown per amministrazioni	y2017
-		y2017:tassonomia_spese_amministrazioni a skos:ConceptScheme;
+		y2017:tassonomia_spese_amministrazioni a g0v:RecordTaxonomy;
 			dct:src :rendiconto_2017 ; 
 			dct:title "Tassonomia capitoli di spesa per amministrazioni";
 			dct:description "Tassonomia amministrazioni/missioni/programmi/azioni/capitoli ricavata dalla legge di bilancio";
@@ -204,11 +201,9 @@ INSERT DATA {
 
 ## Load Linked data
 
-
 LOAD <http://reference.data.gov.uk/id/gregorian-interval/2021-01-01T00:00:00/P1Y> INTO GRAPH :intervals;
 LOAD <http://reference.data.gov.uk/id/gregorian-interval/2020-01-01T00:00:00/P1Y> INTO GRAPH :intervals;
 LOAD <http://reference.data.gov.uk/id/gregorian-interval/2019-01-01T00:00:00/P1Y> INTO GRAPH :intervals;
-
 LOAD <http://reference.data.gov.uk/id/gregorian-interval/2018-01-01T00:00:00/P1Y> INTO GRAPH :intervals;
 LOAD <http://reference.data.gov.uk/id/gregorian-interval/2017-01-01T00:00:00/P1Y> INTO GRAPH :intervals;
 LOAD <http://reference.data.gov.uk/id/gregorian-interval/2016-01-01T00:00:00/P1Y> INTO GRAPH :intervals;

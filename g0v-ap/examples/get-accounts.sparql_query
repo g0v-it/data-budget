@@ -1,0 +1,25 @@
+PREFIX : <urn:local:g0v:api:v1:>
+
+SELECT ?code ?name ?amount ?last_amount ?grandParentLabel ?parentLabel 
+WHERE {
+	# compute ?last_amount.
+	{
+		SELECT ?code_history ( MAX (?year) AS ?last_year)
+		WHERE {
+		  ?account_record a :AccountRecord;
+				:code ?code_history ;
+				:year ?year             
+		} GROUP BY ?code_history 
+	}
+	?account_record a :AccountRecord; :code ?code_history; :year ?last_year; :amount ?last_amount.
+
+	?s a :Account.
+	OPTIONAL { ?s :code ?code}
+	OPTIONAL { ?s :name ?name}
+	OPTIONAL { ?s :amount ?amount }
+	OPTIONAL { ?s :last_amount ?last_amount }
+	OPTIONAL { ?s :parentLabel ?parentLabel}
+	OPTIONAL { ?s :grandParentLabel ?grandParentLabel}
+		
+	FILTER (?code = ?code_history) 
+}

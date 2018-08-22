@@ -1,5 +1,5 @@
 ##
-## AXIOM: create an account node suitable for easy api sparql query
+## AXIOM: create account nodes suitable for easy api development
 ##
 PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
@@ -12,12 +12,12 @@ PREFIX qb:       <http://purl.org/linked-data/cube#>
 PREFIX sdmx-dimension:  <http://purl.org/linked-data/sdmx/2009/dimension#> 
 PREFIX sdmx-measure:    <http://purl.org/linked-data/sdmx/2009/measure#> 
 PREFIX sdmx-attribute:  <http://purl.org/linked-data/sdmx/2009/attribute#> 
-PREFIX : <urn:local:g0v:budget:example:>
+PREFIX : <urn:local:g0v:api:v1:>
 
-DROP GRAPH :accounts_graph ;
 
+
+## create an api account budget
 INSERT {
-  GRAPH :accounts_graph { 
 	?accountUri a :Account ;
        :amount ?amount;
        :code ?code;
@@ -25,37 +25,38 @@ INSERT {
        :grandParentLabel ?best_grand_parent_label;
        :parentLabel ?best_parent_label;
 	   dct:subject ?account_subject
-  }    
 } WHERE {
-  {
-    SELECT ?account_subject (SUM (?budget_amount) AS ?amount) WHERE {
-      ?budget a g0v:Budget;  
-                  g0v:subject ?budget_subject;
-                  g0v:obsValue ?budget_amount.
-      ?budget_subject skos:broader ?account_subject .    
-    } GROUP BY ?account_subject
-  }
- 
-  ?account_subject skos:prefLabel ?name ; skos:notation ?code .
-  OPTIONAL {?account_subject skos:broader/skos:broader/skos:prefLabel ?parent_label}
-  OPTIONAL {?account_subject skos:broader/skos:broader/skos:prefLabel ?parent_Shortlabel}
-  OPTIONAL {?account_subject skos:broader/skos:broader/skos:broader/skos:prefLabel ?grand_parent_label}
-  OPTIONAL {?account_subject skos:broader/skos:broader/skos:broader/skos:altLabel ?grand_parent_short_label}
-  BIND( COALESCE(?grand_parent_short_label,?grand_parent_label) AS ?best_grand_parent_label)
-  BIND( COALESCE(?parent_short_label,?parent_label) AS ?best_parent_label)
-  BIND( UUID() AS ?accountUri )
+	{
+		SELECT ?account_subject (SUM (?budget_amount) AS ?amount) WHERE {
+		  ?budget a g0v:Budget;  
+					  g0v:subject ?budget_subject;
+					  g0v:obsValue ?budget_amount.
+		  ?budget_subject skos:broader ?account_subject .    
+		} GROUP BY ?account_subject
+	}
+
+	?account_subject skos:prefLabel ?name ; skos:notation ?code .
+	
+	# find te best labels for top levele and secon level taxonomy concepts
+	OPTIONAL {?account_subject skos:broader/skos:broader/skos:prefLabel ?parent_label}
+	OPTIONAL {?account_subject skos:broader/skos:broader/skos:prefLabel ?parent_Shortlabel}
+	BIND( COALESCE(?parent_short_label,?parent_label) AS ?best_parent_label)
+	
+	OPTIONAL {?account_subject skos:broader/skos:broader/skos:broader/skos:prefLabel ?grand_parent_label}
+	OPTIONAL {?account_subject skos:broader/skos:broader/skos:broader/skos:altLabel ?grand_parent_short_label}
+	BIND( COALESCE(?grand_parent_short_label,?grand_parent_label) AS ?best_grand_parent_label)
+	
+	BIND( UUID() AS ?accountUri )
 }
+
 ;
 
-
-## create account record
+## create an api account record
 INSERT {
-	GRAPH :accounts_graph {
-	  ?accountUri a :AccountRecord;
-		   :amount  ?amount;
-		   :year ?year;
-		   :code ?code
-	}
+	?accountRecordUri a :AccountRecord;
+	   :amount  ?amount;
+	   :year ?year;
+	   :code ?code
 } WHERE {  
 
   {
@@ -72,7 +73,7 @@ INSERT {
   }
  
   ?account_record_subject skos:notation ?code 
-  BIND( UUID() AS ?accountUri )
+  BIND( UUID() AS ?accountRecordUri )
 }
 
 

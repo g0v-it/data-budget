@@ -12,18 +12,18 @@ g0v-ap is an semantic web application profile that builds upon the following RDF
 - the [SKOS](https://www.w3.org/TR/skos-primer) to describe balance taxonomy.
 - The [DCMI Metadata Terms](http://dublincore.org/documents/dcmi-terms/)
 - some facilities from [sdmx ontologies](https://sdmx.org/)
-- the [g0v-budget Vocabulary](g0v-budget.rdf) that defines few classes, attributes and bindings.
+- the [g0v-budget Vocabulary](g0v-budget.ttl) that defines few classes, attributes and bindings.
 
-g0v-ap also reuses some references to linked open data provided by [UK e-gov](https://github.com/alphagov/datagovuk_reference) and by [dbpedia](http://dbpedia.gov).
+g0v-ap also reuses some individual references to linked open data provided by [UK e-gov](https://github.com/alphagov/datagovuk_reference) and by [dbpedia](http://dbpedia.org/).
 
-The two main concepts in g0v-ap are **budget** and **record** that are observations of money amount in a reference period (e.g. year 2018) for a specific account defined in a taxonomy ( i.e. the budget breackdown structures). The g0v:Budget class defines a forecast value for an account, the g0v:Record class defines the final account value for a specific time period.
+The two main concepts in g0v-ap are **Budget** and **Record** that are observations of money amount in a reference period (e.g. year 2018) for a specific account defined in a taxonomy . The g0v:Budget class defines a forecast value for an account defined in a budget report (e.g. italian "legge di bilancio", the g0v:Record class defines the consolidated historical account value for a specific time period.
 
 Very often, the account taxonomy can change on a year basis. This could teorically prevent an account historical analysis. In a practical use, these taxonomies do not change very much. For this reason it is possible to map different account concepts defined in different taxonomies using the skos:closeMatch attribute. A budget visalization application can use this information to compute a "light" historical trend for a specific account.
 
 See the [g0v-ap UML diagram](https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=g0v-uml-diagram#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fe-artspace.com%2Fuc%3Fid%3D1Qa_zoF1Nl8ULUg9uChN-OH3ep2Lta4PY%26export%3Ddownload) for more info about restrictions.
 
 
-This snippet (in RDF trig format) is an example snapshot of a knowlege base that contains a budget expressed using with g0v-ap:
+This snippet (in RDF trig format) is an example snapshot of linked data that contains a budget expressed using with g0v-ap:
 
 ```
 ...
@@ -57,6 +57,26 @@ This snippet (in RDF trig format) is an example snapshot of a knowlege base that
 see a [complete sparql update example file](examples/data.update)
 
 The g0v-ap profile is designed to be easily processed by SPARLQ processor in order to produce data models suitable for a specific task (e.g. the version 1 of the api to feed vue-budget components with data). See [in this picture the intended dataflow](https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=g0v-budget-datafow#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fe-artspace.com%2Fuc%3Fid%3D1iXdW0V08-gUK_SL1EkYmnofGvs1L1UD4%26export%3Ddownload)
+
+
+## Test the ontology
+
+Instal docker and run:
+
+```	
+docker run --name g0vap -d \
+  -p 8889:8080 \
+  -v examples/:/data \
+  lyrasis/blazegraph:2.1.4
+```	
+
+Connect to [blazegraph consolole SPARQL update tab](http://localhost:8889/bigdata/#update) and load some example data with the [SPARQL update script](load_example_data.sparql_update).
+
+Do	 some general reasoning about loaded data running [base axioms](g0v_axioms.sparql_update)
+
+Transform data for your api running [axioms for api](api_axioms.sparql_update).
+
+Than move in SPARQL QUERY tab and enjoi with one of the provided query examples
 
 
 

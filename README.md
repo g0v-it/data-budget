@@ -32,10 +32,10 @@ To run the rdf store and loading it with data for italian government budget, typ
 ```bash
 docker-compose up -d
 # run the ingestion processor
-docker exec sdaas ingestion.sh
+docker exec databudget_sdaas_1 ingestion.sh 
 ```
 
-The rdf store exposes a SPARQL endpoint on 9999 port to access a datastore interface ). This interface must be disabled in producion.
+The rdf store exposes a SPARQL endpoint on 9999 port. This interface must be disabled in producion environment.
 
 The api server exposes an http enpoint at 8080 port. Try to get the italian budget data with http://localhost:8080/v1/accounts
 
