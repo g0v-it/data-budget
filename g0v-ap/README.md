@@ -64,15 +64,13 @@ The g0v-ap profile is designed to be easily processed by SPARLQ processor in ord
 Instal docker and run:
 
 ```	
-docker run --name g0vap -d \
-  -p 8889:8080 \
-  -v examples/:/data \
-  lyrasis/blazegraph:2.1.4
+cd ..
+docker-compose up -d sdaas 
 ```	
 
-Connect to [blazegraph consolole SPARQL update tab](http://localhost:8889/bigdata/#update) and load some example data with the [SPARQL update script](load_example_data.sparql_update).
+Connect to [blazegraph consolole SPARQL update tab](http://localhost:9999/bigdata/#update) and load some example data with the [SPARQL update script](load_example_data.sparql_update).
 
-Do	 some general reasoning about loaded data running [base axioms](g0v_axioms.sparql_update)
+Do some general reasoning about loaded data running [base axioms](g0v_axioms.sparql_update)
 
 Transform data for your api running [axioms for api](api_axioms.sparql_update).
 
