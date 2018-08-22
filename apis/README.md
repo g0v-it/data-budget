@@ -8,7 +8,7 @@ vue components defined in [vue-budget repository]().
 
 ### /accounts/{schema}
 
-returns  data in format suitable to be used with budget-bubbles vue component
+returns data in format suitable to be used with budget-bubbles vue component
 
 
 {schema} indicates the data model provided. The following schemas are supported:
@@ -28,6 +28,11 @@ returns data suitable to be used with AccountDetails vue component
 {schema} indicates the data model provided. The following schemas are supported:
 
 - **full**: provides data in a format suitable for the BudgetBubbles vue component  [default]
+
+
+### /partition_labels/
+
+returns data suitable to be used in partitioning in budget-bubbles vue component
 
 
 ## Test

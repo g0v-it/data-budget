@@ -14,38 +14,62 @@ querystring = require('querystring');
 
 
 exports.getAccounts = async (req, res) => {
-	let queryAccounts = require('../queries/get-accounts.js'),
+	let queryAccounts, queryAccountsMeta, schema, accountsJson, metaJson, outputJson;
+
+	//Fetch Queries
+	queryAccounts = require('../queries/get-accounts.js');
 	queryAccountsMeta = require('../queries/get-accounts-meta.js');
 	
-	schema = req.params.schema;
-	
 	//Set schema
+	schema = req.params.schema;
 	schema = (schema === undefined) ? DEFAULT_SCHEMA_ACCOUNTS : schema;
 
-	let accounts = await buildJsonAccountsList(
+	accountsJson = await buildJsonAccountsList(
 		await getQueryResult(config.endpoint, queryAccounts));
-	let meta = await csv().fromString(
+	metaJson = await csv().fromString(
 		await getQueryResult(config.endpoint, queryAccountsMeta));
 	
-	//Build Json
-	let output = {};
+	//Build OutputJson
+	outputJson = {};
 
-	output.meta = meta;
-	output.accounts = accounts;
-	res.send(output);
+	outputJson.meta = metaJson[0];
+	outputJson.accounts = accountsJson;
+	res.json(outputJson);
 }
 
 exports.getAccount = async (req, res) => {
-	let schema = req.params.schema,
-		id = req.params.id;
+	let queryAccount, schema, outputJson;
 	
-	let query = require('../queries/get-account.js')(id);
+	//Fetch Queries
+	queryAccount = require('../queries/get-account.js')(req.params.id);
 
 	//Set schema
+	schema = req.params.schema;
 	schema = (schema === undefined) ? DEFAULT_SCHEMA_ACCOUNT : schema;
 
-	let account = await buildJsonAccount(await getQueryResult(config.endpoint, query));
-	res.json(account);
+	outputJson = await buildJsonAccount(await getQueryResult(config.endpoint, queryAccount));
+	res.json(outputJson);
+}
+
+
+exports.getPartitionLabels =  async (req, res) => {
+	//Variables
+	let queriesPartitionLabels, topPartitionLabelsJson, secondPartitionLabelsJson, outputJson;
+
+	queriesPartitionLabels = require('../queries/get-partition-labels.js');
+	
+	//Get the lables
+	topPartitionLabelsJson = await csv().fromString(
+		await getQueryResult(config.endpoint, queriesPartitionLabels.top_partition_labels));
+ 	secondPartitionLabelsJson = await csv().fromString(
+		await getQueryResult(config.endpoint, queriesPartitionLabels.second_partition_labels));
+
+ 	//Build the json
+ 	outputJson = {};
+ 	outputJson.top_partition = topPartitionLabelsJson;
+ 	outputJson.second_partition = secondPartitionLabelsJson;
+
+ 	res.json(outputJson);
 }
 
 
@@ -104,16 +128,16 @@ async function buildJsonAccountsList(data){
 			let output = await csv().fromString(data);
 			output.map(account => {
 			//Set new tags
-
+				//top_partition_label second_partition_label
 				account.partitions = {
-					ministero: account.grandParentLabel,
-					misisone: account.parentLabel
+					top_partition: account.top_partition_label,
+					second_partition: account.second_partition_label
 				}
-				account.top_level = account.grandParentLabel;
+				account.top_level = account.top_partition_label;
 				
 				//remove old ones
-				delete account.grandParentLabel;
-				delete account.parentLabel;
+				delete account.top_partition_label;
+				delete account.second_partition_label;
 			});
 			resolve(output);
 			
@@ -126,20 +150,40 @@ async function buildJsonAccountsList(data){
 async function buildJsonAccount(data){
 	return new Promise(async (resolve, reject) =>{
 		try{
-			let json = await csv().fromString(data);
-			let output = {};
+			let json, output;
+
+			json = await csv().fromString(data);
+			output = json[0];
+
 			output.past_values= {};
+			output.partitions = {};
 
 			json.map(account => {
-				output.past_values[account.year] = account.amount;
+				output.past_values[account.year] = account.history_amount;
 			});
+
+			output.partitions = {
+				top_partition: output.top_partition_label,
+				second_partition: output.second_partition_label
+			}
+			
+			output.top_level =  output.top_partition_label;
+			
+			//remove old ones
+			delete output.history_amount;
+			delete output.year;
+			delete output.top_partition_label;
+			delete output.second_partition_label;
 			resolve(output);
+		
 		}catch (e){
 			reject(e);
 		}
 		
 	});
 }
+
+
 
 
 

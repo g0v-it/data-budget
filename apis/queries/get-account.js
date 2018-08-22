@@ -6,13 +6,24 @@ PREFIX interval: <http://reference.data.gov.uk/def/intervals/>
 PREFIX time: <http://www.w3.org/2006/time#>
 
 
-SELECT ?code_history ?year ?amount
+SELECT ?code ?name ?amount ?last_amount ?top_partition_label ?second_partition_label ?year ?history_amount
 WHERE {
-  	?account_record a :AccountRecord;
-				:code ?code_history ;
-				:year/time:hasBeginning/interval:ordinalYear ?year;
-                :amount ?amount.
-		
-	FILTER (?code_history = "${id}") 
-}`})
+    ?account a :Account;
+               :code ?code;
+               :name ?name;
+          :amount ?amount;
+               :last_amount ?last_amount;
+               :topPartitionLabel ?top_partition_label;
+               :secondPartitionLabel ?second_partition_label.
+               
+               
+    ?account_record a :AccountRecord;
+        :code ?code ;
+        :year/time:hasBeginning/interval:ordinalYear ?year;
+                :amount ?history_amount.
+    
+  FILTER (?code = "${id}") 
+}ORDER BY DESC(?year)
+
+`})
 }

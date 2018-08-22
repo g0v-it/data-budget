@@ -22,8 +22,8 @@ INSERT {
        :amount ?amount;
        :code ?code;
        :name ?name;
-       :grandParentLabel ?best_grand_parent_label;
-       :parentLabel ?best_parent_label;
+       :topPartitionLabel ?best_top_partition_label;
+       :secondPartitionLabel ?best_second_partition_label;
 	   dct:subject ?account_subject
 } WHERE {
 	{
@@ -38,13 +38,13 @@ INSERT {
 	?account_subject skos:prefLabel ?name ; skos:notation ?code .
 	
 	# find te best labels for top levele and secon level taxonomy concepts
-	OPTIONAL {?account_subject skos:broader/skos:broader/skos:prefLabel ?parent_label}
-	OPTIONAL {?account_subject skos:broader/skos:broader/skos:prefLabel ?parent_Shortlabel}
-	BIND( COALESCE(?parent_short_label,?parent_label) AS ?best_parent_label)
+	OPTIONAL {?account_subject skos:broader/skos:broader/skos:prefLabel ?second_partition_label}
+	OPTIONAL {?account_subject skos:broader/skos:broader/skos:prefLabel ?second_partition_short_label}
+	BIND( COALESCE(?second_partition_short_label,?second_partition_label) AS ?best_second_partition_label)
 	
-	OPTIONAL {?account_subject skos:broader/skos:broader/skos:broader/skos:prefLabel ?grand_parent_label}
-	OPTIONAL {?account_subject skos:broader/skos:broader/skos:broader/skos:altLabel ?grand_parent_short_label}
-	BIND( COALESCE(?grand_parent_short_label,?grand_parent_label) AS ?best_grand_parent_label)
+	OPTIONAL {?account_subject skos:broader/skos:broader/skos:broader/skos:prefLabel ?top_partition_label}
+	OPTIONAL {?account_subject skos:broader/skos:broader/skos:broader/skos:altLabel ?top_partition_short_label}
+	BIND( COALESCE(?top_partition_short_label,?top_partition_label) AS ?best_top_partition_label)
 	
 	BIND( UUID() AS ?accountUri )
 }
@@ -74,6 +74,73 @@ INSERT {
  
   ?account_record_subject skos:notation ?code 
   BIND( UUID() AS ?accountRecordUri )
+}
+
+;
+
+## create an api accountTopPartition
+INSERT {
+	?accountUriTopPartition a :AccountTopPartition ;
+       :amount ?amount;
+       :label ?top_partition_label;
+} WHERE {
+  	{
+		SELECT ?top_partition_label (SUM (?account_amount) AS ?amount)
+        WHERE {
+          ?accountUri a :Account;
+                        :amount ?account_amount;
+                        :topPartitionLabel ?top_partition_label;
+        }GROUP BY ?top_partition_label 
+	}
+  
+	BIND( UUID() AS ?accountUriTopPartition )
+}
+;
+
+## create an api accountSecondPartition
+INSERT {
+	?accountUriSecondPartition a :AccountSecondPartition ;
+       :amount ?amount;
+       :label ?second_partition_label;
+} WHERE {
+  	{
+		SELECT ?second_partition_label (SUM (?account_amount) AS ?amount)
+        WHERE {
+          ?accountUri a :Account;
+                        :amount ?account_amount;
+                        :secondPartitionLabel ?second_partition_label;
+        }GROUP BY ?second_partition_label 
+	}
+  
+	BIND( UUID() AS ?accountUriSecondPartition )
+}
+
+;
+
+## add last_amount to account
+
+INSERT { 
+	?account :last_amount ?last_amount
+} WHERE {  
+    
+    {
+		SELECT ?code_history ( MAX (?year) AS ?last_year)
+		WHERE {
+		  ?account_record a :AccountRecord;
+				:code ?code_history ;
+				:year ?year             
+		} GROUP BY ?code_history 
+	}
+    
+  	?account a :Account;
+               :code ?code.
+  
+  	?account_record a :AccountRecord; 
+                      :code ?code_history; 
+                      :year ?last_year; 
+                      :amount ?last_amount.
+	
+	FILTER(?code = ?code_history )
 }
 
 
