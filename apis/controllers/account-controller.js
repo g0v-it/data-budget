@@ -12,19 +12,22 @@ querystring = require('querystring');
 
 
 
-exports.getAccounts = (req, res) => {
+exports.getAccounts = async (req, res) => {
 	let endpoint = "http://sdaas:8080/bigdata/sparql",
-	query = require('../queries/get-accounts.js'),
+	queryAccounts = require('../queries/get-accounts.js'),
+	queryAccountsMeta = require('../queries/get-accounts-meta.js');
 	schema = req.params.schema;
 	
 	//Set schema
 	schema = (schema === undefined) ? DEFAULT_SCHEMA_ACCOUNTS : schema;
 
-	getQueryResult(endpoint, query).then(async (result) => {
-		let output = await buildJsonAccountsList(result);
-		res.send(output);
-	})
-	.catch((e) => console.error(`problem with request: ${e.message}`));
+	let accounts = await buildJsonAccountsList(await getQueryResult(endpoint, queryAccounts));
+	let meta = await csv().fromString(await getQueryResult(endpoint, queryAccountsMeta));
+	let output = {};
+
+	output.meta = meta;
+	output.accounts = accounts;
+	res.send(output);
 }
 
 exports.getAccount = (req, res) => {
@@ -95,14 +98,18 @@ async function buildJsonAccountsList(data){
 			//Set new tags
 
 			account.partition = {
-				missione: account.missione,
-				ministero: account.ministero
+				ministero: account.grandParentLabel,
+				misisone: account.parentLabel
 			}
-
+			account.ministero = account.grandParentLabel;
+			account.misisone = account.parentLabel
 			//remove old ones
-			delete account.missione;
-			delete account.ministero;
+			delete account.grandParentLabel;
+			delete account.parentLabel;
 		});
 		resolve(output);
 	});
 }
+
+
+
