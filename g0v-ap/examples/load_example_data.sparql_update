@@ -83,7 +83,6 @@ INSERT DATA {
 			 skos:altLabel "FINANZE"@it;
 			 skos:inScheme y2018:tassonomia_spese_amministrazioni;
 			 skos:narrow :missione_A102;
-			 skos:broader y2018:azione_A10200120001.
 		
 		y2018:capitolo_A102001200010001 a skos:Concept ;
 			 skos:notation "A1.02.0012.0001.0001";
