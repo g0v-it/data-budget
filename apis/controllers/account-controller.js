@@ -3,7 +3,8 @@ const config = require('../config.js');
 
 //Default values
 const DEFAULT_SCHEMA_ACCOUNTS = "bubbles",
-	DEFAULT_SCHEMA_ACCOUNT = "full";
+	DEFAULT_SCHEMA_ACCOUNT = "full",
+	DEFAULT_ACCEPT = "text/csv";
 
 
 //Modules
@@ -72,13 +73,26 @@ exports.getPartitionLabels =  async (req, res) => {
  	res.json(outputJson);
 }
 
+exports.getStats = async (req, res) => {
+	let queryStats, result;
+
+	queryStats = require('../queries/get-stats.js');
+	result = await getQueryResult(config.endpoint, queryStats, "application/json");
+
+	res.send(result);
+
+}
+
 
 /**
 	* @endpoint must a be a complete path (e.s. https://query.wikidata.org/sparql)
 	* @query must be an object (e.s. {query : "this is a query" })
 */
-function getQueryResult(endpoint, query){
+function getQueryResult(endpoint, query, format = DEFAULT_ACCEPT){
 	return new Promise((resolve, reject) => {
+		//set Format
+		//format = (format === undefined) ? DEFAULT_ACCEPT : format;
+
 		let url = new URL(endpoint),
 		result,
 		options = {
@@ -87,7 +101,7 @@ function getQueryResult(endpoint, query){
 			path: url.pathname,
 			method: 'POST',
 			headers: {
-          		'Accept': 'text/csv',
+          		'Accept': format,
           		'Content-Type': 'application/x-www-form-urlencoded'
       		}
 		};
@@ -155,6 +169,8 @@ async function buildJsonAccount(data){
 			json = await csv().fromString(data);
 			output = json[0];
 
+			console.log(output);
+
 			output.past_values= {};
 			output.partitions = {};
 
@@ -178,8 +194,7 @@ async function buildJsonAccount(data){
 		
 		}catch (e){
 			reject(e);
-		}
-		
+		}	
 	});
 }
 

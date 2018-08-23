@@ -21,7 +21,7 @@ $match = array(
     $b => 20
 );
 //PREFIXES
-printf('@prefix g0v: <http://data.budget.g0v.it/g0v-budget/v1> .
+printf('@prefix g0v: <http://data.budget.g0v.it/g0v-budget/v1#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> . 
 @prefix skos:     <http://www.w3.org/2004/02/skos/core#> . 
 @prefix dcat:      <http://www.w3.org/ns/dcat#> . 
@@ -56,11 +56,11 @@ while ($rawdata = fgetcsv(STDIN, 2048, ';')) {
     $budget = $rawdata[$match[$b]];
 
     //Codes then used in notation and uri construction
-    $a_code = md5($amministrazione);
-    $m_code = md5($amministrazione . $missione);
-    $p_code = md5($amministrazione . $missione . $programma);
-    $az_code = md5($amministrazione . $missione . $programma . $azione);
-    $c_code = md5($amministrazione . $missione . $programma . $azione . $capitolo);
+    $a_code =Helper::getUri($amministrazione);
+    $m_code =Helper::getUri($amministrazione . $missione);
+    $p_code =Helper::getUri($amministrazione . $missione . $programma);
+    $az_code =Helper::getUri($amministrazione . $missione . $programma . $azione);
+    $c_code = Helper::getUri($amministrazione . $missione . $programma . $azione . $capitolo);
     
     //Uris
     $a_uri = "<$bdapDatasetUri#{$a}_$a_code>";

@@ -1,4 +1,4 @@
-PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1>
+PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
 PREFIX interval: <http://reference.data.gov.uk/def/intervals/>
 PREFIX dct:      <http://purl.org/dc/terms/> 
 PREFIX dcat:      <http://www.w3.org/ns/dcat#> 
@@ -11,8 +11,8 @@ PREFIX time: <http://www.w3.org/2006/time#>
 
 SELECT  ?year ?um ?update ?source
 WHERE {
-	?budget a g0v:Budget; qb:dataSet ?legge_di_bilancio.
-	?legge_di_bilancio dct:issued ?update;
+	?budget a g0v:Budget; qb:dataSet ?legge_di_bilancio .
+	?legge_di_bilancio dct:issued ?update ;
 		sdmx-dimension:refPeriod/time:hasBeginning/interval:ordinalYear ?year;
 		dcat:distribution/dcat:accessURL ?source.
 

@@ -2,7 +2,7 @@
 module.exports = {
 	query : `PREFIX : <urn:local:g0v:api:v1:>
 
-SELECT ?code ?name ?amount ?last_amount ?top_partition_label ?second_partition_label 
+SELECT DISTINCT ?code ?name ?amount ?last_amount ?top_partition_label ?second_partition_label
 WHERE {
 
 	?s a :Account.

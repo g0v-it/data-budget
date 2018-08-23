@@ -8,6 +8,7 @@ WHERE {
 }ORDER BY DESC(?amount)
 
 
+PREFIX : <urn:local:g0v:api:v1:>
 SELECT ?second_partition ?amount
 WHERE {
   ?accountUri a :AccountSecondPartition;

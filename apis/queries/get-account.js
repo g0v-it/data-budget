@@ -12,18 +12,18 @@ WHERE {
                :code ?code;
                :name ?name;
           :amount ?amount;
-               :last_amount ?last_amount;
                :topPartitionLabel ?top_partition_label;
                :secondPartitionLabel ?second_partition_label.
                
                
-    ?account_record a :AccountRecord;
-        :code ?code ;
-        :year/time:hasBeginning/interval:ordinalYear ?year;
-                :amount ?history_amount.
-    
+   OPTIONAL { 
+      ?account_record a :AccountRecord;
+            :code ?code;
+                :year/time:hasBeginning/interval:ordinalYear ?year.
+    }
+    OPTIONAL {?account :last_amount ?last_amount}
+  
   FILTER (?code = "${id}") 
 }ORDER BY DESC(?year)
-
 `})
 }

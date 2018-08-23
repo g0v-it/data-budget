@@ -3,7 +3,7 @@
 ##
 
 PREFIX skos:     <http://www.w3.org/2004/02/skos/core#>
-PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1>
+PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
 
 INSERT { 
 	?budget_subject skos:closeMatch ?close_record_subject

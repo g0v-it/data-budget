@@ -1,4 +1,4 @@
-@prefix g0v: <http://data.budget.g0v.it/g0v-budget/v1>.
+@prefix g0v: <http://data.budget.g0v.it/g0v-budget/v1#>.
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix owl:      <http://www.w3.org/2002/07/owl#> .
 @prefix skos:     <http://www.w3.org/2004/02/skos/core#> .
@@ -11,7 +11,7 @@
 @prefix sdmx-measure:    <http://purl.org/linked-data/sdmx/2009/measure#> .
 @prefix sdmx-attribute:  <http://purl.org/linked-data/sdmx/2009/attribute#>.
 @prefix spod:       <https://bdap-opendata.mef.gov.it/lod/> .
-@prefix : <http://data.budget.g0v/resource/> .
+@prefix : <http://data.budget.g0v.it/resource/> .
 
 :MEF a foaf:Organization; 
 	foaf:homepage <http://www.mef.gov.it>;

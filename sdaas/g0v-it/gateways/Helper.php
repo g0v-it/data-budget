@@ -25,7 +25,15 @@ class Helper {
             "MINISTERO DELL'ISTRUZIONE, DELL'UNIVERSITA' E DELLA RICERCA" => "Istruzione",
             "MINISTERO DELLO SVILUPPO ECONOMICO" => "Sviluppo Economico"
         );
-        return $arrayMinisteri[$label];
+        return $arrayMinisteri[$label] ? $arrayMinisteri[$label] : $label;
+    }
+
+    public static function getUri($string){
+        $string = strtoupper($string);
+        $string = preg_replace('/\s+/', '', $string);
+        $string = preg_replace('/[^A-Za-z0-9]/', '', $string);
+        $uri = md5($string);
+        return $uri;
     }
 
         /**
