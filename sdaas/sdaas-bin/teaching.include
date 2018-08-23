@@ -5,7 +5,7 @@ SD_REQUIRES_CMD awk
 #  extra files to be copied in the distribution
 function SD_CREATE_DATA_DISTRIBUTION {
 	_SD_DIST_DIR=${_SD_DIST_DIR:="distrib/$(date +'%s')"}
-	mkdir -p "$_SD_DIST_DIR"
+	mkdir  "$_SD_DIST_DIR"
 	local query
 	for query in questions/*.* ; do
 		local filename=$(basename "$query")

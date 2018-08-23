@@ -5,7 +5,7 @@ SD_CACHE=${SD_CACHE:=".cache"}
 
 function SD_CLEAN_CACHE {
 	if [ ! -d $SD_CACHE ]; then
-		mkdir -m 711 -p $SD_CACHE || SD_FATAL_ERROR "Can't create $SD_CACHE directory!"
+		mkdir -m 711  $SD_CACHE || SD_FATAL_ERROR "Can't create $SD_CACHE directory!"
 	else
 		rm -rf $SD_CACHE/* || SD_FATAL_ERROR "Can't delete $SD_CACHE directory!"
 	fi

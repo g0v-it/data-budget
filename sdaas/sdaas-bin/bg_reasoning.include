@@ -119,7 +119,7 @@ function SD_REASONER_LOAD {
 	local endpoint namespace archetype
 	IFS='|' read  endpoint namespace archetype <<< $(SD_FETCH_SERVICE "$reasonerId")
 	
-	mkdir -m 777 -p "$SD_CACHE/blzg" || SD_FATAL_ERROR "Unable to create dataloader dir"
+	mkdir -m 777  "$SD_CACHE/blzg" || SD_FATAL_ERROR "Unable to create dataloader dir"
 	
 	local inputStream fileUri
 	if [ "$2" = '-' ]; then 

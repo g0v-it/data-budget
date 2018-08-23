@@ -33,11 +33,11 @@ function _SD_ACTIVITY_LOG {
 function _SD_START_ACTIVITY {
 	SD_REQUIRES_VAR SD_CACHE SD_HOSTNAME
 	local comment="${1:-'a knowledge base ingestion activity'}"	
-	SD_ACTIVITY_DIR="$(realpath "${2:-$(mktemp -d --tmpdir="$SD_CACHE" activity-XXXXXXXXXX)}")" || SD_FATAL_ERROR "unable to create SD_ACTIVITY_DIR"
+	SD_ACTIVITY_DIR="$(realpath "${2:-$(mktemp -d -p "$SD_CACHE" activity-XXXXXXXXXX)}")" || SD_FATAL_ERROR "unable to create SD_ACTIVITY_DIR"
 	SD_ACTIVITY_ID="$(basename "$SD_ACTIVITY_DIR")"
 	
-	mkdir -p "$SD_ACTIVITY_DIR/out" || SD_FATAL_ERROR "Error creating activity default output dir $SD_ACTIVITY_DIR/out"
-	mkdir -p "$SD_ACTIVITY_DIR/in" || SD_FATAL_ERROR "Error creating activity default input dir $SD_ACTIVITY_DIR/in"
+	mkdir  "$SD_ACTIVITY_DIR/out" || SD_FATAL_ERROR "Error creating activity default output dir $SD_ACTIVITY_DIR/out"
+	mkdir  "$SD_ACTIVITY_DIR/in" || SD_FATAL_ERROR "Error creating activity default input dir $SD_ACTIVITY_DIR/in"
 		
 	local baseUri="file://${SD_HOSTNAME}${SD_ACTIVITY_DIR}/"
 	baseUri=${baseUri// /%20}

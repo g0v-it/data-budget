@@ -13,7 +13,7 @@ function SD_REGISTER_SERVICE {
 	local serviceSpecs="$1"
 	local dataFile
 	
-	mkdir -p "$_SD_SERVICE_ARCHIVE" || SD_FATAL_ERROR "Error initializing services registry archive"
+	mkdir  "$_SD_SERVICE_ARCHIVE" || SD_FATAL_ERROR "Error initializing services registry archive"
 	test -r "$_SD_SERVICE_ARCHIVE" || SD_FATAL_ERROR "Registry archive is not writable."
 	
 	if [ -z "$2" ]; then

@@ -1,0 +1,92 @@
+@prefix g0v: <http://data.budget.g0v.it/g0v-budget/v1>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> .
+@prefix skos:     <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcat:      <http://www.w3.org/ns/dcat#> .
+@prefix dct:      <http://purl.org/dc/terms/> .
+@prefix foaf:     <http://xmlns.com/foaf/0.1/> .
+@prefix interval: <http://reference.data.gov.uk/def/intervals/> .
+@prefix qb:       <http://purl.org/linked-data/cube#> .
+@prefix sdmx-dimension:  <http://purl.org/linked-data/sdmx/2009/dimension#> .
+@prefix sdmx-measure:    <http://purl.org/linked-data/sdmx/2009/measure#> .
+@prefix sdmx-attribute:  <http://purl.org/linked-data/sdmx/2009/attribute#>.
+@prefix spod:       <https://bdap-opendata.mef.gov.it/lod/> .
+@prefix : <http://data.budget.g0v/resource/> .
+
+:MEF a foaf:Organization; 
+	foaf:homepage <http://www.mef.gov.it>;
+	foaf:name "Minstero dell'Economia e delle Finanze"@it
+.
+
+:legge_bilancio_2018 a g0v:Dataset, dcat:Dataset, qb:Dataset;
+	dct:title       "2018 - DISEGNO LEGGE DI BILANCIO PRESENTATO ELABORABILE SPESE CAPITOLO"@it;
+	owl:sameas 		spod:dataset-49277093-0b3b-4c3d-817a-de3bb5ce4166 ;
+	dct:publisher   [ a foaf:Organization; foaf:homepage <http://www.mef.gov.it>; foaf:name "Minstero dell'Economia e delle Finanze"@it ] ;
+	dct:issued      "2018-03-23"^^xsd:date;
+	sdmx-dimension:refPeriod <http://reference.data.gov.uk/id/gregorian-interval/2018-01-01T00:00:00/P1Y> ;
+	sdmx-attribute:unitMeasure <http://dbpedia.org/resource/Euro> ;
+	dcat:distribution [ a dcat:Distribution ;
+		dcat:accessURL <https://bdap-opendata.mef.gov.it/opendata/spd_lbf_spe_elb_cap_01_2018> ;
+		dcat:license <http://creativecommons.org/licenses/by/3.0>
+	]
+	.
+	
+:rendiconto_2017 a g0v:Dataset, dcat:Dataset, qb:Dataset;
+	dct:title       "2017 - RENDICONTO PUBBLICATO ELABORABILE SPESE CAPITOLO"@it;
+	dct:publisher   :MEF;
+	dct:issued      "2018-03-23"^^xsd:date;
+	sdmx-dimension:refPeriod <http://reference.data.gov.uk/id/gregorian-interval/2017-01-01T00:00:00/P1Y> ;
+	sdmx-attribute:unitMeasure <http://dbpedia.org/resource/Eur> ;
+	dcat:distribution [ a dcat:Distribution ;
+		dcat:accessURL <https://bdap-opendata.mef.gov.it/content/2017-rendiconto-pubblicato-elaborabile-spese-capitolo> ;
+		dcat:license <http://creativecommons.org/licenses/by/3.0>
+	]
+	.
+	
+:rendiconto_2016 a g0v:Dataset, dcat:Dataset, qb:Dataset;
+	dct:title       "2016 - RENDICONTO PUBBLICATO ELABORABILE SPESE CAPITOLO"@it;
+	dct:publisher   :MEF;
+	dct:issued      "2017-06-30"^^xsd:date;
+	sdmx-dimension:refPeriod <http://reference.data.gov.uk/id/gregorian-interval/2016-01-01T00:00:00/P1Y> ;
+	sdmx-attribute:unitMeasure <http://dbpedia.org/resource/Eur> ;
+	dcat:distribution [ a dcat:Distribution ;
+		dcat:accessURL <https://bdap-opendata.mef.gov.it/opendata/spd_rnd_spe_elb_cap_01_2016> ;
+		dcat:license <http://creativecommons.org/licenses/by/3.0>
+	]
+	.
+	
+:rendiconto_2015 a g0v:Dataset, dcat:Dataset, qb:Dataset;
+	dct:title       "2015 - RENDICONTO PUBBLICATO ELABORABILE SPESE CAPITOLO"@it;
+	dct:publisher   :MEF;
+	dct:issued      "2016-12-14"^^xsd:date;
+	sdmx-dimension:refPeriod <http://reference.data.gov.uk/id/gregorian-interval/2015-01-01T00:00:00/P1Y> ;
+	sdmx-attribute:unitMeasure <http://dbpedia.org/resource/Eur> ;
+	dcat:distribution [ a dcat:Distribution ;
+		dcat:accessURL <https://bdap-opendata.mef.gov.it/opendata/spd_rnd_spe_elb_cap_01_2015> ;
+		dcat:license <http://creativecommons.org/licenses/by/3.0>
+	]
+	.
+	
+:rendiconto_2014 a g0v:Dataset, dcat:Dataset, qb:Dataset;
+	dct:title       "2014 - RENDICONTO PUBBLICATO ELABORABILE SPESE CAPITOLO"@it;
+	dct:publisher   :MEF;
+	dct:issued      "2016-12-14"^^xsd:date;
+	sdmx-dimension:refPeriod <http://reference.data.gov.uk/id/gregorian-interval/2014-01-01T00:00:00/P1Y> ;
+	sdmx-attribute:unitMeasure <http://dbpedia.org/resource/Eur> ;
+	dcat:distribution [ a dcat:Distribution ;
+		dcat:accessURL <https://bdap-opendata.mef.gov.it/opendata/spd_rnd_spe_elb_cap_01_2014> ;
+		dcat:license <http://creativecommons.org/licenses/by/3.0>
+	]
+	.
+	
+:rendiconto_2013 a g0v:Dataset, dcat:Dataset, qb:Dataset;
+	dct:title       "2013 - RENDICONTO PUBBLICATO ELABORABILE SPESE CAPITOLO"@it;
+	dct:publisher   :MEF;
+	dct:issued      "2016-12-14"^^xsd:date;
+	sdmx-dimension:refPeriod <http://reference.data.gov.uk/id/gregorian-interval/2013-01-01T00:00:00/P1Y> ;
+	sdmx-attribute:unitMeasure <http://dbpedia.org/resource/Eur> ;
+	dcat:distribution [ a dcat:Distribution ;
+		dcat:accessURL <https://bdap-opendata.mef.gov.it/opendata/spd_rnd_spe_elb_cap_01_2013> ;
+		dcat:license <http://creativecommons.org/licenses/by/3.0>
+	]
+	.

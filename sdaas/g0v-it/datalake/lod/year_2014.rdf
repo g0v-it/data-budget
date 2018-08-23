@@ -1,0 +1,192 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:prv="http://purl.org/net/provenance/ns#"
+    xmlns:doap="http://usefulinc.com/ns/doap#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:interval="http://reference.data.gov.uk/def/intervals/"
+    xmlns:void="http://rdfs.org/ns/void#"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:scv="http://purl.org/NET/scovo#"
+    xmlns:time="http://www.w3.org/2006/time#"
+    xmlns:dgu="http://reference.data.gov.uk/def/reference/"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:dct="http://purl.org/dc/dcmitype/"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:frbr="http://purl.org/vocab/frbr/core#"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+  <time:Interval rdf:about="http://reference.data.gov.uk/id/gregorian-interval/2014-01-01T00:00:00/P1Y">
+    <scv:max rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-12-31T23:59:59</scv:max>
+    <time:hasBeginning>
+      <time:Instant rdf:about="http://reference.data.gov.uk/id/gregorian-instant/2014-01-01T00:00:00">
+        <interval:dayOfWeek rdf:resource="http://www.w3.org/2006/time#Wednesday"/>
+        <time:inXSDDateTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+        >2014-01-01T00:00:00</time:inXSDDateTime>
+        <interval:ordinalSecondOfMinute rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >0</interval:ordinalSecondOfMinute>
+        <interval:ordinalDayOfYear rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >1</interval:ordinalDayOfYear>
+        <interval:ordinalMinuteOfHour rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >0</interval:ordinalMinuteOfHour>
+        <interval:ordinalDayOfMonth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >1</interval:ordinalDayOfMonth>
+        <interval:ordinalMonthOfYear rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >1</interval:ordinalMonthOfYear>
+        <interval:monthOfYear rdf:resource="http://reference.data.gov.uk/def/intervals/January"/>
+        <interval:ordinalDayOfWeek rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >3</interval:ordinalDayOfWeek>
+        <interval:ordinalQuarterOfYear rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >1</interval:ordinalQuarterOfYear>
+        <interval:ordinalHourOfDay rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >0</interval:ordinalHourOfDay>
+        <rdfs:label xml:lang="en">Gregorian Instant:2014-01-01T00:00:00</rdfs:label>
+        <interval:ordinalHalfOfYear rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >1</interval:ordinalHalfOfYear>
+        <interval:ordinalWeekOfYearYear rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >2014</interval:ordinalWeekOfYearYear>
+        <interval:ordinalWeekOfYear rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >1</interval:ordinalWeekOfYear>
+        <rdfs:comment xml:lang="en">The instant at start of the 1st second of 1st minute of 1st hour of Wednesday the 1st January of the Gregorian calendar year 2014</rdfs:comment>
+        <interval:ordinalYear rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >2014</interval:ordinalYear>
+        <skos:prefLabel xml:lang="en">Gregorian Instant:2014-01-01T00:00:00</skos:prefLabel>
+      </time:Instant>
+    </time:hasBeginning>
+    <rdfs:comment xml:lang="en">An interval of 1 year beginning at the start of the 1st second of 1st minute of 1st hour of Wednesday the 1st January 2014 in the Gregorian Calendar</rdfs:comment>
+    <scv:min rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-01-01T00:00:00</scv:min>
+    <dgu:uriSet>
+      <dgu:URIset rdf:about="http://reference.data.gov.uk/id/gregorian-interval">
+        <skos:prefLabel xml:lang="en">Arbitary duration intervals on the Gregorian timeline.</skos:prefLabel>
+        <rdfs:label xml:lang="en">Arbitary duration intervals on the Gregorian timeline.</rdfs:label>
+        <rdf:type rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+      </dgu:URIset>
+    </dgu:uriSet>
+    <interval:hasXsdDurationDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#duration"
+    >P1Y</interval:hasXsdDurationDescription>
+    <skos:prefLabel xml:lang="en">Gregorian Interval:2014-01-01T00:00:00/P1Y</skos:prefLabel>
+    <rdf:type rdf:resource="http://purl.org/NET/scovo#Dimension"/>
+    <foaf:isPrimaryTopicOf>
+      <prv:DataItem rdf:about="http://reference.data.gov.uk/doc/gregorian-interval/2014-01-01T00:00:00/P1Y">
+        <dcterms:publisher>
+          <frbr:CorporateBody rdf:nodeID="A0">
+            <foaf:name xml:lang="en">data.gov.uk</foaf:name>
+            <rdf:type rdf:resource="http://purl.org/net/provenance/ns#DataPublisher"/>
+          </frbr:CorporateBody>
+        </dcterms:publisher>
+        <dcterms:license rdf:resource="http://reference.data.gov.uk/id/open-government-licence"/>
+        <dcterms:hasFormat>
+          <foaf:Document rdf:about="http://reference.data.gov.uk/doc/gregorian-interval/2014-01-01T00:00:00/P1Y.n3">
+            <rdfs:label xml:lang="en">N3 document about: Gregorian Interval:2014-01-01T00:00:00/P1Y</rdfs:label>
+            <dcterms:format rdf:parseType="Resource">
+              <rdfs:label>text/n3</rdfs:label>
+            </dcterms:format>
+          </foaf:Document>
+        </dcterms:hasFormat>
+        <dcterms:creator>
+          <prv:DataProvidingService rdf:nodeID="A1">
+            <prv:employedArtifact>
+              <doap:Project>
+                <prv:usedBy rdf:nodeID="A0"/>
+                <doap:release>
+                  <doap:Version>
+                    <doap:revision>0.0.3</doap:revision>
+                    <doap:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+                    >2011-09-09</doap:created>
+                    <doap:name xml:lang="en">Harrison</doap:name>
+                  </doap:Version>
+                </doap:release>
+                <doap:name>UK Gov. Intervals and Instants URI Set Server</doap:name>
+              </doap:Project>
+            </prv:employedArtifact>
+            <prv:operatedBy rdf:nodeID="A0"/>
+            <doap:name xml:lang="en">Intervals and Instants URI Set Service</doap:name>
+          </prv:DataProvidingService>
+        </dcterms:creator>
+        <dcterms:hasFormat>
+          <foaf:Document rdf:about="http://reference.data.gov.uk/doc/gregorian-interval/2014-01-01T00:00:00/P1Y.json">
+            <rdfs:label xml:lang="en">JSON document about: Gregorian Interval:2014-01-01T00:00:00/P1Y</rdfs:label>
+            <dcterms:format rdf:parseType="Resource">
+              <rdfs:label>application/json</rdfs:label>
+            </dcterms:format>
+          </foaf:Document>
+        </dcterms:hasFormat>
+        <rdfs:label xml:lang="en">Generic Dataset document about: Gregorian Interval:2014-01-01T00:00:00/P1Y</rdfs:label>
+        <dcterms:hasFormat>
+          <foaf:Document rdf:about="http://reference.data.gov.uk/doc/gregorian-interval/2014-01-01T00:00:00/P1Y.rdf">
+            <rdfs:label xml:lang="en">RDF/XML document about: Gregorian Interval:2014-01-01T00:00:00/P1Y</rdfs:label>
+            <dcterms:format rdf:parseType="Resource">
+              <rdfs:label>application/rdf+xml</rdfs:label>
+            </dcterms:format>
+          </foaf:Document>
+        </dcterms:hasFormat>
+        <dcterms:hasFormat>
+          <foaf:Document rdf:about="http://reference.data.gov.uk/doc/gregorian-interval/2014-01-01T00:00:00/P1Y.nt">
+            <rdfs:label xml:lang="en">N-Triple document about: Gregorian Interval:2014-01-01T00:00:00/P1Y</rdfs:label>
+            <dcterms:format rdf:parseType="Resource">
+              <rdfs:label>text/plain</rdfs:label>
+            </dcterms:format>
+          </foaf:Document>
+        </dcterms:hasFormat>
+        <prv:createdBy>
+          <prv:DataCreation>
+            <prv:performedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+            >2011-09-09</prv:performedAt>
+            <prv:performedBy rdf:nodeID="A1"/>
+          </prv:DataCreation>
+        </prv:createdBy>
+        <dcterms:hasFormat>
+          <foaf:Document rdf:about="http://reference.data.gov.uk/doc/gregorian-interval/2014-01-01T00:00:00/P1Y.ttl">
+            <rdfs:label xml:lang="en">Turtle document about: Gregorian Interval:2014-01-01T00:00:00/P1Y</rdfs:label>
+            <dcterms:format rdf:parseType="Resource">
+              <rdfs:label>text/turtle</rdfs:label>
+            </dcterms:format>
+          </foaf:Document>
+        </dcterms:hasFormat>
+        <dcterms:dateCopyrighted rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+        >2011-09-09</dcterms:dateCopyrighted>
+        <dcterms:rightsHolder rdf:nodeID="A0"/>
+        <foaf:primaryTopic rdf:resource="http://reference.data.gov.uk/id/gregorian-interval/2014-01-01T00:00:00/P1Y"/>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Document"/>
+      </prv:DataItem>
+    </foaf:isPrimaryTopicOf>
+    <time:hasEnd>
+      <time:Instant rdf:about="http://reference.data.gov.uk/id/gregorian-instant/2015-01-01T00:00:00">
+        <interval:ordinalWeekOfYearYear rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >2015</interval:ordinalWeekOfYearYear>
+        <time:inXSDDateTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+        >2015-01-01T00:00:00</time:inXSDDateTime>
+        <interval:dayOfWeek rdf:resource="http://www.w3.org/2006/time#Thursday"/>
+        <interval:ordinalDayOfYear rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >1</interval:ordinalDayOfYear>
+        <interval:ordinalYear rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >2015</interval:ordinalYear>
+        <rdfs:comment xml:lang="en">The instant at start of the 1st second of 1st minute of 1st hour of Thursday the 1st January of the Gregorian calendar year 2015</rdfs:comment>
+        <interval:ordinalDayOfWeek rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >4</interval:ordinalDayOfWeek>
+        <interval:ordinalWeekOfYear rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >1</interval:ordinalWeekOfYear>
+        <interval:ordinalDayOfMonth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >1</interval:ordinalDayOfMonth>
+        <interval:ordinalMinuteOfHour rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >0</interval:ordinalMinuteOfHour>
+        <rdfs:label xml:lang="en">Gregorian Instant:2015-01-01T00:00:00</rdfs:label>
+        <interval:ordinalMonthOfYear rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >1</interval:ordinalMonthOfYear>
+        <interval:ordinalSecondOfMinute rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >0</interval:ordinalSecondOfMinute>
+        <interval:monthOfYear rdf:resource="http://reference.data.gov.uk/def/intervals/January"/>
+        <interval:ordinalHourOfDay rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >0</interval:ordinalHourOfDay>
+        <skos:prefLabel xml:lang="en">Gregorian Instant:2015-01-01T00:00:00</skos:prefLabel>
+        <interval:ordinalQuarterOfYear rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >1</interval:ordinalQuarterOfYear>
+        <interval:ordinalHalfOfYear rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >1</interval:ordinalHalfOfYear>
+      </time:Instant>
+    </time:hasEnd>
+    <rdfs:label xml:lang="en">Gregorian Interval:2014-01-01T00:00:00/P1Y</rdfs:label>
+  </time:Interval>
+</rdf:RDF>

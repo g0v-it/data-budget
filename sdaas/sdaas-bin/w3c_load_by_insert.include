@@ -16,7 +16,7 @@ function SD_LOAD_RDF_FILE {
 	local graphUri="$1"
 	local inputFile="$2"
 	local format="${3:-guess}"
-	local tempDir="${4:-$(mktemp -d --tmpdir="$SD_CACHE" load_rdf_file.XXXXXXXXXX)}"
+	local tempDir="${4:-$(mktemp --tmpdir -p "$SD_CACHE" load_rdf_file.XXXXXXXXXX)}"
 	
 	local fileUri="file://${SD_HOSTNAME}$(realpath "$inputFile")" 
 	fileUri=${fileUri// /%20} 

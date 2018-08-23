@@ -11,9 +11,11 @@ ENV PATH="/usr/local/bin/sdaas:${PATH}"
 
 ADD RWStore.properties $BLAZEGRAPH_RW_PATH
 ADD sdaas-bin /usr/local/bin/sdaas
+ADD g0v-it /home/sdaas
 
+# see https://wiki.alpinelinux.org/wiki/How_to_get_regular_stuff_working
 
-RUN apk update && apk --no-cache add openssl bash unzip curl gawk raptor2 php7
+RUN apk update && apk --no-cache add sudo util-linux coreutils binutils findutils grep openssl bash unzip curl gawk raptor2 php7
 RUN wget -O ${JETTY_WEBAPPS}/${BLAZEGRAPH_NAME}.war $BLAZEGRAPH_VERSION_URL
 RUN chown jetty:jetty $BLAZEGRAPH_RW_PATH
 
@@ -30,4 +32,4 @@ EXPOSE 8080
 # The blazegraph docs also hint about wrong startup folder being a possible
 # problem if rules.log is not found:
 # https://wiki.blazegraph.com/wiki/index.php/NanoSparqlServer#Common_Startup_Problems
-CMD cd /var/lib/jetty && sudo -u jetty java -jar /usr/local/jetty/start.jar -Dcom.bigdata.rdf.sail.webapp.ConfigParams.propertyFile=/RWStore.properties
+#CMD cd /var/lib/jetty && sudo -u jetty "java -jar /usr/local/jetty/start.jar -Dcom.bigdata.rdf.sail.webapp.ConfigParams.propertyFile=/RWStore.properties"

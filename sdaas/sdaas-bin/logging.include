@@ -40,7 +40,7 @@ function SD_DEBUG_INFO {
 # $1 a string or a file name 
 function SD_MK_DEBUG_TMP_FILE {
     local prefix=${1:-"debug"}
-    local tmpFile=$(mktemp -p "$SD_CACHE" "${prefix}.XXXXXXXXXXXX")
+    local tmpFile=$(mktemp  "$SD_CACHE" "${prefix}.XXXXXXXXXXXX")
 	SD_DEBUG_INFO "SD_MK_DEBUG_TMP_FILE $tmpFile"
 	echo "$tmpFile"
 }

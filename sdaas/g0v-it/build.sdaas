@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -a
+GRAPH="urn:local:g0v:budget:it:graph"
+
+
+####################################################
+SD_LOG  "Step 0: booting knowledge base and facts learning..."
+####################################################
+SD_LOAD_RDF_FILE $GRAPH:catalog data/catalog.ttl
+
+for year in 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022; do
+	SD_LOAD_RDF_FILE  http://reference.data.gov.uk/ datalake/lod/year_$year.ttl
+done
+SD_LOAD_RDF_FILE  http://dbpedia.org/ datalake/lod/eur.ttl
+SD_LOAD_RDF_FILE  http://dbpedia.org/ datalake/lod/usd.ttl
+SD_LOAD_RDF_FILE  http://dbpedia.org/ datalake/lod/gbp.ttl
+
+
+SD_THATS_ALL_FOLKS

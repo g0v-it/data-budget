@@ -1,0 +1,192 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:prv="http://purl.org/net/provenance/ns#"
+    xmlns:doap="http://usefulinc.com/ns/doap#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:interval="http://reference.data.gov.uk/def/intervals/"
+    xmlns:void="http://rdfs.org/ns/void#"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:scv="http://purl.org/NET/scovo#"
+    xmlns:time="http://www.w3.org/2006/time#"
+    xmlns:dgu="http://reference.data.gov.uk/def/reference/"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:dct="http://purl.org/dc/dcmitype/"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:frbr="http://purl.org/vocab/frbr/core#"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+  <scv:Dimension rdf:about="http://reference.data.gov.uk/id/gregorian-interval/2020-01-01T00:00:00/P1Y">
+    <foaf:isPrimaryTopicOf>
+      <prv:DataItem rdf:about="http://reference.data.gov.uk/doc/gregorian-interval/2020-01-01T00:00:00/P1Y">
+        <dcterms:rightsHolder>
+          <frbr:CorporateBody rdf:nodeID="A0">
+            <foaf:name xml:lang="en">data.gov.uk</foaf:name>
+            <rdf:type rdf:resource="http://purl.org/net/provenance/ns#DataPublisher"/>
+          </frbr:CorporateBody>
+        </dcterms:rightsHolder>
+        <dcterms:hasFormat>
+          <foaf:Document rdf:about="http://reference.data.gov.uk/doc/gregorian-interval/2020-01-01T00:00:00/P1Y.json">
+            <rdfs:label xml:lang="en">JSON document about: Gregorian Interval:2020-01-01T00:00:00/P1Y</rdfs:label>
+            <dcterms:format rdf:parseType="Resource">
+              <rdfs:label>application/json</rdfs:label>
+            </dcterms:format>
+          </foaf:Document>
+        </dcterms:hasFormat>
+        <dcterms:hasFormat>
+          <foaf:Document rdf:about="http://reference.data.gov.uk/doc/gregorian-interval/2020-01-01T00:00:00/P1Y.ttl">
+            <rdfs:label xml:lang="en">Turtle document about: Gregorian Interval:2020-01-01T00:00:00/P1Y</rdfs:label>
+            <dcterms:format rdf:parseType="Resource">
+              <rdfs:label>text/turtle</rdfs:label>
+            </dcterms:format>
+          </foaf:Document>
+        </dcterms:hasFormat>
+        <rdfs:label xml:lang="en">Generic Dataset document about: Gregorian Interval:2020-01-01T00:00:00/P1Y</rdfs:label>
+        <dcterms:license rdf:resource="http://reference.data.gov.uk/id/open-government-licence"/>
+        <dcterms:hasFormat>
+          <foaf:Document rdf:about="http://reference.data.gov.uk/doc/gregorian-interval/2020-01-01T00:00:00/P1Y.nt">
+            <rdfs:label xml:lang="en">N-Triple document about: Gregorian Interval:2020-01-01T00:00:00/P1Y</rdfs:label>
+            <dcterms:format rdf:parseType="Resource">
+              <rdfs:label>text/plain</rdfs:label>
+            </dcterms:format>
+          </foaf:Document>
+        </dcterms:hasFormat>
+        <dcterms:hasFormat>
+          <foaf:Document rdf:about="http://reference.data.gov.uk/doc/gregorian-interval/2020-01-01T00:00:00/P1Y.n3">
+            <rdfs:label xml:lang="en">N3 document about: Gregorian Interval:2020-01-01T00:00:00/P1Y</rdfs:label>
+            <dcterms:format rdf:parseType="Resource">
+              <rdfs:label>text/n3</rdfs:label>
+            </dcterms:format>
+          </foaf:Document>
+        </dcterms:hasFormat>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Document"/>
+        <dcterms:creator>
+          <prv:DataProvidingService rdf:nodeID="A1">
+            <prv:employedArtifact>
+              <doap:Project>
+                <prv:usedBy rdf:nodeID="A0"/>
+                <doap:release>
+                  <doap:Version>
+                    <doap:revision>0.0.3</doap:revision>
+                    <doap:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+                    >2011-09-09</doap:created>
+                    <doap:name xml:lang="en">Harrison</doap:name>
+                  </doap:Version>
+                </doap:release>
+                <doap:name>UK Gov. Intervals and Instants URI Set Server</doap:name>
+              </doap:Project>
+            </prv:employedArtifact>
+            <prv:operatedBy rdf:nodeID="A0"/>
+            <doap:name xml:lang="en">Intervals and Instants URI Set Service</doap:name>
+          </prv:DataProvidingService>
+        </dcterms:creator>
+        <dcterms:publisher rdf:nodeID="A0"/>
+        <dcterms:hasFormat>
+          <foaf:Document rdf:about="http://reference.data.gov.uk/doc/gregorian-interval/2020-01-01T00:00:00/P1Y.rdf">
+            <rdfs:label xml:lang="en">RDF/XML document about: Gregorian Interval:2020-01-01T00:00:00/P1Y</rdfs:label>
+            <dcterms:format rdf:parseType="Resource">
+              <rdfs:label>application/rdf+xml</rdfs:label>
+            </dcterms:format>
+          </foaf:Document>
+        </dcterms:hasFormat>
+        <dcterms:dateCopyrighted rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+        >2011-09-09</dcterms:dateCopyrighted>
+        <foaf:primaryTopic rdf:resource="http://reference.data.gov.uk/id/gregorian-interval/2020-01-01T00:00:00/P1Y"/>
+        <prv:createdBy>
+          <prv:DataCreation>
+            <prv:performedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+            >2011-09-09</prv:performedAt>
+            <prv:performedBy rdf:nodeID="A1"/>
+          </prv:DataCreation>
+        </prv:createdBy>
+      </prv:DataItem>
+    </foaf:isPrimaryTopicOf>
+    <interval:hasXsdDurationDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#duration"
+    >P1Y</interval:hasXsdDurationDescription>
+    <scv:max rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2020-12-31T23:59:59</scv:max>
+    <rdf:type rdf:resource="http://www.w3.org/2006/time#Interval"/>
+    <dgu:uriSet>
+      <dgu:URIset rdf:about="http://reference.data.gov.uk/id/gregorian-interval">
+        <skos:prefLabel xml:lang="en">Arbitary duration intervals on the Gregorian timeline.</skos:prefLabel>
+        <rdfs:label xml:lang="en">Arbitary duration intervals on the Gregorian timeline.</rdfs:label>
+        <rdf:type rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+      </dgu:URIset>
+    </dgu:uriSet>
+    <scv:min rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2020-01-01T00:00:00</scv:min>
+    <time:hasBeginning>
+      <time:Instant rdf:about="http://reference.data.gov.uk/id/gregorian-instant/2020-01-01T00:00:00">
+        <interval:ordinalYear rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >2020</interval:ordinalYear>
+        <interval:ordinalHourOfDay rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >0</interval:ordinalHourOfDay>
+        <interval:ordinalSecondOfMinute rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >0</interval:ordinalSecondOfMinute>
+        <interval:ordinalWeekOfYear rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >1</interval:ordinalWeekOfYear>
+        <rdfs:comment xml:lang="en">The instant at start of the 1st second of 1st minute of 1st hour of Wednesday the 1st January of the Gregorian calendar year 2020</rdfs:comment>
+        <interval:monthOfYear rdf:resource="http://reference.data.gov.uk/def/intervals/January"/>
+        <interval:ordinalDayOfYear rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >1</interval:ordinalDayOfYear>
+        <interval:ordinalDayOfWeek rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >3</interval:ordinalDayOfWeek>
+        <rdfs:label xml:lang="en">Gregorian Instant:2020-01-01T00:00:00</rdfs:label>
+        <time:inXSDDateTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+        >2020-01-01T00:00:00</time:inXSDDateTime>
+        <skos:prefLabel xml:lang="en">Gregorian Instant:2020-01-01T00:00:00</skos:prefLabel>
+        <interval:ordinalHalfOfYear rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >1</interval:ordinalHalfOfYear>
+        <interval:dayOfWeek rdf:resource="http://www.w3.org/2006/time#Wednesday"/>
+        <interval:ordinalWeekOfYearYear rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >2020</interval:ordinalWeekOfYearYear>
+        <interval:ordinalMonthOfYear rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >1</interval:ordinalMonthOfYear>
+        <interval:ordinalQuarterOfYear rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >1</interval:ordinalQuarterOfYear>
+        <interval:ordinalMinuteOfHour rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >0</interval:ordinalMinuteOfHour>
+        <interval:ordinalDayOfMonth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >1</interval:ordinalDayOfMonth>
+      </time:Instant>
+    </time:hasBeginning>
+    <rdfs:comment xml:lang="en">An interval of 1 year beginning at the start of the 1st second of 1st minute of 1st hour of Wednesday the 1st January 2020 in the Gregorian Calendar</rdfs:comment>
+    <time:hasEnd>
+      <time:Instant rdf:about="http://reference.data.gov.uk/id/gregorian-instant/2021-01-01T00:00:00">
+        <rdfs:comment xml:lang="en">The instant at start of the 1st second of 1st minute of 1st hour of Friday the 1st January of the Gregorian calendar year 2021</rdfs:comment>
+        <rdfs:label xml:lang="en">Gregorian Instant:2021-01-01T00:00:00</rdfs:label>
+        <interval:ordinalYear rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >2021</interval:ordinalYear>
+        <interval:ordinalQuarterOfYear rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >1</interval:ordinalQuarterOfYear>
+        <interval:dayOfWeek rdf:resource="http://www.w3.org/2006/time#Friday"/>
+        <interval:ordinalDayOfMonth rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >1</interval:ordinalDayOfMonth>
+        <interval:ordinalSecondOfMinute rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >0</interval:ordinalSecondOfMinute>
+        <interval:monthOfYear rdf:resource="http://reference.data.gov.uk/def/intervals/January"/>
+        <interval:ordinalWeekOfYearYear rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >2020</interval:ordinalWeekOfYearYear>
+        <time:inXSDDateTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+        >2021-01-01T00:00:00</time:inXSDDateTime>
+        <interval:ordinalMonthOfYear rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >1</interval:ordinalMonthOfYear>
+        <interval:ordinalDayOfYear rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >1</interval:ordinalDayOfYear>
+        <interval:ordinalHourOfDay rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >0</interval:ordinalHourOfDay>
+        <interval:ordinalMinuteOfHour rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >0</interval:ordinalMinuteOfHour>
+        <skos:prefLabel xml:lang="en">Gregorian Instant:2021-01-01T00:00:00</skos:prefLabel>
+        <interval:ordinalDayOfWeek rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >5</interval:ordinalDayOfWeek>
+        <interval:ordinalHalfOfYear rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >1</interval:ordinalHalfOfYear>
+        <interval:ordinalWeekOfYear rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >53</interval:ordinalWeekOfYear>
+      </time:Instant>
+    </time:hasEnd>
+    <skos:prefLabel xml:lang="en">Gregorian Interval:2020-01-01T00:00:00/P1Y</skos:prefLabel>
+    <rdfs:label xml:lang="en">Gregorian Interval:2020-01-01T00:00:00/P1Y</rdfs:label>
+  </scv:Dimension>
+</rdf:RDF>
