@@ -25,14 +25,14 @@ The government budget raw data source must be available as [3,4 or 5 stars linke
 
 ## Quickstart
 
-As prerequisite you need need [docker](https://docs.docker.com/) version 18+ with docker-compose.
+As pre-requisite you need need [docker](https://docs.docker.com/) version 18+ with docker-compose.
 
 To run the rdf store and loading it with data for italian government budget, type:
 
 ```bash
 docker-compose up -d
-# run the ingestion processor
-docker exec databudget_sdaas_1 ingestion.sh 
+# initialize the datastore
+docker exec databudget_sdaas_1 sdaas -f /data/build.sdaas --reboot
 ```
 
 The rdf store exposes a SPARQL endpoint on 9999 port. Try to acesss the admin contro panel ar http://localhost:9999/bigdata/. **WARNING**: this interface must be disabled in producion environment to prevent security issue

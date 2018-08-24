@@ -1,5 +1,59 @@
 # g0v-data smart data management platform
 
+Thi directory contains a lightweight implementation of a [Smart Data Management Platform](https://it.linkeddata.center/b/smart-data-platform/)(SDMP) conforming to [Knowledge Exchange Engine Schema](http://LinkedData.Center/kees)(KEES) specification
+
+The SDMP is in charge to build and maintain adomain knowledge base running a workflow based on a sequence of four temporal phases called "windows“:
+:
+1. a startup  phase (**boot window**)  to initialize the knowledge base just with KEES description
+2. a time slot for the population of the Knowledge Base and to link data (**learning window**)
+3. a time slot for the data inference (**reasoning window**)
+4. a time slot to access the Knowledge Base and answering to questions  (**teaching window**)
+
+
+
+More or less the  **learning window** is an ETL process that:
+  
+- **extracts** raw data from source datasets.
+- **trasnsforms** data from a data model to another using customized gateway
+- **loads** data in a persistent RDF store together with the meaning of data and provenance info.
+
+The **reasoning window** computes axioms and creates inferences analyzing the learned knowledge base.
+
+The **teasching window** allow the knowledge base to be queried.
+
+
+sdaas uses a simple shell like script (build.sdaas) to define the whole KEES workflow.
+
+## Development
+
+The gov-it directory contains all data and components required by the s
+
+To create a knowledge base containing data about italian governmet budget you require docker:
+
+```
+docker build . -t g0v-it
+docker run -d -v g0v-it:/data -p 9999:8080 --name g0v-it g0v-it
+docker exec g0v-it -f /data/build.sdaas --reboot
+```
+
+Play with the blazegraph control panel pointing a browser to http://localhost:9999/bigdata.
+
+Go to the SPARQL Query tab and type:
+
+```
+PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1>
+REFIX dcat:      <http://www.w3.org/ns/dcat#> 
+PREFIX dct:      <http://purl.org/dc/terms/> 
+PREFIX foaf:     <http://xmlns.com/foaf/0.1/> 
+
+SELECT DISTINCT ?datasetUri ?title ?publisher_name ?source
+WHERE {
+	?datasetUri a g0v:Dataset;
+		dct:title ?title;
+		dct:publisher/foaf:name ?publisher_name
+		dcat:distribution/dcat:accessURL ?source
+}
+```
 
 ## Credits and license
 
