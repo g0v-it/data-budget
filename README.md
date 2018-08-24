@@ -35,9 +35,9 @@ docker-compose up -d
 docker exec databudget_sdaas_1 ingestion.sh 
 ```
 
-The rdf store exposes a SPARQL endpoint on 9999 port. This interface must be disabled in producion environment.
+The rdf store exposes a SPARQL endpoint on 9999 port. Try to acesss the admin contro panel ar http://localhost:9999/bigdata/. **WARNING**: this interface must be disabled in producion environment to prevent security issue
 
-The api server exposes an http endpoint at 8080 port. Try to get the italian budget data with http://localhost:8080/v1/accounts
+The api server exposes an http endpoint at 8080 port. Try to get the italian budget data with http://localhost:8080/accounts
 
 
 
@@ -47,12 +47,13 @@ For answers you may not find in here or in the Wiki, avoid posting issues. Feel 
 
 ## Credits
 
-- [All Contributors](../../contributors)
-- the RDF datastore and SPARQL endpoint  is based on the community edition of [Blazegraph](https://www.blazegraph.com/)
-- the ingestion engine is based on the [SDaaS Platform](https://bitbucket.org/linkeddatacenter/sdaas/wiki/Home) by LinkedData.Center . The required SDaaS license is kindly provided for free by LinkedData.Center to the g0v community for non commercial projects.
+- the RDF datastore and SPARQL endpoint is based on the [Blazegraph community edition](https://www.blazegraph.com/)
+- the ontology and the smart data management platform was developed by Enrico Fagnoni (enrico at LinkedData.Center) with SDaaS Platform by [LinkedData.Center](http://LinkedData.Center/)
+- API server was developed by Yassine Ouahidi (yass.ouahidi at gmail.com ) from [DataChef](http://DataChef.Cloud)
 
+Thanks to all project contributors and to the [Copernicani community](https://copernicani.it/) ideas and for support
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT). Please see [License File](LICENSE) for more information.
 
