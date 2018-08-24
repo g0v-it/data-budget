@@ -16,9 +16,9 @@ g0v-ap is an semantic web application profile that builds upon the following RDF
 
 g0v-ap also reuses some individual references to linked open data provided by [UK e-gov](https://github.com/alphagov/datagovuk_reference) and by [dbpedia](http://dbpedia.org/).
 
-The two main concepts in g0v-ap are **Budget** and **Record** that are observations of money amount in a reference period (e.g. year 2018) for a specific account defined in a taxonomy . The g0v:Budget class defines a forecast value for an account defined in a budget report (e.g. italian "legge di bilancio", the g0v:Record class defines the consolidated historical account value for a specific time period.
+The two main concepts in g0v-ap are **Budget** and **Record** that are observations of money amount in a reference period (e.g. year 2018) for a specific account defined in a taxonomy . The g0v:Budget class defines a forecast value for an account defined in a budget report (e.g. italian "legge di bilancio"), the g0v:Record class defines the consolidated historical account value for a specific time period (e.g. Rendiconto 2017).
 
-Very often, the account taxonomy can change on a year basis. This could teorically prevent an account historical analysis. In a practical use, these taxonomies do not change very much. For this reason it is possible to map different account concepts defined in different taxonomies using the skos:closeMatch attribute. A budget visalization application can use this information to compute a "light" historical trend for a specific account.
+Very often, the account taxonomy can change on a year basis. This could teorically prevent an account historical analysis. In a practical use, these taxonomies do not change very much. For this reason it is possible to map different account concepts defined in different taxonomies using the skos:closeMatch attribute. A reasoning  uses this information to compute a "light" historical trend for a specific account.
 
 See the [g0v-ap UML diagram](https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=g0v-uml-diagram#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fe-artspace.com%2Fuc%3Fid%3D1Qa_zoF1Nl8ULUg9uChN-OH3ep2Lta4PY%26export%3Ddownload) for more info about restrictions.
 
@@ -30,6 +30,7 @@ This snippet (in RDF trig format) is an example snapshot of linked data that con
 
 :legge_bilancio_2018 a g0v:Dataset;
 	dct:title       "2018 - DISEGNO LEGGE DI BILANCIO PRESENTATO ELABORABILE SPESE CAPITOLO"@it;
+	dct:description "Dati di Spesa relativi alla Legge di Bilancio Pubblicata per l'esercizio finanziario 2018. I dati sono raccolti per capitoli di spesa e organizzati per ministero, missione, programma e azione."
 	dct:publisher   [ a foaf:Organization; foaf:homepage <http://www.mef.gov.it>; foaf:name "Minstero dell'Economia e delle Finanze"@it ] ;
 	dct:issued      "2018-03-23"^^xsd:date;
 	sdmx-dimension:refPeriod <http://reference.data.gov.uk/id/gregorian-interval/2018-01-01T00:00:00/P1Y> ;
@@ -51,6 +52,7 @@ This snippet (in RDF trig format) is an example snapshot of linked data that con
 	g0v:subject :capitolo_02001200020001;
 	qb:dataSet :legge_bilancio_2018 ;
 	g0v:obsValue 88149000000.00		
+	
 	.
 ```	
 
