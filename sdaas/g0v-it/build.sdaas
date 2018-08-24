@@ -1,19 +1,25 @@
 #!/usr/bin/env bash
 set -a
-GRAPH="urn:local:g0v:budget:it:graph"
+GRAPH="urn:local:g0v:budget:it:graph:"
+KISS_DIR="/kiss/"
 
 
 ####################################################
-SD_LOG  "Step 0: booting knowledge base and facts learning..."
+SD_LOG  "Step 0: booting knowledge base..."
 ####################################################
-SD_LOAD_RDF_FILE $GRAPH:catalog data/catalog.ttl
+SD_LOAD_RDF_FILE urn:sdaas:config "{$KISS_DIR}data/kees.ttl"
+
+####################################################
+SD_LOG  "Step 1: learning facts..."
+####################################################
+SD_LOAD_RDF_FILE "{$GRAPH}catalog" "{$KISS_DIR}data/catalog.ttl"
 
 for year in 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022; do
-	SD_LOAD_RDF_FILE  http://reference.data.gov.uk/ datalake/lod/year_$year.ttl
+	SD_LOAD_RDF_FILE  "{$GRAPH}intervals" "{$KISS_DIR}datalake/lod/year_$year.ttl"
 done
-SD_LOAD_RDF_FILE  http://dbpedia.org/ datalake/lod/eur.ttl
-SD_LOAD_RDF_FILE  http://dbpedia.org/ datalake/lod/usd.ttl
-SD_LOAD_RDF_FILE  http://dbpedia.org/ datalake/lod/gbp.ttl
+SD_LOAD_RDF_FILE  "{$GRAPH}dbpedia" "{$KISS_DIR}datalake/lod/eur.ttl"
+SD_LOAD_RDF_FILE  "{$GRAPH}dbpedia" "{$KISS_DIR}datalake/lod/usd.ttl"
+SD_LOAD_RDF_FILE  "{$GRAPH}dbpedia" "{$KISS_DIR}datalake/lod/gbp.ttl"
 
 
 SD_THATS_ALL_FOLKS

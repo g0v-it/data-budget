@@ -11,7 +11,7 @@ The SDMP is in charge to build and maintain adomain knowledge base running a wor
 
 
 
-More or less the  **learning window** is an ETL process that:
+More or less the **learning window** is an ETL process that:
   
 - **extracts** raw data from source datasets.
 - **trasnsforms** data from a data model to another using customized gateway
@@ -26,33 +26,22 @@ sdaas uses a simple shell like script (build.sdaas) to define the whole KEES wor
 
 ## Development
 
-The gov-it directory contains all data and components required by the s
+The gov-it directory contains all data and components required by the sdaas platform
 
 To create a knowledge base containing data about italian governmet budget you require docker:
 
 ```
-docker build . -t g0v-it
-docker run -d -v g0v-it:/data -p 9999:8080 --name g0v-it g0v-it
-docker exec g0v-it -f /data/build.sdaas --reboot
+docker build . -t kb
+docker run -d -v g0v-it:/kees -p 9999:8080 --name kb kb
+docker exec kb -f /kees/build.sdaas --reboot
 ```
 
 Play with the blazegraph control panel pointing a browser to http://localhost:9999/bigdata.
 
-Go to the SPARQL Query tab and type:
+Go to the Explore tab and type:
 
 ```
-PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1>
-REFIX dcat:      <http://www.w3.org/ns/dcat#> 
-PREFIX dct:      <http://purl.org/dc/terms/> 
-PREFIX foaf:     <http://xmlns.com/foaf/0.1/> 
-
-SELECT DISTINCT ?datasetUri ?title ?publisher_name ?source
-WHERE {
-	?datasetUri a g0v:Dataset;
-		dct:title ?title;
-		dct:publisher/foaf:name ?publisher_name
-		dcat:distribution/dcat:accessURL ?source
-}
+<http://data.budget.g0v.it/resource/knowledge_base>
 ```
 
 ## Credits and license
