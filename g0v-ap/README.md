@@ -40,8 +40,7 @@ This snippet (in RDF trig format) is an example snapshot of linked data that con
 		dcat:license <http://creativecommons.org/licenses/by/3.0>
 	]
 	.
-
-
+	
 [] a g0v:Budget;
 	g0v:subject :capitolo_02001200010001;
 	qb:dataSet :legge_bilancio_2018 ;
@@ -51,14 +50,27 @@ This snippet (in RDF trig format) is an example snapshot of linked data that con
 [] a g0v:Budget;
 	g0v:subject :capitolo_02001200020001;
 	qb:dataSet :legge_bilancio_2018 ;
-	g0v:obsValue 88149000000.00		
-	
+	g0v:obsValue 88149000000.00			
 	.
+
+...
+
+	dct:src :legge_bilancio_2018 ; 
+	dct:title "Tassonomia capitoli di spesa per amministrazioni";
+	dct:description "Tassonomia amministrazioni/missioni/programmi/azioni/capitoli ricavata dalla legge di bilancio";
+.
+y2018:capitolo_A102001200010001 a skos:Concept ;skos:broader y2018:azione_A10200120001.
+y2018:azione_A10200120001 a skos:Concept ; skos:broader y2018:programma_A1020012.
+y2018:programma_A1020012 a skos:Concept ; skos:broader :missione_A102.
+y2018::missione_A102 a skos:Concept ; skos:broader y2018:amministrazione_A1.
+y2018:amministrazione_A1 a skos:Concept ;
+y2018:tassonomia_spese_amministrazioni a g0v:BudgetTaxonomy;skos:hasTopConcept y2018:amministrazione_A1;
+
 ```	
 
-see a [complete sparql update example file](examples/data.update)
+Here a [complete SPARQL update example file](load_example_data.sparql_update)
 
-The g0v-ap profile is designed to be easily processed by SPARLQ processor in order to produce data models suitable for a specific task (e.g. the version 1 of the api to feed vue-budget components with data). See [in this picture the intended dataflow](https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=g0v-budget-datafow#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fe-artspace.com%2Fuc%3Fid%3D1iXdW0V08-gUK_SL1EkYmnofGvs1L1UD4%26export%3Ddownload)
+The g0v-ap ontology is designed to be easily queried by SPARLQ processor in order to produce data models suitable for a specific task (e.g. the version 1 of the api to feed vue-budget components with data). See [in this picture the intended dataflow](https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=g0v-budget-datafow#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fe-artspace.com%2Fuc%3Fid%3D1iXdW0V08-gUK_SL1EkYmnofGvs1L1UD4%26export%3Ddownload)
 
 
 ## Test the ontology
