@@ -1,0 +1,9 @@
+if [ ! -z ${__module_blazegraph+x} ]; then return ; else __module_blazegraph=1 ; fi
+
+SD_REQUIRES_VAR SD_BG_ENDPOINT SD_BG_NAMESPACE
+SD_SPARQL_QUERY_ENDPOINT="$SD_BG_ENDPOINT/namespace/$SD_BG_NAMESPACE/sparql"
+SD_SPARQL_UPDATE_ENDPOINT="$SD_SPARQL_QUERY_ENDPOINT"
+
+SD_INCLUDE w3c_query "--compressed"
+SD_INCLUDE w3c_update_uncompressed
+SD_INCLUDE w3c_load_by_insert

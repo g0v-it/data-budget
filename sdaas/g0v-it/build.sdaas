@@ -9,7 +9,7 @@ SD_LOG  "Step 0: booting knowledge base and facts learning..."
 SD_LOAD_RDF_FILE $GRAPH:catalog data/catalog.ttl
 
 for year in 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022; do
-	SD_LOAD_RDF_FILE  http://reference.data.gov.uk/ datalake/lod/year_$year.ttl
+	SD_LOAD_RDF_FILE  http://reference.data.gov.uk/ datalake/lod/year_$year.rdf
 done
 SD_LOAD_RDF_FILE  http://dbpedia.org/ datalake/lod/eur.ttl
 SD_LOAD_RDF_FILE  http://dbpedia.org/ datalake/lod/usd.ttl

@@ -8,7 +8,7 @@ function SD_LEARN_S3 {
 	local s3Resource="$2"
 	shift 2
 	
-	local tmpDir=$(mktemp -d -p "$SD_CACHE" s3-XXXXXXXXXX)
+	local tmpDir=$(mktemp -d --tmpdir="$SD_CACHE" s3-XXXXXXXXXX)
 	LOG "Transferring s3 resources from $s3Resource to $tmpDir..."
 	aws s3 cp "$s3Resource" "$tmpDir" || SD_FATAL_ERROR "SD_LEARN_S3 error copying s3 resource $s3Resource."
 	___s3files=($(find "$tmpDir" -ttype f))

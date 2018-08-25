@@ -7,11 +7,13 @@ ENV BLAZEGRAPH_NAME bigdata
 ENV BLAZEGRAPH_RW_PATH /RWStore.properties
 ENV BLAZEGRAPH_VERSION 2_1_4
 ENV BLAZEGRAPH_VERSION_URL https://github.com/blazegraph/database/releases/download/BLAZEGRAPH_RELEASE_${BLAZEGRAPH_VERSION}/blazegraph.war
+
+ENV SD_LOCAL_BG_ENDPOINT http://localhost:8080/bigdata
 ENV PATH="/usr/local/bin/sdaas:${PATH}"
 
 ADD RWStore.properties $BLAZEGRAPH_RW_PATH
 ADD sdaas-bin /usr/local/bin/sdaas
-ADD g0v-it /home/sdaas
+ADD g0v-it /data
 
 # see https://wiki.alpinelinux.org/wiki/How_to_get_regular_stuff_working
 
@@ -25,11 +27,13 @@ RUN chown jetty:jetty $BLAZEGRAPH_RW_PATH
 RUN chgrp -R 0 /var/lib/jetty && \
     chmod -R g=u /var/lib/jetty
 
+	
 EXPOSE 8080
+
 	
 # We have to make sure we run in the correct folder, since that might be messed
 # up because of OpenShift's random uids (see the link above for more info).
 # The blazegraph docs also hint about wrong startup folder being a possible
 # problem if rules.log is not found:
 # https://wiki.blazegraph.com/wiki/index.php/NanoSparqlServer#Common_Startup_Problems
-#CMD cd /var/lib/jetty && sudo -u jetty "java -jar /usr/local/jetty/start.jar -Dcom.bigdata.rdf.sail.webapp.ConfigParams.propertyFile=/RWStore.properties"
+CMD cd /var/lib/jetty && sudo -u jetty "java -jar /usr/local/jetty/start.jar -Dcom.bigdata.rdf.sail.webapp.ConfigParams.propertyFile=/RWStore.properties"
