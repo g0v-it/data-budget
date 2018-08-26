@@ -1,5 +1,5 @@
 #
-# This file describe a domain knowledge base contents
+# Knowledge base configuration description
 #
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix kees: <http://linkeddata.center/kees/v1#> .
@@ -9,18 +9,11 @@
 @prefix sdaas: <http://linkeddata.center/sdaas/v1#> .
 @prefix graph: <urn:local:g0v:budget:it:graph:> .
 @prefix resource: <http://data.budget.g0v.it/resource/> .
-@base <file:///kees/> .
 	
-<urn:sdaas:config:knowledge_base> a kees:KnowledgeBase, sd:Service;
-	dct:title "Knowledge base about italian goverment budget"@en;
-	dct:description "The Knowledge base about budget and historical data for Italian government."@en ;
-    sd:endpoint <http://data.budget.g0v.it:9999/bigdata/sparql> ;
-    sd:supportedLanguage sd:SPARQL11Query ;
-    sd:resultFormat <http://www.w3.org/ns/formats/RDF_XML>, <http://www.w3.org/ns/formats/Turtle> ;
-    sd:defaultDataset resource:budget_g0v_it_default_dataset
-.
-resource:kb_default_dataset a sd:Dataset ;
-    sd:defaultGraph [a sd:Graph ] 
+<urn:sdaas:config:kb> a kees:KnowledgeBase;
+	dct:title "Italian government budget knowledge"@en;
+	dct:description "The knowledge base about budget and historical data for Italian government."@en ;
+    sd:endpoint <http://data.budget.g0v.it:9999/sdaas/sparql> ;
 .
 
 
@@ -43,8 +36,13 @@ resource:catalog_graph a kees:LinkedDataGraph;
 	
 resource:intervals_graph a kees:LinkedDataGraph ;
 	dct:title "periodi di riferimento"@it;
-	dct:description "riferimenti per le annualità (intervalli) tratte da http://reference.data.gov.uk/"@it ;
-	sd:name graph:intervals .
+	dct:description "intervalli temporali definti da http://reference.data.gov.uk/"@it ;
+	sd:name graph:intervals .	
+	
+resource:dbpedia_graph a kees:LinkedDataGraph ;
+	dct:title "risorse estratte da dbpedia"@it;
+	dct:description "unità di misura, valute e altre risorse definte da http://dbpedia.org/"@it ;
+	sd:name graph:dbpedia .
 
 resource:budgets_2018_graph a kees:LinkedDataGraph;
 	dct:title "budget 2018"@it;

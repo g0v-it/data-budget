@@ -1,25 +1,30 @@
 #!/usr/bin/env bash
 set -a
+
+#SD_DEBUG=1
 GRAPH="urn:local:g0v:budget:it:graph:"
-KISS_DIR="/kiss/"
 
 
 ####################################################
-SD_LOG  "Step 0: booting knowledge base..."
+SD_LOG  "Starting booting window: clean and configure knowledge base..."
 ####################################################
-SD_LOAD_RDF_FILE urn:sdaas:config "{$KISS_DIR}data/kees.ttl"
+SD_LOAD_RDF_FILE urn:sdaas:config "kees.ttl"
 
 ####################################################
-SD_LOG  "Step 1: learning facts..."
+SD_LOG  "Starting learning window: loading facts. This will take a while..."
 ####################################################
-SD_LOAD_RDF_FILE "{$GRAPH}catalog" "{$KISS_DIR}data/catalog.ttl"
+SD_LOAD_RDF_FILE "${GRAPH}catalog" "data/catalog.ttl"
 
 for year in 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022; do
-	SD_LOAD_RDF_FILE  "{$GRAPH}intervals" "{$KISS_DIR}datalake/lod/year_$year.ttl"
+	SD_LOAD_RDF_FILE  "${GRAPH}intervals" "datalake/lod/year_$year.rdf"
 done
-SD_LOAD_RDF_FILE  "{$GRAPH}dbpedia" "{$KISS_DIR}datalake/lod/eur.ttl"
-SD_LOAD_RDF_FILE  "{$GRAPH}dbpedia" "{$KISS_DIR}datalake/lod/usd.ttl"
-SD_LOAD_RDF_FILE  "{$GRAPH}dbpedia" "{$KISS_DIR}datalake/lod/gbp.ttl"
+SD_LOAD_RDF_FILE  "${GRAPH}dbpedia" "datalake/lod/eur.ttl"
+SD_LOAD_RDF_FILE  "${GRAPH}dbpedia" "datalake/lod/usd.ttl"
+SD_LOAD_RDF_FILE  "${GRAPH}dbpedia" "datalake/lod/gbp.ttl"
 
+
+####################################################
+SD_LOG  "Starting reasoning window: computing axioms and rules..."
+####################################################
 
 SD_THATS_ALL_FOLKS

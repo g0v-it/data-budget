@@ -1,50 +1,60 @@
 # g0v-data smart data management platform
 
-Thi directory contains a lightweight implementation of a [Smart Data Management Platform](https://it.linkeddata.center/b/smart-data-platform/)(SDMP) conforming to [Knowledge Exchange Engine Schema](http://LinkedData.Center/kees)(KEES) specification
+This directory contains the configuration for the knowledge base about the Italian government budget data an a lightweight implementation of a  [Smart Data Management Platform](https://it.linkeddata.center/b/smart-data-platform/)(SDMP) derived from the  [LinkeData.Center SDaaS product](https://it.linkeddata.center//p/sdaas).
 
-The SDMP is in charge to build and maintain adomain knowledge base running a workflow based on a sequence of four temporal phases called "windows“:
-:
-1. a startup  phase (**boot window**)  to initialize the knowledge base just with KEES description
-2. a time slot for the population of the Knowledge Base and to link data (**learning window**)
-3. a time slot for the data inference (**reasoning window**)
-4. a time slot to access the Knowledge Base and answering to questions  (**teaching window**)
+The knowledge base configuration is consistent with the [Knowledge Exchange Engine Schema](http://LinkedData.Center/kees)(KEES) specifications. 
 
+The data management platform runs a workflow that is based on a sequence of four temporal phases called *windows*:
+
+1. a startup  phase (**boot window**)  to initialize the knowledge base
+2. a time slot for the population of the knowledge base and to link data (**learning window**)
+3. a time slot for the compute inferences (**reasoning window**)
+4. a time slot query the Knowledge Base (**teaching window**)
 
 
 More or less the **learning window** is an ETL process that:
   
-- **extracts** raw data from source datasets.
-- **trasnsforms** data from a data model to another using customized gateway
-- **loads** data in a persistent RDF store together with the meaning of data and provenance info.
+- **extracts** raw data from source datasets (locally or from web).
+- **transforms** data from the variois source a data models to the RDF domain language profile customized using custom gateways
+- **loads** data in a persistent RDF store together with dataprovenance info.
 
 The **reasoning window** computes axioms and creates inferences analyzing the learned knowledge base.
 
-The **teasching window** allow the knowledge base to be queried.
+A simple file (build.sdaas) defines the whole KEES workflow.
 
-
-sdaas uses a simple shell like script (build.sdaas) to define the whole KEES workflow.
-
-## Development
-
-The gov-it directory contains all data and components required by the sdaas platform
+## Quickstart
 
 To create a knowledge base containing data about italian governmet budget you require docker:
 
 ```
 docker build . -t kb
-docker run -d -v g0v-it:/kees -p 9999:8080 --name kb kb
-docker exec kb -f /kees/build.sdaas --reboot
+docker run -d -p 9999:8080 --name kb kb
+docker exec kb sdaas -f build.sdaas --reboot
 ```
 
-Play with the blazegraph control panel pointing a browser to http://localhost:9999/bigdata.
-
-Go to the Explore tab and type:
+Play with the blazegraph control panel pointing a browser to http://localhost:9999/sdaas/#explore and type:
 
 ```
 <http://data.budget.g0v.it/resource/knowledge_base>
 ```
 
+Use the [QUERY tab](http://localhost:9999/sdaas/#query) to query the knowledge base with SPARQL 1.1 (see some examples in g0v-it/queries directory).
+
+### Development and debugging
+
+Manually downloads copy all required raw data that are not directly accessible for web in the g0v-it/datalake/download (e.g. bdap files that require explict condition chec' by an human before to be used)
+
+Cache other linked open data editing and running the script `refresh.sh` in the *g0v-it/datalake/lod* directory.
+
+Test the platform using docker
+
+```
+docker run -d --name kb-dev -p 9999:8080 -v $PWD/g0v-it:/kees -v $PWD/sdaas-bin:/usr/local/bin/sdaas kb
+docker exec -ti kb-dev sdaas
+```
+ 
+
 ## Credits and license
 
-- the rdf datastore implementation is based on [Docker Blazegraph](https://github.com/lyrasis/docker-blazegraph)
+- the dockerfile was inspired from [Docker Blazegraph](https://github.com/lyrasis/docker-blazegraph)
 - the sdaas platform is derived from [LinkedData.Center SDaas Product](https://it.linkeddata.center/p/sdaas) and licensed with CC-by-nd-nc by LinkedData.Center to g0v community

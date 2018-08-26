@@ -31,8 +31,8 @@ To run the rdf store and loading it with data for italian government budget, typ
 
 ```bash
 docker-compose up -d
-# initialize the datastore
-docker exec databudget_sdaas_1 sdaas -f /data/build.sdaas --reboot
+# Start the smart data management platform and execute data ingestion process
+docker exec databudget_sdaas_1 sdaas . build.sdaas
 ```
 
 The rdf store exposes a SPARQL endpoint on 9999 port. Try to acesss the admin contro panel ar http://localhost:9999/bigdata/. **WARNING**: this interface must be disabled in producion environment to prevent security issue
@@ -48,10 +48,10 @@ For answers you may not find in here or in the Wiki, avoid posting issues. Feel 
 ## Credits
 
 - the RDF datastore and SPARQL endpoint is based on the [Blazegraph community edition](https://www.blazegraph.com/)
-- the ontology and the smart data management platform was developed by Enrico Fagnoni (enrico at LinkedData.Center) with SDaaS Platform by [LinkedData.Center](http://LinkedData.Center/)
-- API server was developed by Yassine Ouahidi (yass.ouahidi at gmail.com ) from [DataChef](http://DataChef.Cloud)
+- the gov-ap ontology and the smart data management platform was developed by Enrico Fagnoni (enrico at LinkedData.Center) with SDaaS Platform by [LinkedData.Center](http://LinkedData.Center/)
+- API server and gateways was developed by Yassine Ouahidi (yass.ouahidi at gmail.com ) from [DataChef](http://DataChef.Cloud)
 
-Thanks to all project contributors and to the [Copernicani community](https://copernicani.it/) ideas and for support
+Thanks to all project contributors and to the [Copernicani community](https://copernicani.it/) for ideas and support.
 
 ## License
 
