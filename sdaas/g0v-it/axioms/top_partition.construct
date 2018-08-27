@@ -1,0 +1,24 @@
+##
+## AXIOM: create an api level account top partition property
+##
+PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+PREFIX dct: <http://purl.org/dc/terms/> 
+PREFIX : <urn:local:g0v:api:v1:>
+
+CONSTRUCT {
+	?accountUriTopPartition a :AccountTopPartition ;
+       :amount ?amount;
+       :label ?top_partition_label;
+} WHERE {
+  	{
+		SELECT ?top_partition_label (SUM (?account_amount) AS ?amount)
+        WHERE {
+          ?accountUri a :Account;
+                        :amount ?account_amount;
+                        :topPartitionLabel ?top_partition_label;
+        }GROUP BY ?top_partition_label 
+	}
+  
+	BIND( UUID() AS ?accountUriTopPartition )
+}

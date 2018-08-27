@@ -1,0 +1,23 @@
+##
+## AXIOM: create match between account budget concepts and account record concepts
+##
+
+PREFIX skos:     <http://www.w3.org/2004/02/skos/core#>
+PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
+
+CONSTRUCT { 
+	?budget_subject skos:closeMatch ?close_record_subject
+} WHERE {  
+	?budget_subject a skos:Concept; 
+		skos:notation ?code; 
+		skos:inScheme ?budget_scheme.
+	?budget_scheme a g0v:BudgetTaxonomy .
+	
+	?close_record_subject a skos:Concept; 
+		skos:notation ?code;
+		skos:inScheme ?record_scheme.
+	?record_scheme a g0v:RecordTaxonomy .
+	
+	FILTER(?budget_subject != ?close_record_subject )
+	FILTER NOT EXISTS {?budget_subject skos:closeMatch ?close_record_subject}
+}

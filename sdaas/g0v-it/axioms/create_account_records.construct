@@ -1,0 +1,40 @@
+##
+## AXIOM: create an api level account budget
+##
+PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+PREFIX dct: <http://purl.org/dc/terms/> 
+PREFIX : <urn:local:g0v:api:v1:>
+
+CONSTRUCT {
+	?accountUri a :Account ;
+       :amount ?amount;
+       :code ?code;
+       :name ?name;
+       :topPartitionLabel ?best_top_partition_label;
+       :secondPartitionLabel ?best_second_partition_label;
+	   dct:subject ?account_subject
+} WHERE {
+	{
+		SELECT ?account_subject (SUM (?budget_amount) AS ?amount) 
+		WHERE {
+		  ?budget a g0v:Budget;  
+					  g0v:subject ?budget_subject;
+					  g0v:obsValue ?budget_amount.
+		  ?budget_subject skos:broader ?account_subject .    
+		} GROUP BY ?account_subject
+	}
+
+	?account_subject skos:prefLabel ?name ; skos:notation ?code .
+	
+	# find te best labels for top levele and secon level taxonomy concepts
+	OPTIONAL {?account_subject skos:broader/skos:broader/skos:prefLabel ?second_partition_label}
+	OPTIONAL {?account_subject skos:broader/skos:broader/skos:prefLabel ?second_partition_short_label}
+	BIND( COALESCE(?second_partition_short_label,?second_partition_label) AS ?best_second_partition_label)
+	
+	OPTIONAL {?account_subject skos:broader/skos:broader/skos:broader/skos:prefLabel ?top_partition_label}
+	OPTIONAL {?account_subject skos:broader/skos:broader/skos:broader/skos:altLabel ?top_partition_short_label}
+	BIND( COALESCE(?top_partition_short_label,?top_partition_label) AS ?best_top_partition_label)
+	
+	BIND( UUID() AS ?accountUri )
+}

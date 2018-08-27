@@ -1,0 +1,34 @@
+##
+## AXIOM: create an api level account record
+##
+PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+PREFIX dct: <http://purl.org/dc/terms/> 
+PREFIX qb: <http://purl.org/linked-data/cube#> 
+PREFIX sdmx-dimension: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX : <urn:local:g0v:api:v1:>
+
+CONSTRUCT {
+	?accountRecordUri a :AccountRecord;
+	   :amount  ?amount;
+	   :year ?year;
+	   :code ?code
+} WHERE {  
+
+  {
+    SELECT ?account_record_subject ?year(SUM (?record_amount) AS ?amount) 
+    WHERE {
+      ?budget a g0v:Budget; g0v:subject/skos:broader ?account_subject.
+      ?account_subject skos:closeMatch ?account_record_subject.
+         
+      ?record a g0v:Record;  
+                g0v:subject/skos:broader ?account_record_subject;
+                g0v:obsValue ?record_amount;
+                qb:dataSet/sdmx-dimension:refPeriod ?year.
+                  
+    } GROUP BY ?account_record_subject ?year 
+  }
+ 
+  ?account_record_subject skos:notation ?code 
+  BIND( UUID() AS ?accountRecordUri )
+}
