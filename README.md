@@ -1,12 +1,15 @@
 ![copernicani](https://copernicani.it/wp-content/uploads/cropped-logo_orizzontale_trasparente-1-e1525161268864.png)
+
 # g0v-data
 
-A simple smart data management platform to feed Italian Government Budget Visualization application. 
+A simple smart data management platform to feed http://budget.g0v.it/ web application and 		. 
 
 g0v is a decentralized civic tech community to advocate transparency of information and build tech solutions 
 for citizens to participate in public affairs from the bottom up. The community was born in Taiwan, see [g0v.asia web site](http://g0v.asia/) for more info.
 
 This project aims to create a smart data management platform to feed a budget visualization application based on W3C semantic web standards.
+
+**Ask not why nobody is doing this. You are the "nobody"!**
 
 ## Components
 

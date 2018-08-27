@@ -42,6 +42,8 @@ function SD_BEGIN_INGESTION {
 
 
 function SD_THATS_ALL_FOLKS {
+	SD_LOG "Computing knowledge base configuration default axioms."
+	SD_SPARQL_UPDATE @$_SDAAS_DIR/axioms/config-axioms.sparq_update
 	SD_LOG "Knowledge ingestion succesfully completed in $(( SECONDS - _SD_START )) seconds."
 }
 

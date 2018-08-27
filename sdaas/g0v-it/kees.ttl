@@ -31,17 +31,17 @@ resource:graph_kees a kees:KBConfigGraph ;
 
 resource:catalog_graph a kees:LinkedDataGraph;
 	dct:title "catalogo dataset"@it;
-	dct:description "catalogo dei dataset utilizzati"@it ;
+	dct:description "Named graph contenente il catalogo dei dataset utilizzati"@it ;
 	sd:name graph:catalog  .
 	
 resource:intervals_graph a kees:LinkedDataGraph ;
 	dct:title "periodi di riferimento"@it;
-	dct:description "intervalli temporali definti da http://reference.data.gov.uk/"@it ;
+	dct:description "Named graph contenente gli intervalli temporali definti da http://reference.data.gov.uk/"@it ;
 	sd:name graph:intervals .	
 	
 resource:dbpedia_graph a kees:LinkedDataGraph ;
 	dct:title "risorse estratte da dbpedia"@it;
-	dct:description "unità di misura, valute e altre risorse definte da http://dbpedia.org/"@it ;
+	dct:description "Named graph contenente le unità di misura, valute e altre risorse definte da http://dbpedia.org/"@it ;
 	sd:name graph:dbpedia .
 
 resource:budgets_2018_graph a kees:LinkedDataGraph;
@@ -51,17 +51,17 @@ resource:budgets_2018_graph a kees:LinkedDataGraph;
 
 resource:records_2017_graph a kees:LinkedDataGraph;
 	dct:title "bilancio 2017"@it;
-	dct:description "bilancio consolidato e tassonomia  capitoli di spesa anno 2017"@it ;
+	dct:description "Named graph contenente il bilancio consolidato e tassonomia  capitoli di spesa anno 2017"@it ;
 	sd:name graph:records_2017 .
 
 resource:records_2016_graph a kees:LinkedDataGraph;
 	dct:title "bilancio 2016"@it;
-	dct:description "bilancio consolidato e tassonomia  capitoli di spesa anno 2016"@it ;
+	dct:description "Named graph contenente il bilancio consolidato e tassonomia  capitoli di spesa anno 2016"@it ;
 	sd:name graph:records_2016 .
 
 resource:records_2015_graph a kees:LinkedDataGraph;
 	dct:title "bilancio 2015"@it;
-	dct:description "bilancio consolidato e tassonomia  capitoli di spesa anno 2015"@it ;
+	dct:description "Named graph contenente il bilancio consolidato e tassonomia  capitoli di spesa anno 2015"@it ;
 	sd:name graph:records_2015 .
 
 resource:records_2014_graph a kees:LinkedDataGraph;
@@ -71,7 +71,7 @@ resource:records_2014_graph a kees:LinkedDataGraph;
 
 resource:records_2013_graph a kees:LinkedDataGraph;
 	dct:title "bilancio 2013"@it;
-	dct:description "bilancio consolidato e tassonomia  capitoli di spesa anno 2013"@it ;
+	dct:description "Named graph contenente il bilancio consolidato e tassonomia  capitoli di spesa anno 2013"@it ;
 	sd:name graph:records_2013 .
 
 
@@ -81,37 +81,37 @@ resource:records_2013_graph a kees:LinkedDataGraph;
 
 resource:close_match_graph a kees:InferredKnowledgeGraph ;
 	dct:title "mapping tra tassonomie di bilancio"@it;
-	dct:description "genera il mapping tra edizioni diverse di tassonomia di bilancio"@it ;
+	dct:description "Regola che genera il mapping tra edizioni diverse di tassonomia di bilancio"@it ;
 	sd:name graph:close_match .
 	
 resource:create_accounts_graph a kees:InferredKnowledgeGraph ;
 	dct:title "creazione di un account per ogni azione"@it;
-	dct:description "crea degli account relative alle azioni consolidando il budget dei capitoli di spesa rispetto alla logica delle APIs v1"@it ;
+	dct:description "Regola che crea degli account relative alle azioni consolidando il budget dei capitoli di spesa rispetto alla logica delle APIs v1"@it ;
 	sd:name graph:create_accounts .
 	
 resource:create_account_records_graph a kees:InferredKnowledgeGraph ;
 	dct:title "creazione di valori storici account azioni"@it;
-	dct:description "crea le registrazioni storiche a per ogni azione in rispetto alla logica delle APIs v1"@it ;
+	dct:description "Regola che crea le registrazioni storiche a per ogni azione in rispetto alla logica delle APIs v1"@it ;
 	sd:name graph:create_account_records .
 	
 resource:top_partition_graph a kees:InferredKnowledgeGraph ;
 	dct:title "identifica la partizione primaria"@it;
-	dct:description "Identifica la partizione primaria per i dati di budget"@it ;
+	dct:description "Regola che identifica la partizione primaria per i dati di budget"@it ;
 	sd:name graph:top_partition .
 	
 resource:second_partition_graph a kees:InferredKnowledgeGraph ;
-	dct:title "identifica la partizione secondaria"@it;
+	dct:title "Regola che identifica la partizione secondaria"@it;
 	dct:description "Identifica la partizione secondaria per i dati di budget"@it ;
 	sd:name graph:second_partition .
 	
 resource:last_amount_graph a kees:InferredKnowledgeGraph ;
 	dct:title "identifica last amount"@it;
-	dct:description "cerca l'ultima registrazione per un determinato account"@it ;
+	dct:description "Regola che cerca l'ultima registrazione per un determinato account"@it ;
 	sd:name graph:last_amount .
 	
 resource:kb_structure_graph a kees:InferredKnowledgeGraph ;
 	dct:title "Ricostruisce la struttura della knowledge base"@it;
-	dct:description "Identifica tutti i  grafi deklla knowledge base"@it ;
+	dct:description "Regola che identifica tutti i grafi della knowledge base"@it ;
 	sd:name graph:kb_structure .
 	
 

@@ -1,10 +1,11 @@
 # g0v-data smart data management platform
 
-This directory contains the configuration for the knowledge base about the Italian government budget data an a lightweight implementation of a  [Smart Data Management Platform](https://it.linkeddata.center/b/smart-data-platform/)(SDMP) derived from the  [LinkeData.Center SDaaS product](https://it.linkeddata.center//p/sdaas).
+This directory contains the configuration and the engine to build a knowledge base about the Italian government budget. It is realized as a lightweight implementation of a  [Smart Data Management Platform](https://it.linkeddata.center/b/smart-data-platform/) derived from the [LinkeData.Center SDaaS product](https://it.linkeddata.center//p/sdaas).
 
 The knowledge base configuration is consistent with the [Knowledge Exchange Engine Schema](http://LinkedData.Center/kees)(KEES) specifications. 
 
-The data management platform runs a workflow that is based on a sequence of four temporal phases called *windows*:
+
+The data life cycle is based on a workflow that is based on a sequence of four temporal phases called *windows*:
 
 1. a startup  phase (**boot window**)  to initialize the knowledge base
 2. a time slot for the population of the knowledge base and to link data (**learning window**)
@@ -22,17 +23,19 @@ The **reasoning window** computes axioms and creates inferences analyzing the le
 
 A simple file (build.sdaas) defines the whole KEES workflow.
 
+Normally the knowledge base lives in the **teaching window** ready to answer questions.
+
 ## Quickstart
 
-To create a knowledge base containing data about italian governmet budget you require docker:
+To create a knowledge base containing data about Italian government budget:
 
 ```
 cd ..
 docker-compose up -d sdaas
-docker exec databudget_sdaas_1 sdaas -f build.sdaas --reboot
+docker exec data-budget_sdaas_1 sdaas -f build.sdaas --reboot
 ```
 
-Navigate the knowledge base pointing a browser to http://localhost:9999/sdaas/#explore and typing the URI `urn:sddas:config:kb` :
+Navigate the knowledge base pointing a browser to http://localhost:9999/sdaas/#explore and typing the URI `urn:sdaas:config:kb` :
 
 
 See some examples in g0v-it/queries directory.

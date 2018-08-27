@@ -1,5 +1,5 @@
 #
-# Infers any missing knowledge base configuration information
+# Infers missing knowledge base configuration information
 #
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
 PREFIX kees: <http://linkeddata.center/kees/v1#> 
@@ -27,7 +27,7 @@ INSERT DATA {
 ####################################
 # SPARQL service structure inference
 ####################################
-WITH <urn:sdaas:config>
+WITH <urn:sdaas:config:kb>
 INSERT {
 	?namedGraph a sd:NamedGraph.
 	<urn:sdaas:config:kb:default> sd:namedGraph ?namedGraph.
