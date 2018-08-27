@@ -81,12 +81,12 @@ PREFIX : <#>
 Here a complete [example data file](examples/example_data.ttl) ready to be loaded in any RDF datastore.
 
 
-## What to do with g0v-ap ontology
+## How to use g0v-ap ontology
 
-If you want to write an application that analyze/visualize budget data you can transform the government budget data in RDF linked data using gov-ap classes and properties. Doing so you are injecting meaning in the raw data. The produced linked data can be stored in a RDF store and queried using the [SPARQL language](http://www.w3.org/TR/sparql11-query/).
-With SPARQL you can also easily produce temporary data to simplify the development of the application that consumes the data.
+If you want to write an application that analyze/visualize budget data you have to transform the government budget data in RDF linked data using gov-ap classes and properties. The produced linked data can be stored in a RDF store and queried using the [SPARQL language](http://www.w3.org/TR/sparql11-query/).
+With SPARQL update you can also easily write rules to generate (i.e. infers) other data to simplify the development of your application.
 
-The g0v-ap ontology is designed to be easily queried by SPARLQ processor in order to produce data models suitable for a specific task (e.g. the version 1 of the api to feed vue-budget components with data). 
+For example, the [api server implementation](../apis/README.md) to feed vue-budget components with data uses an applicatio platfor g0v-ap and and axioms to feed vue-budget components.
 
 See [in this picture the typical dataflow](https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=g0v-budget-datafow#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fe-artspace.com%2Fuc%3Fid%3D1iXdW0V08-gUK_SL1EkYmnofGvs1L1UD4%26export%3Ddownload)
 
