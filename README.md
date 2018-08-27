@@ -1,3 +1,4 @@
+![copernicani](https://copernicani.it/wp-content/uploads/cropped-logo_orizzontale_trasparente-1-e1525161268864.png)
 # g0v-data
 
 A simple smart data management platform to feed Italian Government Budget Visualization application. 
@@ -31,12 +32,13 @@ To run the rdf store and loading it with data for italian government budget, typ
 ```bash
 docker-compose up -d
 # Start the data ingestion process
-docker exec databudget_sdaas_1 sdaas -f build.sdaas --reboot
+docker exec data-budget_sdaas_1 sdaas -f build.sdaas --reboot
 ```
 
-The rdf store exposes a SPARQL endpoint on 9999 port. Try to acesss the admin contro panel ar http://localhost:9999/bigdata/. **WARNING**: this interface must be disabled in producion environment to prevent security issue
+The data management platform entry point is located at http://localhost:9999/
+**WARNING**: this interface must be disabled in production environment to prevent security issues.
 
-The api server exposes an http endpoint at 8080 port. Try to get the italian budget data with http://localhost:8080/accounts
+The api endpoint is located at http://localhost:8080/
 
 
 ## Support
@@ -46,10 +48,10 @@ For answers you may not find in here or in the Wiki, avoid posting issues. Feel 
 ## Credits
 
 - the RDF datastore and the SPARQL endpoint is based on the [Blazegraph community edition](https://www.blazegraph.com/)
-- the gov-ap ontology and the smart data management platform was developed by Enrico Fagnoni (enrico at LinkedData.Center) with SDaaS Platform by [LinkedData.Center](http://LinkedData.Center/)
+- the gov-ap ontology and the smart data management platform was developed by Enrico Fagnoni (enrico at LinkedData.Center) using the SDaaS platform by [LinkedData.Center](http://LinkedData.Center/)
 - API server and gateways was developed by Yassine Ouahidi (yass.ouahidi at gmail.com ) from [DataChef](http://DataChef.Cloud)
 
-Thanks to all project contributors, to the [Copernicani community](https://copernicani.it/) and to [g0v asia community](http://g0v.asia) for ideas and support.
+Thanks to all project contributors, to the [Copernicani community](https://copernicani.it/) and to the [g0v asia community](http://g0v.asia) for ideas and support.
 
 ## License
 

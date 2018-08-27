@@ -91,16 +91,16 @@ For example, the [api server implementation](../apis/README.md) to feed vue-budg
 See [in this picture the typical dataflow](https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=g0v-budget-datafow#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fe-artspace.com%2Fuc%3Fid%3D1iXdW0V08-gUK_SL1EkYmnofGvs1L1UD4%26export%3Ddownload)
 
 
-## Test the ontology
+## Practice with the g0v-ap
 
-Instal docker and run:
+Install docker and run:
 
 ```	
 cd ..
 docker-compose up -d sdaas 
 ```
 
-1. Connect to [blazegraph console SPARQL update tab](http://localhost:9999/bigdata/#update)
+1. Connect to the blazegraph console SPARQL update tab pointing the browser to http://localhost:9999/bigdata/#update
 2. Load example_data.ttl in a RDF triple store that support SPARQL Query and SPARQL Update.
 3. Execute g0v_axioms.sparql_update to load external data and create maps between taxonomies
 4. Execute api_axioms.sparql_update to generate application level data (e.g. budget amount aggregations)

@@ -1,7 +1,11 @@
 version: '3'
 services:
   sdaas:
-    image: lyrasis/blazegraph:2.1.4
+    build: ./sdaas
+    volumes:
+      - ./sdaas/g0v-it:/kees  
+      - ./sdaas/sdaas-bin:/usr/local/bin/sdaas
+      - ./sdaas/webapps/root:/var/lib/jetty/webapps/root  
     ports:
       - "9999:8080"
   api:

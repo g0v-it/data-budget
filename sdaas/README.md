@@ -27,30 +27,27 @@ A simple file (build.sdaas) defines the whole KEES workflow.
 To create a knowledge base containing data about italian governmet budget you require docker:
 
 ```
-docker build . -t kb
-docker run -d -p 9999:8080 --name kb kb
-docker exec kb sdaas -f build.sdaas --reboot
+cd ..
+docker-compose up -d sdaas
+docker exec databudget_sdaas_1 sdaas -f build.sdaas --reboot
 ```
 
-Play with the blazegraph control panel pointing a browser to http://localhost:9999/sdaas/#explore and type:
+Navigate the knowledge base pointing a browser to http://localhost:9999/sdaas/#explore and typing the URI `urn:sddas:config:kb` :
 
-```
-<http://data.budget.g0v.it/resource/knowledge_base>
-```
 
-Use the [QUERY tab](http://localhost:9999/sdaas/#query) to query the knowledge base with SPARQL 1.1 (see some examples in g0v-it/queries directory).
+See some examples in g0v-it/queries directory.
 
 ### Development and debugging
 
-Manually downloads copy all required raw data that are not directly accessible for web in the g0v-it/datalake/download (e.g. bdap files that require explict condition chec' by an human before to be used)
+Manually downloads copy all required raw data that are not directly accessible for web in the g0v-it/datalake/download.
 
 Cache other linked open data editing and running the script `refresh.sh` in the *g0v-it/datalake/lod* directory.
 
-Test the platform using docker
+Connect to the container to debug build script commands
 
 ```
-docker run -d --name kb-dev -p 9999:8080 -v $PWD/g0v-it:/kees -v $PWD/sdaas-bin:/usr/local/bin/sdaas kb
-docker exec -ti kb-dev sdaas
+docker exec -ti exec databudget_sdaas_1 sdaas sdaas
+SD_HELP
 ```
  
 
