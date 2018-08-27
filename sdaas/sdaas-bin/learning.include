@@ -91,7 +91,7 @@ function _SD_EXTRACT {
 
 	
 		##### add schema to url if a file is passed
-		if [ -f "$url" ]; then url="file://${SD_HOSTNAME}$(realpath "$url")"; url=${url// /%20}; fi
+		if [ -f "$url" ]; then url="file://$(realpath "$url")"; url=${url// /%20}; fi
 		
 		if [  "$extension" = 'auto' ]; then
 			#####  try to preseve extension, if any
