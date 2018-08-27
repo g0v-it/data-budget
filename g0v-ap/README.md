@@ -78,7 +78,7 @@ PREFIX : <#>
 
 ```
 
-Here a complete [example data file](example_data.ttl) ready to be loaded in any RDF datastore.
+Here a complete [example data file](examples/example_data.ttl) ready to be loaded in any RDF datastore.
 
 
 ## What to do with g0v-ap ontology
