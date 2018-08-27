@@ -20,6 +20,12 @@ INSERT {
 	
 	FILTER(?budget_subject != ?close_record_subject )
 	FILTER NOT EXISTS {?budget_subject skos:closeMatch ?close_record_subject}
-}
+};
 
+##
+## Load external reference Linked data
+##
+LOAD <http://reference.data.gov.uk/id/gregorian-interval/2018-01-01T00:00:00/P1Y>;
+LOAD <http://reference.data.gov.uk/id/gregorian-interval/2017-01-01T00:00:00/P1Y>;
+LOAD <http://dbpedia.org/data/Euro.n3> INTO GRAPH <http://dbpedia.org/>
 	

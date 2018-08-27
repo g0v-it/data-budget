@@ -1,13 +1,13 @@
 g0v-data application profile (ontology)
 ---------------------------------------
 
-g0v-ap is an general [OWL ontology](https://www.w3.org/TR/owl2-primer/) suitable to annotate a government budget data with the purpose of supporting budget visalization applications (e.g. http://budget.g0v.it/).  
+g0v-ap is an general [OWL ontology](https://www.w3.org/TR/owl2-primer/) suitable to annotate a government budget data with the purpose of supporting budget visualization applications (e.g. http://budget.g0v.it/).  
 
 It captures different perspectives of a government budget data like historical trends, cross-department and component breakdown of tax by government.
 
 g0v-ap is an semantic web application profile that builds upon the following RDF vocabularies:: 
 
-- the [W3C RDF Data Cube Vocabulary](https://www.w3.org/TR/vocab-data-cube) , to describe the balance accounts observations
+- the [W3C RDF Data Cube Vocabulary](https://www.w3.org/TR/vocab-data-cube), to describe the outgoings/incomes accounts observations
 - the [Data Catalog Vocabulary](https://www.w3.org/TR/vocab-dcat/) to describe the dataset metadata
 - the [SKOS](https://www.w3.org/TR/skos-primer) to describe balance taxonomy.
 - The [DCMI Metadata Terms](http://dublincore.org/documents/dcmi-terms/)
@@ -23,54 +23,72 @@ Very often, the account taxonomy can change on a year basis. This could teorical
 See the [g0v-ap UML diagram](https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=g0v-uml-diagram#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fe-artspace.com%2Fuc%3Fid%3D1Qa_zoF1Nl8ULUg9uChN-OH3ep2Lta4PY%26export%3Ddownload) for more info about restrictions.
 
 
-This snippet (in RDF trig format) is an example snapshot of linked data that contains a budget expressed using with g0v-ap:
+This snippet (in RDF turtle format) find some budget information expressed as linked data with g0v-ap:
 
 ```
-...
+PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+PREFIX skos:     <http://www.w3.org/2004/02/skos/core#> 
+PREFIX dcat:      <http://www.w3.org/ns/dcat#> 
+PREFIX dct:      <http://purl.org/dc/terms/> 
+PREFIX foaf:     <http://xmlns.com/foaf/0.1/> 
+PREFIX interval: <http://reference.data.gov.uk/def/intervals/> 
+PREFIX qb:       <http://purl.org/linked-data/cube#> 
+PREFIX sdmx-dimension:  <http://purl.org/linked-data/sdmx/2009/dimension#> 
+PREFIX sdmx-measure:    <http://purl.org/linked-data/sdmx/2009/measure#> 
+PREFIX sdmx-attribute:  <http://purl.org/linked-data/sdmx/2009/attribute#> 
+PREFIX : <#>
 
-:legge_bilancio_2018 a g0v:Dataset;
-	dct:title       "2018 - DISEGNO LEGGE DI BILANCIO PRESENTATO ELABORABILE SPESE CAPITOLO"@it;
-	dct:description "Dati di Spesa relativi alla Legge di Bilancio Pubblicata per l'esercizio finanziario 2018. I dati sono raccolti per capitoli di spesa e organizzati per ministero, missione, programma e azione."
-	dct:publisher   [ a foaf:Organization; foaf:homepage <http://www.mef.gov.it>; foaf:name "Minstero dell'Economia e delle Finanze"@it ] ;
-	dct:issued      "2018-03-23"^^xsd:date;
+:legge_bilancio_2018 a g0v:Dataset ;
 	sdmx-dimension:refPeriod <http://reference.data.gov.uk/id/gregorian-interval/2018-01-01T00:00:00/P1Y> ;
-	sdmx-attribute:unitMeasure <http://dbpedia.org/resource/Eur> ;
-	dcat:distribution [ a dcat:Distribution ;
-		dcat:accessURL <https://bdap-opendata.mef.gov.it/opendata/spd_lbf_spe_elb_cap_01_2018> ;
-		dcat:license <http://creativecommons.org/licenses/by/3.0>
-	]
-	.
+	sdmx-attribute:unitMeasure <http://dbpedia.org/resource/Euro> .
+	
+:rendiconto_2017 a g0v:Dataset ;
+	sdmx-dimension:refPeriod <http://reference.data.gov.uk/id/gregorian-interval/2017-01-01T00:00:00/P1Y> ;
+	sdmx-attribute:unitMeasure <http://dbpedia.org/resource/Euro> .
 	
 [] a g0v:Budget;
-	g0v:subject :capitolo_02001200010001;
+	g0v:subject :capitolo_02001200010001 ;
 	qb:dataSet :legge_bilancio_2018 ;
-	g0V:obsValue 288149000000.00		
-	.
+	g0v:obsValue 288149000000.00	.
+
+[] a g0v:Budget;
+	g0v:subject :capitolo_02001200020001 ;
+	qb:dataSet :legge_bilancio_2018 ;
+	g0v:obsValue 881493000.00	.
+	
+[] a g0v:Record;
+	g0v:subject :capitolo_02001200010001 ;
+	qb:dataSet :rendiconto_2017 ;
+	g0v:obsValue 278149000000.00	.
 
 [] a g0v:Budget;
 	g0v:subject :capitolo_02001200020001;
-	qb:dataSet :legge_bilancio_2018 ;
-	g0v:obsValue 88149000000.00			
-	.
+	qb:dataSet :rendiconto_2017 ;
+	g0v:obsValue 88149123400.00	.
+
+:capitolo_A102001200010001 a skos:Concept ;skos:broader :azione_A10200120001 .
+:azione_A10200120001 a skos:Concept ; skos:broader :programma_A1020012 .
+:programma_A1020012 a skos:Concept ; skos:broader :missione_A102 .
+::missione_A102 a skos:Concept ; skos:broader :amministrazione_A1 .
+:amministrazione_A1 a skos:Concept .
+:tassonomia_spese_amministrazioni a g0v:BudgetTaxonomy; skos:hasTopConcept :amministrazione_A1 .
 
 ...
 
-	dct:src :legge_bilancio_2018 ; 
-	dct:title "Tassonomia capitoli di spesa per amministrazioni";
-	dct:description "Tassonomia amministrazioni/missioni/programmi/azioni/capitoli ricavata dalla legge di bilancio";
-.
-y2018:capitolo_A102001200010001 a skos:Concept ;skos:broader y2018:azione_A10200120001.
-y2018:azione_A10200120001 a skos:Concept ; skos:broader y2018:programma_A1020012.
-y2018:programma_A1020012 a skos:Concept ; skos:broader :missione_A102.
-y2018::missione_A102 a skos:Concept ; skos:broader y2018:amministrazione_A1.
-y2018:amministrazione_A1 a skos:Concept ;
-y2018:tassonomia_spese_amministrazioni a g0v:BudgetTaxonomy;skos:hasTopConcept y2018:amministrazione_A1;
+```
 
-```	
+Here a complete [example data file](example_data.ttl) ready to be loaded in any RDF datastore.
 
-Here a [complete SPARQL update example file](load_example_data.sparql_update)
 
-The g0v-ap ontology is designed to be easily queried by SPARLQ processor in order to produce data models suitable for a specific task (e.g. the version 1 of the api to feed vue-budget components with data). See [in this picture the intended dataflow](https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=g0v-budget-datafow#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fe-artspace.com%2Fuc%3Fid%3D1iXdW0V08-gUK_SL1EkYmnofGvs1L1UD4%26export%3Ddownload)
+## What to do with g0v-ap ontology
+
+If you want to write an application that analyze/visualize budget data you can transform the government budget data in RDF linked data using gov-ap classes and properties. Doing so you are injecting meaning in the raw data. The produced linked data can be stored in a RDF store and queried using the [SPARQL language](http://www.w3.org/TR/sparql11-query/).
+With SPARQL you can also easily produce temporary data to simplify the development of the application that consumes the data.
+
+The g0v-ap ontology is designed to be easily queried by SPARLQ processor in order to produce data models suitable for a specific task (e.g. the version 1 of the api to feed vue-budget components with data). 
+
+See [in this picture the typical dataflow](https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=g0v-budget-datafow#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fe-artspace.com%2Fuc%3Fid%3D1iXdW0V08-gUK_SL1EkYmnofGvs1L1UD4%26export%3Ddownload)
 
 
 ## Test the ontology
@@ -80,15 +98,10 @@ Instal docker and run:
 ```	
 cd ..
 docker-compose up -d sdaas 
-```	
+```
 
-Connect to [blazegraph consolole SPARQL update tab](http://localhost:9999/bigdata/#update) and load some example data with the [SPARQL update script](load_example_data.sparql_update).
-
-Do some general reasoning about loaded data running [base axioms](g0v_axioms.sparql_update)
-
-Transform data for your api running [axioms for api](api_axioms.sparql_update).
-
-Than move in SPARQL QUERY tab and enjoi with one of the provided query examples
-
-
-
+1. Connect to [blazegraph console SPARQL update tab](http://localhost:9999/bigdata/#update)
+2. Load example_data.ttl in a RDF triple store that support SPARQL Query and SPARQL Update.
+3. Execute g0v_axioms.sparql_update to load external data and create maps between taxonomies
+4. Execute api_axioms.sparql_update to generate application level data (e.g. budget amount aggregations)
+5. Try SPARQL queries

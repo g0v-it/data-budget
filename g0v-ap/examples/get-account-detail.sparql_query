@@ -20,5 +20,5 @@ WHERE {
     }
     OPTIONAL {?account :last_amount ?last_amount}
   
-  FILTER (?code = "${id}") 
+  FILTER (?code = "A1.02.0012.0001") 
 }ORDER BY DESC(?year)
