@@ -1,0 +1,47 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix kees: <http://linkeddata.center/kees/v1#> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix daq: <http://purl.org/eis/vocab/daq#> .
+
+	
+[] a qb:Observation ;
+ 	rdfs:comment "Subjective ranks could be biased";
+	daq:computedOn <urn:kees:config> ; 
+    daq:metric kees:trustGraphMetric;
+    daq:value 0.98 ;
+	daq:isEstimated true .
+	
+[] a qb:Observation ;
+ 	rdfs:comment "Official source";
+	daq:computedOn <http://schema.org/> ; 
+    daq:metric kees:trustGraphMetric;
+    daq:value 1.00 ;
+	daq:isEstimated false .
+	
+[] a qb:Observation ;
+ 	rdfs:comment "Official source";
+	daq:computedOn <urn:graph:istat> ; 
+    daq:metric kees:trustGraphMetric;
+    daq:value 1.00 ;
+	daq:isEstimated false .
+
+[] a qb:Observation ;
+ 	rdfs:comment "Lexical proximity could create false positive";
+	daq:computedOn <urn:graph:cities_with_similar_name> ; 
+    daq:metric kees:trustGraphMetric;
+    daq:value 0.70 ;
+	daq:isEstimated true .	
+	
+[] a qb:Observation ;
+ 	rdfs:comment "Deterministic algorithm";
+	daq:computedOn <urn:graph:trustmap_default> ; 
+    daq:metric kees:trustGraphMetric;
+    daq:value 1.00 ;
+	daq:isEstimated false .
+	
+[] a qb:Observation ;
+ 	rdfs:comment "Deterministic algorithm";
+	daq:computedOn <urn:graph:calculated_trusts> ; 
+    daq:metric kees:trustGraphMetric;
+    daq:value 1.00 ;
+	daq:isEstimated false .	

@@ -93,14 +93,11 @@ See [in this picture the typical dataflow](https://www.draw.io/?lightbox=1&highl
 
 ## Practice with the g0v-ap
 
-Install docker and run:
-
 ```	
-cd ..
-docker-compose up -d sdaas 
+docker run --name blazegraph -d -p 9999:8080 lyrasis/blazegraph:2.1.4
 ```
 
-1. Connect to the blazegraph console SPARQL update tab pointing the browser to http://localhost:9999/bigdata/#update
+1. Connect to the blazegraph workbench SPARQL update tab pointing the browser to http://localhost:9999/bigdata/#update
 2. Load example_data.ttl in a RDF triple store that support SPARQL Query and SPARQL Update.
 3. Execute g0v_axioms.sparql_update to load external data and create maps between taxonomies
 4. Execute api_axioms.sparql_update to generate application level data (e.g. budget amount aggregations)

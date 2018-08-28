@@ -1,0 +1,66 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix kees: <http://linkeddata.center/kees/v1#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix : <#> .
+
+#######################################################
+# Knowledge graph
+#######################################################	
+:kb a kees:KnowledgeBase; dct:publisher :ldc .
+[] a kees:KBConfigGraph; sd:name <urn:kees:config>; dct:title  "The KEES configuration".
+[] a kees:LinkedDataGraph; sd:name <urn:graph:istat>; dct:source <https://www.istat.it/it/archivio/6789>.
+[] a kees:TBoxGraph; sd:name <http://schema.org/>; dct:source <http://schema.org/docs/developers.html>.
+[] a kees:InferredKnowledgeGraph; sd:name <urn:graph:trustmap_default> ; dct:title "Default trust observations" .
+[] a kees:InferredKnowledgeGraph; sd:name <urn:graph:calculated_trusts> ; dct:title "Inferred trust on graphs" .
+[] a kees:InferredKnowledgeGraph; sd:name <urn:graph:cities_with_similar_name> ; dct:title "Inferred lexical proximity on city names" .
+
+#######################################################
+# Datasets
+#######################################################	
+[] a dcat:Dataset; 
+	dct:title "Codici statistici delle unità amministrative territoriali: comuni, città metropolitane, province e regioni"@it ;	
+	dct:description "Elenco delle circoscrizioni territorialiItaliane"@it ;
+    dct:publisher :istat;
+	dct:modified  "2017-06-30"^^xsd:date ;
+	dcat:distribution  [
+	    dcat:accessURL <https://www.istat.it/it/archivio/6789> ;
+	    dct:license <http://creativecommons.org/licenses/by/3.0/it/>
+	] 
+.
+
+[] a dcat:Dataset; 
+	dct:title "schema.org" ;	
+	dct:description "access to machine-readable representations of schema.org"@en ;
+    dct:publisher :schema_org;
+	dcat:distribution  [
+	    dcat:accessURL <http://schema.org/docs/developers.html> ;
+	    dct:license <http://schema.org/docs/terms.html>
+	] 
+.
+########################################################
+# Licenses and documents metadata
+########################################################
+<http://creativecommons.org/licenses/by/3.0/it/> a dct:LicenseDocument;
+	dct:title "Creative Commons - Attribuzione 3.0 Italia (CC BY 3.0)"@it.
+
+<https://raw.githubusercontent.com/linkeddatacenter/BOTK-core/master/LICENSE> a dct:LicenseDocument;
+	dct:title "MIT license by LinkedData.Center"@en.
+
+########################################################
+# Publishers 
+########################################################
+:ldc a foaf:Organization; 
+	foaf:name "LinkedData.Center"; 
+	foaf:homepage <http://linkeddata.center/> .
+	
+:istat a foaf:Organization; 
+	foaf:name "ISTAT"; 
+	foaf:homepage <http://www.istat.it/> .	
+	
+:schema_org a foaf:Organization; 
+	foaf:name "schema.org community"; 
+	foaf:homepage <http://schema.org/> .

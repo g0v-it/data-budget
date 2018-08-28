@@ -1,0 +1,5 @@
+PREFIX schema: <http://schema.org/>
+CONSTRUCT { ?s <urn:sdaas:text> ?text }
+WHERE { 
+  ?s a schema:City; schema:name ?text
+}

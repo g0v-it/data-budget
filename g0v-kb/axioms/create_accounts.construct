@@ -27,7 +27,7 @@ CONSTRUCT {
 
 	?account_subject skos:prefLabel ?name ; skos:notation ?code .
 	
-	# find te best labels for top levele and secon level taxonomy concepts
+	# find the best labels for top and second level taxonomy concepts
 	OPTIONAL {?account_subject skos:broader/skos:broader/skos:prefLabel ?second_partition_label}
 	OPTIONAL {?account_subject skos:broader/skos:broader/skos:prefLabel ?second_partition_short_label}
 	BIND( COALESCE(?second_partition_short_label,?second_partition_label) AS ?best_second_partition_label)

@@ -13,11 +13,12 @@ This project aims to create a smart data management platform to feed a budget vi
 
 ## Components
 
-The project contains three logical components:
+The project contains four logical components:
 
-- the g0v-ap ontology designed to describe the Italian budget data with an application profile of the [W3C RDF Data Cube Vocabulary](https://www.w3.org/TR/vocab-data-cube) . Find files and documentation in [g0v-ap directory](g0v-ap/README.md)
-- a data management platform providing a RDF store, a [SPARQL endpoint](https://www.w3.org/TR/sparql11-overview), a set of gateways to transform raw government budget data into linked data according with g0v-ap ontology and a build script that drives an automated data ingestion engine that populate the RDF store.  See files and docs in [sdaas directory](sdaas/README.md)
-- a set of APIs that query the SPARQL endpoint and produce json data with a schema suitable to be used with the [vue-budget component project](). See files and docs in *apis directory*
+- the **g0v-ap** ontology designed to describe the Italian budget data with an application profile of the [W3C RDF Data Cube Vocabulary](https://www.w3.org/TR/vocab-data-cube) . Find files and documentation in [g0v-ap directory](g0v-ap/README.md)
+- **sdaas**: (smart data as a service) a data management platform providing a RDF store, a [SPARQL endpoint](https://www.w3.org/TR/sparql11-overview) an automated ingestion engine. See files and docs in [sdaas directory](sdaas/README.md)
+-**gov-kb**: a set of gateways to transform raw government budget data into linked data according with g0v-ap ontology and a build script that drives the sdaas ingestion engine that populate the RDF store.
+- a set of **APIs** that query the SPARQL endpoint and produce json data with a schema suitable to be used with the [vue-budget component project](). See files and docs in [apis directory](apis/README.md)
  
 [This picture](https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=g0v-data-architecture.html#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fe-artspace.com%2Fuc%3Fid%3D1Q2VSl5IL_K1qByiSzGDffSXiVbSRA1zl%26export%3Ddownload) shows the components interactions.
 
@@ -35,13 +36,14 @@ To run the rdf store and loading it with data for italian government budget, typ
 ```bash
 docker-compose up -d
 # Start the data ingestion process
-docker exec data-budget_sdaas_1 sdaas -f build.sdaas --reboot
+docker exec "$(basename $PWD)_sdaas_1" sdaas -f build.sdaas --reboot
 ```
 
-The data management platform entry point is located at http://localhost:9999/
-**WARNING**: this interface must be disabled in production environment to prevent security issues.
+The data management platform entry point is located at http://localhost:9999/ try http://localhost:9999/sdaas/#explore:kb:urn:sdaas:config:kb
 
-The api endpoint is located at http://localhost:8080/
+**WARNING**: the 9999 port must be disabled in production environment to prevent security issues.
+
+The api endpoint is located at http://localhost:8080/ try http://localhost:8080/accounts
 
 
 ## Support

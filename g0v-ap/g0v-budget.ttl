@@ -15,7 +15,7 @@
 @prefix interval: <http://reference.data.gov.uk/def/intervals/> .
 @prefix sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#> .
 @prefix sdmx-dimension: <http://purl.org/linked-data/sdmx/2009/dimension#> .
-@base <http://data.budget.g0v.it/g0v-budget/v1> .
+@base <http://data.budget.g0v.it/g0v-budget/v1#> .
 
 <http://data.budget.g0v.it/g0v-budget/v1> rdf:type owl:Ontology ;
                                           

@@ -1,0 +1,6 @@
+#Just selects all cities whose name starts with the letter M
+PREFIX schema: <http://schema.org/>
+SELECT ?s ?text WHERE { 
+  ?s a schema:City; schema:name ?text
+  FILTER ( STRSTARTS( ?text , 'M'))
+}

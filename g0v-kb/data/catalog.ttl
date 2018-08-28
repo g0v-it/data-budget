@@ -25,11 +25,14 @@
 	dct:issued      "2018-03-23"^^xsd:date;
 	sdmx-dimension:refPeriod <http://reference.data.gov.uk/id/gregorian-interval/2018-01-01T00:00:00/P1Y> ;
 	sdmx-attribute:unitMeasure <http://dbpedia.org/resource/Euro> ;
-	dcat:distribution [ a dcat:Distribution ;
+	dcat:distribution :legge_bilancio_2018_distribution 
+.
+	
+:legge_bilancio_2018_distribution a dcat:Distribution ;
 		dcat:accessURL <https://bdap-opendata.mef.gov.it/opendata/spd_lbf_spe_elb_cap_01_2018> ;
 		dcat:license <http://creativecommons.org/licenses/by/3.0>
-	]
-	.
+.
+	
 	
 :rendiconto_2017 a g0v:Dataset, dcat:Dataset, qb:Dataset;
 	dct:title       "2017 - RENDICONTO PUBBLICATO ELABORABILE SPESE CAPITOLO"@it;
@@ -37,11 +40,13 @@
 	dct:issued      "2018-03-23"^^xsd:date;
 	sdmx-dimension:refPeriod <http://reference.data.gov.uk/id/gregorian-interval/2017-01-01T00:00:00/P1Y> ;
 	sdmx-attribute:unitMeasure <http://dbpedia.org/resource/Eur> ;
-	dcat:distribution [ a dcat:Distribution ;
+	dcat:distribution :rendiconto_2017_distribution
+.
+
+:rendiconto_2017_distribution a dcat:Distribution ;
 		dcat:accessURL <https://bdap-opendata.mef.gov.it/content/2017-rendiconto-pubblicato-elaborabile-spese-capitolo> ;
 		dcat:license <http://creativecommons.org/licenses/by/3.0>
-	]
-	.
+.
 	
 :rendiconto_2016 a g0v:Dataset, dcat:Dataset, qb:Dataset;
 	dct:title       "2016 - RENDICONTO PUBBLICATO ELABORABILE SPESE CAPITOLO"@it;
@@ -49,11 +54,13 @@
 	dct:issued      "2017-06-30"^^xsd:date;
 	sdmx-dimension:refPeriod <http://reference.data.gov.uk/id/gregorian-interval/2016-01-01T00:00:00/P1Y> ;
 	sdmx-attribute:unitMeasure <http://dbpedia.org/resource/Eur> ;
-	dcat:distribution [ a dcat:Distribution ;
+	dcat:distribution :rendiconto_2016_distribution
+.
+
+:rendiconto_2016_distribution a dcat:Distribution ;
 		dcat:accessURL <https://bdap-opendata.mef.gov.it/opendata/spd_rnd_spe_elb_cap_01_2016> ;
 		dcat:license <http://creativecommons.org/licenses/by/3.0>
-	]
-	.
+.
 	
 :rendiconto_2015 a g0v:Dataset, dcat:Dataset, qb:Dataset;
 	dct:title       "2015 - RENDICONTO PUBBLICATO ELABORABILE SPESE CAPITOLO"@it;
@@ -61,11 +68,13 @@
 	dct:issued      "2016-12-14"^^xsd:date;
 	sdmx-dimension:refPeriod <http://reference.data.gov.uk/id/gregorian-interval/2015-01-01T00:00:00/P1Y> ;
 	sdmx-attribute:unitMeasure <http://dbpedia.org/resource/Eur> ;
-	dcat:distribution [ a dcat:Distribution ;
+	dcat:distribution :rendiconto_2015_distribution
+.
+
+:rendiconto_2015_distribution a dcat:Distribution ;
 		dcat:accessURL <https://bdap-opendata.mef.gov.it/opendata/spd_rnd_spe_elb_cap_01_2015> ;
 		dcat:license <http://creativecommons.org/licenses/by/3.0>
-	]
-	.
+.
 	
 :rendiconto_2014 a g0v:Dataset, dcat:Dataset, qb:Dataset;
 	dct:title       "2014 - RENDICONTO PUBBLICATO ELABORABILE SPESE CAPITOLO"@it;
@@ -73,11 +82,13 @@
 	dct:issued      "2016-12-14"^^xsd:date;
 	sdmx-dimension:refPeriod <http://reference.data.gov.uk/id/gregorian-interval/2014-01-01T00:00:00/P1Y> ;
 	sdmx-attribute:unitMeasure <http://dbpedia.org/resource/Eur> ;
-	dcat:distribution [ a dcat:Distribution ;
+	dcat:distribution :rendiconto_2014_distribution
+.
+
+:rendiconto_2014_distribution a dcat:Distribution ;
 		dcat:accessURL <https://bdap-opendata.mef.gov.it/opendata/spd_rnd_spe_elb_cap_01_2014> ;
 		dcat:license <http://creativecommons.org/licenses/by/3.0>
-	]
-	.
+.
 	
 :rendiconto_2013 a g0v:Dataset, dcat:Dataset, qb:Dataset;
 	dct:title       "2013 - RENDICONTO PUBBLICATO ELABORABILE SPESE CAPITOLO"@it;
@@ -85,8 +96,10 @@
 	dct:issued      "2016-12-14"^^xsd:date;
 	sdmx-dimension:refPeriod <http://reference.data.gov.uk/id/gregorian-interval/2013-01-01T00:00:00/P1Y> ;
 	sdmx-attribute:unitMeasure <http://dbpedia.org/resource/Eur> ;
-	dcat:distribution [ a dcat:Distribution ;
+	dcat:distribution :rendiconto_2013_distribution
+.
+
+:rendiconto_2013_distribution a dcat:Distribution ;
 		dcat:accessURL <https://bdap-opendata.mef.gov.it/opendata/spd_rnd_spe_elb_cap_01_2013> ;
 		dcat:license <http://creativecommons.org/licenses/by/3.0>
-	]
-	.
+.

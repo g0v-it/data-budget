@@ -1,8 +1,8 @@
-# g0v-data smart data management platform
+# g0v-data sdaas
 
-This directory contains the configuration and the engine to build a knowledge base about the Italian government budget. It is realized as a lightweight implementation of a  [Smart Data Management Platform](https://it.linkeddata.center/b/smart-data-platform/) derived from the [LinkeData.Center SDaaS product](https://it.linkeddata.center//p/sdaas).
+This directory contains the engine to build a knowledge base about the Italian government budget. It is realized as a lightweight implementation of a  [Smart Data Management Platform](https://it.linkeddata.center/b/smart-data-platform/) derived from the [LinkeData.Center SDaaS product](https://it.linkeddata.center//p/sdaas).
 
-The knowledge base configuration is consistent with the [Knowledge Exchange Engine Schema](http://LinkedData.Center/kees)(KEES) specifications. 
+The knowledge base is consistent with the [Knowledge Exchange Engine Schema](http://LinkedData.Center/kees)(KEES) specifications. 
 
 
 The data life cycle is based on a workflow that is based on a sequence of four temporal phases called *windows*:
@@ -25,34 +25,25 @@ A simple file (build.sdaas) defines the whole KEES workflow.
 
 Normally the knowledge base lives in the **teaching window** ready to answer questions.
 
-## Quickstart
-
-To create a knowledge base containing data about Italian government budget:
+## Test platform
 
 ```
-cd ..
-docker-compose up -d sdaas
-docker exec data-budget_sdaas_1 sdaas -f build.sdaas --reboot
+docker build -t sdaas .
+docker run -d -p 9999:8080 -v $PWD/sdaas-bin:/usr/local/bin/sdaas -v $PWD/webapps/root:/var/lib/jetty/webapps/root --name sdaas sdaas
+docker exec -ti sdaas sdaas -f build.sdaas --reboot
 ```
 
-Navigate the knowledge base pointing a browser to http://localhost:9999/sdaas/#explore and typing the URI `urn:sdaas:config:kb` :
+Navigate the knowledge base pointing a browser to http://localhost:9999/:
 
-
-See some examples in g0v-it/queries directory.
 
 ### Development and debugging
 
-Manually downloads copy all required raw data that are not directly accessible for web in the g0v-it/datalake/download.
+Manually downloads copy all required raw data that are not directly accessible for web in the g0v-kb/datalake/download.
 
 Cache other linked open data editing and running the script `refresh.sh` in the *g0v-it/datalake/lod* directory.
 
 Connect to the container to debug build script commands
 
-```
-docker exec -ti exec databudget_sdaas_1 sdaas sdaas
-SD_HELP
-```
- 
 
 ## Credits and license
 

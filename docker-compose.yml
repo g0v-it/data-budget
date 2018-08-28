@@ -3,9 +3,7 @@ services:
   sdaas:
     build: ./sdaas
     volumes:
-      - ./sdaas/g0v-it:/kees  
-      - ./sdaas/sdaas-bin:/usr/local/bin/sdaas
-      - ./sdaas/webapps/root:/var/lib/jetty/webapps/root  
+      - ./g0v-kb:/kees
     ports:
       - "9999:8080"
   api:

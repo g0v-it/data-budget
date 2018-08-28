@@ -13,7 +13,7 @@ ENV PATH="/usr/local/bin/sdaas:${PATH}"
 
 ADD RWStore.properties $BLAZEGRAPH_RW_PATH
 ADD sdaas-bin /usr/local/bin/sdaas
-ADD g0v-it $KEES_DIR
+ADD boilerplate $KEES_DIR
 
 # load regular linux tools required by sdaas:
 # see https://wiki.alpinelinux.org/wiki/How_to_get_regular_stuff_working
@@ -22,15 +22,9 @@ RUN apk --no-cache add sudo util-linux coreutils binutils findutils grep sed ope
 # load root webapp
 ADD webapps/root ${JETTY_WEBAPPS}/root
 
-# load blazegraph.war and unpack webapp
-#RUN wget -O /tmp/blazegraph.war $BLAZEGRAPH_VERSION_URL &&\
-#	unzip /tmp/blazegraph.war -d ${JETTY_WEBAPPS}/${BLAZEGRAPH_NAME}
-
-# change RWStore.properties location	
-#RUN sed -i.orig -e 's/<param-value>RWStore.properties<\/param-value>/<param-value>\/RWStore.properties<\/param-value>/g' ${JETTY_WEBAPPS}/${BLAZEGRAPH_NAME}/WEB-INF/web.xml 
-
 RUN chown jetty:jetty $BLAZEGRAPH_RW_PATH
 
+# load and install blazegraph.war
 RUN wget -O ${JETTY_WEBAPPS}/${BLAZEGRAPH_NAME}.war $BLAZEGRAPH_VERSION_URL
 
 
@@ -51,4 +45,3 @@ WORKDIR  ${KEES_DIR}
 # problem if rules.log is not found:
 # https://wiki.blazegraph.com/wiki/index.php/NanoSparqlServer#Common_Startup_Problems
 CMD cd /var/lib/jetty && sudo -u jetty java -jar /usr/local/jetty/start.jar -Dcom.bigdata.rdf.sail.webapp.ConfigParams.propertyFile=/RWStore.properties
-
