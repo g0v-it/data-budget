@@ -16,22 +16,20 @@ This project aims to create a smart data management platform to feed a budget vi
 The project contains four logical components:
 
 - the **g0v-ap** ontology designed to describe the Italian budget data with an application profile of the [W3C RDF Data Cube Vocabulary](https://www.w3.org/TR/vocab-data-cube) . Find files and documentation in [g0v-ap directory](g0v-ap/README.md)
-- **sdaas**: (smart data as a service) a data management platform providing a RDF store, a [SPARQL endpoint](https://www.w3.org/TR/sparql11-overview) an automated ingestion engine. See files and docs in [sdaas directory](sdaas/README.md)
--**gov-kb**: a set of gateways to transform raw government budget data into linked data according with g0v-ap ontology and a build script that drives the sdaas ingestion engine that populate the RDF store.
+- **sdaas**: (smart data as a service) a data management platform providing a RDF store, a [SPARQL endpoint](https://www.w3.org/TR/sparql11-overview) and an ingestion engine. See files and docs in [sdaas directory](sdaas/README.md)
+-**gov-kb**: a datalake, a set of gateways to transform raw government budget data into linked data according with g0v-ap ontology and a build script that drives the sdaas ingestion engine to populate the RDF store.
 - a set of **APIs** that query the SPARQL endpoint and produce json data with a schema suitable to be used with the [vue-budget component project](). See files and docs in [apis directory](apis/README.md)
  
 [This picture](https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=g0v-data-architecture.html#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fe-artspace.com%2Fuc%3Fid%3D1Q2VSl5IL_K1qByiSzGDffSXiVbSRA1zl%26export%3Ddownload) shows the components interactions.
 
-The deploy of g0v-data is based on a [stack of two docker containers](https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=g0v-data-stack.html#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fe-artspace.com%2Fuc%3Fid%3D1FEItM1NOMCzj03GxkXc_EE5SLnJ-oF_R%26export%3Ddownload), one to run the platform and one or the APIs server.
-
-The government budget raw data source is supposed to be be available as [3,4 or 5 stars linked data](https://5stardata.info/en/) . All required ETL processes are implemented by the DMP using data gateways drived by the build script.
+The deploy of g0v-data requires a [stack of two docker containers](https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=g0v-data-stack.html#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fe-artspace.com%2Fuc%3Fid%3D1FEItM1NOMCzj03GxkXc_EE5SLnJ-oF_R%26export%3Ddownload), one to run the data management platform and one for the APIs server.
 
 
 ## Quickstart
 
 You need need to install [docker](https://docs.docker.com/) version 18+ with docker-compose.
 
-To run the rdf store and loading it with data for italian government budget, type:
+To run the rdf store and loading it with data for Italian government budget, type:
 
 ```bash
 docker-compose up -d
@@ -61,4 +59,3 @@ Thanks to all project contributors, to the [Copernicani community](https://coper
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE) for more information.
-

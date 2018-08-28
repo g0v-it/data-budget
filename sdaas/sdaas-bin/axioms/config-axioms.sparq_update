@@ -27,7 +27,7 @@ INSERT DATA {
 ####################################
 # SPARQL service structure inference
 ####################################
-WITH <urn:sdaas:config:kb>
+WITH <urn:sdaas:config>
 INSERT {
 	?namedGraph a sd:NamedGraph.
 	<urn:sdaas:config:kb:default> sd:namedGraph ?namedGraph.

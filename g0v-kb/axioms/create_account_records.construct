@@ -12,12 +12,15 @@ CONSTRUCT {
 	?accountRecordUri a :AccountRecord;
 	   :amount  ?amount;
 	   :year ?year;
-	   :code ?code
+	   :code ?code;
+	   dct:subject ?account_record_subject
 } WHERE {  
 
+  BIND( UUID() AS ?accountRecordUri )
+  
   {
     SELECT ?account_record_subject ?year(SUM (?record_amount) AS ?amount) WHERE {
-      ?budget a g0v:Budget; g0v:subject/skos:broader ?account_subject.
+      ?account a :Account; dct:subject ?account_subject.
       ?account_subject skos:closeMatch ?account_record_subject.
          
       ?record a g0v:Record;  
@@ -29,5 +32,4 @@ CONSTRUCT {
   }
  
   ?account_record_subject skos:notation ?code 
-  BIND( UUID() AS ?accountRecordUri )
 }
