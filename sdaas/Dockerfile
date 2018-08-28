@@ -33,6 +33,8 @@ RUN wget -O ${JETTY_WEBAPPS}/${BLAZEGRAPH_NAME}.war $BLAZEGRAPH_VERSION_URL
 # because of its use of random uids.
 RUN chgrp -R 0 /var/lib/jetty && \
     chmod -R g=u /var/lib/jetty
+    
+RUN chmod +rx /usr/local/bin/sdaas
 
 EXPOSE 8080
 
