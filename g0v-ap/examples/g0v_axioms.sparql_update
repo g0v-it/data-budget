@@ -1,3 +1,11 @@
+
+##
+## Load external referenced Linked data
+##
+LOAD <http://reference.data.gov.uk/id/gregorian-interval/2018-01-01T00:00:00/P1Y> ;
+LOAD <http://reference.data.gov.uk/id/gregorian-interval/2017-01-01T00:00:00/P1Y> ;
+LOAD <http://dbpedia.org/data/Euro.n3> INTO GRAPH <http://dbpedia.org/> ;
+
 ##
 ## AXIOM: create match between account budget concepts and account record concepts
 ##
@@ -6,26 +14,74 @@ PREFIX skos:     <http://www.w3.org/2004/02/skos/core#>
 PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
 
 INSERT { 
-	?budget_subject skos:closeMatch ?close_record_subject
+	?concept skos:closeMatch ?close_concept
 } WHERE {  
-	?budget_subject a skos:Concept; 
+	?concept a skos:Concept; 
 		skos:notation ?code; 
-		skos:inScheme ?budget_scheme.
-	?budget_scheme a g0v:BudgetTaxonomy .
+		skos:inScheme ?scheme.
 	
-	?close_record_subject a skos:Concept; 
+	?close_concept a skos:Concept; 
 		skos:notation ?code;
-		skos:inScheme ?record_scheme.
-	?record_scheme a g0v:RecordTaxonomy .
+		skos:inScheme ?other_scheme.
 	
-	FILTER(?budget_subject != ?close_record_subject )
-	FILTER NOT EXISTS {?budget_subject skos:closeMatch ?close_record_subject}
-};
+	FILTER(?concept != ?close_concept )
+	FILTER(?scheme != ?other_scheme )
+	FILTER NOT EXISTS {?concept skos:closeMatch ?close_concept}
+}
+
+;
+
 
 ##
-## Load external reference Linked data
+## AXIOM: inherit the reference period attribute in Fact, if missing
 ##
-LOAD <http://reference.data.gov.uk/id/gregorian-interval/2018-01-01T00:00:00/P1Y>;
-LOAD <http://reference.data.gov.uk/id/gregorian-interval/2017-01-01T00:00:00/P1Y>;
-LOAD <http://dbpedia.org/data/Euro.n3> INTO GRAPH <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
+PREFIX qb: <http://purl.org/linked-data/cube#>
+
+INSERT { ?fact g0v:refPeriod ?ref_period} 
+WHERE {  
+	?fact a g0v:Fact; qb:dataSet/g0v:refPeriod ?ref_period.
 	
+	FILTER NOT EXISTS {?fact g0v:refPeriod []}
+}
+
+;
+
+
+##
+## AXIOM: inherit the unit attribute in Fact, if missing
+##
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
+PREFIX qb: <http://purl.org/linked-data/cube#>
+
+INSERT { ?fact g0v:unit ?unit} 
+WHERE {  
+	?fact a g0v:Fact; qb:dataSet/g0v:unit ?unit.
+	
+	FILTER NOT EXISTS {?fact g0v:unit []}
+}
+
+;
+
+
+##
+## AXIOM: Create a component that aggregates facts from the taxonomy
+##
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
+
+INSERT { 
+	?component a g0v:Component ;
+		g0v:concept ?component_concept.
+	?fact g0v:isPartOf ?component;
+} 
+WHERE {  
+	?fact a g0v:Fact; 
+		g0v:concept/skos:broader ?component_concept.
+	
+	BIND( URI( CONCAT(STR(?component_concept),"_component")) AS ?component )
+	
+	FILTER NOT EXISTS {?fact g0v:isPartOf []}
+}

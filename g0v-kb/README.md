@@ -1,6 +1,9 @@
 # budget.gov.it knowledge Base
 
-This project contains the configuration, quality records and data gateways for setting up and update the budget.gov.it knowledge Base.
+This project contains the sddas configuration, data and gateways for setting up and update a knowledge base ready to teach the budget.g0v.it APIs.
+
+It requires sdaas platforms.
+This directory must be mounted in the /kees directory on the sdaas engine. 
 
 ## Updating data
 
@@ -12,33 +15,35 @@ Cache other linked open data editing and running the script `refresh.sh` in the 
 
 Install the sdaas platform to debug build.script
 
-## testing gateways
+## stand alone gateways development and testing
+
+Gateways can be tested stand alone just with any host providing php7; e.g.:
 
 ```
-docker run -ti -v $PWD/gateways:/gateways -v $PWD/tests:/tests thatsamguy/trusty-php71 bash
-php gateways/bdap-legge-di-bilancio.php test1 < tests/data/test1.csv 
+docker run -ti -v $PWD/gateways:/gateways thatsamguy/trusty-php71 bash
+php gateways/bdap-legge-di-bilancio.php dstest1 < gateways/tests/data/legge-di-bilancio.csv 
+php gateways/bdap-rendiconto.php dstest2 < gateways/tests/data/rendiconto.csv 
+php gateways/bdap-rendiconto-special.php dstest3 < gateways/tests/data/rendiconto-special.csv 
 ```
 
-To test rdf result use an online service like http://rdf-translator.appspot.com/
+Check the gateway results using an online service like http://rdf-translator.appspot.com/
  
 ## debugging build script
 
 ```
 docker build -t sdaas ../sdaas
 docker run -d -p 9999:8080 -v $PWD/.:/kees --name g0v-kb sdaas
-docker exec -ti g0v-kb bash
-sdaas -f build.sdaas --reboot
+docker exec -t g0v-kb sdaas --debug -f build.sdaas --reboot
 ```
-
+logs info and debug traces will be created in .cache directory
 
 ## Directory structure
 
-- the **build.sdaas** sdaas script to populate the knowledge base from scratch. It requires sdaas platform community edition 2.0+
+- the **build.sdaas** file is a script for sdaas platform to populate the knowledge base from scratch. It requires sdaas platform community edition 2.0+
 - the **axioms** directory contains static rules to be processed during reasoning windows. 
-- the **.cache** temporary created directory that contains rules to be interpreted by reasoner and data distributions. 
 - the **data** directory contains local data files
-- the **distrib** temporary created directory that contains the answers to questions. It is created by the teaching window during build process.
-- the **doc** directory directory contains various documentation files
+- the **datalake** this directory contains a mirror of data that are present outside the
 - the **gateways** directory contains the code to transform raw data into linked data
-- the **tests** directory contains data samples and test sparql queries
-- the **data_lake** this directory contains a mirror of data that are present outside the project. 
+- the **doc** directory directory contains various documentation files
+- the **distrib** temporary created directory that contains the answers to questions. It is created by the teaching window during build process. Not saved in repo.
+- the **.cache** temporary created directory that contains rules to be interpreted by reasoner and data distributions. Not saved in repo.

@@ -1,0 +1,134 @@
+##
+## APPLICATION LEVEL AXIOM: generate type and main property for the lowest level of component.
+##
+PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+PREFIX : <urn:local:g0v:api:v1:>
+
+INSERT {
+	?component a :Account ;
+       :amount ?amount;
+       :code ?code;
+       :name ?name;
+       :topPartitionLabel ?best_top_partition_label;
+       :secondPartitionLabel ?best_second_partition_label
+} WHERE {
+	{
+		SELECT ?component (SUM (?fact_amount) AS ?amount) WHERE {
+		  ?component a g0v:Component.
+		  ?fact a g0v:Fact; g0v:isPartOf ?component; g0v:amount ?fact_amount  
+		} GROUP BY ?component
+	}
+
+	?component g0v:concept ?account_subject.
+	?account_subject skos:prefLabel ?name ; skos:notation ?code .
+	
+	# find te best labels for top levele and secon level taxonomy concepts
+	OPTIONAL {?account_subject skos:broader/skos:broader/skos:prefLabel ?second_partition_label}
+	OPTIONAL {?account_subject skos:broader/skos:broader/skos:prefLabel ?second_partition_short_label}
+	BIND( COALESCE(?second_partition_short_label,?second_partition_label) AS ?best_second_partition_label)
+	
+	OPTIONAL {?account_subject skos:broader/skos:broader/skos:broader/skos:prefLabel ?top_partition_label}
+	OPTIONAL {?account_subject skos:broader/skos:broader/skos:broader/skos:altLabel ?top_partition_short_label}
+	BIND( COALESCE(?top_partition_short_label,?top_partition_label) AS ?best_top_partition_label)
+}
+
+;
+
+##
+## APPLICATION LEVEL AXIOM: inherit Account refPeriod and unit from children.
+##
+PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
+PREFIX : <urn:local:g0v:api:v1:>
+
+INSERT { ?component :unit ?unit; :refPeriod ?refPeriod} 
+WHERE {
+	?component a :Account.	
+	?fact a g0v:Fact; g0v:isPartOf ?component;
+		g0v:unit ?unit;
+		g0v:refPeriod ?refPeriod
+}
+;
+
+##
+## APPLICATION LEVEL AXIOM: attach Account History.
+##
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
+PREFIX : <urn:local:g0v:api:v1:>
+
+INSERT { ?component :hasHistoryRec ?history_rec } 
+WHERE {
+	?component a :Account; :refPeriod ?ref_period; g0v:concept/skos:closeMatch ?close_match.
+	?history_rec a :Account; :refPeriod ?history_ref_period ; g0v:concept ?close_match.
+  
+    FILTER( STR(?history_ref_period) < STR(?ref_period) )
+}
+
+;
+
+##
+## APPLICATION LEVEL AXIOM: compute the last_amount property for each Account.
+##
+PREFIX : <urn:local:g0v:api:v1:>
+
+INSERT { ?account :last_amount ?last_amount} 
+WHERE {  
+    
+    {
+		SELECT DISTINCT ?account  ?history_rec
+		WHERE {
+		  ?account a :Account; :hasHistoryRec ?history_rec .  
+		} ORDER BY DESC(?history_rec) LIMIT 1
+	}
+    
+  	?history_rec :amount ?last_amount.
+}
+
+##
+## APPLICATION LEVEL AXIOM: create an api accountTopPartition summary
+##
+
+PREFIX : <urn:local:g0v:api:v1:>
+INSERT {
+	?accountUriTopPartition a :AccountTopPartition ;
+       :amount ?amount;
+       :label ?top_partition_label;
+} WHERE {
+  	{
+		SELECT ?top_partition_label (SUM (?account_amount) AS ?amount)
+        WHERE {
+          ?accountUri a :Account;
+                        :amount ?account_amount;
+                        :topPartitionLabel ?top_partition_label;
+        } GROUP BY ?top_partition_label 
+	}
+  
+	BIND( UUID() AS ?accountUriTopPartition )
+}
+
+;
+
+##
+## APPLICATION LEVEL AXIOM: create an api accountSecondPartition
+##
+
+PREFIX : <urn:local:g0v:api:v1:>
+INSERT {
+	?accountUriSecondPartition a :AccountSecondPartition ;
+       :amount ?amount;
+       :label ?second_partition_label;
+} WHERE {
+  	{
+		SELECT ?second_partition_label (SUM (?account_amount) AS ?amount)
+        WHERE {
+          ?accountUri a :Account;
+                        :amount ?account_amount;
+                        :secondPartitionLabel ?second_partition_label;
+        }GROUP BY ?second_partition_label 
+	}
+  
+	BIND( UUID() AS ?accountUriSecondPartition )
+}
+
+	

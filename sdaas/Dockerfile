@@ -11,22 +11,18 @@ ENV KEES_DIR /kees
 ENV SD_LOCAL_BG_ENDPOINT http://localhost:8080/${BLAZEGRAPH_NAME}
 ENV PATH="/usr/local/bin/sdaas:${PATH}"
 
-ADD RWStore.properties $BLAZEGRAPH_RW_PATH
-ADD sdaas-bin /usr/local/bin/sdaas
-ADD boilerplate $KEES_DIR
+COPY RWStore.properties $BLAZEGRAPH_RW_PATH
+COPY sdaas-bin /usr/local/bin/sdaas
+COPY boilerplate $KEES_DIR
+COPY webapps/root ${JETTY_WEBAPPS}/root
 
 # load regular linux tools required by sdaas:
 # see https://wiki.alpinelinux.org/wiki/How_to_get_regular_stuff_working
 RUN apk --no-cache add sudo util-linux coreutils binutils findutils grep sed openssl bash unzip curl gawk raptor2 php7
-
-# load root webapp
-ADD webapps/root ${JETTY_WEBAPPS}/root
-
 RUN chown jetty:jetty $BLAZEGRAPH_RW_PATH
 
 # load and install blazegraph.war
 RUN wget -O ${JETTY_WEBAPPS}/${BLAZEGRAPH_NAME}.war $BLAZEGRAPH_VERSION_URL
-
 
 # These are based on recommendations from the OpenShift docs in
 # https://docs.openshift.org/latest/creating_images/guidelines.html#use-uid

@@ -8,17 +8,17 @@ WHERE {
     ?account a :Account;
                :code ?code;
                :name ?name;
-          :amount ?amount;
+               :amount ?amount;
                :topPartitionLabel ?top_partition_label;
                :secondPartitionLabel ?second_partition_label.
                
+   OPTIONAL {
+   		?account :hasHistoryRec ?history_rec.
+   		?history_rec :refPeriod/time:hasBeginning/interval:ordinalYear ?year;
+   			:amount ?history_amount
+   }          
                
-   OPTIONAL { 
-      ?account_record a :AccountRecord;
-            :code ?code;
-                :year/time:hasBeginning/interval:ordinalYear ?year.
-    }
-    OPTIONAL {?account :last_amount ?last_amount}
+   OPTIONAL {?account :last_amount ?last_amount}
   
-  FILTER (?code = "A1.02.0012.0001") 
-}ORDER BY DESC(?year)
+   FILTER (?account = <urn:mef:taxonomy:spending:2018:azione_A10200120001_component>) 
+} ORDER BY DESC(?year)

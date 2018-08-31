@@ -15,211 +15,114 @@
 @prefix interval: <http://reference.data.gov.uk/def/intervals/> .
 @prefix sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#> .
 @prefix sdmx-dimension: <http://purl.org/linked-data/sdmx/2009/dimension#> .
-@base <http://data.budget.g0v.it/g0v-budget/v1#> .
+@base <http://data.budget.g0v.it/g0v-budget/v1> .
 
 <http://data.budget.g0v.it/g0v-budget/v1> rdf:type owl:Ontology ;
-                                          
-                                          rdfs:label "g0v-budget Ontology"@en ;
-                                          
-                                          dc:creator "Enrico Fagnoni enrico@linkeddata.center"@en ;
-                                          
-                                          dc:title "The g0v-budget vocabulary for knowledge  base management"@en ;
-                                          
-                                          owl:versionInfo "V 1.0.0 Release 2018-08-19" ;
-                                          
-                                          dc:rights "The g0v-budget ontology is available under the Creative Commons Attribution 3.0 Unported license; see http://creativecommons.org/licenses/by/3.0/. In a nutshell, you are free to copy, distribute and transmit the work; to remix/adapt the work (e.g. to import the ontology and create specializations of its elements), as long as you attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work). Proper Attribution: Simply include the statement \"This work is based on the g0v-budget ontology, developed by Enrico Fagnoni\" and link back to http://linkeddata.center/"@en ;
-                                          
-                                          dc:subject "g0v-budget Ontology."@en ;
-                                          
-                                          dc:description """g0v-budget ontology describes some classes used in g0v-ap application profile. g0v-ap is used to
-	model government budget data for http://budget.g0v.it/ application."""@en ;
-                                          
-                                          dct:license <http://creativecommons.org/licenses/by/4.0/> ;
-                                          
-                                          foaf:homepage <http://data.budget.g0v.it/g0v-budget> ;
-                                          
-                                          rdfs:seeAlso <https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=g0v-uml-diagram#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fe-artspace.com%2Fuc%3Fid%3D1Qa_zoF1Nl8ULUg9uChN-OH3ep2Lta4PY%26export%3Ddownload> .
-
+                                           dct:license <http://creativecommons.org/licenses/by/4.0/> ;
+                                           dc:description "g0v-budget ontology describes some classes used in g0v-ap application profile. g0v-ap is used to model government budget data for http://budget.g0v.it/ application. it is inspired to the \"Knowledge Exchange Engine Schema\" [http://linkedddata.center/kees] and from  the \"Financial Report Semantics and Dynamics Theory\" paper [http://xbrlsite.azurewebsites.net/2016/Library/Theory-2017-06-26.pdf] by Charles Hoffman and  Raynier van Egmond, M.Sc"@en ;
+                                           rdfs:label "g0v-budget Ontology"@en ;
+                                           rdfs:seeAlso <https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=g0v-uml-diagram#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fe-artspace.com%2Fuc%3Fid%3D1Qa_zoF1Nl8ULUg9uChN-OH3ep2Lta4PY%26export%3Ddownload> ;
+                                           dc:title "The g0v-budget vocabulary for knowledge  base management"@en ;
+                                           dc:subject "g0v-budget Ontology."@en ;
+                                           dc:rights "The g0v-budget ontology is available under the Creative Commons Attribution 3.0 Unported license; see http://creativecommons.org/licenses/by/3.0/. In a nutshell, you are free to copy, distribute and transmit the work; to remix/adapt the work (e.g. to import the ontology and create specializations of its elements), as long as you attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work). Proper Attribution: Simply include the statement \"This work is based on the g0v-budget ontology, developed by Enrico Fagnoni\" and link back to http://linkeddata.center/"@en ;
+                                           dc:creator "Enrico Fagnoni enrico@linkeddata.center"@en ;
+                                           owl:versionInfo "V 1.0.0 Release 2018-08-19" ;
+                                           foaf:homepage <http://data.budget.g0v.it/g0v-budget> .
 
 #################################################################
-#
 #    Annotation properties
-#
 #################################################################
-
 
 ###  http://purl.org/dc/elements/1.1/contributor
-
 dc:contributor rdf:type owl:AnnotationProperty .
 
 
-
 ###  http://purl.org/dc/elements/1.1/creator
-
 dc:creator rdf:type owl:AnnotationProperty .
 
 
-
 ###  http://purl.org/dc/elements/1.1/description
-
 dc:description rdf:type owl:AnnotationProperty .
 
 
-
 ###  http://purl.org/dc/elements/1.1/modifed
-
 dc:modifed rdf:type owl:AnnotationProperty .
 
 
-
 ###  http://purl.org/dc/elements/1.1/rights
-
 dc:rights rdf:type owl:AnnotationProperty .
 
 
-
 ###  http://purl.org/dc/elements/1.1/subject
-
 dc:subject rdf:type owl:AnnotationProperty .
 
 
-
 ###  http://purl.org/dc/elements/1.1/title
-
 dc:title rdf:type owl:AnnotationProperty .
 
 
-
 ###  http://purl.org/dc/terms/license
-
 dct:license rdf:type owl:AnnotationProperty .
 
 
-
 ###  http://www.w3.org/2002/07/owl#deprecated
-
 owl:deprecated rdf:type owl:AnnotationProperty .
 
 
-
 ###  http://xmlns.com/foaf/0.1/homepage
-
 foaf:homepage rdf:type owl:AnnotationProperty .
 
 
-
-
-
 #################################################################
-#
 #    Data properties
-#
 #################################################################
-
 
 ###  http://data.budget.g0v.it/g0v-budget/v1#obsValue
-
 :obsValue rdf:type owl:DatatypeProperty ,
                    owl:FunctionalProperty ;
-          
-          rdfs:domain :Account ;
-          
+          rdfs:domain :Fact ;
           rdfs:range xsd:decimal .
 
 
-
-
-
 #################################################################
-#
 #    Classes
-#
 #################################################################
 
-
-###  http://data.budget.g0v.it/g0v-budget/v1#Account
-
-:Account rdf:type owl:Class ;
-         
-         rdfs:subClassOf qb:Observation ;
-         
-         rdfs:comment "An observation of a money amount related to a government budget or finatial report"@en .
+###  http://data.budget.g0v.it/g0v-budget/v1#Component
+:Component rdf:type owl:Class ;
+           rdfs:comment """a set of facts which go together (tend to be cohesive and share a certain
+common nature) for some specific purpose within a financial report"""@en ;
+           rdfs:label "Component"@en .
 
 
-
-###  http://data.budget.g0v.it/g0v-budget/v1#Budget
-
-:Budget rdf:type owl:Class ;
-        
-        rdfs:subClassOf :Account ;
-        
-        rdfs:comment "An observed forecast amount on a n account"@en .
-
-
-
-###  http://data.budget.g0v.it/g0v-budget/v1#BudgetTaxonomy
-
-:BudgetTaxonomy rdf:type owl:Class ;
-                
-                rdfs:subClassOf skos:ConceptScheme .
+###  http://data.budget.g0v.it/g0v-budget/v1#Fact
+:Fact rdf:type owl:Class ;
+      rdfs:subClassOf qb:Observation ;
+      rdfs:comment """An observation of a money amount related to a government budget or finatial report. It define a Fact with its characteristic. 
+A fact is reported. A fact defines a single, observable, reportable piece of information contained within a financial report, or fact value, contextualized for unambiguous interpretation or analysis by one or more distinguishing characteristics (properties of the fact). A fact value is one property of a fact.
+Every fact has exactly one fact value.
+Facts never exist on their own; they are always organized into components."""@en ;
+      rdfs:label "Fact"@en .
 
 
-
-###  http://data.budget.g0v.it/g0v-budget/v1#Dataset
-
-:Dataset rdf:type owl:Class ;
-         
-         rdfs:label "Dataset"@en ;
-         
-         rdfs:subClassOf qb:Dataset ,
-                         dcat:Dataset ;
-         
-         rdfs:comment "A budget datasource document containing  goverment budget related  data."@en .
-
-
-
-###  http://data.budget.g0v.it/g0v-budget/v1#Record
-
-:Record rdf:type owl:Class ;
-        
-        rdfs:subClassOf :Account ;
-        
-        rdfs:comment "A record of and historic value regarding an account"@en .
-
-
-
-###  http://data.budget.g0v.it/g0v-budget/v1#RecordTaxonomy
-
-:RecordTaxonomy rdf:type owl:Class ;
-                
-                rdfs:subClassOf skos:ConceptScheme .
-
+###  http://data.budget.g0v.it/g0v-budget/v1#FinacialReport
+:FinacialReport rdf:type owl:Class ;
+                rdfs:subClassOf qb:Dataset ,
+                                dcat:Dataset ;
+                rdfs:comment "A budget datasource document containing  goverment budget related  data."@en ;
+                rdfs:label "Dataset"@en .
 
 
 ###  http://purl.org/linked-data/cube#Dataset
-
 qb:Dataset rdf:type owl:Class .
 
 
-
 ###  http://purl.org/linked-data/cube#Observation
-
 qb:Observation rdf:type owl:Class .
 
 
-
-###  http://www.w3.org/2004/02/skos/core#ConceptScheme
-
-skos:ConceptScheme rdf:type owl:Class .
-
-
-
 ###  http://www.w3.org/ns/dcat#Dataset
-
 dcat:Dataset rdf:type owl:Class .
 
 
-
-
-###  Generated by the OWL API (version 3.5.1) http://owlapi.sourceforge.net
-
+###  Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi

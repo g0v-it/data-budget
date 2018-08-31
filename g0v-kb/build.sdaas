@@ -7,7 +7,7 @@ GRAPH="urn:local:g0v:budget:it:graph:"
 ####################################################
 SD_LOG  "Starting booting window: clean and configure knowledge base..."
 ####################################################
-SD_LOAD_RDF_FILE urn:sdaas:config "kees.ttl"
+SD_LOAD_RDF_FILE urn:sdaas:config "data/kees.ttl"
 
 ####################################################
 SD_LOG  "Starting learning window: loading facts. This will take a while..."

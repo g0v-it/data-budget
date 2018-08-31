@@ -5,4 +5,4 @@ WHERE {
   ?accountUri a :AccountTopPartition;
                 :amount ?amount;
                 :label ?top_partition;
-}ORDER BY DESC(?amount)
+} ORDER BY DESC(?amount)

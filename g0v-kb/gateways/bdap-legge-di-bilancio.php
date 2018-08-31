@@ -1,4 +1,8 @@
 <?php
+/**
+ * Gateway per trasformare  le leggi di bilancio emesse dal 2018 su BDAP
+ * da  formato csv a rdf g0v-ap
+ **/
 //dataset-afcec986-9a57-4eae-abfa-543a4f043c5e
 if(!isset($argv[1])){
     echo "You need to provide the dataset id";
@@ -33,7 +37,6 @@ printf('@prefix g0v: <http://data.budget.g0v.it/g0v-budget/v1#> .
 @prefix sdmx-dimension:  <http://purl.org/linked-data/sdmx/2009/dimension#> .
 @prefix sdmx-measure:    <http://purl.org/linked-data/sdmx/2009/measure#> . 
 @prefix sdmx-attribute:  <http://purl.org/linked-data/sdmx/2009/attribute#> .
-@prefix rdfs: <urn:g0v:budget:example:resource:>.
 ');
 
 //TAXONOMY
