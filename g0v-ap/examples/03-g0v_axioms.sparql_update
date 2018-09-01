@@ -1,4 +1,3 @@
-
 ##
 ## Load external referenced Linked data
 ##
@@ -6,36 +5,10 @@ LOAD <http://reference.data.gov.uk/id/gregorian-interval/2018-01-01T00:00:00/P1Y
 LOAD <http://reference.data.gov.uk/id/gregorian-interval/2017-01-01T00:00:00/P1Y> ;
 LOAD <http://dbpedia.org/data/Euro.n3> INTO GRAPH <http://dbpedia.org/> ;
 
-##
-## AXIOM: create match between account budget concepts and account record concepts
-##
-
-PREFIX skos:     <http://www.w3.org/2004/02/skos/core#>
-PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
-
-INSERT { 
-	?concept skos:closeMatch ?close_concept
-} WHERE {  
-	?concept a skos:Concept; 
-		skos:notation ?code; 
-		skos:inScheme ?scheme.
-	
-	?close_concept a skos:Concept; 
-		skos:notation ?code;
-		skos:inScheme ?other_scheme.
-	
-	FILTER(?concept != ?close_concept )
-	FILTER(?scheme != ?other_scheme )
-	FILTER NOT EXISTS {?concept skos:closeMatch ?close_concept}
-}
-
-;
-
 
 ##
 ## AXIOM: inherit the reference period attribute in Fact, if missing
 ##
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
 PREFIX qb: <http://purl.org/linked-data/cube#>
 
@@ -52,7 +25,6 @@ WHERE {
 ##
 ## AXIOM: inherit the unit attribute in Fact, if missing
 ##
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
 PREFIX qb: <http://purl.org/linked-data/cube#>
 
@@ -64,7 +36,6 @@ WHERE {
 }
 
 ;
-
 
 ##
 ## AXIOM: Create a component that aggregates facts from the taxonomy

@@ -1,0 +1,13 @@
+##
+## SKOS AXIOM: infer top concepts
+##
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+CONSTRUCT { ?scheme skos:hasTopConcept ?concept}
+WHERE {  
+	?concept a skos:Concept; 
+		skos:inScheme ?scheme.
+
+	FILTER NOT EXISTS {?concept skos:broader []}
+	FILTER NOT EXISTS {?scheme skos:hasTopConcept ?concept}
+}

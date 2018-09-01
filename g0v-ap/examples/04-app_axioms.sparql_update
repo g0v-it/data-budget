@@ -1,5 +1,5 @@
 ##
-## APPLICATION LEVEL AXIOM: generate type and main property for the lowest level of component.
+## APPLICATION LEVEL AXIOM: generate type and main application property for the lowest level of component.
 ##
 PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
@@ -35,23 +35,62 @@ INSERT {
 
 ;
 
+
+
 ##
-## APPLICATION LEVEL AXIOM: inherit Account refPeriod and unit from children.
+## APPLICATION LEVEL AXIOM: inherit Account refPeriod, unit and dataset from children.
 ##
 PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
+PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX : <urn:local:g0v:api:v1:>
 
-INSERT { ?component :unit ?unit; :refPeriod ?refPeriod} 
+INSERT { ?component :unit ?unit; :refPeriod ?ref_period; :dataSet ?dataset} 
 WHERE {
 	?component a :Account.	
-	?fact a g0v:Fact; g0v:isPartOf ?component;
+	?fact a g0v:Fact; 
+		g0v:isPartOf ?component;
 		g0v:unit ?unit;
-		g0v:refPeriod ?refPeriod
+		g0v:refPeriod ?ref_period;
+		qb:dataSet ?dataset
 }
+
 ;
 
 ##
-## APPLICATION LEVEL AXIOM: attach Account History.
+## APPLICATION LEVEL AXIOM: election of the most updated dataset.
+##
+PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX : <urn:local:g0v:api:v1:>
+
+INSERT { ?dataset a :ReferenceDataset} 
+WHERE {
+	{
+		SELECT  ?dataset WHERE {
+			?component a :Account; :dataSet ?dataset.
+			?dataset g0v:refPeriod ?ref_period;
+		} ORDER BY DESC(?ref_period) LIMIT 1
+	}
+	FILTER NOT EXISTS { ?dataset a :ReferenceDataset }
+}
+
+;
+##
+## APPLICATION LEVEL AXIOM: election of the all ReferenceAccount.
+##
+PREFIX : <urn:local:g0v:api:v1:>
+
+INSERT { ?account a :ReferenceAccount} 
+WHERE {
+	?account a :Account; :dataSet ?dataset.
+	?dataset a :ReferenceDataset;
+}
+
+;
+
+
+##
+## APPLICATION LEVEL AXIOM: attach Account History to all reference accounts
 ##
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
@@ -59,8 +98,12 @@ PREFIX : <urn:local:g0v:api:v1:>
 
 INSERT { ?component :hasHistoryRec ?history_rec } 
 WHERE {
-	?component a :Account; :refPeriod ?ref_period; g0v:concept/skos:closeMatch ?close_match.
+	?component a :ReferenceAccount; 
+		:dataSet ?dataset;
+		:refPeriod ?ref_period; 
+		g0v:concept/skos:closeMatch ?close_match.
 	?history_rec a :Account; :refPeriod ?history_ref_period ; g0v:concept ?close_match.
+	?dataset a :ReferenceDataset.
   
     FILTER( STR(?history_ref_period) < STR(?ref_period) )
 }
@@ -68,7 +111,7 @@ WHERE {
 ;
 
 ##
-## APPLICATION LEVEL AXIOM: compute the last_amount property for each Account.
+## APPLICATION LEVEL AXIOM: compute the last_amount property for each Reference Account.
 ##
 PREFIX : <urn:local:g0v:api:v1:>
 
@@ -78,12 +121,14 @@ WHERE {
     {
 		SELECT DISTINCT ?account  ?history_rec
 		WHERE {
-		  ?account a :Account; :hasHistoryRec ?history_rec .  
+		  ?account a :ReferenceAccount; :hasHistoryRec ?history_rec .  
 		} ORDER BY DESC(?history_rec) LIMIT 1
 	}
     
   	?history_rec :amount ?last_amount.
 }
+
+;
 
 ##
 ## APPLICATION LEVEL AXIOM: create an api accountTopPartition summary

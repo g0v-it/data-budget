@@ -13,3 +13,13 @@ services:
       - ./apis:/usr/src/app
     ports:
       - "8080:80"
+  lodview:
+    build: ./lodview
+    volumes:
+      - ./lodview/conf.ttl:/LodView/src/main/webapp/WEB-INF/
+    ports:
+      - "8082:8080"
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"

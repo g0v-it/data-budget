@@ -16,6 +16,11 @@
     sd:endpoint <http://data.budget.g0v.it:9999/sdaas/sparql> ;
 .
 
+resource:welcome
+	dct:title "Welcome to budget.g0v.it linked data interface"@en; 
+	dct:description "Navigate to the knowledge base resouces."@en;
+	rdfs:comment "power by LinkedData.Center SDaaS platform and g0v-ap ontology"@en
+.
 
 #######################################################
 # Config facts

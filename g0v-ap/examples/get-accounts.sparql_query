@@ -3,7 +3,7 @@ PREFIX : <urn:local:g0v:api:v1:>
 SELECT DISTINCT ?code ?name ?amount ?last_amount ?top_partition_label ?second_partition_label
 WHERE {
 
-	?s a :Account.
+	?s a :ReferenceAccount.
 	OPTIONAL { ?s :code ?code}
 	OPTIONAL { ?s :name ?name}
 	OPTIONAL { ?s :amount ?amount }

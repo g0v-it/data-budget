@@ -88,6 +88,7 @@ docker run --name blazegraph -d -p 9999:8080 lyrasis/blazegraph:2.1.4
 
 1. Connect to the blazegraph workbench SPARQL update tab pointing the browser to http://localhost:9999/bigdata/#update
 2. Load example_data.ttl in a RDF triple store that support SPARQL Query and SPARQL Update.
-3. Execute g0v_axioms.sparql_update to load external data and create maps between taxonomies
+2. Execute skos_axioms.sparql_update create maps between taxonomies and other base skos rules
+3. Execute g0v_axioms.sparql_update to load external data and create low level components
 4. Execute app_axioms.sparql_update to generate application level data (e.g. budget amount aggregations)
 5. Try SPARQL queries

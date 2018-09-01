@@ -1,0 +1,19 @@
+##
+## SKOS AXIOM: map close concepts
+##
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+CONSTRUCT { ?concept skos:closeMatch ?close_concept }
+WHERE {  
+	?concept a skos:Concept; 
+		skos:notation ?code; 
+		skos:inScheme ?scheme.
+	
+	?close_concept a skos:Concept; 
+		skos:notation ?code;
+		skos:inScheme ?other_scheme.
+	
+	FILTER(?concept != ?close_concept )
+	FILTER(?scheme != ?other_scheme )
+	FILTER NOT EXISTS {?concept skos:closeMatch ?close_concept}
+}

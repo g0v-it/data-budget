@@ -34,9 +34,6 @@ printf('@prefix g0v: <http://data.budget.g0v.it/g0v-budget/v1#> .
 @prefix interval: <http://reference.data.gov.uk/def/intervals/> . 
 @prefix qb:       <http://purl.org/linked-data/cube#> . 
 @prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix sdmx-dimension:  <http://purl.org/linked-data/sdmx/2009/dimension#> .
-@prefix sdmx-measure:    <http://purl.org/linked-data/sdmx/2009/measure#> . 
-@prefix sdmx-attribute:  <http://purl.org/linked-data/sdmx/2009/attribute#> .
 ');
 
 //TAXONOMY

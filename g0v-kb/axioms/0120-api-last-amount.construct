@@ -1,0 +1,17 @@
+##
+## APPLICATION LEVEL AXIOM: compute the last_amount property for each Reference Account.
+##
+PREFIX : <urn:local:g0v:api:v1:>
+
+CONSTRUCT { ?account :last_amount ?last_amount} 
+WHERE {  
+    
+    {
+		SELECT DISTINCT ?account  ?history_rec
+		WHERE {
+		  ?account a :ReferenceAccount; :hasHistoryRec ?history_rec .  
+		} ORDER BY DESC(?history_rec) LIMIT 1
+	}
+    
+  	?history_rec :amount ?last_amount.
+}

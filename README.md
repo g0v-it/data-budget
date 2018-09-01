@@ -13,16 +13,18 @@ This project aims to create a general smart data management platform to feed a b
 
 ## Components
 
-The project contains four logical components:
+The project contains following logical components:
 
 - the **g0v-ap** ontology designed to describe a budget data with an application profile of the [W3C RDF Data Cube Vocabulary](https://www.w3.org/TR/vocab-data-cube). Find files and documentation in [g0v-ap directory](g0v-ap/README.md)
-- **sdaas**: (smart data as a service) a data management platform providing a RDF store, a [SPARQL endpoint](https://www.w3.org/TR/sparql11-overview) and a data ingestion engine. See files and docs in [sdaas directory](sdaas/README.md)
+- **sdaas**: (smart data as a service) a data management platform core providing a RDF store, a [SPARQL endpoint](https://www.w3.org/TR/sparql11-overview) and a data ingestion engine. See files and docs in [sdaas directory](sdaas/README.md)
 -**gov-kb**: a datalake, a set of gateways to transform raw government budget data into linked data according with g0v-ap ontology and a build script that drives the sdaas ingestion engine to populate the RDF store.
-- a set of **APIs** that query the SPARQL endpoint and produce json data with a schema suitable to be used with the [vue-budget component project](). See files and docs in [apis directory](apis/README.md)
+- a set of **apis** that query the SPARQL endpoint and produce json data with a schema suitable to be used with the [vue-budget component project](). See files and docs in [apis directory](apis/README.md)
+- a n installation of **lodview** to navigate the knowledge base
+- a web **frontend** that provides the platform home page and the redirect/proxy to the containers'services
  
 [This picture](https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=g0v-data-architecture.html#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fe-artspace.com%2Fuc%3Fid%3D1Q2VSl5IL_K1qByiSzGDffSXiVbSRA1zl%26export%3Ddownload) shows the components interactions.
 
-The deploy of g0v-data requires a [stack of two docker containers](https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=g0v-data-stack.html#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fe-artspace.com%2Fuc%3Fid%3D1FEItM1NOMCzj03GxkXc_EE5SLnJ-oF_R%26export%3Ddownload), one for running the data management platform and one for running the APIs server.
+The deploy of g0v-data requires a [stack of four docker containers + a volume for data persistency ](https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=g0v-data-stack.html#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fe-artspace.com%2Fuc%3Fid%3D1FEItM1NOMCzj03GxkXc_EE5SLnJ-oF_R%26export%3Ddownload), one for running the data management platform and one for running the APIs server.
 
 
 ## Quickstart
@@ -37,11 +39,18 @@ docker-compose up -d
 docker exec "$(basename $PWD)_sdaas_1" sdaas -f build.sdaas --reboot
 ```
 
-The data management platform entry point is located at http://localhost:9999/ try http://localhost:9999/sdaas/#explore:kb:urn:sdaas:config:kb
+### development endpoints:
 
-**WARNING**: the 9999 port must be disabled in production environment to prevent security issues.
+- The data management platform entry point is located at http://localhost:9999/ try http://localhost:9999/sdaas/#explore:kb:urn:sdaas:config:kb
+- The api endpoint is located at http://localhost:8080/ try http://localhost:8080/accounts
+- The lodview endpoint is located at http://localhost:8082/ try http://localhost:8080/accounts
 
-The api endpoint is located at http://localhost:8080/ try http://localhost:8080/accounts
+**WARNING**: all development port must be disabled in production environment to prevent security issues.
+
+
+### frontend endpoint:
+
+- http://localhost:8081/ the platform home page
 
 
 ## Support
@@ -51,10 +60,12 @@ For answers you may not find in here or in the Wiki, avoid posting issues. Feel 
 ## Credits
 
 - the RDF datastore and the SPARQL endpoint is based on the [Blazegraph community edition](https://www.blazegraph.com/)
-- the gov-ap ontology and the smart data management platform was developed by Enrico Fagnoni (enrico at LinkedData.Center) using the SDaaS platform by [LinkedData.Center](http://LinkedData.Center/)
-- API server and gateways was developed by Yassine Ouahidi (yass.ouahidi at gmail.com ) from [DataChef](http://DataChef.Cloud)
+- the gov-ap ontology and the smart data management platform was developed by [Enrico Fagnoni] (https://github.com/ecow) using the [SDaaS platform by LinkedData.Center](http://LinkedData.Center/)
+- API server and gateways was developed by [Yassine Ouahidi](https://github.com/YassineOuahidi)
+- [LOD-VIEW](http://lodview.it/) was developed by [Diego Valerio Camarda](https://www.linkedin.com/in/dvcama) and [Alessandro Antonuccio](http://hstudio.it/).
 
 Thanks to all project contributors, to the [Copernicani community](https://copernicani.it/) and to the [g0v asia community](http://g0v.asia) for ideas and support.
+
 
 ## License
 

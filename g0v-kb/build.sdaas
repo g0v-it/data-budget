@@ -21,24 +21,21 @@ SD_LOAD_RDF_FILE  "${GRAPH}dbpedia" "datalake/lod/eur.ttl"
 SD_LOAD_RDF_FILE  "${GRAPH}dbpedia" "datalake/lod/usd.ttl"
 SD_LOAD_RDF_FILE  "${GRAPH}dbpedia" "datalake/lod/gbp.ttl"
 
-SD_LEARN "$GRAPH/budgets_2018" "datalake/download/2018---Legge-di-Bilancio-Pubblicata-Elaborabile-Spese-Capitolo.csv" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' - |php7 gateways/bdap-legge-di-bilancio.php legge_bilancio_2018"
+SD_LEARN "${GRAPH}budgets_2018" "datalake/download/2018---Legge-di-Bilancio-Pubblicata-Elaborabile-Spese-Capitolo.csv" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' - |php7 gateways/bdap-legge-di-bilancio.php legge_bilancio_2018"
 
 # Caricamento dati storici dal 2017 al 2013. N.B. nel 2017 il formato del riepilogo è cambiato
-SD_LEARN "$GRAPH/records_2017" "datalake/download/2017---Rendiconto-Pubblicato-Elaborabile-Spese-Capitolo.csv" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' -|php7 gateways/bdap-rendiconto.php rendiconto_2017"
-for year in 2013 2014 2015 2016; do
-   SD_LEARN "$GRAPH/records_${year}" "datalake/download/${year}---Rendiconto-Pubblicato-Elaborabile-Spese-Capitolo.csv" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' -|php7 gateways/bdap-rendiconto-special.php rendiconto_${year}"
-done
+SD_LEARN "${GRAPH}records_2017" "datalake/download/2017---Rendiconto-Pubblicato-Elaborabile-Spese-Capitolo.csv" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' -|php7 gateways/bdap-rendiconto.php rendiconto_2017"
+
+#for year in 2013 2014 2015 2016; do
+#   SD_LEARN "${GRAPH}records_${year}" "datalake/download/${year}---Rendiconto-Pubblicato-Elaborabile-Spese-Capitolo.csv" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' -|php7 gateways/bdap-rendiconto-special.php rendiconto_${year}"
+#done
 
 ####################################################
 SD_LOG  "Starting reasoning window: computing axioms and rules..."
 ####################################################
-SD_REASONING_BY SD_EVAL_CONSTRUCTOR "$GRAPH/close_match" @axioms/close_match.construct
-SD_REASONING_BY SD_EVAL_CONSTRUCTOR "$GRAPH/create_accounts" @axioms/create_accounts.construct
-SD_REASONING_BY SD_EVAL_CONSTRUCTOR "$GRAPH/create_account_records" @axioms/create_account_records.construct
-SD_REASONING_BY SD_EVAL_CONSTRUCTOR "$GRAPH/top_partition" @axioms/top_partition.construct
-SD_REASONING_BY SD_EVAL_CONSTRUCTOR "$GRAPH/second_partition" @axioms/second_partition.construct
-SD_REASONING_BY SD_EVAL_CONSTRUCTOR "$GRAPH/last_amount" @axioms/last_amount.construct
-
-
+for axiomFile in $(ls -v axioms/*construct); do
+	axiomGraph=$(basename $axiomFile)
+	SD_REASONING_BY SD_EVAL_CONSTRUCTOR "${GRAPH}${axiomGraph}" @$axiomFile
+done
 
 SD_THATS_ALL_FOLKS
