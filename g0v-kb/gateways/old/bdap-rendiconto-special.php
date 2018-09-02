@@ -25,7 +25,7 @@ $match = array(
     $b => 36
 );
 //PREFIXES
-printf('@prefix g0v: <http://data.budget.g0v.it/g0v-budget/v1#> .
+printf('@prefix g0v: <http://data.budget.g0v.it/g0v-ap/v1#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> . 
 @prefix skos:     <http://www.w3.org/2004/02/skos/core#> . 
 @prefix dcat:      <http://www.w3.org/ns/dcat#> . 

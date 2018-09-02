@@ -2,7 +2,7 @@
 ## AXIOM: Create a component that aggregates facts from the taxonomy
 ##
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
+PREFIX g0v: <http://data.budget.g0v.it/g0v-ap/v1#>
 
 CONSTRUCT { 
 	?component a g0v:Component ;

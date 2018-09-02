@@ -25,14 +25,23 @@ class Helper {
             "MINISTERO DELL'ISTRUZIONE, DELL'UNIVERSITA' E DELLA RICERCA" => "Istruzione",
             "MINISTERO DELLO SVILUPPO ECONOMICO" => "Sviluppo Economico"
         );
-        return $arrayMinisteri[$label] ? $arrayMinisteri[$label] : $label;
+        return isset($arrayMinisteri[$label]) ? $arrayMinisteri[$label] : strtolower($label);
     }
 
+    /**
+     * questa funzione genera un codice univoco a partire da una stringa
+     * numeri, spazi, segni di interpunzione e vocali sono rimossi
+     * la stringa viene convertita in maiuscolo, 
+     * solo i rimanenti caratteri alfabetici sono significativi.
+     * 
+     * La funzione viene computta per estrarre un identificatvo d auna descrizione testuale
+     */
     public static function getUri($string){
         $string = strtoupper($string);
         $string = preg_replace('/\s+/', '', $string);
-        $string = preg_replace('/[^A-Za-z0-9]/', '', $string);
-        $uri = md5($string);
+        $string = preg_replace('/[^A-Z]/', '', $string);
+        $string = preg_replace('/[AEIOU]/', '', $string);
+        $uri = CRC32($string);
         return $uri;
     }
 

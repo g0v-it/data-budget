@@ -5,21 +5,31 @@
 @prefix kees: <http://linkeddata.center/kees/v1#> .
 @prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
 @prefix dct: <http://purl.org/dc/terms/> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix sdaas: <http://linkeddata.center/sdaas/v1#> .
-@prefix graph: <urn:local:g0v:budget:it:graph:> .
+@prefix void: <http://rdfs.org/ns/void#> .
 @prefix resource: <http://data.budget.g0v.it/resource/> .
 	
-<urn:sdaas:config:kb> a kees:KnowledgeBase;
-	dct:title "Italian government budget knowledge"@en;
-	dct:description "The knowledge base about budget and historical data for Italian government."@en ;
+resource:welcome a kees:KnowledgeBase;
     sd:endpoint <http://data.budget.g0v.it:9999/sdaas/sparql> ;
+	dct:title "Welcome to budget.g0v.it knowledge base service"@en; 
+	dct:description "This knowledge base serve information about the Italian government budget expressed in RDF with the gov-ap ontology."@en;
+    sd:supportedLanguage sd:SPARQL11Query, sd:SPARQL11Update ;
+    sd:inputFormat <http://www.w3.org/ns/formats/RDF_XML>, <http://www.w3.org/ns/formats/Turtle> ;
+    sd:resultFormat <http://www.w3.org/ns/formats/RDF_XML>, <http://www.w3.org/ns/formats/Turtle> ;
+    sd:defaultEntailmentRegime <http://www.w3.org/ns/entailment/Simple> ;
+    sd:feature 
+    	sd:DereferencesURIs,
+    	sd:UnionDefaultGraph ;
+	rdfs:comment "power by LinkedData.Center SDaaS platform and g0v-ap ontology"@en;
+	sd:defaultDataset resource:dataset_description;
 .
-
-resource:welcome
-	dct:title "Welcome to budget.g0v.it linked data interface"@en; 
-	dct:description "Navigate to the knowledge base resouces."@en;
-	rdfs:comment "power by LinkedData.Center SDaaS platform and g0v-ap ontology"@en
+resource:dataset_description a sd:Dataset ;
+ 	void:exampleResource 
+		resource:legge_bilancio_2018,
+		resource:legge_bilancio_2018_schema,
+		resource:rendiconto_2017,
+		resource:rendiconto_2017_schema;
+	void:uriSpace "http://data.budget.g0v.it/resource/";
+	void:vocabulary <http://data.budget.g0v.it/g0v-ap/v1>
 .
 
 #######################################################
@@ -28,97 +38,3 @@ resource:welcome
 resource:graph_kees a kees:KBConfigGraph ;
 	sd:name <urn:sdaas:config> ;
 	dct:source <data/kees.ttl>.
-
-#######################################################
-# Learned facts
-#######################################################
-
-
-resource:catalog_graph a kees:LinkedDataGraph;
-	dct:title "catalogo dataset"@it;
-	dct:description "Named graph contenente il catalogo dei dataset utilizzati"@it ;
-	sd:name graph:catalog  .
-	
-resource:intervals_graph a kees:LinkedDataGraph ;
-	dct:title "periodi di riferimento"@it;
-	dct:description "Named graph contenente gli intervalli temporali definti da http://reference.data.gov.uk/"@it ;
-	sd:name graph:intervals .	
-	
-resource:dbpedia_graph a kees:LinkedDataGraph ;
-	dct:title "risorse estratte da dbpedia"@it;
-	dct:description "Named graph contenente le unità di misura, valute e altre risorse definte da http://dbpedia.org/"@it ;
-	sd:name graph:dbpedia .
-
-resource:budgets_2018_graph a kees:LinkedDataGraph;
-	dct:title "budget 2018"@it;
-	dct:description "budget e tassonomia  capitoli di spesa anno 2018"@it ;
-	sd:name graph:budgets_2018 .
-
-resource:records_2017_graph a kees:LinkedDataGraph;
-	dct:title "bilancio 2017"@it;
-	dct:description "Named graph contenente il bilancio consolidato e tassonomia  capitoli di spesa anno 2017"@it ;
-	sd:name graph:records_2017 .
-
-resource:records_2016_graph a kees:LinkedDataGraph;
-	dct:title "bilancio 2016"@it;
-	dct:description "Named graph contenente il bilancio consolidato e tassonomia  capitoli di spesa anno 2016"@it ;
-	sd:name graph:records_2016 .
-
-resource:records_2015_graph a kees:LinkedDataGraph;
-	dct:title "bilancio 2015"@it;
-	dct:description "Named graph contenente il bilancio consolidato e tassonomia  capitoli di spesa anno 2015"@it ;
-	sd:name graph:records_2015 .
-
-resource:records_2014_graph a kees:LinkedDataGraph;
-	dct:title "bilancio 2014"@it;
-	dct:description "bilancio consolidato e tassonomia  capitoli di spesa anno 2014"@it ;
-	sd:name graph:records_2014 .
-
-resource:records_2013_graph a kees:LinkedDataGraph;
-	dct:title "bilancio 2013"@it;
-	dct:description "Named graph contenente il bilancio consolidato e tassonomia  capitoli di spesa anno 2013"@it ;
-	sd:name graph:records_2013 .
-
-
-#######################################################
-#  Axioms 
-#######################################################	
-
-resource:close_match_graph a kees:InferredKnowledgeGraph ;
-	dct:title "mapping tra tassonomie di bilancio"@it;
-	dct:description "Regola che genera il mapping tra edizioni diverse di tassonomia di bilancio"@it ;
-	sd:name graph:close_match .
-	
-resource:create_accounts_graph a kees:InferredKnowledgeGraph ;
-	dct:title "creazione di un account per ogni azione"@it;
-	dct:description "Regola che crea degli account relative alle azioni consolidando il budget dei capitoli di spesa rispetto alla logica delle APIs v1"@it ;
-	sd:name graph:create_accounts .
-	
-resource:create_account_records_graph a kees:InferredKnowledgeGraph ;
-	dct:title "creazione di valori storici account azioni"@it;
-	dct:description "Regola che crea le registrazioni storiche a per ogni azione in rispetto alla logica delle APIs v1"@it ;
-	sd:name graph:create_account_records .
-	
-resource:top_partition_graph a kees:InferredKnowledgeGraph ;
-	dct:title "identifica la partizione primaria"@it;
-	dct:description "Regola che identifica la partizione primaria per i dati di budget"@it ;
-	sd:name graph:top_partition .
-	
-resource:second_partition_graph a kees:InferredKnowledgeGraph ;
-	dct:title "Regola che identifica la partizione secondaria"@it;
-	dct:description "Identifica la partizione secondaria per i dati di budget"@it ;
-	sd:name graph:second_partition .
-	
-resource:last_amount_graph a kees:InferredKnowledgeGraph ;
-	dct:title "identifica last amount"@it;
-	dct:description "Regola che cerca l'ultima registrazione per un determinato account"@it ;
-	sd:name graph:last_amount .
-	
-resource:kb_structure_graph a kees:InferredKnowledgeGraph ;
-	dct:title "Ricostruisce la struttura della knowledge base"@it;
-	dct:description "Regola che identifica tutti i grafi della knowledge base"@it ;
-	sd:name graph:kb_structure .
-	
-
-
-	

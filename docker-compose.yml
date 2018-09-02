@@ -1,5 +1,11 @@
 version: '3'
 services:
+  lode:
+    build: ./g0v-ap
+    volumes:
+      - ./g0v-ap/g0v-ap.owl /lode/LODE-master/src/main/webapp/g0v-ap.owl
+    ports:
+      - "8083:8080"
   sdaas:
     build: ./sdaas
     volumes:
@@ -9,17 +15,24 @@ services:
   api:
     build: ./apis
     command: [ "nodemon"]
-    volumes:
-      - ./apis:/usr/src/app
     ports:
       - "8080:80"
+    depends_on:
+      - "sdaas"
   lodview:
     build: ./lodview
-    volumes:
-      - ./lodview/conf.ttl:/LodView/src/main/webapp/WEB-INF/
     ports:
       - "8082:8080"
+    depends_on:
+      - "sdaas"
   frontend:
     build: ./frontend
+    volumes:
+      - ./frontend/httpd.conf:/usr/local/apache2/conf/httpd.conf
     ports:
       - "80:80"
+    depends_on:
+      - "sdaas"
+      - "lodview"
+      - "lode"
+      - "api"

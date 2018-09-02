@@ -1,24 +1,22 @@
 //get accountsmeta
 module.exports = {
-	query : `PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
+	query : `PREFIX g0v: <http://data.budget.g0v.it/g0v-ap/v1#>
 PREFIX interval: <http://reference.data.gov.uk/def/intervals/>
-PREFIX dct:      <http://purl.org/dc/terms/> 
-PREFIX dcat:      <http://www.w3.org/ns/dcat#> 
-PREFIX qb:       <http://purl.org/linked-data/cube#> 
-PREFIX sdmx-dimension:  <http://purl.org/linked-data/sdmx/2009/dimension#> 
-PREFIX sdmx-measure:    <http://purl.org/linked-data/sdmx/2009/measure#> 
-PREFIX sdmx-attribute:  <http://purl.org/linked-data/sdmx/2009/attribute#> 
+PREFIX dct: <http://purl.org/dc/terms/> 
+PREFIX dcat: <http://www.w3.org/ns/dcat#> 
 PREFIX dbpedia: <http://dbpedia.org/property/>
 PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX : <urn:local:g0v:api:v1:>
 
-SELECT  ?year ?um ?update ?source
+SELECT DISTINCT ?year ?um ?update ?source ?title ?description 
 WHERE {
-	?budget a g0v:Budget; qb:dataSet ?legge_di_bilancio .
-	?legge_di_bilancio dct:issued ?update ;
-		sdmx-dimension:refPeriod/time:hasBeginning/interval:ordinalYear ?year;
-		dcat:distribution/dcat:accessURL ?source.
+	?source a :ReferenceDataset ;
+        dct:title ?title;
+		dct:modified ?update ;
+		g0v:refPeriod/time:hasBeginning/interval:ordinalYear ?year.
 
-	OPTIONAL {?legge_di_bilancio sdmx-attribute:unitMeasure/dbpedia:isoCode ?um_from_dbpedia}
+    OPTIONAL {?source dct:description ?description;}
+	OPTIONAL {?source g0v:unit/dbpedia:isoCode ?um_from_dbpedia}
 	BIND (COALESCE(?um_from_dbpedia, "") AS ?um)
 } ORDER BY DESC(?year) LIMIT 1
 `

@@ -1,17 +1,19 @@
 ##
 ## APPLICATION LEVEL AXIOM: compute the last_amount property for each Reference Account.
 ##
+PREFIX g0v: <http://data.budget.g0v.it/g0v-ap/v1#>
 PREFIX : <urn:local:g0v:api:v1:>
 
 CONSTRUCT { ?account :last_amount ?last_amount} 
 WHERE {  
     
     {
-		SELECT DISTINCT ?account  ?history_rec
+		SELECT DISTINCT ?account  ( MAX(?history_rec) AS ?newer_history_rec)
 		WHERE {
-		  ?account a :ReferenceAccount; :hasHistoryRec ?history_rec .  
-		} ORDER BY DESC(?history_rec) LIMIT 1
+		  ?account a :Account; :hasHistoryRec ?history_rec .  
+		} GROUP BY ?account 
 	}
     
-  	?history_rec :amount ?last_amount.
+  	?newer_history_rec :amount ?last_amount.
+ 	FILTER NOT EXISTS { ?account :last_amount ?last_amount} 
 }

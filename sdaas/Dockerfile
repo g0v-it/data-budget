@@ -14,11 +14,24 @@ ENV PATH="/usr/local/bin/sdaas:${PATH}"
 COPY RWStore.properties $BLAZEGRAPH_RW_PATH
 COPY sdaas-bin /usr/local/bin/sdaas
 COPY boilerplate $KEES_DIR
-COPY webapps/root ${JETTY_WEBAPPS}/root
 
 # load regular linux tools required by sdaas:
 # see https://wiki.alpinelinux.org/wiki/How_to_get_regular_stuff_working
-RUN apk --no-cache add sudo util-linux coreutils binutils findutils grep sed openssl bash unzip curl gawk raptor2 php7
+RUN apk --no-cache add \
+	bash \
+	binutils \
+	coreutils \
+	curl \
+	findutils \
+	gawk \
+	grep \
+	openssl \
+	php7 \
+	raptor2 \
+	sed \
+	sudo \
+	unzip \
+	util-linux
 RUN chown jetty:jetty $BLAZEGRAPH_RW_PATH
 
 # load and install blazegraph.war
@@ -30,7 +43,7 @@ RUN wget -O ${JETTY_WEBAPPS}/${BLAZEGRAPH_NAME}.war $BLAZEGRAPH_VERSION_URL
 RUN chgrp -R 0 /var/lib/jetty && \
     chmod -R g=u /var/lib/jetty
     
-RUN chmod -R +rx /usr/local/bin/sdaas
+RUN chmod -R 0755 /usr/local/bin/sdaas
 
 EXPOSE 8080
 

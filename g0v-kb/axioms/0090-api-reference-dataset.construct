@@ -1,4 +1,4 @@
-PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
+PREFIX g0v: <http://data.budget.g0v.it/g0v-ap/v1#>
 PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX : <urn:local:g0v:api:v1:>
 

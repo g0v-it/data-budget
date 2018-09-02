@@ -1,17 +1,16 @@
 ##
 ## APPLICATION LEVEL AXIOM: generate type and main application property for the lowest level of component.
 ##
-PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
+PREFIX g0v: <http://data.budget.g0v.it/g0v-ap/v1#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
 PREFIX : <urn:local:g0v:api:v1:>
 
 INSERT {
 	?component a :Account ;
        :amount ?amount;
-       :code ?code;
        :name ?name;
-       :topPartitionLabel ?best_top_partition_label;
-       :secondPartitionLabel ?best_second_partition_label
+       :topPartitionLabel ?top_partition_label;
+       :secondPartitionLabel ?second_partition_label
 } WHERE {
 	{
 		SELECT ?component (SUM (?fact_amount) AS ?amount) WHERE {
@@ -21,16 +20,11 @@ INSERT {
 	}
 
 	?component g0v:concept ?account_subject.
-	?account_subject skos:prefLabel ?name ; skos:notation ?code .
-	
-	# find te best labels for top levele and secon level taxonomy concepts
-	OPTIONAL {?account_subject skos:broader/skos:broader/skos:prefLabel ?second_partition_label}
-	OPTIONAL {?account_subject skos:broader/skos:broader/skos:prefLabel ?second_partition_short_label}
-	BIND( COALESCE(?second_partition_short_label,?second_partition_label) AS ?best_second_partition_label)
-	
-	OPTIONAL {?account_subject skos:broader/skos:broader/skos:broader/skos:prefLabel ?top_partition_label}
-	OPTIONAL {?account_subject skos:broader/skos:broader/skos:broader/skos:altLabel ?top_partition_short_label}
-	BIND( COALESCE(?top_partition_short_label,?top_partition_label) AS ?best_top_partition_label)
+	?account_subject skos:prefLabel ?name ; 
+	# get mission label
+	skos:broader/skos:broader/skos:prefLabel ?second_partition_label;
+	# get administration label
+	skos:broader/skos:broader/skos:broader/skos:prefLabel ?top_partition_label
 }
 
 ;
@@ -40,7 +34,7 @@ INSERT {
 ##
 ## APPLICATION LEVEL AXIOM: inherit Account refPeriod, unit and dataset from children.
 ##
-PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
+PREFIX g0v: <http://data.budget.g0v.it/g0v-ap/v1#>
 PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX : <urn:local:g0v:api:v1:>
 
@@ -59,7 +53,7 @@ WHERE {
 ##
 ## APPLICATION LEVEL AXIOM: election of the most updated dataset.
 ##
-PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
+PREFIX g0v: <http://data.budget.g0v.it/g0v-ap/v1#>
 PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX : <urn:local:g0v:api:v1:>
 
@@ -93,7 +87,7 @@ WHERE {
 ## APPLICATION LEVEL AXIOM: attach Account History to all reference accounts
 ##
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
+PREFIX g0v: <http://data.budget.g0v.it/g0v-ap/v1#>
 PREFIX : <urn:local:g0v:api:v1:>
 
 INSERT { ?component :hasHistoryRec ?history_rec } 
@@ -119,13 +113,14 @@ INSERT { ?account :last_amount ?last_amount}
 WHERE {  
     
     {
-		SELECT DISTINCT ?account  ?history_rec
+		SELECT DISTINCT ?account  ( MAX(?history_rec) AS ?newer_history_rec)
 		WHERE {
-		  ?account a :ReferenceAccount; :hasHistoryRec ?history_rec .  
-		} ORDER BY DESC(?history_rec) LIMIT 1
+		  ?account a :Account; :hasHistoryRec ?history_rec .  
+		} GROUP BY ?account 
 	}
     
-  	?history_rec :amount ?last_amount.
+  	?newer_history_rec :amount ?last_amount.
+ 	FILTER NOT EXISTS { ?account :last_amount ?last_amount} 
 }
 
 ;
@@ -143,7 +138,7 @@ INSERT {
   	{
 		SELECT ?top_partition_label (SUM (?account_amount) AS ?amount)
         WHERE {
-          ?accountUri a :Account;
+          ?accountUri a :ReferenceAccount;
                         :amount ?account_amount;
                         :topPartitionLabel ?top_partition_label;
         } GROUP BY ?top_partition_label 
@@ -167,7 +162,7 @@ INSERT {
   	{
 		SELECT ?second_partition_label (SUM (?account_amount) AS ?amount)
         WHERE {
-          ?accountUri a :Account;
+          ?accountUri a :ReferenceAccount;
                         :amount ?account_amount;
                         :secondPartitionLabel ?second_partition_label;
         }GROUP BY ?second_partition_label 
@@ -176,4 +171,17 @@ INSERT {
 	BIND( UUID() AS ?accountUriSecondPartition )
 }
 
+;
+##
+## AXIOM: Create account unique identifiers
+##
+PREFIX : <urn:local:g0v:api:v1:>
+
+INSERT { ?component :identifier ?id } 
+WHERE { 
+	?component a :Account.
+	BIND( MD5(STR(?component)) AS ?id )
+	
+	FILTER NOT EXISTS { ?component :identifier  [] } 
+}
 	

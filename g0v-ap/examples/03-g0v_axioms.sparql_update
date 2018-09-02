@@ -9,7 +9,7 @@ LOAD <http://dbpedia.org/data/Euro.n3> INTO GRAPH <http://dbpedia.org/> ;
 ##
 ## AXIOM: inherit the reference period attribute in Fact, if missing
 ##
-PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
+PREFIX g0v: <http://data.budget.g0v.it/g0v-ap/v1#>
 PREFIX qb: <http://purl.org/linked-data/cube#>
 
 INSERT { ?fact g0v:refPeriod ?ref_period} 
@@ -25,7 +25,7 @@ WHERE {
 ##
 ## AXIOM: inherit the unit attribute in Fact, if missing
 ##
-PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
+PREFIX g0v: <http://data.budget.g0v.it/g0v-ap/v1#>
 PREFIX qb: <http://purl.org/linked-data/cube#>
 
 INSERT { ?fact g0v:unit ?unit} 
@@ -41,7 +41,7 @@ WHERE {
 ## AXIOM: Create a component that aggregates facts from the taxonomy
 ##
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
+PREFIX g0v: <http://data.budget.g0v.it/g0v-ap/v1#>
 
 INSERT { 
 	?component a g0v:Component ;
@@ -53,6 +53,7 @@ WHERE {
 		g0v:concept/skos:broader ?component_concept.
 	
 	BIND( URI( CONCAT(STR(?component_concept),"_component")) AS ?component )
+	BIND( STRUUID() AS ?id )
 	
 	FILTER NOT EXISTS {?fact g0v:isPartOf []}
 }

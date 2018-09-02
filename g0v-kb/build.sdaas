@@ -21,14 +21,14 @@ SD_LOAD_RDF_FILE  "${GRAPH}dbpedia" "datalake/lod/eur.ttl"
 SD_LOAD_RDF_FILE  "${GRAPH}dbpedia" "datalake/lod/usd.ttl"
 SD_LOAD_RDF_FILE  "${GRAPH}dbpedia" "datalake/lod/gbp.ttl"
 
-SD_LEARN "${GRAPH}budgets_2018" "datalake/download/2018---Legge-di-Bilancio-Pubblicata-Elaborabile-Spese-Capitolo.csv" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' - |php7 gateways/bdap-legge-di-bilancio.php legge_bilancio_2018"
+SD_LEARN "${GRAPH}budgets_2018" "datalake/download/2018---Legge-di-Bilancio-Pubblicata-Elaborabile-Spese-Capitolo.csv" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' - |php7 gateways/bdap.php legge_bilancio_2018 1"
 
 # Caricamento dati storici dal 2017 al 2013. N.B. nel 2017 il formato del riepilogo è cambiato
-SD_LEARN "${GRAPH}records_2017" "datalake/download/2017---Rendiconto-Pubblicato-Elaborabile-Spese-Capitolo.csv" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' -|php7 gateways/bdap-rendiconto.php rendiconto_2017"
+SD_LEARN "${GRAPH}records_2017" "datalake/download/2017---Rendiconto-Pubblicato-Elaborabile-Spese-Capitolo.csv" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' -|php7 gateways/bdap.php rendiconto_2017 2"
 
-#for year in 2013 2014 2015 2016; do
-#   SD_LEARN "${GRAPH}records_${year}" "datalake/download/${year}---Rendiconto-Pubblicato-Elaborabile-Spese-Capitolo.csv" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' -|php7 gateways/bdap-rendiconto-special.php rendiconto_${year}"
-#done
+for year in 2013 2014 2015 2016; do
+   SD_LEARN "${GRAPH}records_${year}" "datalake/download/${year}---Rendiconto-Pubblicato-Elaborabile-Spese-Capitolo.csv" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' -|php7 gateways/bdap.php rendiconto_${year} 3"
+done
 
 ####################################################
 SD_LOG  "Starting reasoning window: computing axioms and rules..."

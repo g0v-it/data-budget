@@ -5,7 +5,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix dct: <http://purl.org/dc/terms/> . 
+@prefix dcterms: <http://purl.org/dc/terms/> . 
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
@@ -53,11 +53,12 @@
 @prefix crm120111: <http://erlangen-crm.org/120111/> .
 @prefix rel: <http://purl.org/vocab/relationship/> .
 
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
 @prefix kees: <http://linkeddata.center/kees/v1#> .
 @prefix sdaas: <http://linkeddata.center/sdaas/v1#> .
-@prefix g0v: <http://data.budget.g0v.it/g0v-budget/v1#>.
+@prefix g0v: <http://data.budget.g0v.it/g0v-ap/v1#>.
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
-
+@prefix resource: <http://data.budget.g0v.it/resource/> .
 
 <> a conf:Configuration;
 
@@ -71,7 +72,7 @@
 
 	conf:endpoint <http://sdaas:8080/sdaas/sparql>;
 	conf:endpointType ""; 	## 	just "virtuoso" is handled right now, this will add some "rawdata" 
-									##	options in the footer, leave this blank if you don't want these links
+							##	options in the footer, leave this blank if you don't want these links
 
 ########## give it a try opening http://localhost:8080/lodview/Rome
 
@@ -215,7 +216,12 @@
 	
 ## license information (will be added at the very end of the page)
 
-	conf:license	"" ; ## eg. "Licensed under <a href='https://creativecommons.org/licenses/by/4.0/'>Creative Commons Attribution 4.0 International</a> (CC BY 4.0)" ;	
+	conf:license	"""
+	<a href="https://copernicani.it/" target="_blank"><img style="margin:0px 56px 0px 0px" src="https://copernicani.it/wp-content/uploads/cropped-logo_orizzontale_trasparente-1-e1525161268864.png" height="56px" alt="Copernicani.it"></a>
+	<a href="http://www.bdap.tesoro.it/" target="_blank"><img style="margin:0px 56px 0px 0px" src="https://bdap-opendata.mef.gov.it/sites/default/files/images/logo-open-bdap.PNG" alt="Ministero delle Finanze"></a>
+	<a href="http://LinkedData.Center/" target="_blank"><img style="margin:0px 56px 0px 0px" src="https://raw.githubusercontent.com/linkeddatacenter/resources/4.2.0/logo/Logo-colori-trasp_oriz-640x220.png" height="56px" alt="power by LinkedData.Center"></a>,	
+	All data licensed under <a href='http://creativecommons.org/licenses/by/3.0'>Creative Commons Attribution 3.0</a> (CC BY 3.0)
+""" ;	
 					
 ##	just a marker to insert a point on the last row
 	

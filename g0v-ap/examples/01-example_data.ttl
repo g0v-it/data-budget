@@ -1,7 +1,7 @@
 ##
 ## A sample knowledge base dump compliant with gov-ap
 ##
-@prefix g0v: <http://data.budget.g0v.it/g0v-budget/v1#>.
+@prefix g0v: <http://data.budget.g0v.it/g0v-ap/v1#>.
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
@@ -23,37 +23,41 @@
 :legge_bilancio_2018 a g0v:FinancialReport;
 	dct:title       "2018 - DISEGNO LEGGE DI BILANCIO PRESENTATO ELABORABILE SPESE CAPITOLO"@it;
 	dct:publisher   [ a foaf:Organization; foaf:homepage <http://www.mef.gov.it>; foaf:name "Minstero dell'Economia e delle Finanze"@it ] ;
-	dct:issued      "2018-03-23"^^xsd:date;
+	dct:modified      "2018-03-23"^^xsd:date;
 	g0v:refPeriod <http://reference.data.gov.uk/id/gregorian-interval/2018-01-01T00:00:00/P1Y> ;
 	g0v:unit <http://dbpedia.org/resource/Euro> ;
-	dcat:distribution [ a dcat:Distribution ;
-		dcat:accessURL <https://bdap-opendata.mef.gov.it/opendata/spd_lbf_spe_elb_cap_01_2018> ;
-		dcat:license <http://creativecommons.org/licenses/by/3.0>
-	]
-	.
+	dcat:theme <https://it.dbpedia.org/resource/Bilancio_dello_Stato> ;
+	dcat:distribution :legge_bilancio_2018_d1
+.
+:legge_bilancio_2018_d1 a dcat:Distribution ;
+	dcat:accessURL <https://bdap-opendata.mef.gov.it/opendata/spd_lbf_spe_elb_cap_01_2018> ;
+	dcat:license <http://creativecommons.org/licenses/by/3.0>
+.
 	
 :rendiconto_2017 a g0v:FinancialReport;
 	dct:title       "2017 - RENDICONTO PUBBLICATO ELABORABILE SPESE CAPITOLO"@it;
 	dct:publisher   :MEF;
-	dct:issued      "2018-03-23"^^xsd:date;
+	dct:modified      "2018-03-23"^^xsd:date;
 	g0v:refPeriod <http://reference.data.gov.uk/id/gregorian-interval/2017-01-01T00:00:00/P1Y> ;
 	g0v:unit <http://dbpedia.org/resource/Eur> ;
-	dcat:distribution [ a dcat:Distribution ;
-		dcat:accessURL <https://bdap-opendata.mef.gov.it/content/2017-rendiconto-pubblicato-elaborabile-spese-capitolo> ;
-		dcat:license <http://creativecommons.org/licenses/by/3.0>
-	]
-	.
+	dcat:theme <https://it.wikipedia.org/wiki/Rendiconto_generale_dello_Stato>;
+	dcat:distribution :rendiconto_2017_d2
+.
+:rendiconto_2017_d2 a dcat:Distribution ;
+	dcat:accessURL <https://bdap-opendata.mef.gov.it/content/2017-rendiconto-pubblicato-elaborabile-spese-capitolo> ;
+	dcat:license <http://creativecommons.org/licenses/by/3.0>
+.
 
 #######################################
 # Budget observations (with taxonomy)
 #######################################
-:f1 a g0v:Fact;
+:legge_bilancio_2018_f1 a g0v:Fact;
 	g0v:concept :2018_capitolo_A102001200010001;
 	qb:dataSet :legge_bilancio_2018 ;
 	g0v:amount 1000.00		
 	.
 
-:f2 a g0v:Fact;
+:legge_bilancio_2018_f2 a g0v:Fact;
 	g0v:concept :2018_capitolo_A102001200020001;
 	qb:dataSet :legge_bilancio_2018 ;
 	g0v:amount 2000.00		
@@ -113,12 +117,12 @@
 #######################################
 # History of observations (with taxonomy)
 #######################################
-:f3 a g0v:Fact ;
+:rendiconto_2017_f1 a g0v:Fact ;
 	g0v:concept :2017_capitolo_A102001200010001;
 	qb:dataSet :rendiconto_2017 ;
 	g0v:amount 288159000000.00		
 	.
-:f4  a g0v:Fact;
+:rendiconto_2017_f2  a g0v:Fact;
 	g0v:concept :2017_capitolo_A102001200020001;
 	qb:dataSet :rendiconto_2017 ;
 	g0v:amount 88159000000.00		

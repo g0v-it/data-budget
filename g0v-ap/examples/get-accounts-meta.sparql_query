@@ -1,17 +1,19 @@
-PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
+PREFIX g0v: <http://data.budget.g0v.it/g0v-ap/v1#>
 PREFIX interval: <http://reference.data.gov.uk/def/intervals/>
-PREFIX dct:      <http://purl.org/dc/terms/> 
-PREFIX dcat:      <http://www.w3.org/ns/dcat#> 
+PREFIX dct: <http://purl.org/dc/terms/> 
+PREFIX dcat: <http://www.w3.org/ns/dcat#> 
 PREFIX dbpedia: <http://dbpedia.org/property/>
 PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX : <urn:local:g0v:api:v1:>
 
-SELECT  ?year ?um ?update ?source
+SELECT DISTINCT ?year ?um ?update ?source ?title ?description 
 WHERE {
-	?legge_di_bilancio a g0v:FinancialReport ;
-		dct:issued ?update ;
-		g0v:refPeriod/time:hasBeginning/interval:ordinalYear ?year;
-		dcat:distribution/dcat:accessURL ?source.
+	?source a :ReferenceDataset ;
+        dct:title ?title;
+		dct:modified ?update ;
+		g0v:refPeriod/time:hasBeginning/interval:ordinalYear ?year.
 
-	OPTIONAL {?legge_di_bilancio g0v:unit/dbpedia:isoCode ?um_from_dbpedia}
+    OPTIONAL {?source dct:description ?description;}
+	OPTIONAL {?source g0v:unit/dbpedia:isoCode ?um_from_dbpedia}
 	BIND (COALESCE(?um_from_dbpedia, "") AS ?um)
 } ORDER BY DESC(?year) LIMIT 1

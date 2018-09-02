@@ -11,7 +11,7 @@ CONSTRUCT {
   	{
 		SELECT ?top_partition_label (SUM (?account_amount) AS ?amount)
         WHERE {
-          ?accountUri a :Account;
+          ?accountUri a :ReferenceAccount;
                         :amount ?account_amount;
                         :topPartitionLabel ?top_partition_label;
         } GROUP BY ?top_partition_label 

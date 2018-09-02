@@ -2,12 +2,12 @@
 ## APPLICATION LEVEL AXIOM: attach Account History to all reference accounts
 ##
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-PREFIX g0v: <http://data.budget.g0v.it/g0v-budget/v1#>
+PREFIX g0v: <http://data.budget.g0v.it/g0v-ap/v1#>
 PREFIX : <urn:local:g0v:api:v1:>
 
 CONSTRUCT { ?component :hasHistoryRec ?history_rec } 
 WHERE {
-	?component a :ReferenceAccount; 
+	?component a g0v:Component; 
 		:dataSet ?dataset;
 		:refPeriod ?ref_period; 
 		g0v:concept/skos:closeMatch ?close_match.
@@ -15,4 +15,5 @@ WHERE {
 	?dataset a :ReferenceDataset.
   
     FILTER( STR(?history_ref_period) < STR(?ref_period) )
+    FILTER NOT EXISTS { ?component :hasHistoryRec ?history_rec }
 }

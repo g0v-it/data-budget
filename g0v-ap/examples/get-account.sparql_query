@@ -1,12 +1,13 @@
-PREFIX : <urn:local:g0v:api:v1:>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX interval: <http://reference.data.gov.uk/def/intervals/>
 PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX g0v: <http://data.budget.g0v.it/g0v-ap/v1#>
+PREFIX : <urn:local:g0v:api:v1:>
 
-
-SELECT ?code ?name ?amount ?last_amount ?top_partition_label ?second_partition_label ?year ?history_amount
+SELECT DISTINCT ?account ?code ?name ?amount ?last_amount ?top_partition_label ?second_partition_label ?year ?history_amount ?fact_uri ?fact_label ?fact_amount
 WHERE {
     ?account a :Account;
-               :code ?code;
+               :identifier ?code;
                :name ?name;
                :amount ?amount;
                :topPartitionLabel ?top_partition_label;
@@ -20,5 +21,13 @@ WHERE {
                
    OPTIONAL {?account :last_amount ?last_amount}
   
-   FILTER (?account = <urn:mef:taxonomy:spending:2018:azione_A10200120001_component>) 
-} ORDER BY DESC(?year)
+   OPTIONAL {
+     ?fact_uri a g0v:Fact; 
+             g0v:isPartOf ?account;
+             g0v:amount ?fact_amount;
+             g0v:concept/skos:prefLabel ?fact_label
+   }
+  
+   FILTER (?code = "9b6ab326301179b231cf82bd779b510e")
+   #FILTER (?code = "${id}") 
+} ORDER BY ?account DESC(?year)

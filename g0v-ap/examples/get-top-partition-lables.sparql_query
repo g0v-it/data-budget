@@ -1,6 +1,6 @@
 PREFIX : <urn:local:g0v:api:v1:>
 
-SELECT ?top_partition ?amount
+SELECT DISTINCT ?top_partition ?amount
 WHERE {
   ?accountUri a :AccountTopPartition;
                 :amount ?amount;
