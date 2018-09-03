@@ -58,6 +58,7 @@
 @prefix kees: <http://linkeddata.center/kees/v1#> .
 @prefix sdaas: <http://linkeddata.center/sdaas/v1#> .
 @prefix g0v: <http://data.budget.g0v.it/g0v-ap/v1#>.
+@prefix g0v-api: <http://data.budget.g0v.it/g0v-ap-api/v1#> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix resource: <http://data.budget.g0v.it/resource/> .
 

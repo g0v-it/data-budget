@@ -14,5 +14,6 @@ RUN cd /lode \
 
 WORKDIR /lode/LODE-master
 COPY g0v-ap.owl /lode/LODE-master/src/main/webapp/g0v-ap.owl
+COPY examples/g0v-ap-api.owl /lode/LODE-master/src/main/webapp/g0v-ap-api.owl
 
 CMD ["mvn", "clean", "jetty:run"]

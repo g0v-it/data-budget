@@ -2,7 +2,7 @@
 
 This project contains the sddas configuration, data and gateways for setting up and update a knowledge base ready to teach the budget.g0v.it APIs.
 
-The knowledge base is based around the [g0v-ap-api-v1 ontology](data/g0v-ap-api-v1.owl) that is a local specialization of [g0v-ap ontology](http://data.budget.g0v.it/g0v-ap/v1) designed to provide a data model that is easy to query for the data-budget apis component in budget.gov.it project.
+The knowledge base is based around the [g0v-ap-api ontology](http://data.budget.g0v.it/g0v-ap-api/v1) that is a local specialization of the [g0v-ap ontology](http://data.budget.g0v.it/g0v-ap/v1) designed to provide a data model that is easy to query for the data-budget apis component in budget.gov.it project.
 
 It requires sdaas platforms.
 

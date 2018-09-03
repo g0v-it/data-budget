@@ -4,7 +4,7 @@ PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX dcat: <http://www.w3.org/ns/dcat#> 
 PREFIX dbpedia: <http://dbpedia.org/property/>
 PREFIX time: <http://www.w3.org/2006/time#>
-PREFIX : <urn:local:g0v:api:v1:>
+PREFIX : <http://data.budget.g0v.it/g0v-ap-api/v1#>
 
 SELECT DISTINCT ?year ?um ?update ?source ?title ?description 
 WHERE {

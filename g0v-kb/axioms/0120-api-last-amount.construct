@@ -2,7 +2,7 @@
 ## APPLICATION LEVEL AXIOM: compute the last_amount property for each Reference Account.
 ##
 PREFIX g0v: <http://data.budget.g0v.it/g0v-ap/v1#>
-PREFIX : <urn:local:g0v:api:v1:>
+PREFIX : <http://data.budget.g0v.it/g0v-ap-api/v1#>
 
 CONSTRUCT { ?account :last_amount ?last_amount} 
 WHERE {  
