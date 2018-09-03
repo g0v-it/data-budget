@@ -42,7 +42,7 @@
 
     <owl:ObjectProperty rdf:about="urn:local:g0v:api:v1:refPeriod">
         <rdfs:domain rdf:resource="urn:local:g0v:api:v1:Account"/>
-        <rdfs:range rdf:resource="http://reference.data.gov.uk/def/intervals/Interval"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2006/time#Interval"/>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">a reference period for account amount</rdfs:comment>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">refPeriod</rdfs:label>
     </owl:ObjectProperty>
@@ -156,9 +156,9 @@
     
 
 
-    <!-- http://reference.data.gov.uk/def/intervals/Interval -->
+    <!-- http://www.w3.org/2006/time#Interval -->
 
-    <owl:Class rdf:about="http://reference.data.gov.uk/def/intervals/Interval"/>
+    <owl:Class rdf:about="http://www.w3.org/2006/time#Interval"/>
     
 
 

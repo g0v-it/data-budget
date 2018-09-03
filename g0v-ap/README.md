@@ -89,7 +89,7 @@ A reasoner able to understand skos and g0v-ap axioms is able to generate the mis
     
 :level_4_account_A10200120001 a skos:Concept ; 
     skos:broader :level_3_account_A1020012 ;
-    skos:narrow 
+    skos:narrower 
         :level_5_account_A102001200010001,
         :level_5_account_A102001200020001 .
 

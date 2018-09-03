@@ -50,11 +50,11 @@ The frontent webapp acts a redirector and as a transparent proxy for all da mana
 
 - **/** redirects to this readme file
 - **/api/** redirects to api documentation
-- **/api/<api command>*** redirects to api  ( try http://localhost/api/accounts)
-- **/resource/<resource id>** calls the lod browser  ( try http://localhost/resource/welcome)
+- **/api/v1/<api command>*** redirects to api  ( try http://localhost/api/accounts)
+- **/resource/<resource id>** calls the data browser  ( try http://localhost/resource/welcome)
 - **/g0v-ap/v1** pretty print of the g0v-ap vocabulary  ( try http://localhost/g0v-ap/v1)
 
-### published ports:
+### development published ports:
 
 These default apply. You can override them in  docker-compose.yml file:
 
