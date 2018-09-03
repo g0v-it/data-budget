@@ -1,11 +1,5 @@
 version: '3'
 services:
-  lode:
-    build: ./g0v-ap
-    volumes:
-      - ./g0v-ap/g0v-ap.owl /lode/LODE-master/src/main/webapp/g0v-ap.owl
-    ports:
-      - "8083:8080"
   sdaas:
     build: ./sdaas
     volumes:
@@ -25,6 +19,10 @@ services:
       - "8082:8080"
     depends_on:
       - "sdaas"
+  lode:
+    build: ./g0v-ap
+    ports:
+      - "8083:8080"
   frontend:
     build: ./frontend
     volumes:
