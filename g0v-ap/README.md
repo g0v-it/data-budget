@@ -5,7 +5,7 @@ g0v-ap is an general Semantic Web Application defined with [OWL](https://www.w3.
 
 It captures different perspectives of a government budget data like historical trends, cross-department and component breakdown of tax by government. 
 
-g0v-ap is an profile that builds upon the following RDF vocabularies:: 
+g0v-ap is an application profile that builds upon the following RDF vocabularies:: 
 
 - the [W3C RDF Data Cube Vocabulary](https://www.w3.org/TR/vocab-data-cube), to describe the outgoings/incomes accounts observations
 - the [Data Catalog Vocabulary](https://www.w3.org/TR/vocab-dcat/) to describe the dataset metadata
