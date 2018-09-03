@@ -53,6 +53,7 @@
 @prefix crm120111: <http://erlangen-crm.org/120111/> .
 @prefix rel: <http://purl.org/vocab/relationship/> .
 
+@prefix qb: <http://purl.org/linked-data/cube#> .
 @prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
 @prefix kees: <http://linkeddata.center/kees/v1#> .
 @prefix sdaas: <http://linkeddata.center/sdaas/v1#> .
