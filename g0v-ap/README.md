@@ -16,7 +16,7 @@ g0v-ap is an application profile that builds upon the following RDF vocabularies
 
 g0v-ap also reuses some individual references to linked open data provided by [UK e-gov](https://github.com/alphagov/datagovuk_reference) and by [dbpedia](http://dbpedia.org/).
 
-g0v-ap is inspired by the [Financial Report Semantics and Dynamics Theory](Theory-2017-06-26.pdf). The main concept in g0v-ap is the **Fact** that is an observation of a money amount described with some attributes: a reference period (e.g. year 2018), a concept defined in a specific taxonomy, etc, etc. Facts  are grouped in **Component**s also described with a concept in a taxonomy, the set of all components' facts define a **FinancialReport** 
+g0v-ap is inspired by the [Financial Report Semantics and Dynamics Theory](doc/Theory-2017-06-26.pdf). The main concept in g0v-ap is the **Fact** that is an observation of a money amount described with some attributes: a reference period (e.g. year 2018), a concept defined in a specific taxonomy, etc, etc. Facts  are grouped in **Component**s also described with a concept in a taxonomy, the set of all components' facts define a **FinancialReport** 
 
 Every fact is strictly related to a taxonomy (1/1 relation). This could theoretically, prevents an historical analysis. In a practical use, the taxonomies in different financial report of for the same legal entity, do not change very much. For this reason it is possible to map different fact concepts, defined in different taxonomies, using the skos:closeMatch attribute. A reasoner MAY uses this information to compute a "euristic" historical trend for a specific Fact or Component.
 
