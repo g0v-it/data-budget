@@ -17,7 +17,7 @@ knowledge base build process require:
 - to cache other linked open data editing and running the script `refresh.sh` in the *datalake/lod* directory.
 - to develop the *gateways* for transforming data in linked data
 - to write *axiom* and rule to infer new data
-. to create a *build script* for sdaas platform.
+- to create a *build script* for sdaas platform.
 
 
 

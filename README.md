@@ -10,12 +10,11 @@ This project aims to create a general smart data management platform to feed a b
 
 - **api**: http://data.budget.g0v.it/api/v1
 - **linked open data** browser: http://data.budget.g0v.it/resource/welcome
-- **g0v-ap** ontology documentation: http://data.budget.g0v.it/g0v-ap/v1- 
+- **g0v-ap** ontology documentation: http://data.budget.g0v.it/g0v-ap/v1 
 - **g0v-ap-api** ontology documentation: http://data.budget.g0v.it/g0v-ap-api/v1
 - **SPARQL** endpoint: http://data.budget.g0v.it/sdaas/sparql
 
 http://data.budget.g0v.it/ redirects to this document.
-
 
 
 ## Architecture
@@ -37,7 +36,7 @@ The deploy of g0v-data requires a [stack of four docker containers](https://www.
 
 Install [docker](https://docs.docker.com/) version 18+ with docker-compose.
 
-To run the rdf store and loading it with data for Italian government budget, type:
+Deploy the whole stack:
 
 ```bash
 docker-compose up -d
