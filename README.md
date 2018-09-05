@@ -20,9 +20,8 @@ Just http://data.budget.g0v.it/ redirects to this document.
 
 The project contains the following logical components:
 
-- the **g0v-ap**, an application ontology to describe a budget report with the [W3C RDF Data Cube Vocabulary](https://www.w3.org/TR/vocab-data-cube). Find files and documentation in [g0v-ap directory](g0v-ap/README.md)
-- **sdaas**: (smart data as a service) a data management platform core providing a RDF store, a [SPARQL endpoint](https://www.w3.org/TR/sparql11-overview) and a data ingestion engine. See files and docs in [sdaas directory](sdaas/README.md)
--**gov-kb**: a datalake, a set of gateways to transform raw government budget data into linked data according with g0v-ap ontology and a build script that drives the sdaas ingestion engine to populate the RDF store.
+- the **g0v-ap**, a general application ontology to describe a budget report with the [W3C RDF Data Cube Vocabulary](https://www.w3.org/TR/vocab-data-cube). Find files and documentation in [g0v-ap directory](g0v-ap/README.md)
+- **sdaas**: (smart data as a service) a data management platform core providing a RDF store, a [SPARQL endpoint](https://www.w3.org/TR/sparql11-overview), a data ingestion engine, a datalake, a set of gateways to transform raw government budget data into linked data according with g0v-ap ontology and a build script that drives the sdaas ingestion engine to populate the RDF store. See files and docs in [sdaas directory](sdaas/README.md)
 - a set of **apis** that query the SPARQL endpoint and produce json data with a schema suitable to be used with the [vue-budget component project](). See files and docs in [apis directory](apis/README.md)
 - an installation of a web application derived from **lodview** to navigate the knowledge base
 - a web **frontend** that provides the platform home page and the redirect/proxy to the containers'services
@@ -62,7 +61,7 @@ These default apply. You can override them in  docker-compose.yml file:
 - **8080** The api endpoint
 - **8082** lodview endpoint
 - **8083**  lode endpoint ( try http://localhost:8083/lode/extract?url=http://localhost) 
-- **port 9999**: the data management platform entry point. This port should be disabled in production. ( try http://localhost:9999/sdaas)
+- **port 9999**: the data management platform entry point (read only)
 
 ## Support
 
