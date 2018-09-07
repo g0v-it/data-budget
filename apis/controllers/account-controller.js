@@ -13,7 +13,7 @@ const http = require('http'),
 csv = require('csvtojson'),
 querystring = require('querystring');
 
-
+//#######################################GET_ROUTES################################################
 exports.getAccounts = async (req, res) => {
 	let queryAccounts, queryAccountsMeta, schema, accountsJson, metaJson, outputJson;
 
@@ -82,6 +82,15 @@ exports.getStats = async (req, res) => {
 	res.send(result);
 
 }
+
+
+//#######################################POST_ROUTES#################################################
+// exports.filter = async (req, res) => {
+
+// }
+
+
+
 
 
 /**
@@ -173,9 +182,14 @@ async function buildJsonAccount(data){
 
 			output.past_values= {};
 			output.partitions = {};
+			output.cds = [];
 
 			json.map(account => {
 				output.past_values[account.year] = account.history_amount;
+				output.cds.push({
+					name: account.fact_label,
+					amount: account.fact_amount,
+				});
 			});
 
 			output.partitions = {
@@ -190,6 +204,11 @@ async function buildJsonAccount(data){
 			delete output.year;
 			delete output.top_partition_label;
 			delete output.second_partition_label;
+
+			//remove capitoli di spesa
+			delete output.fact_uri;
+			delete output.fact_label;
+			delete output.fact_amount;
 			resolve(output);
 		
 		}catch (e){

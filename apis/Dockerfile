@@ -17,7 +17,7 @@ RUN npm install
 RUN mv $WORK_DIR/node_modules /node_modules
 
 COPY . .
-# EXPOSE 80
+EXPOSE 80
 
 CMD [ "npm", "start" ]
 

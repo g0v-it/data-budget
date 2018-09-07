@@ -9,7 +9,7 @@ PREFIX time: <http://www.w3.org/2006/time#>
 PREFIX g0v: <http://data.budget.g0v.it/g0v-ap/v1#>
 PREFIX : <urn:local:g0v:api:v1:>
 
-SELECT DISTINCT ?account ?code ?name ?amount ?last_amount ?top_partition_label ?second_partition_label ?year ?history_amount #?fact_uri ?fact_label ?fact_amount
+SELECT DISTINCT ?account ?code ?name ?amount ?last_amount ?top_partition_label ?second_partition_label ?year ?history_amount ?fact_uri ?fact_label ?fact_amount
 WHERE {
     ?account a :Account;
                :identifier ?code;
