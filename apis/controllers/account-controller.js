@@ -6,6 +6,9 @@ const DEFAULT_SCHEMA_ACCOUNTS = "bubbles",
 	DEFAULT_SCHEMA_ACCOUNT = "full",
 	DEFAULT_ACCEPT = "text/csv";
 
+const topPartition = "top_partition_label"
+secondPartition = "second_partition_label";
+
 
 //Modules
 const http = require('http'),
@@ -85,12 +88,29 @@ exports.getStats = async (req, res) => {
 
 
 //#######################################POST_ROUTES#################################################
-// exports.filter = async (req, res) => {
+exports.filter = async (req, res) => {
+	let topQueryFilter, secondQueryFilter, result, top_filter, second_filter,
+	filter = req.body;
 
-// }
 
+	result = {};
+	//Params
+	let top_partition = filter.top_partition.join('|'),
+	second_partition = filter.second_partition.join('|');
 
+	//Get queries
+	topQueryFilter = require('../queries/filter.js')(top_partition, second_partition, topPartition);
+	secondQueryFilter = require('../queries/filter.js')(top_partition, second_partition, secondPartition);
 
+	//get Top and second filter
+	top_filter = await buildJsonFilter(await getQueryResult(config.endpoint, topQueryFilter), topPartition);
+	second_filter = await buildJsonFilter(await getQueryResult(config.endpoint, secondQueryFilter), secondPartition);
+
+	//output
+	result[topPartition] = top_filter;
+	result[secondPartition] = second_filter;
+	res.send(result);
+}
 
 
 /**
@@ -217,7 +237,26 @@ async function buildJsonAccount(data){
 	});
 }
 
+/**
+	* @group must be one of the const values @topPartition @secondPartition
+*/
+async function buildJsonFilter(data, group){
+	return new Promise(async (resolve, reject) =>{
+		try{
+			let output, result = await csv().fromString(data);
+			
+			output = {};
+			result.map(d => {
+				output[d[group]] = d.amount;
+			})
 
+			resolve(output);
+			
+		}catch (e){
+			reject(e);
+		}
+	});
+}
 
 
 
