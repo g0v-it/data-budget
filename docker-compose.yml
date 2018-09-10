@@ -21,8 +21,8 @@ services:
     build: ./g0v-ap
     ports:
       - "8083:8080"
-  frontend:
-    build: ./frontend
+  router:
+    build: ./router
     ports:
       - "80:80"
     depends_on:

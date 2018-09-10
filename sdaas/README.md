@@ -46,6 +46,8 @@ docker exec -t kb sdaas --debug -f build.sdaas --reboot
 
 logs info and debug traces will be created in .cache directory
 
+Access the admin workbench pointing browser to http://localhost:9999/sdaas
+
  
 ### publishing  the knowledge base
 

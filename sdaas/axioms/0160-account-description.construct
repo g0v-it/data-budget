@@ -1,0 +1,22 @@
+##
+## AXIOM: Create missing account description for accounts 
+##
+PREFIX : <http://data.budget.g0v.it/g0v-ap-api/v1#>
+PREFIX g0v: <http://data.budget.g0v.it/g0v-ap/v1#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+CONSTRUCT { ?component :description ?description } 
+WHERE { 
+	?component a :Account; g0v:concept ?concept.
+	?concept 
+		skos:broader/skos:prefLabel ?programma;
+		skos:broader/skos:broader/skos:prefLabel ?missione.
+		
+	BIND( STRLANG( CONCAT( 
+			"azione parte del programma -", ?programma,
+			"- relativo alla missione -", ?missione, "-"
+		),  "it") 
+	AS ?description )
+	
+	FILTER NOT EXISTS { ?component :description  [] } 
+}
