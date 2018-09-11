@@ -1,4 +1,4 @@
-PREFIX : <urn:local:g0v:api:v1:>
+PREFIX : <http://data.budget.g0v.it/g0v-ap-api/v1#>
 
 SELECT DISTINCT ?top_partition ?amount
 WHERE {

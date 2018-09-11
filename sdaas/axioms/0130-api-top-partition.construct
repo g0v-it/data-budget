@@ -1,0 +1,21 @@
+##
+## APPLICATION LEVEL AXIOM: create an api accountTopPartition summary
+##
+PREFIX : <http://data.budget.g0v.it/g0v-ap-api/v1#>
+
+CONSTRUCT {
+	?accountUriTopPartition a :AccountTopPartition ;
+       :amount ?amount;
+       :label ?top_partition_label;
+} WHERE {
+  	{
+		SELECT ?top_partition_label (SUM (?account_amount) AS ?amount)
+        WHERE {
+          ?accountUri a :ReferenceAccount;
+                        :amount ?account_amount;
+                        :topPartitionLabel ?top_partition_label;
+        } GROUP BY ?top_partition_label 
+	}
+  
+	BIND( UUID() AS ?accountUriTopPartition )
+}

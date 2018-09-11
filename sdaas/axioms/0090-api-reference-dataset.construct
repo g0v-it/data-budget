@@ -1,0 +1,17 @@
+##
+## APPLICATION LEVEL AXIOM: election of the newer financial report as ReferenceDataset.
+##
+PREFIX g0v: <http://data.budget.g0v.it/g0v-ap/v1#>
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX : <http://data.budget.g0v.it/g0v-ap-api/v1#>
+
+CONSTRUCT { ?dataset a :ReferenceDataset} 
+WHERE {
+	{
+		SELECT  ?dataset WHERE {
+			?component a :Account; :dataSet ?dataset.
+			?dataset g0v:refPeriod ?ref_period;
+		} ORDER BY DESC(?ref_period) LIMIT 1
+	}
+	FILTER NOT EXISTS { ?dataset a :ReferenceDataset }
+}

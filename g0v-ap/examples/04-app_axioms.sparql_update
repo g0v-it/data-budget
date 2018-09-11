@@ -3,7 +3,7 @@
 ##
 PREFIX g0v: <http://data.budget.g0v.it/g0v-ap/v1#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
-PREFIX : <urn:local:g0v:api:v1:>
+PREFIX : <http://data.budget.g0v.it/g0v-ap-api/v1#>
 
 INSERT {
 	?component a :Account ;
@@ -36,7 +36,7 @@ INSERT {
 ##
 PREFIX g0v: <http://data.budget.g0v.it/g0v-ap/v1#>
 PREFIX qb: <http://purl.org/linked-data/cube#>
-PREFIX : <urn:local:g0v:api:v1:>
+PREFIX : <http://data.budget.g0v.it/g0v-ap-api/v1#>
 
 INSERT { ?component :unit ?unit; :refPeriod ?ref_period; :dataSet ?dataset} 
 WHERE {
@@ -55,7 +55,7 @@ WHERE {
 ##
 PREFIX g0v: <http://data.budget.g0v.it/g0v-ap/v1#>
 PREFIX qb: <http://purl.org/linked-data/cube#>
-PREFIX : <urn:local:g0v:api:v1:>
+PREFIX : <http://data.budget.g0v.it/g0v-ap-api/v1#>
 
 INSERT { ?dataset a :ReferenceDataset} 
 WHERE {
@@ -72,7 +72,7 @@ WHERE {
 ##
 ## APPLICATION LEVEL AXIOM: election of the all ReferenceAccount.
 ##
-PREFIX : <urn:local:g0v:api:v1:>
+PREFIX : <http://data.budget.g0v.it/g0v-ap-api/v1#>
 
 INSERT { ?account a :ReferenceAccount} 
 WHERE {
@@ -88,7 +88,7 @@ WHERE {
 ##
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX g0v: <http://data.budget.g0v.it/g0v-ap/v1#>
-PREFIX : <urn:local:g0v:api:v1:>
+PREFIX : <http://data.budget.g0v.it/g0v-ap-api/v1#>
 
 INSERT { ?component :hasHistoryRec ?history_rec } 
 WHERE {
@@ -107,7 +107,7 @@ WHERE {
 ##
 ## APPLICATION LEVEL AXIOM: compute the last_amount property for each Reference Account.
 ##
-PREFIX : <urn:local:g0v:api:v1:>
+PREFIX : <http://data.budget.g0v.it/g0v-ap-api/v1#>
 
 INSERT { ?account :last_amount ?last_amount} 
 WHERE {  
@@ -129,7 +129,7 @@ WHERE {
 ## APPLICATION LEVEL AXIOM: create an api accountTopPartition summary
 ##
 
-PREFIX : <urn:local:g0v:api:v1:>
+PREFIX : <http://data.budget.g0v.it/g0v-ap-api/v1#>
 INSERT {
 	?accountUriTopPartition a :AccountTopPartition ;
        :amount ?amount;
@@ -153,7 +153,7 @@ INSERT {
 ## APPLICATION LEVEL AXIOM: create an api accountSecondPartition
 ##
 
-PREFIX : <urn:local:g0v:api:v1:>
+PREFIX : <http://data.budget.g0v.it/g0v-ap-api/v1#>
 INSERT {
 	?accountUriSecondPartition a :AccountSecondPartition ;
        :amount ?amount;
@@ -175,7 +175,7 @@ INSERT {
 ##
 ## AXIOM: Create account unique identifiers
 ##
-PREFIX : <urn:local:g0v:api:v1:>
+PREFIX : <http://data.budget.g0v.it/g0v-ap-api/v1#>
 
 INSERT { ?component :identifier ?id } 
 WHERE { 

@@ -2,8 +2,6 @@ version: '3'
 services:
   sdaas:
     build: ./sdaas
-    volumes:
-      - ./g0v-kb:/kees
     ports:
       - "9999:8080"
   api:
@@ -25,10 +23,8 @@ services:
     build: ./g0v-ap
     ports:
       - "8083:8080"
-  frontend:
-    build: ./frontend
-    volumes:
-      - ./frontend/httpd.conf:/usr/local/apache2/conf/httpd.conf
+  router:
+    build: ./router
     ports:
       - "80:80"
     depends_on:

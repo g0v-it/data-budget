@@ -1,3 +1,0 @@
-SELECT ?graphName (count(*) as ?RDF_statements) WHERE {
-   Graph ?graphName { ?s ?p ?o }
-} Group by ?graphName ORDER BY DESC(?RDF_statements)

@@ -1,0 +1,12 @@
+##
+## APPLICATION LEVEL AXIOM: election of the all ReferenceAccount (i.e. Accounts in a Reference Dataset).
+##
+PREFIX : <http://data.budget.g0v.it/g0v-ap-api/v1#>
+
+CONSTRUCT { ?account a :ReferenceAccount} 
+WHERE {
+	?account a :Account; :dataSet ?dataset.
+	?dataset a :ReferenceDataset;
+	
+	FILTER NOT EXISTS { ?account a :ReferenceAccount} 
+}

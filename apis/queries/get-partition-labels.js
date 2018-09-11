@@ -1,6 +1,6 @@
 module.exports = {
 	top_partition_labels: {
-		query : `PREFIX : <urn:local:g0v:api:v1:>
+		query : `PREFIX : <http://data.budget.g0v.it/g0v-ap-api/v1#>
 SELECT ?top_partition ?amount
 WHERE {
   ?accountUri a :AccountTopPartition;
@@ -10,7 +10,7 @@ WHERE {
 	},
 
 	second_partition_labels: {
-		query : `PREFIX : <urn:local:g0v:api:v1:>
+		query : `PREFIX : <http://data.budget.g0v.it/g0v-ap-api/v1#>
 SELECT ?second_partition ?amount
 WHERE {
   ?accountUri a :AccountSecondPartition;

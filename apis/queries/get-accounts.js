@@ -1,7 +1,7 @@
 //get accounts
 module.exports = {
 	query : `
-PREFIX : <urn:local:g0v:api:v1:>
+PREFIX : <http://data.budget.g0v.it/g0v-ap-api/v1#>
 
 SELECT DISTINCT ?code ?name ?amount ?last_amount ?top_partition_label ?second_partition_label
 WHERE {
