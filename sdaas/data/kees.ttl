@@ -9,27 +9,22 @@
 @prefix resource: <http://data.budget.g0v.it/resource/> .
 	
 resource:welcome a kees:KnowledgeBase;
-    sd:endpoint <http://data.budget.g0v.it:9999/sdaas/sparql> ;
-	dct:title "Welcome to budget.g0v.it knowledge base service"@en; 
-	dct:description "This knowledge base serve information about the Italian government budget expressed in RDF with the gov-ap ontology."@en;
-    sd:supportedLanguage sd:SPARQL11Query, sd:SPARQL11Update ;
-    sd:inputFormat <http://www.w3.org/ns/formats/RDF_XML>, <http://www.w3.org/ns/formats/Turtle> ;
-    sd:resultFormat <http://www.w3.org/ns/formats/RDF_XML>, <http://www.w3.org/ns/formats/Turtle> ;
-    sd:defaultEntailmentRegime <http://www.w3.org/ns/entailment/Simple> ;
-    sd:feature 
-    	sd:DereferencesURIs,
-    	sd:UnionDefaultGraph ;
-	rdfs:comment "power by LinkedData.Center SDaaS platform and g0v-ap ontology"@en;
-	sd:defaultDataset resource:dataset_description;
-.
-resource:dataset_description a sd:Dataset ;
+    void:sparqlEndpoint <http://data.budget.g0v.it/sdaas/sparql> ;
+	dct:title "Welcome to budget.g0v.it knowledge base"@en; 
+	dct:description "This dataset serves information about the Italian government budget expressed in RDF with the gov-ap ontology."@en;
+    dct:license <https://creativecommons.org/licenses/by/3.0/>;
+	rdfs:comment "Power by the community edition of  LinkedData.Center SDaaS™ platform."@en;
+	rdfs:comment "Data derived from OpenBDAP by © RGS Ragioneria Generale dello Stato."@en;
  	void:exampleResource 
 		resource:legge_bilancio_2018,
 		resource:legge_bilancio_2018_schema,
 		resource:rendiconto_2017,
 		resource:rendiconto_2017_schema;
 	void:uriSpace "http://data.budget.g0v.it/resource/";
-	void:vocabulary <http://data.budget.g0v.it/g0v-ap/v1>
+	void:vocabulary 
+		<http://data.budget.g0v.it/g0v-ap/v1> ,
+		<http://data.budget.g0v.it/g0v-ap-api/v1>;
+	dct:subject <https://it.wikipedia.org/wiki/Bilancio_dello_Stato>	
 .
 
 #######################################################
