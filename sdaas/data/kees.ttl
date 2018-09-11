@@ -21,9 +21,6 @@ resource:welcome a kees:KnowledgeBase;
 		resource:rendiconto_2017,
 		resource:rendiconto_2017_schema;
 	void:uriSpace "http://data.budget.g0v.it/resource/";
-	void:vocabulary 
-		<http://data.budget.g0v.it/g0v-ap/v1> ,
-		<http://data.budget.g0v.it/g0v-ap-api/v1>;
 	dct:subject <https://it.wikipedia.org/wiki/Bilancio_dello_Stato>	
 .
 
