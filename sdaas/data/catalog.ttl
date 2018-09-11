@@ -11,7 +11,7 @@
 
 :MEF a foaf:Organization; 
 	foaf:homepage <http://www.mef.gov.it>;
-	foaf:name "Minstero dell'Economia e delle Finanze"@it
+	foaf:name "Ministero dell'Economia e delle Finanze"@it
 .
 
 :legge_bilancio_2018 a dcat:Dataset;
