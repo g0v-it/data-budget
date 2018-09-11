@@ -39,9 +39,6 @@ WHERE {
 `})
 }
 
-
-
-
 //module.exports = (id) => {
 //	return ({
 //	query : `PREFIX : <http://data.budget.g0v.it/g0v-ap-api/v1#>

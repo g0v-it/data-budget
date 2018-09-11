@@ -1,3 +1,3 @@
-# g0v-data front end
+# g0v-data router
 
-A simple web server that manages the redirection and a transparent proxy to all other platform service.
+A simple web server that manages the redirection and proxy to all other platform service.

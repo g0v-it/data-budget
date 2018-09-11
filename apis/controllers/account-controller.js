@@ -6,6 +6,9 @@ const DEFAULT_SCHEMA_ACCOUNTS = "bubbles",
 	DEFAULT_SCHEMA_ACCOUNT = "full",
 	DEFAULT_ACCEPT = "text/csv";
 
+const topPartition = "top_partition_label"
+secondPartition = "second_partition_label";
+
 
 //Modules
 const http = require('http'),
@@ -13,7 +16,7 @@ const http = require('http'),
 csv = require('csvtojson'),
 querystring = require('querystring');
 
-
+//#######################################GET_ROUTES################################################
 exports.getAccounts = async (req, res) => {
 	let queryAccounts, queryAccountsMeta, schema, accountsJson, metaJson, outputJson;
 
@@ -81,6 +84,32 @@ exports.getStats = async (req, res) => {
 
 	res.send(result);
 
+}
+
+
+//#######################################POST_ROUTES#################################################
+exports.filter = async (req, res) => {
+	let topQueryFilter, secondQueryFilter, result, top_filter, second_filter,
+	filter = req.body;
+
+
+	result = {};
+	//Params
+	let top_partition = filter.top_partition.join('|'),
+	second_partition = filter.second_partition.join('|');
+
+	//Get queries
+	topQueryFilter = require('../queries/filter.js')(top_partition, second_partition, topPartition);
+	secondQueryFilter = require('../queries/filter.js')(top_partition, second_partition, secondPartition);
+
+	//get Top and second filter
+	top_filter = await buildJsonFilter(await getQueryResult(config.endpoint, topQueryFilter), topPartition);
+	second_filter = await buildJsonFilter(await getQueryResult(config.endpoint, secondQueryFilter), secondPartition);
+
+	//output
+	result[topPartition] = top_filter;
+	result[secondPartition] = second_filter;
+	res.send(result);
 }
 
 
@@ -173,9 +202,14 @@ async function buildJsonAccount(data){
 
 			output.past_values= {};
 			output.partitions = {};
+			output.cds = [];
 
 			json.map(account => {
 				output.past_values[account.year] = account.history_amount;
+				output.cds.push({
+					name: account.fact_label,
+					amount: account.fact_amount,
+				});
 			});
 
 			output.partitions = {
@@ -190,6 +224,11 @@ async function buildJsonAccount(data){
 			delete output.year;
 			delete output.top_partition_label;
 			delete output.second_partition_label;
+
+			//remove capitoli di spesa
+			delete output.fact_uri;
+			delete output.fact_label;
+			delete output.fact_amount;
 			resolve(output);
 		
 		}catch (e){
@@ -198,7 +237,26 @@ async function buildJsonAccount(data){
 	});
 }
 
+/**
+	* @group must be one of the const values @topPartition @secondPartition
+*/
+async function buildJsonFilter(data, group){
+	return new Promise(async (resolve, reject) =>{
+		try{
+			let output, result = await csv().fromString(data);
+			
+			output = {};
+			result.map(d => {
+				output[d[group]] = d.amount;
+			})
 
+			resolve(output);
+			
+		}catch (e){
+			reject(e);
+		}
+	});
+}
 
 
 

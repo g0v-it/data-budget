@@ -13,6 +13,6 @@ WHERE {
 	OPTIONAL { ?s :secondPartitionLabel ?second_partition_label}
 	OPTIONAL { ?s :topPartitionLabel ?top_partition_label}
 
-} ORDER BY ?amount
+} ORDER BY DESC(?amount)
 `
 }
