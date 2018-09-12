@@ -6,12 +6,13 @@
 @prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix void: <http://rdfs.org/ns/void#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix resource: <http://data.budget.g0v.it/resource/> .
 	
 resource:welcome a kees:KnowledgeBase;
     void:sparqlEndpoint <http://data.budget.g0v.it/sdaas/sparql> ;
 	dct:title "Welcome to budget.g0v.it knowledge base"@en; 
-	dct:description "This dataset serves information about the Italian government budget expressed in RDF with the gov-ap ontology."@en;
+	dct:description "This dataset provides information about the Italian government budget expressed in RDF with the gov-ap ontology."@en;
     dct:license <https://creativecommons.org/licenses/by/3.0/>;
 	rdfs:comment "Power by the community edition of  LinkedData.Center SDaaS™ platform."@en;
 	rdfs:comment "Data derived from OpenBDAP by © RGS Ragioneria Generale dello Stato."@en;
@@ -21,7 +22,8 @@ resource:welcome a kees:KnowledgeBase;
 		resource:rendiconto_2017,
 		resource:rendiconto_2017_schema;
 	void:uriSpace "http://data.budget.g0v.it/resource/";
-	dct:subject <https://it.wikipedia.org/wiki/Bilancio_dello_Stato>	
+	dct:subject <https://it.wikipedia.org/wiki/Bilancio_dello_Stato>;
+	foaf:page <http://data.budget.g0v.it/>
 .
 
 #######################################################
