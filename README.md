@@ -25,14 +25,14 @@ The project contains the following logical components:
  
 This pictureshows the components interactions:
 
-![architecture](doc/gov-data-architecture.png)
+![architecture](doc/g0v-data-architecture.png)
 
 
 ## Deployment
 
 The full deploy of g0v-data requires a stack of four services (e.g. docker containers):
 
-![stack](doc/gov-data-stack.png)
+![stack](doc/g0v-data-stack.png)
 
 
 
