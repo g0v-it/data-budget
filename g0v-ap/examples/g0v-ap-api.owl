@@ -14,7 +14,7 @@
         <owl:imports rdf:resource="http://data.budget.g0v.it/g0v-ap/v1"/>
         <dc:description xml:lang="en">an application domain ontology derived from g0v-ap used to simplify the development of data-budget api component.</dc:description>
         <dc:title xml:lang="en">g0v-ap-api ontology</dc:title>
-        <rdfs:comment xml:lang="it">Ontologia applicativa a supporto della creazione di api nel progetto g0v-data. E&apos; una estensione dell&apos;ontologia  http://data.budget.g0v.it/g0v-ap/v1</rdfs:comment>
+        <rdfs:comment xml:lang="it">Ontologia applicativa a supporto della creazione di api nel progetto g0v-data. E&apos; una estensione dell&apos;ontologia  http://data.budget.g0v.it/g0v-ap/v1 per maggiori informazioni vedi http://data.budget.g0v.it/g0v-ap</rdfs:comment>
     </owl:Ontology>
     
 

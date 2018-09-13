@@ -75,7 +75,7 @@ For answers you may not find in here or in the Wiki, avoid posting issues. Feel 
 
 - data extracted from by [OpenBDAP](https://bdap-opendata.mef.gov.it/) with CC-BY open licens
 - the RDF datastore and the SPARQL endpoint is based on the [Blazegraph community edition](https://www.blazegraph.com/)
-- the gov-ap ontology and the smart data management platform was developed by [Enrico Fagnoni] (https://github.com/ecow) using the [SDaaS platform by LinkedData.Center](http://LinkedData.Center/)
+- the g0v-ap ontology and the smart data management platform was developed by [Enrico Fagnoni] (https://github.com/ecow) using the [SDaaS platform by LinkedData.Center](http://LinkedData.Center/)
 - API server and gateways was developed by [Yassine Ouahidi](https://github.com/YassineOuahidi)
 - [LOD-VIEW](http://lodview.it/) was developed by [Diego Valerio Camarda](https://www.linkedin.com/in/dvcama) and [Alessandro Antonuccio](http://hstudio.it/).
 

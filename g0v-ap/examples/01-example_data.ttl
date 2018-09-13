@@ -1,5 +1,5 @@
 ##
-## A sample knowledge base dump compliant with gov-ap
+## A sample knowledge base dump compliant with g0v-ap
 ##
 @prefix g0v: <http://data.budget.g0v.it/g0v-ap/v1#>.
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .

@@ -100,16 +100,19 @@ A reasoner that is able to understand skos and g0v-ap axioms is able to generate
 
 The directory [examples](examples/README.ttl) provides some data and axioms ready to use in a RDF store with a SPARQL update and query capabilities.
 
-## How to use g0v-ap application profile
+## How to use g0v-ap
 
 If you want to write an application that analyzes/visualizes budget data, first you have to transform the government budget data in RDF linked 
-data using gov-ap classes and properties. The produced linked data can be stored in a RDF store and queried using the [SPARQL language](http://www.w3.org/TR/sparql11-query/).
+data using g0v-ap classes and properties. The produced linked data can be stored in a RDF store and queried using the [SPARQL language](http://www.w3.org/TR/sparql11-query/).
 With SPARQL update you can also easily write rules to generate (i.e. infers) other data view to simplify the development of your application.
 In practice, you have to extend g0v-ap to match your specific application needs.
 
 In this picture the typical dataflow:
 
 ![dataflow](doc/g0v-data-dataflow.png)
+
+
+The [g0v-ap-api vocabulary](http://data.budget.g0v.it/g0v-ap/v1) is an example of a g0v-ap specialization used to model data for the data-budget api component.
 
 
 ## Edit g0v-ap ontology
@@ -138,8 +141,8 @@ Here find a container to run a [lode server](https://github.com/essepuntato/LODE
  
 ```	
 docker build . -t lode
-docker run -d -v gov-ap.owl:/lode/LODE-master/src/main/webapp/g0v-ap.owl --name lode -p 9090:8080 lode
+docker run -d -v g0v-ap.owl:/lode/LODE-master/src/main/webapp/g0v-ap.owl --name lode -p 9090:8080 lode
 ```
 
-Point your browser to http://localhost:9090/lode/extract?url=localhost:8080/lode/gov-ap.owl
+Point your browser to http://localhost:9090/lode/extract?url=localhost:8080/lode/g0v-ap.owl
 

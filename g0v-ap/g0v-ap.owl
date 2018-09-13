@@ -30,16 +30,15 @@
         <owl:imports rdf:resource="http://dbpedia.org/ontology/Currency"/>
         <owl:imports rdf:resource="http://www.w3.org/2004/02/skos/core"/>
         <dct:license rdf:resource="http://creativecommons.org/licenses/by/4.0/"/>
-        <dc:subject xml:lang="en">g0v-ap Ontology.</dc:subject>
-        <rdfs:label xml:lang="en">g0v-ap Ontology</rdfs:label>
+        <dc:subject xml:lang="en">g0v-ap vocabulary</dc:subject>
+        <rdfs:label xml:lang="en">g0v-ap vocabulary</rdfs:label>
         <owl:versionInfo>V 1.1.0 Release 2018-02-09</owl:versionInfo>
         <foaf:homepage rdf:resource="http://data.budget.g0v.it/g0v-ap"/>
         <dc:creator xml:lang="en">Enrico Fagnoni enrico@linkeddata.center</dc:creator>
-        <dc:description rdf:resource="https://www.draw.io/?lightbox=1&amp;highlight=0000ff&amp;edit=_blank&amp;layers=1&amp;nav=1&amp;title=g0v-uml-diagram#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fe-artspace.com%2Fuc%3Fid%3D1Qa_zoF1Nl8ULUg9uChN-OH3ep2Lta4PY%26export%3Ddownload"/>
         <dc:rights xml:lang="en">The g0v-ap ontology is available under the Creative Commons Attribution 3.0 Unported license; see http://creativecommons.org/licenses/by/3.0/. In a nutshell, you are free to copy, distribute and transmit the work; to remix/adapt the work (e.g. to import the ontology and create specializations of its elements), as long as you attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work). Proper Attribution: Simply include the statement &quot;This work is based on the g0v-ap ontology, developed by Enrico Fagnoni&quot; and link back to http://linkeddata.center/</dc:rights>
         <dc:title xml:lang="en">The g0v-ap vocabulary for knowledge  base management</dc:title>
         <rdfs:seeAlso rdf:resource="https://git.copernicani.it/g0v/data-budget/blob/master/g0v-ap/README.md"/>
-        <dc:description xml:lang="en">g0v-ap ontology describes some classes used in g0v-ap application profile. g0v-ap is used to model government budget data for http://budget.g0v.it/ application. it is inspired to the &quot;Knowledge Exchange Engine Schema&quot; [http://linkedddata.center/kees] and from  the &quot;Financial Report Semantics and Dynamics Theory&quot; paper [http://xbrlsite.azurewebsites.net/2016/Library/Theory-2017-06-26.pdf] by Charles Hoffman and  Raynier van Egmond, M.Sc</dc:description>
+        <dc:description xml:lang="en">g0v-ap ontology describes some classes used to model a financtial report (e.g. a budget report). It is inspired to the &quot;Financial Report Semantics and Dynamics Theory&quot; paper [http://xbrlsite.azurewebsites.net/2016/Library/Theory-2017-06-26.pdf] by Charles Hoffman and  Raynier van Egmond, M.Sc. Please refer to the g0v-ap home page for more info (http://data.budget.g0v.it/g0v-ap)</dc:description>
     </owl:Ontology>
     
 
