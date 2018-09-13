@@ -109,7 +109,7 @@ In practice, you have to extend g0v-ap to match your specific application needs.
 
 In this picture the typical dataflow:
 
-![dataflow](doc/g0v-data-dataflow.png)
+![dataflow](doc/g0v-budget-dataflow.png)
 
 
 ## Edit g0v-ap ontology
