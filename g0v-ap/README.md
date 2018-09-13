@@ -72,7 +72,7 @@ In this snippet (in RDF turtle format) describes a provisional financial report 
 .
 ```
 
-A reasoner able to understand skos and g0v-ap axioms is able to generate the missing mandatory properties and relations. e.g:
+A reasoner that is able to understand skos and g0v-ap axioms is able to generate the missing mandatory properties and relations. e.g:
 
 ```
 :facx_x a g0v:Fact, qb:Observable;
@@ -102,7 +102,7 @@ The directory [examples](examples/README.ttl) provides some data and axioms read
 
 ## How to use g0v-ap application profile
 
-If you want to write an application that analyze/visualize budget data, first you have to transform the government budget data in RDF linked 
+If you want to write an application that analyzes/visualizes budget data, first you have to transform the government budget data in RDF linked 
 data using gov-ap classes and properties. The produced linked data can be stored in a RDF store and queried using the [SPARQL language](http://www.w3.org/TR/sparql11-query/).
 With SPARQL update you can also easily write rules to generate (i.e. infers) other data view to simplify the development of your application.
 In practice, you have to extend g0v-ap to match your specific needs.
@@ -111,11 +111,11 @@ See [in this picture the typical dataflow](https://www.draw.io/?lightbox=1&highl
 
 ## Edit g0v-ap ontology
 
-g0v-ap is expressed as [owl file](g0v-ap.owl) serialized as RDF xml. You can edit the file by hand or using [Protégé](https://protege.stanford.edu/)
+g0v-ap is expressed in a [owl file](g0v-ap.owl) serialized as RDF xml. You can edit the file by hand or using [Protégé](https://protege.stanford.edu/)
 
 ## Practice with the g0v-ap
 
-To practice with ontolg0v-apogy you need a RDF data store and some data. [Blazegraph](https://www.blazegraph.com/) is a good starting point. For a quick start, use this docker:
+To practice with g0v-ap you need a RDF data store and some data. [Blazegraph](https://www.blazegraph.com/) is a good starting point. For a quick start, use this docker:
 
 ```	
 docker run --name blazegraph -d -p 9999:8080 lyrasis/blazegraph:2.1.4
