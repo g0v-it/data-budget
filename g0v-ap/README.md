@@ -26,7 +26,7 @@ A reasoner MAY uses this information to relate different financial reports and t
 
 Some fact properties, if not explicitly defined, can be inherited form the financial report attributes, that provide a default. Also the groups hierarchy can be inferred from the concepts taxonomy structure.
 
-![g0v-ap UML diagram](doc/g0v-ap-uml-diagram.png]
+![g0v-ap UML diagram](doc/g0v-ap-uml-diagram.png)
 
 
 In this snippet (in RDF turtle format) describes a provisional financial report as linked data with g0v-ap:
@@ -109,7 +109,7 @@ In practice, you have to extend g0v-ap to match your specific application needs.
 
 In this picture the typical dataflow:
 
-![dataflow](doc/gov-data-dataflow.png)
+![dataflow](doc/g0v-data-dataflow.png)
 
 
 ## Edit g0v-ap ontology
