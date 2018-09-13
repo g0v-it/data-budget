@@ -112,7 +112,7 @@ In this picture the typical dataflow:
 ![dataflow](doc/g0v-budget-dataflow.png)
 
 
-The [g0v-ap-api vocabulary](http://data.budget.g0v.it/g0v-ap/v1) is an example of a g0v-ap specialization used to model data for the data-budget api component.
+The [g0v-ap-api vocabulary](http://data.budget.g0v.it/g0v-ap-api/v1) is an example of a g0v-ap specialization used to model data for the data-budget api component.
 
 
 ## Edit g0v-ap ontology
