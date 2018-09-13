@@ -40,7 +40,7 @@ returns data suitable to be used in partitioning in budget-bubbles vue component
 To test api server you need:
 
 - run the data store and api server provider 
-- populate the graph database with example data (see how in [sdaas component](../sdaas/README.MD))
+- populate the graph database with example data (see how in [sdaas component](../sdaas/README.md))
 - test api using a browser or any api client pointing it to:
 
 
