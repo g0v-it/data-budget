@@ -1,5 +1,5 @@
-g0v-ap vocabulary
-------------------------------
+g0v-ap
+-------
 
 g0v-ap is an general Semantic Web Application defined with [OWL](https://www.w3.org/TR/owl2-primer/) suitable to annotate a government budget data with the purpose of supporting budget visualization applications (e.g. http://budget.g0v.it/).  
 
