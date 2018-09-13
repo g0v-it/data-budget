@@ -109,7 +109,7 @@ In practice, you have to extend g0v-ap to match your specific application needs.
 
 In this picture the typical dataflow:
 
-![dataflow](doc/g0v-data-dataflow.png)
+![dataflow](doc/g0v-budget-dataflow.png)
 
 
 The [g0v-ap-api vocabulary](http://data.budget.g0v.it/g0v-ap/v1) is an example of a g0v-ap specialization used to model data for the data-budget api component.
