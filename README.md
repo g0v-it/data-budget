@@ -10,9 +10,7 @@ This project aims to create a general smart data management platform to feed a b
 
 - **api**: http://data.budget.g0v.it/api/v1
 - **linked open data** viewer: http://data.budget.g0v.it/resource/welcome
-- **g0v-ap** ontology documentation: http://data.budget.g0v.it/g0v-ap/v1 
-- **g0v-ap-api** ontology documentation: http://data.budget.g0v.it/g0v-ap-api/v1
-- **SPARQL endpoint**: http://data.budget.g0v.it/sdaas/sparql (read only)
+- **SPARQL endpoint**: http://data.budget.g0v.it:8889/sdaas/#query
 
 
 ## Development
@@ -50,7 +48,7 @@ The frontent webapp acts a redirector and as a transparent proxy for all da mana
 - **/resource/<resource id>** calls the data browser  ( try http://localhost/resource/welcome)
 - **/g0v-ap/v1** pretty print of the g0v-ap vocabulary  ( try http://localhost/g0v-ap/v1)
 - **/g0v-ap-api/v1** pretty print of the g0v-ap-api vocabulary  ( try http://localhost/g0v-ap-api/v1)
-- **/sdaas/sparql** redirects to sparql endpoin  ( try http://localhost/sdaas/sparql)
+- **/sdaas/sparql** redirects to sparql endpoint  ( try http://localhost/sdaas/sparql)
 
 ### published ports:
 
