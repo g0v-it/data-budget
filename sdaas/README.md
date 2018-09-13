@@ -2,11 +2,12 @@
 
 This project contains all needed for setting up and update a knowledge base ready to be used by the budget.g0v.it APIs.
 
-The knowledge base is built around the [g0v-ap-api ontology](http://data.budget.g0v.it/g0v-ap-api/v1) that is a local specialization of the [g0v-ap ontology](http://data.budget.g0v.it/g0v-ap/v1) designed to provide a data model that is easy to query for the data-budget apis component in budget.gov.it project.
+The knowledge base is built around the [g0v-ap-api ontology](http://data.budget.g0v.it/g0v-ap-api/v1)
+that is a local specialization of the [g0v-ap ontology](http://data.budget.g0v.it/g0v-ap/v1) designed
+to provide a data model that is easy to query for the data-budget apis component in budget.gov.it project
 
-It requires [sdaas-ce] platforms.
+The data ingestion process is managed by the SDaS platform (community edition).
 
-**This directory must be mounted as /kees  on the sdaas engine host.** 
 
 ## updating the knowledge base
 
