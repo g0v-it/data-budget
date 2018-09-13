@@ -17,9 +17,9 @@ knowledge base build process require:
 - to manually downloads copy all required raw data that are not directly accessible for web in the *datalake/download* directory
 - to cache other linked open data editing and running the script `refresh.sh` in the *datalake/lod* directory.
 - to develop the *gateways* for transforming data in linked data
-- to write *axiom* and rule to infer new data
-- to create a *build script* for sdaas platform.
-
+- to write *axioms* and rules to infer new data
+- to create a *build script* for sdaas platform that drives the data ingestion process.
+- to run sdaas
 
 
 ## stand alone gateways development and testing
