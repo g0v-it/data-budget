@@ -26,7 +26,7 @@ A reasoner MAY uses this information to relate different financial reports and t
 
 Some fact properties, if not explicitly defined, can be inherited form the financial report attributes, that provide a default. Also the groups hierarchy can be inferred from the concepts taxonomy structure.
 
-See the [g0v-ap UML diagram](https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=g0v-uml-diagram#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fe-artspace.com%2Fuc%3Fid%3D1Qa_zoF1Nl8ULUg9uChN-OH3ep2Lta4PY%26export%3Ddownload) for more info about g0v-ap.
+![g0v-ap UML diagram](doc/g0v-ap-uml-diagram.png]
 
 
 In this snippet (in RDF turtle format) describes a provisional financial report as linked data with g0v-ap:
@@ -105,9 +105,12 @@ The directory [examples](examples/README.ttl) provides some data and axioms read
 If you want to write an application that analyzes/visualizes budget data, first you have to transform the government budget data in RDF linked 
 data using gov-ap classes and properties. The produced linked data can be stored in a RDF store and queried using the [SPARQL language](http://www.w3.org/TR/sparql11-query/).
 With SPARQL update you can also easily write rules to generate (i.e. infers) other data view to simplify the development of your application.
-In practice, you have to extend g0v-ap to match your specific needs.
+In practice, you have to extend g0v-ap to match your specific application needs.
 
-See [in this picture the typical dataflow](https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=g0v-budget-datafow#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fe-artspace.com%2Fuc%3Fid%3D1iXdW0V08-gUK_SL1EkYmnofGvs1L1UD4%26export%3Ddownload)
+In this picture the typical dataflow:
+
+![dataflow](doc/gov-data-dataflow.png)
+
 
 ## Edit g0v-ap ontology
 

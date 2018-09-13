@@ -23,9 +23,17 @@ The project contains the following logical components:
 - an installation of a web application derived from **lodview** to navigate the knowledge base as linked open data
 - a **router** that provides redirects and proxies to the platform services.
  
-[This picture](https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=g0v-data-architecture.html#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fe-artspace.com%2Fuc%3Fid%3D1Q2VSl5IL_K1qByiSzGDffSXiVbSRA1zl%26export%3Ddownload) shows the components interactions.
+This pictureshows the components interactions:
 
-The deploy of g0v-data requires a [stack of four docker containers](https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=g0v-data-stack.html#Uhttps%3A%2F%2Fdrive.google.com%2Fa%2Fe-artspace.com%2Fuc%3Fid%3D1FEItM1NOMCzj03GxkXc_EE5SLnJ-oF_R%26export%3Ddownload)
+![architecture](doc/gov-data-architecture.png)
+
+
+## Deployment
+
+The full deploy of g0v-data requires a stack of four services (e.g. docker containers):
+
+![stack](doc/gov-data-stack.png)
+
 
 
 ### local development quickstart
