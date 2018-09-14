@@ -18,12 +18,12 @@ This project aims to create a general smart data management platform to feed a b
 The project contains the following logical components:
 
 - the **g0v-ap**, a general application ontology to describe a budget report with the [W3C RDF Data Cube Vocabulary](https://www.w3.org/TR/vocab-data-cube). Find files and documentation in [g0v-ap directory](g0v-ap/README.md)
-- **sdaas** (smart data as a service):  the data management platform core providing a RDF store, a [SPARQL endpoint](https://www.w3.org/TR/sparql11-overview), a data ingestion engine, a datalake, a set of gateways to transform raw data in linked data according with g0v-ap-api ontology (an application level extension of g0v-ap) and a build script that populates the RDF store. See files and docs in [sdaas directory](sdaas/README.md)
+- **sdaas** (smart data as a service):  the data management platform core providing a RDF store, a [SPARQL endpoint](https://www.w3.org/TR/sparql11-overview), a data ingestion engine, a set of gateways to transform raw data in linked data according with g0v-ap-api ontology (an application level extension of g0v-ap) and a build script that populates the RDF store. See files and docs in [sdaas directory](sdaas/README.md)
 - a set of **apis** that query the SPARQL endpoint and produce json data with a schema suitable to be used with the [vue-budget component project](). See files and docs in [apis directory](apis/README.md)
-- an installation of a web application derived from **lodview** to navigate the knowledge base as linked open data
+- a local installation of a web application derived from **lodview** to navigate the knowledge base as linked open data
 - a **router** that provides redirects and proxies to the platform services.
  
-This pictureshows the components interactions:
+This picture shows the components interactions:
 
 ![architecture](doc/g0v-data-architecture.png)
 

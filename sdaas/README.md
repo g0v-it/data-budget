@@ -13,12 +13,10 @@ The data ingestion process is managed by the SDaS platform (community edition).
 
 knowledge base build process require:
 
-- to create local data, editing the files in the *data* directory
-- to manually downloads copy all required raw data that are not directly accessible for web in the *datalake/download* directory
-- to cache other linked open data editing and running the script `refresh.sh` in the *datalake/lod* directory.
-- to develop the *gateways* for transforming data in linked data
-- to write *axioms* and rules to infer new data
-- to create a *build script* for sdaas platform that drives the data ingestion process.
+- to edit local data, editing the files in the *data* directory
+- to develop the *gateways* for transforming web resources in linked data
+- to write *axioms* and rules to generate new data
+- to edit a *build script* for sdaas platform that drives the data ingestion process.
 - to run sdaas
 
 
@@ -34,7 +32,7 @@ php gateways/bdap.php dstest2 2< gateways/tests/data/rendiconto.csv
 php gateways/bdap.php dstest3 3< gateways/tests/data/rendiconto-special.csv 
 ```
 
-The gatewais must provide valid RDF statements in turtle (n3) or any other RDF serialization format. Check the gateway results using an online service like http://rdf-translator.appspot.com/
+The gateways must provide valid RDF statements in turtle (n3) or any other RDF serialization format. Check the gateway results using an online service like http://rdf-translator.appspot.com/
  
 ### debugging the build script
 
@@ -67,9 +65,9 @@ The resulting container will provide a readonly distribution of the whole knowle
 - the **build.sdaas** file is a script for sdaas platform to populate the knowledge base from scratch. It requires sdaas platform community edition 2.0+
 - the **axioms** directory contains rules to be processed during reasoning windows. 
 - the **data** directory contains local data files
-- the **datalake** this directory contains a mirror of web data
+- the **datalake** this directory contains a mirror of external data (i.e. not directly downloadable)
 - the **gateways** directory contains the code to transform raw data into linked data
-- the **distrib** temporary created directory that contains the answers to questions. It is created by the teaching window during build process. Not saved in repo.
+- the **scripts** directory contains the code for local extensions to sdaas
 - the **.cache** temporary directory that contains logs and debugging info. Not saved in repo.
 
 

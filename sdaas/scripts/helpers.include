@@ -1,0 +1,12 @@
+########################################################################################
+# Some shortcat for loading italian goverment data
+########################################################################################
+
+function LEARN_FROM_BDAP {
+}
+
+function LEARN_FROM_DBPEDIA {
+}
+
+function LEARN_TIME_PERIODS {
+}

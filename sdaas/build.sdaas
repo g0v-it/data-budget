@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -a
 
+#SD_INCLUDE scripts/helpers.include
+
 GRAPH="urn:local:g0v:budget:it:graph:"
 
 
