@@ -14,26 +14,11 @@ The data ingestion process is managed by the SDaS platform (community edition).
 knowledge base build process require:
 
 - to edit local data, editing the files in the *data* directory
-- to develop the *gateways* for transforming web resources in linked data
-- to write *axioms* and rules to generate new data
+- to develop the *gateways* for transforming web resources in linked data. See [gateways doc.](gateways/README.md)
+- to write *axioms* and rules to generate new data. See [axioms doc.](axioms/README.md)
 - to edit a *build script* for sdaas platform that drives the data ingestion process.
 - to run sdaas
 
-
-## stand alone gateways development and testing
-
-
-Gateways can be tested stand alone just with any host providing php7; e.g.:
-
-```
-docker run -ti -v $PWD/gateways:/gateways thatsamguy/trusty-php71 bash
-php gateways/bdap.php dstest1 1< gateways/tests/data/legge-di-bilancio.csv 
-php gateways/bdap.php dstest2 2< gateways/tests/data/rendiconto.csv 
-php gateways/bdap.php dstest3 3< gateways/tests/data/rendiconto-special.csv 
-```
-
-The gateways must provide valid RDF statements in turtle (n3) or any other RDF serialization format. Check the gateway results using an online service like http://rdf-translator.appspot.com/
- 
 ### debugging the build script
 
 the test of the build script requires the sdaas-ce container.
@@ -63,9 +48,8 @@ The resulting container will provide a readonly distribution of the whole knowle
 ## Directory structure
 
 - the **build.sdaas** file is a script for sdaas platform to populate the knowledge base from scratch. It requires sdaas platform community edition 2.0+
-- the **axioms** directory contains rules to be processed during reasoning windows. 
+- the **axioms** directory contains rules to be processed during reasoning windows.
 - the **data** directory contains local data files
-- the **datalake** this directory contains a mirror of external data (i.e. not directly downloadable)
 - the **gateways** directory contains the code to transform raw data into linked data
 - the **scripts** directory contains the code for local extensions to sdaas
 - the **.cache** temporary directory that contains logs and debugging info. Not saved in repo.

@@ -1,3 +1,3 @@
 module.exports = {
-	query : `describe <urn:linkeddata.center:sdaas:local:stat>`
+	query : `describe <http://data.budget.g0v.it/resource/welcome>`
 }

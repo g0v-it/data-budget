@@ -1,40 +1,36 @@
 #!/usr/bin/env bash
 set -a
 
-#SD_INCLUDE scripts/helpers.include
-
-GRAPH="urn:local:g0v:budget:it:graph:"
-
+SD_INCLUDE scripts/bdap.include
 
 ####################################################
-SD_LOG  "Starting booting window: clean and configure knowledge base..."
+SD_LOG  "Starting booting window: configure knowledge base..."
 ####################################################
 SD_LOAD_RDF_FILE urn:sdaas:config "data/kees.ttl"
 
 ####################################################
 SD_LOG  "Starting learning window: loading facts. This will take a while..."
 ####################################################
-SD_LOAD_RDF_FILE "${GRAPH}catalog" "data/catalog.ttl"
 
-for year in 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022; do
-	SD_LOAD_RDF_FILE  "${GRAPH}intervals" "datalake/lod/year_$year.rdf"
+# Learn currency description from dbpedia
+SD_LEARN "http://dbpedia.org/data/Euro.n3"
+
+# Learn time intervals from uk reference 
+for year in $(seq 2013 2022) ; do
+	SD_LEARN "http://reference.data.gov.uk/doc/gregorian-interval/${year}-01-01T00:00:00/P1Y"
 done
-SD_LOAD_RDF_FILE  "${GRAPH}dbpedia" "datalake/lod/eur.ttl"
-SD_LOAD_RDF_FILE  "${GRAPH}dbpedia" "datalake/lod/usd.ttl"
-SD_LOAD_RDF_FILE  "${GRAPH}dbpedia" "datalake/lod/gbp.ttl"
 
-SD_LEARN "${GRAPH}budgets_2018" "datalake/download/2018---Legge-di-Bilancio-Pubblicata-Elaborabile-Spese-Capitolo.csv" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' - |php7 gateways/bdap.php legge_bilancio_2018 1"
+# G0V_LEARN_FROM_BDAP spd_dlb_spe_elb_cap_01_2019
 
-# Caricamento dati storici dal 2017 al 2013. N.B. nel 2017 il formato del riepilogo è cambiato
-SD_LEARN "${GRAPH}records_2017" "datalake/download/2017---Rendiconto-Pubblicato-Elaborabile-Spese-Capitolo.csv" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' -|php7 gateways/bdap.php rendiconto_2017 2"
-
-for year in 2013 2014 2015 2016; do
-   SD_LEARN "${GRAPH}records_${year}" "datalake/download/${year}---Rendiconto-Pubblicato-Elaborabile-Spese-Capitolo.csv" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' -|php7 gateways/bdap.php rendiconto_${year} 3"
+for year in $(seq 2013 2018) ; do
+	G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_cap_01_${year}
 done
+
 
 ####################################################
 SD_LOG  "Starting reasoning window: computing axioms and rules..."
 ####################################################
+GRAPH="http://data.budget.g0v.it/resource/"
 for axiomFile in $(ls -v axioms/*construct); do
 	axiomGraph=$(basename $axiomFile)
 	SD_REASONING_BY SD_EVAL_CONSTRUCTOR "${GRAPH}${axiomGraph}" @$axiomFile

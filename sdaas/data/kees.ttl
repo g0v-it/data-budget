@@ -7,6 +7,7 @@
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix void: <http://rdfs.org/ns/void#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix skos:     <http://www.w3.org/2004/02/skos/core#> . 
 @prefix resource: <http://data.budget.g0v.it/resource/> .
 	
 resource:welcome a kees:KnowledgeBase;
@@ -17,18 +18,31 @@ resource:welcome a kees:KnowledgeBase;
 	rdfs:comment "Power by the community edition of  LinkedData.Center SDaaS™ platform."@en;
 	rdfs:comment "Data derived from OpenBDAP by © RGS Ragioneria Generale dello Stato."@en;
  	void:exampleResource 
-		resource:legge_bilancio_2018,
-		resource:legge_bilancio_2018_schema,
-		resource:rendiconto_2017,
-		resource:rendiconto_2017_schema;
+		resource:spd_lbf_spe_elb_cap_01_2018 ,
+		resource:spd_lbf_spe_elb_cap_01_2018_schema ;
 	void:uriSpace "http://data.budget.g0v.it/resource/";
 	dct:subject <https://it.wikipedia.org/wiki/Bilancio_dello_Stato>;
 	foaf:page <http://data.budget.g0v.it/>
 .
 
+
 #######################################################
-# Config facts
+# Individuals
 #######################################################
-resource:graph_kees a kees:KBConfigGraph ;
-	sd:name <urn:sdaas:config> ;
-	dct:source <data/kees.ttl>.
+resource:spd_dlb_spe_elb_cap_01_theme a skos:Concept;
+	skos:prefLabel "Disegno di legge di bilancio, spese per capitolo"@it
+.
+
+resource:spd_lbf_spe_elb_cap_01_theme a skos:Concept;
+	skos:prefLabel "Legge di bilancio approvata, spese per capitolo"@it
+.
+
+resource:spd_lbf_spe_rnd_cap_01_theme a skos:Concept;
+	skos:prefLabel "Rendicondo spese per capitolo"@it
+.
+
+resource:MEF a foaf:Organization; 
+    foaf:homepage <http://www.mef.gov.it>;
+    foaf:name "Ragioneria Generale dello Stato"@it
+.
+	
