@@ -1,0 +1,17 @@
+########################################################################################
+# Some shortcat for loading italian goverment data
+########################################################################################
+
+##
+# Imports both metadata and data from a BDAP financial report ( budget or rendiconto)
+# it use ckan api v1 ( see https://bdap-opendata.mef.gov.it/content/api)
+#  reportType is budget|rendiconto
+##
+function G0V_LEARN_FROM_BDAP {
+	SD_REQUIRES_VAR 1 
+	local reportName="$1"
+	local uri="https://bdap-opendata.mef.gov.it/SpodCkanApi/api/1/rest/dataset/${reportName}"
+	SD_LEARN "${uri}" "${uri}" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' - |php7 gateways/bdap_meta.php"
+	SD_LEARN "${uri}.csv" "${uri}.csv" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' - |php7 gateways/bdap.php ${reportName}"
+}
+

@@ -1,0 +1,53 @@
+{
+  "id": "00b33aed-007f-483f-a7c5-b94694f37ac5",
+  "private": false,
+  "metadata_created": "2017-06-30T10:28:03.000000",
+  "metadata_modified": "2017-06-30T14:07:28.000000",
+  "author": "Ragioneria Generale dello Stato",
+  "state": "active",
+  "resources": [
+    {
+      "package_id": "00b33aed-007f-483f-a7c5-b94694f37ac5",
+      "id": "4140",
+      "size": "2420044",
+      "last_modified": "",
+      "format": "csv",
+      "mimetype": "text/csv",
+      "name": "spd_rnd_spe_elb_cap_01_2016.csv",
+      "created": "2017-06-30T10:24:43.000000",
+      "url": "http://bdap-opendata.mef.gov.it/SpodCkanApi/api/1/rest/dataset/spd_rnd_spe_elb_cap_01_2016.csv",
+      "position": 0
+    },
+    {
+      "package_id": "00b33aed-007f-483f-a7c5-b94694f37ac5",
+      "id": "4185",
+      "size": "746448",
+      "last_modified": "",
+      "format": "1726_Rendiconto Pubblicato Elaborabile Spese.pdf",
+      "mimetype": "application/pdf",
+      "name": "1726_Rendiconto Pubblicato Elaborabile Spese.pdf",
+      "created": "2017-06-30T14:07:28.000000",
+      "url": "http://bdap-opendata.mef.gov.it/sites/default/files/metadata_updfile/report/1726_Rendiconto Pubblicato Elaborabile Spese.pdf",
+      "position": 0
+    }
+  ],
+  "tags": [],
+  "tracking_summary": {
+    "total": 0,
+    "recent": 0
+  },
+  "groups": [],
+  "organization": {
+    "name": "Data Warehouse RGS",
+    "is_organization": true,
+    "id": "69"
+  },
+  "name": "spd_rnd_spe_elb_cap_01_2016",
+  "isopen": true,
+  "notes_rendered": "\u003cp\u003e\u003cp\u003eDati di Spesa relativi al Rendiconto Pubblicato per l\u0027esercizio finanziario di riferimento - Atto dovuto in formato elaborabile - [RND_SPE_ELB_CAP_001]\u003c/p\u003e\r\n\u003c/p\u003e",
+  "ckan_url": "http://rgspod/opendata/spd_rnd_spe_elb_cap_01_2016",
+  "notes": "Dati di Spesa relativi al Rendiconto Pubblicato per l\u0027esercizio finanziario di riferimento - Atto dovuto in formato elaborabile - [RND_SPE_ELB_CAP_001]\r\n",
+  "title": "2016 - Rendiconto Pubblicato Elaborabile Spese Capitolo",
+  "extras": {},
+  "ratings_cout": 0
+}
