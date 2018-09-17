@@ -29,15 +29,15 @@ resource:welcome a kees:KnowledgeBase;
 #######################################################
 # Individuals
 #######################################################
-resource:spd_dlb_spe_elb_cap_01_theme a skos:Concept;
+resource:spd_dlb_spe_elb_cap_theme a skos:Concept;
 	skos:prefLabel "Disegno di legge di bilancio, spese per capitolo"@it
 .
 
-resource:spd_lbf_spe_elb_cap_01_theme a skos:Concept;
+resource:spd_lbf_spe_elb_cap_theme a skos:Concept;
 	skos:prefLabel "Legge di bilancio approvata, spese per capitolo"@it
 .
 
-resource:spd_lbf_spe_rnd_cap_01_theme a skos:Concept;
+resource:spd_rnd_spe_rnd_cap_theme a skos:Concept;
 	skos:prefLabel "Rendicondo spese per capitolo"@it
 .
 
