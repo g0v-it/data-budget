@@ -58,9 +58,6 @@ To see the container's logs, run:
 
     $ docker-compose logs -f # follow the logs
 
-```bash
-docker-compose up -d
-```
 
 ### router entry points :
 
