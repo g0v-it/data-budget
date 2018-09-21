@@ -28,19 +28,35 @@ This picture shows the components interactions:
 ![architecture](doc/g0v-data-architecture.png)
 
 
-## Deployment
-
 The full deploy of g0v-data requires a stack of four services (e.g. docker containers):
 
 ![stack](doc/g0v-data-stack.png)
 
+g0v-data platform is shipped with a [Docker](https://docker.com) setup that makes it easy to get a containerized development
+environment up and running. If you do not already have Docker on your computer, [it's the right time to install it](https://docs.docker.com/install/).
+
+clone this project, open a terminal, and navigate to the directory of this repository. Run the following command to start all
+services using [Docker Compose](https://docs.docker.com/compose/):
+
+    $ docker-compose up -d # Running in detached mode
+
+This starts the following services:
 
 
-### local development quickstart
+| Name        | Description                                                   | Port(s) | Environment(s)
+| ----------- | ------------------------------------------------------------- | ------- | --------------
+| router      | proxy cache server                                            | 80      | customize in prod 
+| sdaas       | a server that manages the datastore and the ingestion engine  | 8889    | all 
+| api         | a server that manages the web-budget api                      | 8081    | all
+| lodview     | a LODVIEW server to navigate linked data                      | 8082    | can use any other internet instance (change router config)
+| lode        | a server to render onology using LODE                         | 8083    | can use any other internet instance (change router config)
 
-Install [docker](https://docs.docker.com/) version 18+ with docker-compose.
+The first time you start the containers, Docker downloads and builds images for you. It will take some time, but don't worry,
+this is done only once. Starting servers will then be lightning fast.
 
-Deploy the whole stack:
+To see the container's logs, run:
+
+    $ docker-compose logs -f # follow the logs
 
 ```bash
 docker-compose up -d
@@ -48,23 +64,16 @@ docker-compose up -d
 
 ### router entry points :
 
-The frontent webapp acts a redirector and as a transparent proxy for all da management platform services. It provides following entry point:
+The router acts a redirector and as a transparent proxy for all da management platform services. It provides following entry point:
 
-- **/** redirects to this readme file
+- **/** redirects to the project home page (this readme file fro now)
 - **/api/** redirects to api documentation
-- **/api/v1/<api command>*** redirects to api  ( try http://localhost/api/accounts)
-- **/resource/<resource id>** calls the data browser  ( try http://localhost/resource/welcome)
+- **/api/v1/<api command>*** redirects to api command  ( try http://localhost/api/accounts)
+- **/resource/<resource id>** calls the linked data browser  ( try http://localhost/resource/welcome)
 - **/g0v-ap/v1** pretty print of the g0v-ap vocabulary  ( try http://localhost/g0v-ap/v1)
 - **/g0v-ap-api/v1** pretty print of the g0v-ap-api vocabulary  ( try http://localhost/g0v-ap-api/v1)
 - **/sdaas/sparql** redirects to sparql endpoint  ( try http://localhost/sdaas/sparql)
 
-### published ports:
-
-- **port 80**: the router endpoint
-- **8080** The api endpoint
-- **8082** lodview endpoint
-- **8083**  lode endpoint ( try http://localhost:8083/lode/extract?url=http://localhost) 
-- **port 9999**: the data management platform entry point (read only)
 
 ## Support
 
