@@ -25,7 +25,10 @@ the test of the build script requires the sdaas-ce container.
 
 ```
 docker run -d -p 9999:8080 -v $PWD/.:/workspace --name kb linkeddatacenter/sdaas-ce
-docker exec -t kb sdaas --debug -f build.sdaas --reboot
+docker exec -ti kb bash
+sdaas --debug -f build.sdaas --reboot
+exit
+docker rm -f kb
 ```
 
 logs info and debug traces will be created in .cache directory

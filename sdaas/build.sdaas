@@ -26,6 +26,7 @@ for year in $(seq 2013 2018) ; do
 	G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_cap_01_${year}
 done
 
+SD_LEARN urn:mef:programmi data/descrizione_programmi.csv "|||.ttl|php7 gateways/programmi.php spd_lbf_spe_elb_cap_01_2018"
 
 ####################################################
 SD_LOG  "Starting reasoning window: computing axioms and rules..."

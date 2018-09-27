@@ -15,11 +15,13 @@ The bdap-meta gateway requires expect in input a json structure containing the m
 Gateways can be tested stand alone just with any host providing php7; e.g.:
 
 ```
-docker run -ti -v $PWD/.:/gateways thatsamguy/trusty-php71 bash
+docker run --rm -ti -v $PWD/.:/app composer bash
+cd /app
 php bdap.php spd_lbf_spe_elb_cap_01_2018 < tests/data/legge-di-bilancio.csv
 php bdap.php spd_dlb_spe_elb_cap_01_2017 < tests/data/disegno-legge-di-bilancio.csv 
 php bdap.php spd_rnd_spe_elb_cap_01_2017 < tests/data/rendiconto.csv 
 php bdap.php spd_rnd_spe_elb_cap_01_2016 < tests/data/rendiconto-old.csv 
+php programmi.php spd_lbf_spe_elb_cap_01_2018 < tests/data/programmi.csv 
 php bdap_meta.php < tests/data/metadata.json 
 ```
 
