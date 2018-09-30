@@ -6,7 +6,6 @@ services:
       - "9999:8080"
   api:
     build: ./apis
-    command: [ "nodemon"]
     volumes:
       - ./apis:/usr/src/app
     ports:

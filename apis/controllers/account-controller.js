@@ -174,10 +174,10 @@ async function buildJsonAccountsList(data){
 				//top_partition_label second_partition_label
 				account.partitions = {
 					top_partition: account.top_partition_label,
-					second_partition: account.second_partition_label
+					second_partition: capitalizeFirstLetter(account.second_partition_label)
 				}
 				account.top_level = account.top_partition_label;
-				
+				account.name = capitalizeFirstLetter(account.name);
 				//remove old ones
 				delete account.top_partition_label;
 				delete account.second_partition_label;
@@ -207,16 +207,16 @@ async function buildJsonAccount(data){
 			json.map(account => {
 				output.past_values[account.year] = account.history_amount;
 				output.cds.push({
-					name: account.fact_label,
+					name: capitalizeFirstLetter(account.fact_label),
 					amount: account.fact_amount,
 				});
 			});
 
 			output.partitions = {
 				top_partition: output.top_partition_label,
-				second_partition: output.second_partition_label
+				second_partition: capitalizeFirstLetter(output.second_partition_label)
 			}
-			
+			output.name = capitalizeFirstLetter(output.name);
 			output.top_level =  output.top_partition_label;
 			
 			//remove old ones
@@ -229,6 +229,8 @@ async function buildJsonAccount(data){
 			delete output.fact_uri;
 			delete output.fact_label;
 			delete output.fact_amount;
+
+
 			resolve(output);
 		
 		}catch (e){
@@ -256,6 +258,10 @@ async function buildJsonFilter(data, group){
 			reject(e);
 		}
 	});
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 
