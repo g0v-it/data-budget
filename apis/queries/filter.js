@@ -1,4 +1,4 @@
-//get account
+//get filter
 
 module.exports = (top_partition_label, second_partition_label, group_label) => {
 	return ({

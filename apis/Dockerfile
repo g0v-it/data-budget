@@ -7,14 +7,14 @@ ENV WORK_DIR /usr/src/app/
 WORKDIR $WORK_DIR
 
 #FOR develop
-RUN npm install -g nodemon
+# RUN npm install -g nodemon
 
 # Install app dependencies
 COPY package*.json ./
 RUN npm install
 
 #FOR_DEV
-RUN mv $WORK_DIR/node_modules /node_modules
+# RUN mv $WORK_DIR/node_modules /node_modules
 
 COPY . .
 EXPOSE 80

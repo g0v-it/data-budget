@@ -19,7 +19,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //CORS
 app.use(CORS);
 
-
 //Routes
 app.use('/', accountRouter);
 

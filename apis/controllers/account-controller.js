@@ -112,6 +112,30 @@ exports.filter = async (req, res) => {
 	res.send(result);
 }
 
+exports.getFilter = async (req, res) => {
+	let topQueryFilter, secondQueryFilter, result, top_filter, second_filter,
+	filter = req.body;
+
+
+	result = {};
+	//Params
+	let top_partition = filter.top_partition.join('|'),
+	second_partition = filter.second_partition.join('|');
+
+	//Get queries
+	topQueryFilter = require('../queries/filter.js')(top_partition, second_partition, topPartition);
+	secondQueryFilter = require('../queries/filter.js')(top_partition, second_partition, secondPartition);
+
+	//get Top and second filter
+	top_filter = await buildJsonFilter(await getQueryResult(config.endpoint, topQueryFilter), topPartition);
+	second_filter = await buildJsonFilter(await getQueryResult(config.endpoint, secondQueryFilter), secondPartition);
+
+	//output
+	result[topPartition] = top_filter;
+	result[secondPartition] = second_filter;
+	res.send(result);
+}
+
 
 /**
 	* @endpoint must a be a complete path (e.s. https://query.wikidata.org/sparql)
@@ -170,14 +194,15 @@ async function buildJsonAccountsList(data){
 		try{
 			let output = await csv().fromString(data);
 			output.map(account => {
-			//Set new tags
+				//Set new tags
 				//top_partition_label second_partition_label
 				account.partitions = {
 					top_partition: account.top_partition_label,
-					second_partition: capitalizeFirstLetter(account.second_partition_label)
+					second_partition: account.second_partition_label
 				}
+				account.amount = parseFloat(account.amount);
+				account.last_amount = parseFloat(account.last_amount);
 				account.top_level = account.top_partition_label;
-				account.name = capitalizeFirstLetter(account.name);
 				//remove old ones
 				delete account.top_partition_label;
 				delete account.second_partition_label;
@@ -198,25 +223,24 @@ async function buildJsonAccount(data){
 			json = await csv().fromString(data);
 			output = json[0];
 
-			console.log(output);
-
 			output.past_values= {};
 			output.partitions = {};
 			output.cds = [];
 
 			json.map(account => {
-				output.past_values[account.year] = account.history_amount;
+				output.past_values[account.year] = parseFloat(account.history_amount);
 				output.cds.push({
-					name: capitalizeFirstLetter(account.fact_label),
-					amount: account.fact_amount,
+					name: account.fact_label,
+					amount: parseFloat(account.fact_amount),
 				});
 			});
 
 			output.partitions = {
 				top_partition: output.top_partition_label,
-				second_partition: capitalizeFirstLetter(output.second_partition_label)
+				second_partition: output.second_partition_label
 			}
-			output.name = capitalizeFirstLetter(output.name);
+			output.amount = parseFloat(output.amount);
+			output.last_amount = parseFloat(output.last_amount);
 			output.top_level =  output.top_partition_label;
 			
 			//remove old ones
@@ -260,10 +284,6 @@ async function buildJsonFilter(data, group){
 	});
 }
 
-function capitalizeFirstLetter(string) {
-    //return string.charAt(0).toUpperCase() + string.slice(1);
-    return string;
-}
 
 
 

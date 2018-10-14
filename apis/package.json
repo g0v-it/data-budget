@@ -1,12 +1,11 @@
 {
   "name": "data-budget-apis",
   "version": "1.0.0",
-  "description": "ekkle",
+  "description": "data-budget APIs for g0v budget visualization applications (see README.md)",
   "author": "Yassine Ouahidi",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon"
+    "start": "node app.js"
   },
   "dependencies": {
     "csvtojson": "^2.0.8",
