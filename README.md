@@ -4,7 +4,7 @@
 
 A simple smart data management platform to feed http://budget.g0v.it/ web application and similar apps. 
 
-This project aims to create a general smart data management platform to feed a budget visualization application based on W3C semantic web standards.
+This project aims to create a general smart data management platform to feed a budget visualization application based on W3C Semantic Web standards.
 
 **Try it now:**
 
