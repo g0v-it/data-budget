@@ -37,7 +37,7 @@
         <dc:creator xml:lang="en">Enrico Fagnoni enrico@linkeddata.center</dc:creator>
         <dc:rights xml:lang="en">The g0v-ap ontology is available under the Creative Commons Attribution 3.0 Unported license; see http://creativecommons.org/licenses/by/3.0/. In a nutshell, you are free to copy, distribute and transmit the work; to remix/adapt the work (e.g. to import the ontology and create specializations of its elements), as long as you attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work). Proper Attribution: Simply include the statement &quot;This work is based on the g0v-ap ontology, developed by Enrico Fagnoni&quot; and link back to http://linkeddata.center/</dc:rights>
         <dc:title xml:lang="en">The g0v-ap vocabulary for knowledge  base management</dc:title>
-        <rdfs:seeAlso rdf:resource="https://git.copernicani.it/g0v/data-budget/blob/master/g0v-ap/README.md"/>
+        <rdfs:seeAlso rdf:resource="https://github.com/g0v-it/data-budget"/>
         <dc:description xml:lang="en">g0v-ap ontology describes some classes used to model a financtial report (e.g. a budget report). It is inspired to the &quot;Financial Report Semantics and Dynamics Theory&quot; paper [http://xbrlsite.azurewebsites.net/2016/Library/Theory-2017-06-26.pdf] by Charles Hoffman and  Raynier van Egmond, M.Sc. Please refer to the g0v-ap home page for more info (http://data.budget.g0v.it/g0v-ap)</dc:description>
     </owl:Ontology>
     
