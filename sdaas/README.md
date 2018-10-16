@@ -26,6 +26,7 @@ the test of the build script requires the sdaas-ce container.
 ```
 docker run -d -p 9999:8080 -v $PWD/.:/workspace --name kb linkeddatacenter/sdaas-ce
 docker exec -ti kb bash
+apk --no-cache add php7-json
 sdaas --debug -f build.sdaas --reboot
 exit
 docker rm -f kb

@@ -16,13 +16,13 @@ Gateways can be tested stand alone just with any host providing php7; e.g.:
 
 ```
 docker run --rm -ti -v $PWD/.:/app composer bash
-cd /app
 php bdap.php spd_lbf_spe_elb_cap_01_2018 < tests/data/legge-di-bilancio.csv
 php bdap.php spd_dlb_spe_elb_cap_01_2017 < tests/data/disegno-legge-di-bilancio.csv 
 php bdap.php spd_rnd_spe_elb_cap_01_2017 < tests/data/rendiconto.csv 
 php bdap.php spd_rnd_spe_elb_cap_01_2016 < tests/data/rendiconto-old.csv 
 php programmi.php spd_lbf_spe_elb_cap_01_2018 < tests/data/programmi.csv 
 php bdap_meta.php < tests/data/metadata.json 
+php account_names.php < tests/data/account_names.csv 
 ```
 
 The gateways must generate valid RDF statements in turtle (n3) or any other RDF serialization format. Check the gateway results using an online service like http://rdf-translator.appspot.com/

@@ -27,6 +27,9 @@ for year in $(seq 2013 2018) ; do
 done
 
 SD_LEARN urn:mef:programmi data/descrizione_programmi.csv "|||.ttl|php7 gateways/programmi.php spd_lbf_spe_elb_cap_01_2018"
+SD_LEARN urn:copernicani:nomi_azioni "https://docs.google.com/spreadsheets/d/e/2PACX-1vTs9jWocG_xYjgp4JmKcH6o_7piJ9b4t--c-kx_xf6Erkp_-ad-4Fj0MRY2Eyd0AA9-LZ94pTwDv4na/pub?output=csv" "|||.ttl|php7 gateways/account_names.php"
+
+
 
 ####################################################
 SD_LOG  "Starting reasoning window: computing axioms and rules..."

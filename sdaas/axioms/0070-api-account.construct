@@ -8,7 +8,6 @@ PREFIX : <http://data.budget.g0v.it/g0v-ap-api/v1#>
 CONSTRUCT {
 	?component a :Account ;
        :amount ?amount;
-       :name ?name;
        :topPartitionLabel ?top_partition_label;
        :secondPartitionLabel ?second_partition_label
 } WHERE {
@@ -19,12 +18,12 @@ CONSTRUCT {
 		} GROUP BY ?component
 	}
 
-	?component g0v:concept ?account_subject.
-	?account_subject skos:prefLabel ?name ; 
-	
-	# get mission label
-	skos:broader/skos:broader/skos:prefLabel ?second_partition_label;
-	
-	# get administration label
-	skos:broader/skos:broader/skos:broader/skos:prefLabel ?top_partition_label
+	?component g0v:concept ?account_concept.
+	?account_concept 
+		
+		# get mission label
+		skos:broader/skos:broader/skos:prefLabel ?second_partition_label;
+		
+		# get administration label
+		skos:broader/skos:broader/skos:broader/skos:prefLabel ?top_partition_label
 }

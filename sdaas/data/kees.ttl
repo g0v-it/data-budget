@@ -46,8 +46,13 @@ resource:spd_rnd_spe_rnd_cap_theme a skos:Concept;
 .
 
 resource:MEF a foaf:Organization; 
-    foaf:homepage <http://www.mef.gov.it>;
+    foaf:homepage <http://www.mef.gov.it/>;
     foaf:name "Ragioneria Generale dello Stato"@it
+.
+
+resource:Copernicani a foaf:Organization; 
+    foaf:homepage <https://copernicani.it/>;
+    foaf:name "Associazione Copernicani"@it
 .
 
 
@@ -84,6 +89,21 @@ resource:descrizione_programmi_csv a  dcat:Distribution ;
 			prov:wasDerivedFrom <https://mail.google.com/mail/u/0?ik=cb29cb291d&view=om&permmsgid=msg-f%3A1612323464032188207>
 		]
 	]
+.
+
+
+resource:nomi_azioni a dcat:Dataset;
+        dct:description  "Ottimizzazione dei nomi delle azioni riscritte dai Copernicani"@it ;
+        dct:identifier   "nomi_azioni" ;
+        dct:publisher    resource:Copernicani ;
+        dct:title        "Nomi azioni ottimizzati"@it ;
+        dcat:accessUrl    <https://docs.google.com/spreadsheets/d/1JpmdYjNkc-Yr4JlQdFhn0jgcJ0tuMZZ5Y9IWmc57BTA/edit?usp=sharing> ;
+        dcat:distribution    resource:nomi_azioni_csv
+.
+resource:nomi_azioni_csv a  dcat:Distribution ;
+        dct:format "text/csv" ;
+        dcat:downloadUrl <https://docs.google.com/spreadsheets/d/e/2PACX-1vTs9jWocG_xYjgp4JmKcH6o_7piJ9b4t--c-kx_xf6Erkp_-ad-4Fj0MRY2Eyd0AA9-LZ94pTwDv4na/pub?output=csv> ;
+        dcat:license <http://creativecommons.org/licenses/by/3.0> 
 .
 
 	
