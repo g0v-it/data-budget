@@ -2,26 +2,31 @@ version: '3'
 services:
   sdaas:
     build: ./sdaas
+    image: copernicani/data-budget-sdaas:$data-budget-version
     ports:
       - "9999:8080"
   api:
     build: ./apis
+    image: copernicani/data-budget-apis:$data-budget-version
     ports:
       - "8080:80"
     depends_on:
       - "sdaas"
   lodview:
     build: ./lodview
+    image: copernicani/data-budget-lodview:$data-budget-version
     ports:
       - "8082:8080"
     depends_on:
       - "sdaas"
   lode:
     build: ./g0v-ap
+    image: copernicani/data-budget-lode:$data-budget-version
     ports:
       - "8083:8080"
   router:
     build: ./router
+    image: copernicani/data-budget-router:$data-budget-version
     ports:
       - "80:80"
     depends_on:
