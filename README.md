@@ -61,15 +61,15 @@ To see the container's logs, run:
 
 ### router entry points :
 
-The router acts a redirector and as a transparent proxy for all da management platform services. It provides following entry point:
+The router acts a redirector and as a transparent proxy for all data management platform services. It provides following entry point:
 
-- **/** redirects to the project home page (this readme file fro now)
+- **/** redirects to the project home page (this readme file)
 - **/api/** redirects to api documentation
-- **/api/v1/<api command>*** redirects to api command  ( try http://localhost/api/accounts)
-- **/resource/<resource id>** calls the linked data browser  ( try http://localhost/resource/welcome)
-- **/g0v-ap/v1** pretty print of the g0v-ap vocabulary  ( try http://localhost/g0v-ap/v1)
-- **/g0v-ap-api/v1** pretty print of the g0v-ap-api vocabulary  ( try http://localhost/g0v-ap-api/v1)
-- **/sdaas/sparql** redirects to sparql endpoint  ( try http://localhost/sdaas/sparql)
+- **/api/v1/<api command>*** redirects to api command  ( e.g. http://localhost/api/accounts)
+- **/resource/<resource id>** calls the linked data browser  (  e.g. http://localhost/resource/welcome)
+- **/g0v-ap/v1** pretty print of the g0v-ap vocabulary  
+- **/g0v-ap-api/v1** pretty print of the g0v-ap-api vocabulary  
+- **/sdaas/sparql** redirects to the sparql endpoint
 
 
 ## Support
