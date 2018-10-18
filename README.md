@@ -8,7 +8,7 @@ This project aims to create a general smart data management platform to feed a b
 
 **Try it now:**
 
-- **api**: http://data.budget.g0v.it/api/v1
+- **json api**: http://data.budget.g0v.it/api/v1
 - **linked open data** viewer: http://data.budget.g0v.it/resource/welcome
 - **SPARQL endpoint**: http://data.budget.g0v.it/sdaas/sparql
 - **SPARQL interactive console**: http://data.budget.g0v.it:8889/sdaas/#query (based on Blazegraph workbench)
