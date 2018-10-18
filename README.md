@@ -65,11 +65,11 @@ The router acts a redirector and as a transparent proxy for all data management 
 
 - **/** redirects to the project home page (this readme file)
 - **/api/** redirects to api documentation
-- **/api/v1/<api command>*** redirects to api command  ( e.g. http://localhost/api/accounts)
-- **/resource/<resource id>** calls the linked data browser  (  e.g. http://localhost/resource/welcome)
+- **/api/v1/<api command>*** a reverse proxy to api server  ( e.g. http://localhost/api/accounts)
+- **/resource/<resource id>** redirects to linked data browser  (  e.g. http://localhost/resource/welcome)
 - **/g0v-ap/v1** pretty print of the g0v-ap vocabulary  
 - **/g0v-ap-api/v1** pretty print of the g0v-ap-api vocabulary  
-- **/sdaas/sparql** redirects to the sparql endpoint
+- **/sdaas/sparql**a reverse proxy to the sparql endpoint
 
 
 ## Support
