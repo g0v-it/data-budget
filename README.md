@@ -35,41 +35,26 @@ The full deploy of g0v-data requires a stack of some services (e.g. docker conta
 g0v-data platform is shipped with a [Docker](https://docker.com) setup that makes it easy to get a containerized development
 environment up and running. If you do not already have Docker on your computer, [it's the right time to install it](https://docs.docker.com/install/).
 
-clone this project, open a terminal, and navigate to the directory of this repository. Run the following command 
+clone this project, open a terminal, and navigate to the directory of this repository. Copy the env.dist file in .env (`cp env.dist .env`), edit .env file according your needs. Do not save the .env file in the repository.
 
-	$ cp env.dist .env
-
-edit .env file according your needs.Do not save the .env file in the repository.
-
-To start all services using [Docker Compose](https://docs.docker.com/compose/) type `docker-compose up -d`
-
+To start all services using [Docker Compose](https://docs.docker.com/compose/) type: `docker-compose up -d`
 
 This starts the following services
-
 
 
 | Name        | Description                                                   | Port(s) | Environment(s
 
 | ----------- | ------------------------------------------------------------- | ------- | -------------
-
 | router      | proxy cache server                                            | 80      | customize in prod
-
 | sdaas       | a server that manages the datastore and the ingestion engine  | 8889    | all
-
 | api         | a server that manages the web-budget api                      | 8081    | al
-
 | lodview     | a LODVIEW server to navigate linked data                      | 8082    | can use any other internet instance (change router config
 
 
 The first time you start the containers, Docker downloads and builds images for you. It will take some time, but don't worry
-
 this is done only once. Starting servers will then be lightning fast
 
-
-To see the container's logs, run
-
-
-    $ docker-compose logs -f # follow the log
+To see the container's logs, run `docker-compose logs -f`
 
 
 
@@ -78,50 +63,34 @@ To see the container's logs, run
 
 The router acts a redirector and as a transparent proxy for all da management platform services. It provides following entry point
 
-
 - **/** redirects to the project home page (this readme file fro now
-
 - **/api/** redirects to api documentatio
-
 - **/api/v1/<api command>*** redirects to api command  ( try http://localhost/api/accounts
-
 - **/resource/<resource id>** calls the linked data browser  ( try http://localhost/resource/welcome
-
 - **/g0v-ap/v1** redirects to the g0v-ap vocabulary  ( try http://localhost/g0v-ap/v1
-
 - **/g0v-ap-api/v1** redirects to  the g0v-ap-api vocabulary  ( try http://localhost/g0v-ap-api/v1
-
 - **/sdaas/sparql** redirects to sparql endpoint  ( try http://localhost/sdaas/sparql
 
 
+## Support
 
-## Suppor
-
-
-For answers you may not find in here or in the Wiki, avoid posting issues. Feel free to ask for support on the [Slack](https://linkeddatacenter.slack.com/) general room. Make sure to mention **@enrico** so he is notified
+For answers you may not find in here or in the Wiki, avoid posting issues. Feel free to ask for support on the [Slack](https://copernicani.slack.com/) general room. Make sure to mention **@enrico** so he is notified
 
 
-## Credit
+## Credits
 
-
-
-- data extracted from by [OpenBDAP](https://bdap-opendata.mef.gov.it/) with CC-BY open licen
-
+- data extracted from by [OpenBDAP](https://bdap-opendata.mef.gov.it/) with CC-BY open license
 - the RDF datastore and the SPARQL endpoint is based on the [Blazegraph community edition](https://www.blazegraph.com/
-
 - the g0v-ap ontology and the smart data management platform was developed by [Enrico Fagnoni] (https://github.com/ecow) using the [SDaaS platform by LinkedData.Center](http://LinkedData.Center/
-
 - API server and gateways was developed by [Yassine Ouahidi](https://github.com/YassineOuahidi
-
 - [LOD-VIEW](http://lodview.it/) was developed by [Diego Valerio Camarda](https://www.linkedin.com/in/dvcama) and [Alessandro Antonuccio](http://hstudio.it/)
 
 
-Thanks to all project contributors, to the [Copernicani community](https://copernicani.it/) and to the [g0v asia community](http://g0v.asia) for ideas and support
+Thanks to all project contributors, to the [Copernicani community](https://copernicani.it/) and to the [g0v asia community](http://g0v.asia) for ideas and support.
 
 
+## License
 
-## Licens
 
-
-The MIT License (MIT). Please see [License File](LICENSE) for more information
+The MIT License (MIT). Please see [License File](LICENSE) for more information.
 
