@@ -43,7 +43,6 @@ This starts the following services
 
 
 | Name        | Description                                                   | Port(s) | Environment(s
-
 | ----------- | ------------------------------------------------------------- | ------- | -------------
 | router      | proxy cache server                                            | 80      | customize in prod
 | sdaas       | a server that manages the datastore and the ingestion engine  | 8889    | all
