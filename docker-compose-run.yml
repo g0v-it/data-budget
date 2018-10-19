@@ -1,0 +1,30 @@
+version: '3'
+services:
+  sdaas:
+    build: ./sdaas
+    image: copernicani/data-budget-sdaas:$databudgetversion
+    ports:
+      - "$sdaasport:8080"
+  api:
+    build: ./apis
+    image: copernicani/data-budget-api:$databudgetversion
+    ports:
+      - "$apiport:80"
+    depends_on:
+      - "sdaas"
+  lodview:
+    build: ./lodview
+    image: copernicani/data-budget-lodview:$databudgetversion
+    ports:
+      - "$lodviewport:8080"
+    depends_on:
+      - "sdaas"
+  router:
+    build: ./router
+    image: copernicani/data-budget-router:$databudgetversion
+    ports:
+      - "$routerport:80"
+    depends_on:
+      - "sdaas"
+      - "lodview"
+      - "api"
