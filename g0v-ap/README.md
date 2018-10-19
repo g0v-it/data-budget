@@ -135,14 +135,11 @@ docker run --name blazegraph -d -p 9999:8080 lyrasis/blazegraph:2.1.4
 5. Try SPARQL queries in examples directory
 
 
-## Generating g0v-ap ontology documentation on-the-fly
+## Generating g0v-ap ontology html documentation on-the-fly
 
-Here find a container to run a [lode server](https://github.com/essepuntato/LODE) to generate human readable document for g0v-ap ontology.
+Point your browser to:
  
-```	
-docker build . -t lode
-docker run -d -v g0v-ap.owl:/lode/LODE-master/src/main/webapp/g0v-ap.owl --name lode -p 9090:8080 lode
-```
+- [HTML rendering of g0v-ap ontology](http://www.essepuntato.it/lode/https://raw.githubusercontent.com/g0v-it/data-budget/master/g0v-ap/g0v-ap.owl)
+[HTML rendering of g0v-ap-api ontology](http://www.essepuntato.it/lode/https://raw.githubusercontent.com/g0v-it/data-budget/master/g0v-ap/examples/g0v-ap-api.owl)
 
-Point your browser to http://localhost:9090/lode/extract?url=localhost:8080/lode/g0v-ap.owl
-
+See the the Dockerfile the doc directory for to create a standalone lode server.

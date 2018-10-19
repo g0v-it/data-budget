@@ -8,10 +8,10 @@ This project aims to create a general smart data management platform to feed a b
 
 **Try it now:**
 
-- **json api**: http://data.budget.g0v.it/api/v1
+- **api**: http://data.budget.g0v.it/api/v1
 - **linked open data** viewer: http://data.budget.g0v.it/resource/welcome
-- **SPARQL endpoint**: http://data.budget.g0v.it/sdaas/sparql
-- **SPARQL interactive console**: http://data.budget.g0v.it:8889/sdaas/#query (based on Blazegraph workbench)
+- **SPARQL endpoint**: http://data.budget.g0v.it:8889/sdaas/#query
+
 
 ## Development
 
@@ -28,66 +28,100 @@ This picture shows the components interactions:
 ![architecture](doc/g0v-data-architecture.png)
 
 
-The full deploy of g0v-data requires a stack of four services (e.g. docker containers):
+The full deploy of g0v-data requires a stack of some services (e.g. docker containers):
 
 ![stack](doc/g0v-data-stack.png)
 
 g0v-data platform is shipped with a [Docker](https://docker.com) setup that makes it easy to get a containerized development
 environment up and running. If you do not already have Docker on your computer, [it's the right time to install it](https://docs.docker.com/install/).
 
-clone this project, open a terminal, and navigate to the directory of this repository. Run the following command to start all
-services using [Docker Compose](https://docs.docker.com/compose/):
+clone this project, open a terminal, and navigate to the directory of this repository. Run the following command 
 
-    $ docker-compose up -d # Running in detached mode
+	$ cp env.dist .env
 
-This starts the following services:
+edit .env file according your needs.Do not save the .env file in the repository.
 
-
-| Name        | Description                                                   | Port(s) | Environment(s)
-| ----------- | ------------------------------------------------------------- | ------- | --------------
-| router      | proxy cache server                                            | 80      | customize in prod 
-| sdaas       | a server that manages the datastore and the ingestion engine  | 8889    | all 
-| api         | a server that manages the web-budget api                      | 8081    | all
-| lodview     | a LODVIEW server to navigate linked data                      | 8082    | can use any other internet instance (change router config)
-| lode        | a server to render onology using LODE                         | 8083    | can use any other internet instance (change router config)
-
-The first time you start the containers, Docker downloads and builds images for you. It will take some time, but don't worry,
-this is done only once. Starting servers will then be lightning fast.
-
-To see the container's logs, run:
-
-    $ docker-compose logs -f # follow the logs
+To start all services using [Docker Compose](https://docs.docker.com/compose/) type `docker-compose up -d`
 
 
-### router entry points :
-
-The router acts a redirector and as a transparent proxy for all data management platform services. It provides following entry point:
-
-- **/** redirects to the project home page (this readme file)
-- **/api/** redirects to api documentation
-- **/api/v1/<api command>*** a reverse proxy to api server  ( e.g. http://localhost/api/accounts)
-- **/resource/<resource id>** redirects to linked data browser  (  e.g. http://localhost/resource/welcome)
-- **/g0v-ap/v1** pretty print of the g0v-ap vocabulary  
-- **/g0v-ap-api/v1** pretty print of the g0v-ap-api vocabulary  
-- **/sdaas/sparql**a reverse proxy to the sparql endpoint
+This starts the following services
 
 
-## Support
 
-For answers you may not find in here or in the Wiki, avoid posting issues. Feel free to ask for support on the [Slack](https://linkeddatacenter.slack.com/) general room. Make sure to mention **@enrico** so he is notified.
+| Name        | Description                                                   | Port(s) | Environment(s
 
-## Credits
+| ----------- | ------------------------------------------------------------- | ------- | -------------
 
+| router      | proxy cache server                                            | 80      | customize in prod
 
-- data extracted from by [OpenBDAP](https://bdap-opendata.mef.gov.it/) with CC-BY open licens
-- the RDF datastore and the SPARQL endpoint is based on the [Blazegraph community edition](https://www.blazegraph.com/)
-- the g0v-ap ontology and the smart data management platform was developed by [Enrico Fagnoni] (https://github.com/ecow) using the [SDaaS platform by LinkedData.Center](http://LinkedData.Center/)
-- API server and gateways was developed by [Yassine Ouahidi](https://github.com/YassineOuahidi)
-- [LOD-VIEW](http://lodview.it/) was developed by [Diego Valerio Camarda](https://www.linkedin.com/in/dvcama) and [Alessandro Antonuccio](http://hstudio.it/).
+| sdaas       | a server that manages the datastore and the ingestion engine  | 8889    | all
 
-Thanks to all project contributors, to the [Copernicani community](https://copernicani.it/) and to the [g0v asia community](http://g0v.asia) for ideas and support.
+| api         | a server that manages the web-budget api                      | 8081    | al
+
+| lodview     | a LODVIEW server to navigate linked data                      | 8082    | can use any other internet instance (change router config
 
 
-## License
+The first time you start the containers, Docker downloads and builds images for you. It will take some time, but don't worry
 
-The MIT License (MIT). Please see [License File](LICENSE) for more information.
+this is done only once. Starting servers will then be lightning fast
+
+
+To see the container's logs, run
+
+
+    $ docker-compose logs -f # follow the log
+
+
+
+### router entry points 
+
+
+The router acts a redirector and as a transparent proxy for all da management platform services. It provides following entry point
+
+
+- **/** redirects to the project home page (this readme file fro now
+
+- **/api/** redirects to api documentatio
+
+- **/api/v1/<api command>*** redirects to api command  ( try http://localhost/api/accounts
+
+- **/resource/<resource id>** calls the linked data browser  ( try http://localhost/resource/welcome
+
+- **/g0v-ap/v1** redirects to the g0v-ap vocabulary  ( try http://localhost/g0v-ap/v1
+
+- **/g0v-ap-api/v1** redirects to  the g0v-ap-api vocabulary  ( try http://localhost/g0v-ap-api/v1
+
+- **/sdaas/sparql** redirects to sparql endpoint  ( try http://localhost/sdaas/sparql
+
+
+
+## Suppor
+
+
+For answers you may not find in here or in the Wiki, avoid posting issues. Feel free to ask for support on the [Slack](https://linkeddatacenter.slack.com/) general room. Make sure to mention **@enrico** so he is notified
+
+
+## Credit
+
+
+
+- data extracted from by [OpenBDAP](https://bdap-opendata.mef.gov.it/) with CC-BY open licen
+
+- the RDF datastore and the SPARQL endpoint is based on the [Blazegraph community edition](https://www.blazegraph.com/
+
+- the g0v-ap ontology and the smart data management platform was developed by [Enrico Fagnoni] (https://github.com/ecow) using the [SDaaS platform by LinkedData.Center](http://LinkedData.Center/
+
+- API server and gateways was developed by [Yassine Ouahidi](https://github.com/YassineOuahidi
+
+- [LOD-VIEW](http://lodview.it/) was developed by [Diego Valerio Camarda](https://www.linkedin.com/in/dvcama) and [Alessandro Antonuccio](http://hstudio.it/)
+
+
+Thanks to all project contributors, to the [Copernicani community](https://copernicani.it/) and to the [g0v asia community](http://g0v.asia) for ideas and support
+
+
+
+## Licens
+
+
+The MIT License (MIT). Please see [License File](LICENSE) for more information
+
