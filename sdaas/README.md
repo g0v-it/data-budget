@@ -6,17 +6,17 @@ The knowledge base is built around the [g0v-ap-api ontology](http://data.budget.
 that is a local specialization of the [g0v-ap ontology](http://data.budget.g0v.it/g0v-ap/v1) designed
 to provide a data model that is easy to query for the data-budget apis component in budget.gov.it project
 
-The data ingestion process is managed by the SDaS platform (community edition).
+The data ingestion process is managed by the LinkedData.Center SDaaS platform (community edition).
 
 
 ## updating the knowledge base
 
-knowledge base build process require:
+knowledge base build process requires:
 
-- to edit local data, editing the files in the *data* directory
+- to edit files in the *data* directory
 - to develop the *gateways* for transforming web resources in linked data. See [gateways doc.](gateways/README.md)
 - to write *axioms* and rules to generate new data. See [axioms doc.](axioms/README.md)
-- to edit a *build script* for sdaas platform that drives the data ingestion process.
+- to edit the *build script* that drives the data ingestion process.
 - to run sdaas
 
 ### debugging the build script
@@ -51,16 +51,15 @@ The resulting container will provide a readonly distribution of the whole knowle
 
 ## Directory structure
 
-- the **build.sdaas** file is a script for sdaas platform to populate the knowledge base from scratch. It requires sdaas platform community edition 2.0+
+- the **build.sdaas** file is a script to populate the knowledge base from scratch. It requires sdaas platform community edition 2.0+
 - the **axioms** directory contains rules to be processed during reasoning windows.
 - the **data** directory contains local data files
-- the **gateways** directory contains the code to transform raw data into linked data
+- the **gateways** directory contains the code to transform raw data in linked data
 - the **scripts** directory contains the code for local extensions to sdaas
 - the **.cache** temporary directory that contains logs and debugging info. Not saved in repo.
 
 
 ## Credits and license
-
 
 - the dockerfile reuse [Docker Blazegraph](https://github.com/lyrasis/docker-blazegraph)
 - the sdaas platform is derived from [LinkedData.Center SDaas Product](https://it.linkeddata.center/p/sdaas) and licensed with CC-by-nd-nc by LinkedData.Center to g0v community
