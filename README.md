@@ -62,13 +62,13 @@ To see the container's logs, run `docker-compose logs -f`
 
 The router acts a redirector and as a transparent proxy for all da management platform services. It provides following entry point
 
-- **/** redirects to the project home page (this readme file fro now
-- **/api/** redirects to api documentatio
-- **/api/v1/<api command>*** redirects to api command  ( try http://localhost/api/accounts
-- **/resource/<resource id>** calls the linked data browser  ( try http://localhost/resource/welcome
-- **/g0v-ap/v1** redirects to the g0v-ap vocabulary  ( try http://localhost/g0v-ap/v1
-- **/g0v-ap-api/v1** redirects to  the g0v-ap-api vocabulary  ( try http://localhost/g0v-ap-api/v1
-- **/sdaas/sparql** redirects to sparql endpoint  ( try http://localhost/sdaas/sparql
+- **/** redirects to the project home page (this readme file for now)
+- **/api/** redirects to api documentation
+- **/api/v1/<api command>*** redirects to api command  (try http://localhost/api/accounts)
+- **/resource/<resource id>** calls the linked data browser  (try http://localhost/resource/welcome)
+- **/g0v-ap/v1** redirects to the g0v-ap vocabulary  (try http://localhost/g0v-ap/v1)
+- **/g0v-ap-api/v1** redirects to  the g0v-ap-api vocabulary  (try http://localhost/g0v-ap-api/v1)
+- **/sdaas/sparql** redirects to sparql endpoint  (try http://localhost/sdaas/sparql)
 
 
 ## Support
@@ -80,8 +80,8 @@ For answers you may not find in here or in the Wiki, avoid posting issues. Feel 
 
 - data extracted from by [OpenBDAP](https://bdap-opendata.mef.gov.it/) with CC-BY open license
 - the RDF datastore and the SPARQL endpoint is based on the [Blazegraph community edition](https://www.blazegraph.com/
-- the g0v-ap ontology and the smart data management platform was developed by [Enrico Fagnoni] (https://github.com/ecow) using the [SDaaS platform by LinkedData.Center](http://LinkedData.Center/
-- API server and gateways was developed by [Yassine Ouahidi](https://github.com/YassineOuahidi
+- the g0v-ap ontology and the smart data management platform was developed by [Enrico Fagnoni](https://github.com/ecow) using the [SDaaS platform by LinkedData.Center](http://LinkedData.Center/)
+- API server and gateways was developed by [Yassine Ouahidi](https://github.com/YassineOuahidi)
 - [LOD-VIEW](http://lodview.it/) was developed by [Diego Valerio Camarda](https://www.linkedin.com/in/dvcama) and [Alessandro Antonuccio](http://hstudio.it/)
 
 
