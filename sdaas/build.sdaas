@@ -15,18 +15,16 @@ SD_LOG  "Starting learning window: loading facts. This will take a while..."
 # Learn currency description from dbpedia
 SD_LEARN "http://dbpedia.org/data/Euro.n3"
 
-# Learn time intervals from uk reference 
-for year in $(seq 2013 2022) ; do
-	SD_LEARN "http://reference.data.gov.uk/doc/gregorian-interval/${year}-01-01T00:00:00/P1Y"
-done
+SD_LEARN "http://reference.data.gov.uk/doc/gregorian-interval/2019-01-01T00:00:00/P1Y"
+SD_LEARN "http://reference.data.gov.uk/doc/gregorian-interval/2018-01-01T00:00:00/P1Y"
+SD_LEARN "http://reference.data.gov.uk/doc/gregorian-interval/2017-01-01T00:00:00/P1Y"
 
-# G0V_LEARN_FROM_BDAP spd_dlb_spe_elb_cap_01_2019
+G0V_LEARN_FROM_BDAP spd_dlb_spe_elb_cap_01_2019
+G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_cap_01_2018
+#G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_cap_01_2017
 
-for year in $(seq 2013 2018) ; do
-	G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_cap_01_${year}
-done
 
-SD_LEARN urn:mef:programmi data/descrizione_programmi.csv "|||.ttl|php7 gateways/programmi.php spd_lbf_spe_elb_cap_01_2018"
+SD_LEARN urn:mef:programmi data/descrizione_programmi.csv "|||.ttl|php7 gateways/programmi.php spd_dlb_spe_elb_cap_01_2019"
 SD_LEARN urn:copernicani:nomi_azioni "https://docs.google.com/spreadsheets/d/e/2PACX-1vTs9jWocG_xYjgp4JmKcH6o_7piJ9b4t--c-kx_xf6Erkp_-ad-4Fj0MRY2Eyd0AA9-LZ94pTwDv4na/pub?output=csv" "|||.ttl|php7 gateways/account_names.php"
 
 

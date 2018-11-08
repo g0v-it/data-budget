@@ -42,7 +42,7 @@ if ($bdapDatasetYear >= 2017) {
             break;
             
         case "spd_dlb_spe_elb_cap":
-            $match[$b]=55;
+            $match[$b]=52;
             ;
             break;
     }
