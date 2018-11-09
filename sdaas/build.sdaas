@@ -15,11 +15,9 @@ SD_LOG  "Starting learning window: loading facts. This will take a while..."
 # Learn currency description from dbpedia
 SD_LEARN "http://dbpedia.org/data/Euro.n3"
 
-SD_LEARN "http://reference.data.gov.uk/doc/gregorian-interval/2020-01-01T00:00:00/P1Y"
 SD_LEARN "http://reference.data.gov.uk/doc/gregorian-interval/2019-01-01T00:00:00/P1Y"
 SD_LEARN "http://reference.data.gov.uk/doc/gregorian-interval/2018-01-01T00:00:00/P1Y"
 SD_LEARN "http://reference.data.gov.uk/doc/gregorian-interval/2017-01-01T00:00:00/P1Y"
-SD_LEARN "http://reference.data.gov.uk/doc/gregorian-interval/2016-01-01T00:00:00/P1Y"
 
 G0V_LEARN_FROM_BDAP spd_dlb_spe_elb_cap_01_2019
 G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_cap_01_2018
