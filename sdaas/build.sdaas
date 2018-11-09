@@ -23,7 +23,7 @@ SD_LEARN "http://reference.data.gov.uk/doc/gregorian-interval/2016-01-01T00:00:0
 
 G0V_LEARN_FROM_BDAP spd_dlb_spe_elb_cap_01_2019
 G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_cap_01_2018
-#G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_cap_01_2017
+G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_cap_01_2017
 
 
 SD_LEARN urn:mef:programmi data/descrizione_programmi.csv "|||.ttl|php7 gateways/programmi.php spd_dlb_spe_elb_cap_01_2019"
