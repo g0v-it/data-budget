@@ -218,7 +218,7 @@ async function buildJsonAccountsList(data){
 async function buildJsonAccount(data){
 	return new Promise(async (resolve, reject) =>{
 		try{
-			let json, output;
+			let json, output, singleCds;
 
 			json = await csv().fromString(data);
 			output = json[0];
@@ -229,10 +229,13 @@ async function buildJsonAccount(data){
 
 			json.map(account => {
 				output.past_values[account.year] = parseFloat(account.history_amount);
-				output.cds.push({
+				singleCds = {
 					name: account.fact_label,
 					amount: parseFloat(account.fact_amount),
-				});
+				}
+				if(!containsObject(singleCds, output.cds)) {
+					output.cds.push(singleCds);	
+    			}
 			});
 
 			output.partitions = {
@@ -284,6 +287,11 @@ async function buildJsonFilter(data, group){
 	});
 }
 
-
-
-
+function containsObject(obj, list) {
+    list.forEach((element) => {
+    	if (element.name == obj.name && element.amount == obj.amount){
+    		return true;
+    	}
+    })
+    return false;
+}
