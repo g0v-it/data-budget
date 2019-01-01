@@ -1,0 +1,11 @@
+##################################
+# Test very skos:Concept has  max one rdfs:comment
+################################## 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+ASK {
+    ?concept a skos:Concept; rdfs:comment ?comment1 .
+    FILTER NOT EXISTS { ?concept rdfs:comment ?comment2 FILTER(?comment1!=?comment2) } 
+}
+    

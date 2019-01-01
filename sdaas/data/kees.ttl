@@ -12,21 +12,25 @@
 @prefix owl:   <http://www.w3.org/2002/07/owl#> .
 @prefix dcat:  <http://www.w3.org/ns/dcat#> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix resource: <http://data.budget.g0v.it/resource/> .
+@prefix resource: <http://mef.linkeddata.cloud/resource/> .
 	
 resource:welcome a kees:KnowledgeBase;
     void:sparqlEndpoint <http://data.budget.g0v.it/sdaas/sparql> ;
 	dct:title "Welcome to budget.g0v.it knowledge base"@en; 
-	dct:description "This dataset provides information about the Italian government budget expressed in RDF with the g0v-ap ontology."@en;
+	dct:description "Contiene la conoscenza sulle spese riportati nelle leggi di bilancio dello Stato Italiano dal 2017."@it;
     dct:license <https://creativecommons.org/licenses/by/3.0/>;
-	rdfs:comment "Power by the community edition of  LinkedData.Center SDaaS™ platform."@en;
+	rdfs:comment "La base della conoscenza è stata costruita utilizzando la piattaforma SDaaS™ di LinkedData.Center "@it;
 	rdfs:comment "Data derived from OpenBDAP by © RGS Ragioneria Generale dello Stato."@en;
+	void:vocabulary <https://github.com/g0v-it/ontologies/tree/master/fr-ap>, <https://github.com/linkeddatacenter/kees>; 
+	dct:publisher resource:Copernicani ;
+	dct:creator resource:SDaaS ;
+	dct:contributor resource:MEF ;
  	void:exampleResource 
-		resource:spd_lbf_spe_elb_cap_01_2018 ,
-		resource:spd_lbf_spe_elb_cap_01_2018_schema ;
-	void:uriSpace "http://data.budget.g0v.it/resource/";
+		resource:spd_lbf_spe_elb_cap_01_2019 ,
+		resource:spd_lbf_spe_elb_cap_01_2019_schema ;
+	void:uriSpace "http://mef.linkeddata.cloud/resource/";
 	dct:subject <https://it.wikipedia.org/wiki/Bilancio_dello_Stato>;
-	foaf:page <http://data.budget.g0v.it/>
+	foaf:page <https://budget.g0v.it/>
 .
 
 
@@ -47,12 +51,28 @@ resource:spd_rnd_spe_rnd_cap_theme a skos:Concept;
 
 resource:MEF a foaf:Organization; 
     foaf:homepage <http://www.mef.gov.it/>;
-    foaf:name "Ragioneria Generale dello Stato"@it
+    foaf:name "Ragioneria Generale dello Stato"@it ;
+    foaf:depiction <http://www.rgs.mef.gov.it//export/sites/sitoRGS/VERSIONE-I/_img/news_in_evidenza/logoRGS_orizzontale300.jpg>;   
+	dct:title "RGS-MEF";
+	dct:description "Ragioneria Generale dello Stato - Ministero dell'Economia e delle Finanze"@it
 .
 
+
 resource:Copernicani a foaf:Organization; 
+	dct:title "Associazione Copernicani";
+	dct:description "Siamo un’associazione indipendente di studenti, lavoratori, imprenditori, docenti, ricercatori e politici che hanno deciso di trasformare le proprie idee in azioni."@it;
     foaf:homepage <https://copernicani.it/>;
-    foaf:name "Associazione Copernicani"@it
+    foaf:name "Associazione Copernicani"@it;
+    foaf:depiction <https://copernicani.it/wp-content/uploads/cropped-logo_orizzontale_trasparente-1-e1525161268864.png>
+.
+
+resource:SDaaS a foaf:Agent; 
+	dct:title "SDaaS platform by LinkedData.Center (community edition v 1.0.0)";
+	dct:description "Smart Data as a Sevice (SDaaS) è una piattaforma software prodotta da LinkedData.Center ."@it;
+    foaf:homepage <https://it.linkeddata.center/p/sdaas/>;
+    foaf:name "SDaaS by LinkedData.Center"@it;
+    foaf:depiction <http://linkeddata.center/resources/v4/logo/Logo-colori-trasp_oriz-640x220.png>
+    
 .
 
 

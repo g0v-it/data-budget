@@ -2,7 +2,10 @@
 
 This directory contains the gateways that transform the raw data provided by the Italian government (BDAP catalog) into linked data compliant with g0v-ap ontology:
 
-Gateways are simple stand-alone php7 scripts that read a csv stream row by row from STDIN and write RDF turtle statements on STDOUT. 
+Gateways are simple stand-alone php7 scripts that read a csv stream row by row from STDIN and write RDF turtle  compliant with  [g0v financial report application profile](https://github.com/g0v-it/ontologies/tree/master/fr-ap):
+
+Gateways are simple stand-alone php7 scripts that read a csv stream row by row from STDIN and 
+write RDF turtle statements on STDOUT. statements on STDOUT. 
 
 The bdap gateway requires as a mandatory parameters an id of a dataset define in https://bdap-opendata.mef.gov.it/SpodCkanApi/api/1/rest/dataset/ and requires a csv input
 

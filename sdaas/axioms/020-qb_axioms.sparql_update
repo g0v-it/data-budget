@@ -1,0 +1,71 @@
+PREFIX fr: <http://linkeddata.center/botk-fr/v1#>
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX sdmx-attribute:	<http://purl.org/linked-data/sdmx/2009/attribute#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+##
+## AXIOM: Create a financial report component that groups fact belonging to the same "azione" 
+##
+INSERT { 
+	?component a fr:Component ; 
+		qb:dataSet ?fr ;
+		fr:concept ?azione .
+	?fact fr:isPartOf ?component;
+} 
+WHERE {  
+	?fr a fr:FinancialReport .
+	
+	?fact a fr:Fact ; 
+		qb:dataSet ?fr ;
+		fr:concept/skos:broader ?azione.
+	
+	BIND( URI( CONCAT(STR(?azione),"_component")) AS ?component )
+	
+	FILTER NOT EXISTS {?fact fr:isPartOf []}
+}
+
+;
+
+##
+## AXIOM: Calculate component total amount 
+##
+INSERT {
+	?component fr:amount ?amount
+} WHERE {
+	{
+		SELECT ?component (SUM (?fact_amount) AS ?amount) WHERE {
+		  ?component a fr:Component.
+		  ?fact a fr:Fact; fr:isPartOf ?component; fr:amount ?fact_amount  
+		} GROUP BY ?component
+	}
+}
+
+;
+
+##
+## AXIOM: inherit the reference period attribute in Facts or Componens from the dataset, if missing
+##
+INSERT { ?factOrComponent fr:refPeriod ?ref_period} 
+WHERE {  
+	{ ?factOrComponent a fr:Fact } UNION { ?factOrComponent a fr:Component } 
+	
+	?factOrComponent qb:dataSet/fr:refPeriod ?ref_period.
+	
+	FILTER NOT EXISTS {?factOrComponent fr:refPeriod []}
+}
+
+;
+
+
+##
+## AXIOM: inherit the unit attribute in Facts or Components from the dataset, if missing
+##
+
+INSERT { ?factOrComponent fr:unit ?unit} 
+WHERE {  
+	{ ?factOrComponent a fr:Fact } UNION { ?factOrComponent a fr:Component } 
+	?factOrComponent qb:dataSet/sdmx-attribute:unitMeasure ?unit.
+	
+	FILTER NOT EXISTS {?factOrComponent fr:unit []}
+}
+

@@ -1,0 +1,124 @@
+#
+# Create bubbles from a Financial Report Component
+#
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX fr: <http://linkeddata.center/botk-fr/v1#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX prov: <http://www.w3.org/ns/prov#> 
+PREFIX interval: <http://reference.data.gov.uk/def/intervals/>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX bgo: <http://linkeddata.center/lodmap-bgo/v1#>
+
+
+INSERT { 
+   ?bubbleUri a bgo:Account ;
+		bgo:inBubbleGraph ?bgo;
+		bgo:code ?code ;
+		dct:title ?title ;
+		dct:subject ?subject ;
+		dct:source ?component ;
+		bgo:amount ?amount ;
+		bgo:version ?year;
+		bgo:partitionLabel ?labelMinistero, ?labelMissione
+} WHERE {
+
+	?bgo a bgo:BubbleGraph ; dct:source ?fr .
+  	?fr a fr:FinancialReport .
+
+	?component a fr:Component ;
+		qb:dataSet ?fr ;
+		fr:concept ?azione ;
+		fr:refPeriod/time:hasBeginning/interval:ordinalYear ?year ;
+		fr:amount ?amount 
+	.
+
+  	# Il titolo della bolla è la prefLabel della azione.
+	?azione skos:prefLabel ?title .
+	
+	# Il subject è il programma della azione 
+	?azione skos:broader ?programma . 
+	?programma skos:prefLabel ?subject  . 
+		
+	# La missione del programma è la seconda partizione
+	?programma skos:broader ?missione .
+	?missione skos:prefLabel ?labelMissione . 
+	
+	# Il ministero della missiome è la prima partizione
+	?missione skos:broader ?ministero .
+  	?ministero skos:prefLabel ?labelMinistero.
+  
+  
+  BIND( MD5(str(?component)) AS ?code)	
+  BIND( IRI( CONCAT("https://data.budget.g0v.it/ldp/account/",?code,"#data")) AS ?bubbleUri)
+  BIND(?partitionLabel2 AS ?subject)
+}
+
+;
+
+
+#
+#  Create comments
+#
+INSERT { ?bubbleUri dct:description ?description} 
+WHERE {
+	?bubbleUri a bgo:Account ; dct:source/fr:concept/skos:broader ?programma .
+	?programma skos:prefLabel ?label .
+	OPTIONAL { ?programma rdfs:comment ?comment }
+	BIND( COALESCE(?comment, ?label) AS ?description)
+	FILTER NOT EXISTS { ?bubbleUri dct:description [] }
+}
+
+;
+
+#
+# Create history rec
+#
+
+INSERT {
+  ?account bgo:isVersionOf ?historyRec.
+  ?historyRec a bgo:VersionedAmount ; dct:source ?source2 ;  bgo:version ?year; bgo:amount ?amount.
+} WHERE {
+	?account a bgo:Account; dct:source ?source1 .
+    ?source1 fr:concept/skos:notation ?notation .
+    ?source2 fr:concept/skos:notation ?notation .
+    FILTER( ?source1 != ?source2 )
+    ?source2 fr:amount ?amount; fr:refPeriod/time:hasBeginning/interval:ordinalYear ?year .
+  	BIND( IRI( CONCAT( STR(?source2),"_bh")) AS ?historyRec )
+}
+
+;
+
+#
+# Create previousValue
+#
+INSERT { ?account bgo:previousValue ?lastAmount }
+WHERE {
+  {
+		SELECT DISTINCT ?account ( MAX(?year) AS ?last_year )  WHERE {
+			?account a bgo:Account; bgo:isVersionOf ?historyRec .
+			?historyRec bgo:version ?year
+		} GROUP BY ?account
+  }
+  ?account bgo:isVersionOf ?historyRec.
+  ?historyRec bgo:version ?last_year; bgo:amount ?lastAmount
+}
+
+;
+
+#
+# Create account parts
+#
+INSERT {
+  ?account bgo:hasPart ?part .
+  ?part a bgo:PartialAmount ; dct:source ?fact ; dct:title ?partTitle ; bgo:amount ?partAmount .
+} WHERE {
+	?account a bgo:Account ; dct:source ?component . 
+	?fact a fr:Fact; fr:isPartOf ?component ;
+		fr:concept/skos:prefLabel ?partTitle ;
+		fr:amount ?partAmount
+	
+	BIND( IRI( CONCAT( STR(?fact),"_bp")) AS ?part )
+}
+

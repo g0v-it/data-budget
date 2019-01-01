@@ -1,3 +1,3 @@
 module.exports = {
-	query : `describe <http://data.budget.g0v.it/resource/welcome>`
+	query : `describe <http://mef.linkeddata.cloud/resource/welcome>`
 }

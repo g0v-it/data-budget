@@ -1,0 +1,23 @@
+##################################
+# Test fr-ap Financial report constraints
+################################## 
+PREFIX fr: <http://linkeddata.center/botk-fr/v1#>
+PREFIX bgo: <http://linkeddata.center/lodmap-bgo/v1#> 
+PREFIX dct: <http://purl.org/dc/terms/> 
+
+ASK {
+	# Just one bgo exists
+    ?bgo a bgo:BubbleGraph.
+    FILTER NOT EXISTS { ?bgo2 a bgo:BubbleGraph FILTER (?bgo != ?bgo2) }
+    
+    
+    # the bubble graph is related to least a financial report
+  	{ ?bgo dct:source ?fr . ?fr a fr:FinancialReport }
+  	UNION
+  	{ ?bgo dct:source/dct:source ?fr. ?fr a fr:FinancialReport } 
+  	
+  	# um is present and unique
+  	?bgo bgo:um ?um.
+	FILTER NOT EXISTS { ?bgo  bgo:um ?um2 FILTER (?um != ?um2) }
+}
+    

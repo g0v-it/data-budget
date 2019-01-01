@@ -3,24 +3,26 @@ services:
   sdaas:
     build: ./sdaas
     ports:
-      - "$sdaasport:8080"
+      - "29321:8080"
   api:
     build: ./apis
     ports:
-      - "$apiport:80"
+      - "29322:80"
     depends_on:
       - "sdaas"
   lodview:
-    build: ./lodview
+    image: linkeddatacenter/lodview:1.1.0
     ports:
-      - "$lodviewport:8080"
+      - "29329:8080"
+    environment:
+      - LODVIEW_URISPACE=http://mef.linkeddata.cloud/resource/
+      - LODVIEW_URISPACEPREFIX=mef 
+      - LODVIEW_SPARQLENDPOINT=http://data.budget.g0v.it/sparql
+      - LODVIEW_HOMEURL=https://github.com/g0v-it/data-budget
+      - LODVIEW_DATALICENSE=Contiene dati pubblicati dal Ministero dell'Economia e Finanze Italiano.
+      - LODMAP_HOME_TITLE=Welcome to MEF g0v knowledge base
+      - LODVIEW_PUBLICURLPREFIX=https://data.mef.g0v.it/
+      - LODEVIEW_HEADERLOGO=https://avatars3.githubusercontent.com/u/42692153?s=80
+      - "LODVIEW_DATALICENSE=Dati estratti dal portale <a title='Open BDAP' href='https://bdap-opendata.mef.gov.it/' target='_blank'><img style='vertical-align: middle' width='48' src='https://bdap-opendata.mef.gov.it/sites/default/files/images/logo-open-bdap.PNG'></a> e prodotti della Ragioneria dello Stato con licenza <a href='http://creativecommons.org/licenses/by/3.0' target='_blank'>CC-BY</a>"
     depends_on:
       - "sdaas"
-  router:
-    build: ./router
-    ports:
-      - "$routerport:80"
-    depends_on:
-      - "sdaas"
-      - "lodview"
-      - "api"
