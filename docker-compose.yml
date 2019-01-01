@@ -17,7 +17,7 @@ services:
     environment:
       - LODVIEW_URISPACE=http://mef.linkeddata.cloud/resource/
       - LODVIEW_URISPACEPREFIX=mef 
-      - LODVIEW_SPARQLENDPOINT=http://data.budget.g0v.it/sparql
+      - LODVIEW_SPARQLENDPOINT=http://194.177.121.230:29321/sdaas/sparql
       - LODVIEW_HOMEURL=https://github.com/g0v-it/data-budget
       - LODVIEW_DATALICENSE=Contiene dati pubblicati dal Ministero dell'Economia e Finanze Italiano.
       - LODMAP_HOME_TITLE=Welcome to MEF g0v knowledge base
