@@ -54,7 +54,7 @@ exports.getFilter = async (req, res) => {
 	let query2 = require('../queries/filter.js')(filter1, filter2, partition2);
 	//prepare data
 	let object1 = await buildJsonFilter(await getQueryResult(config.endpoint, query1, 'text/csv'), partition1);
-	let object2 = await buildJsonFilter(await getQueryResult(config.endpoint, query2, 'text/csv'), partition3);
+	let object2 = await buildJsonFilter(await getQueryResult(config.endpoint, query2, 'text/csv'), partition2);
 	//prepare result
 	let result = {};
 
