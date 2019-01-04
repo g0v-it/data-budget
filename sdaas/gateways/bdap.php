@@ -79,7 +79,7 @@ if ($bdapDatasetYear >= 2017) {
 $taxonomyUri = "resource:{$bdapDatasetId}_schema";
 
 //PREFIXES
-echo "@prefix g0v: <http://data.budget.g0v.it/g0v-ap/v1#> .
+echo "@prefix fr: <http://linkeddata.center/botk-fr/v1#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> . 
 @prefix skos:     <http://www.w3.org/2004/02/skos/core#> . 
 @prefix dcat:      <http://www.w3.org/ns/dcat#> . 
@@ -88,12 +88,13 @@ echo "@prefix g0v: <http://data.budget.g0v.it/g0v-ap/v1#> .
 @prefix interval: <http://reference.data.gov.uk/def/intervals/> . 
 @prefix qb:       <http://purl.org/linked-data/cube#> . 
 @prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> . 
-@prefix resource: <http://data.budget.g0v.it/resource/> .
+@prefix sdmx-attribute:	<http://purl.org/linked-data/sdmx/2009/attribute#> .
+@prefix resource: <http://mef.linkeddata.cloud/resource/> .
 
-resource:$bdapDatasetId a g0v:FinancialReport;
+resource:$bdapDatasetId a fr:FinancialReport;
     dcat:theme resource:{$bdapDatasetType}_theme ;
-    g0v:refPeriod <http://reference.data.gov.uk/id/gregorian-interval/{$bdapDatasetYear}-01-01T00:00:00/P1Y> ;  
-    g0v:unit <http://dbpedia.org/resource/Euro> 
+    fr:refPeriod <http://reference.data.gov.uk/id/gregorian-interval/{$bdapDatasetYear}-01-01T00:00:00/P1Y> ;  
+    sdmx-attribute:unitMeasure <http://publications.europa.eu/resource/authority/currency/EUR> 
 .
 $taxonomyUri a skos:ConceptScheme;
     dct:source resource:$bdapDatasetId ;
@@ -105,8 +106,9 @@ $taxonomyUri a skos:ConceptScheme;
 
 //skips header
 fgets(STDIN);
-$firstRecord=true;
+$recordNum=0;
 while ($rawdata = fgetcsv(STDIN, 2048, ';')) {
+    $recordNum++;
     $esercizio = $rawdata[0];
     $amministrazione = $rawdata[$match[$a]];
     $missione = $rawdata[$match[$m]];
@@ -128,7 +130,7 @@ while ($rawdata = fgetcsv(STDIN, 2048, ';')) {
     $p_uri = "resource:{$bdapDatasetId}_{$p}_${p_code}";
     $az_uri = "resource:{$bdapDatasetId}_{$az}_${az_code}";
     $c_uri = "resource:{$bdapDatasetId}_{$c}_${c_code}";
-    $b_uri = "resource:{$bdapDatasetId}_{$b}_" . uniqid();
+    $b_uri = "resource:{$bdapDatasetId}_{$b}_" . $recordNum;
 
     //AMMINISTRAZIONE
     printSingleLevel($a_uri, $a_code, $amministrazione);
@@ -148,10 +150,10 @@ while ($rawdata = fgetcsv(STDIN, 2048, ';')) {
 
 function printBudget($uri, $subjectUri, $value){
     $bdapDatasetId = $GLOBALS['bdapDatasetId'];
-    printf("%s a g0v:Fact;
-        g0v:concept %s ;
+    printf("%s a fr:Fact;
+        fr:concept %s ;
         qb:dataSet resource:%s;
-        g0v:amount %.2F ."
+        fr:amount %.2F ."
         ,$uri, $subjectUri, $bdapDatasetId, $value);
 }
 

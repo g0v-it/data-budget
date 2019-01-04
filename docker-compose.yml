@@ -3,24 +3,10 @@ services:
   sdaas:
     build: ./sdaas
     ports:
-      - "$sdaasport:8080"
+      - "29321:8080"
   api:
     build: ./apis
     ports:
-      - "$apiport:80"
+      - "29322:80"
     depends_on:
       - "sdaas"
-  lodview:
-    build: ./lodview
-    ports:
-      - "$lodviewport:8080"
-    depends_on:
-      - "sdaas"
-  router:
-    build: ./router
-    ports:
-      - "$routerport:80"
-    depends_on:
-      - "sdaas"
-      - "lodview"
-      - "api"

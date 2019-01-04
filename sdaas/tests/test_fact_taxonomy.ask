@@ -1,0 +1,35 @@
+##################################
+# Test fr-ap Financtial report constraints
+################################## 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX fr: <http://linkeddata.center/botk-fr/v1#>
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX sdmx-attribute:	<http://purl.org/linked-data/sdmx/2009/attribute#> 
+PREFIX dcat: <http://www.w3.org/ns/dcat#> 
+
+ASK {
+    ?scheme a skos:ConceptScheme.
+
+    # No duplicated concepts in facts of the same financial report
+    {
+        ?fact1 a fr:Fact ; fr:concept ?concept1; qb:dataSet ?fr.
+        ?fact2 a fr:Fact ; fr:concept ?concept2; qb:dataSet ?fr.
+        FILTER( ?fact1 != ?fact2 )
+        FILTER( ?concept1 != ?concept2 )
+        
+        # two facts concepts must not be correlated
+        FILTER NOT EXISTS { ?concept1 skos:exactMatch|skos:skos:closeMatch ?concept2 }
+        FILTER NOT EXISTS { ?concept1 skos:narrower+ ?concept2 }
+        FILTER NOT EXISTS { ?concept1 skos:boarder+ ?concept2 }
+    }
+    
+    # Every fr:Fact has exactly one fr:concept with skos:prefLabel and a notation
+    {
+        ?concept1 skos:prefLabel ?label; skos:notation ?notation.
+    }
+    
+    
+}
+    

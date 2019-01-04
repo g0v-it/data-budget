@@ -1,8 +1,0 @@
-PREFIX : <http://data.budget.g0v.it/g0v-ap-api/v1#>
-
-SELECT DISTINCT ?second_partition ?amount
-WHERE {
-  ?accountUri a :AccountSecondPartition;
-                :amount ?amount;
-                :label ?second_partition;
-} ORDER BY DESC(?amount)

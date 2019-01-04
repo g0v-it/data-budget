@@ -1,8 +1,0 @@
-PREFIX : <http://data.budget.g0v.it/g0v-ap-api/v1#>
-
-SELECT DISTINCT ?top_partition ?amount
-WHERE {
-  ?accountUri a :AccountTopPartition;
-                :amount ?amount;
-                :label ?top_partition;
-} ORDER BY DESC(?amount)

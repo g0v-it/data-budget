@@ -18,7 +18,7 @@ include "Helper.php";
 //PREFIXES
 echo "@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dct:      <http://purl.org/dc/terms/> . 
-@prefix resource: <http://data.budget.g0v.it/resource/> .
+@prefix resource: <http://mef.linkeddata.cloud/resource/> .
 
 resource:$datasetId
     dct:source resource:Missioni-programmi.csv ;
@@ -36,5 +36,5 @@ while ($rawdata = fgetcsv(STDIN, 2048)) {
 
     //Codes then used in notation and uri construction
     $p_code =Helper::getUri($amministrazione . $missione . $programma);
-    echo "resource:{$datasetId}_programma_${p_code} dct:description \"$descrizione\"@it .\n";
+    echo "resource:{$datasetId}_programma_${p_code} rdfs:comment \"$descrizione\"@it .\n";
 }
