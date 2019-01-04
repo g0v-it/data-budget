@@ -13,7 +13,8 @@ PREFIX fr: <http://linkeddata.center/botk-fr/v1#>
 #
 INSERT { ?bgo dct:title ?title } 
 WHERE {
- 	?bgo a bgo:BubbleGraph ; dct:source/dct:title ?title . 
+ 	?bgo a bgo:BubbleGraph ; 
+ 		dct:source/dct:title ?title . 
  	
 	FILTER NOT EXISTS { ?bgo dct:title  []}
 }
@@ -25,7 +26,8 @@ WHERE {
 #
 INSERT { ?bgo dct:description ?description } 
 WHERE {
- 	?bgo a bgo:BubbleGraph ; dct:source/dct:description ?description . 
+ 	?bgo a bgo:BubbleGraph ; 
+ 		dct:source/dct:description ?description . 
  	
 	FILTER NOT EXISTS { ?bgo dct:description  []}
 }
@@ -38,8 +40,10 @@ WHERE {
 #
 INSERT {
   accounts:ministero bgo:partition ?partitionUri.
-  ?partitionUri bgo:label ?partitionLabel; bgo:partitionAmount ?partitionAmount.
-} WHERE {
+  ?partitionUri bgo:label ?partitionLabel; 
+  	bgo:partitionAmount ?partitionAmount.
+} 
+WHERE {
   {
     SELECT DISTINCT ?partitionLabel ( SUM(?amount) AS ?partitionAmount) WHERE  {
 		?bubble a bgo:Account ; 
@@ -62,8 +66,10 @@ INSERT {
 #
 INSERT {
   accounts:missione bgo:partition ?partitionUri.
-  ?partitionUri bgo:label ?partitionLabel; bgo:partitionAmount ?partitionAmount.
-} WHERE {
+  ?partitionUri bgo:label ?partitionLabel; 
+  	bgo:partitionAmount ?partitionAmount.
+} 
+WHERE {
   {
     SELECT DISTINCT ?partitionLabel ( SUM(?amount) AS ?partitionAmount) WHERE  {
 		?bubble a bgo:Account ; 

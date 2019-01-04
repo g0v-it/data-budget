@@ -16,11 +16,13 @@
 	
 resource:welcome a kees:KnowledgeBase;
     void:sparqlEndpoint <http://data.budget.g0v.it/sdaas/sparql> ;
-	dct:title "Welcome to budget.g0v.it knowledge base"@en; 
+	dct:title "budget.g0v.it knowledge base"@it; 
 	dct:description "Contiene la conoscenza sulle spese riportati nelle leggi di bilancio dello Stato Italiano dal 2017."@it;
     dct:license <https://creativecommons.org/licenses/by/3.0/>;
-	rdfs:comment "La base della conoscenza è stata costruita utilizzando la piattaforma SDaaS™ di LinkedData.Center "@it;
-	rdfs:comment "Data derived from OpenBDAP by © RGS Ragioneria Generale dello Stato."@en;
+	rdfs:comment 
+		"Dati estratti da OpenBDAP by © RGS Ragioneria Generale dello Stato."@it,
+		"La base della conoscenza è stata costruita utilizzando la piattaforma SDaaS™ di LinkedData.Center "@it ,
+		"La conoscenza è formalizzata attraverso Linked Data RDF e serve per alimentare l'applicazione https://budget.g0v.it/. Per maggiori dettagli sulle ontologie e sugli strumenti utilizzati vedi https://github.com/g0v-it/data-budget."@it,
 	void:vocabulary <https://github.com/g0v-it/ontologies/tree/master/fr-ap>, <https://github.com/linkeddatacenter/kees>; 
 	dct:publisher resource:Copernicani ;
 	dct:creator resource:SDaaS ;

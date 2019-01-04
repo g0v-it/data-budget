@@ -34,6 +34,6 @@
 
 <accounts#missione>
 	bgo:partitionSchemeId "p2_missione" ;
-	dct:title "missione"
+	dct:title "missione"@it
 .
 

@@ -14,15 +14,18 @@ PREFIX bgo: <http://linkeddata.center/lodmap-bgo/v1#>
 
 INSERT { 
    ?bubbleUri a bgo:Account ;
-		bgo:inBubbleGraph ?bgo;
+		bgo:inBubbleGraph ?bgo ;
 		bgo:code ?code ;
 		dct:title ?title ;
 		dct:subject ?subject ;
 		dct:source ?component ;
 		bgo:amount ?amount ;
-		bgo:version ?year;
-		bgo:partitionLabel ?labelMinistero, ?labelMissione
-} WHERE {
+		bgo:version ?year ;
+		bgo:partitionLabel 
+			?labelMinistero, 
+			?labelMissione
+} 
+WHERE {
 
 	?bgo a bgo:BubbleGraph ; dct:source ?fr .
   	?fr a fr:FinancialReport .
@@ -77,14 +80,19 @@ WHERE {
 #
 
 INSERT {
-  ?account bgo:isVersionOf ?historyRec.
-  ?historyRec a bgo:VersionedAmount ; dct:source ?source2 ;  bgo:version ?year; bgo:amount ?amount.
+	?account bgo:isVersionOf ?historyRec .
+	?historyRec a bgo:VersionedAmount ; 
+	  	dct:source ?source2 ;
+		bgo:version ?year ;
+		bgo:amount ?amount
+	.
 } WHERE {
 	?account a bgo:Account; dct:source ?source1 .
     ?source1 fr:concept/skos:notation ?notation .
     ?source2 fr:concept/skos:notation ?notation .
     FILTER( ?source1 != ?source2 )
-    ?source2 fr:amount ?amount; fr:refPeriod/time:hasBeginning/interval:ordinalYear ?year .
+    ?source2 fr:amount ?amount ; 
+    	fr:refPeriod/time:hasBeginning/interval:ordinalYear ?year .
   	BIND( IRI( CONCAT( STR(?source2),"_bh")) AS ?historyRec )
 }
 
@@ -97,12 +105,14 @@ INSERT { ?account bgo:previousValue ?lastAmount }
 WHERE {
   {
 		SELECT DISTINCT ?account ( MAX(?year) AS ?last_year )  WHERE {
-			?account a bgo:Account; bgo:isVersionOf ?historyRec .
+			?account a bgo:Account; 
+				bgo:isVersionOf ?historyRec .
 			?historyRec bgo:version ?year
 		} GROUP BY ?account
   }
-  ?account bgo:isVersionOf ?historyRec.
-  ?historyRec bgo:version ?last_year; bgo:amount ?lastAmount
+  ?account bgo:isVersionOf ?historyRec .
+  ?historyRec bgo:version ?last_year ; 
+  	bgo:amount ?lastAmount
 }
 
 ;
@@ -112,13 +122,18 @@ WHERE {
 #
 INSERT {
   ?account bgo:hasPart ?part .
-  ?part a bgo:PartialAmount ; dct:source ?fact ; dct:title ?partTitle ; bgo:amount ?partAmount .
-} WHERE {
+  ?part a bgo:PartialAmount ; 
+  dct:source ?fact ; 
+  dct:title ?partTitle ; 
+  bgo:amount ?partAmount .
+} 
+WHERE {
 	?account a bgo:Account ; dct:source ?component . 
-	?fact a fr:Fact; fr:isPartOf ?component ;
+	?fact a fr:Fact; 
+		fr:isPartOf ?component ;
 		fr:concept/skos:prefLabel ?partTitle ;
 		fr:amount ?partAmount
-	
+	.
 	BIND( IRI( CONCAT( STR(?fact),"_bp")) AS ?part )
 }
 
