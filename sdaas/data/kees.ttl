@@ -22,7 +22,7 @@ resource:welcome a kees:KnowledgeBase;
 	rdfs:comment 
 		"Dati estratti da OpenBDAP by © RGS Ragioneria Generale dello Stato."@it,
 		"La base della conoscenza è stata costruita utilizzando la piattaforma SDaaS™ di LinkedData.Center "@it ,
-		"La conoscenza è formalizzata attraverso Linked Data RDF e serve per alimentare l'applicazione https://budget.g0v.it/. Per maggiori dettagli sulle ontologie e sugli strumenti utilizzati vedi https://github.com/g0v-it/data-budget."@it,
+		"La conoscenza è formalizzata attraverso Linked Data RDF e serve per alimentare l'applicazione https://budget.g0v.it/. Per maggiori dettagli sulle ontologie e sugli strumenti utilizzati vedi https://github.com/g0v-it/data-budget."@it ;
 	void:vocabulary <https://github.com/g0v-it/ontologies/tree/master/fr-ap>, <https://github.com/linkeddatacenter/kees>; 
 	dct:publisher resource:Copernicani ;
 	dct:creator resource:SDaaS ;
