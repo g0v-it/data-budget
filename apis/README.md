@@ -91,37 +91,44 @@ returns data in format suitable to be used with LODMAP2D Bubble Graph component:
 returns data in format suitable to be used with LODMAP2D Bubble AccountDetails component:
 
 ```json
-{  
-   "code":"0079efb015208cf960dfa5b21d46cacf",
-   "amount":-89590,
-   "previousValue":-95532.7,
-   "version":"2017",
-   "source":"http://inps.linkeddata.cloud/resource/bilancio_uscite_2017_G204",
-   "title":"CONTRIBUTI DELL'AGENZIA PER LE RELAZIONI SINDACALI DELLE PUBBLICHE AMMINISTRAZIONI (ARAN) AI SENSI DELL'ART. 50, C. 8, LETT. A), D.LGS N. 29/1993",
-   "subject":"Trasferimenti passivi (USCITE)",
-   "description":"Sezione USCITE. Capitolo di spesa 4U1206061 appartenete alla categoria 'Trasferimenti passivi'. Parte della UPB 'Risorse Umane'.",
-   "partitionLabel":[  
-      "Risorse Umane",
-      "USCITE"
-   ],
-   "isVersionOf":[  
-      {  
-         "version":"2014",
-         "amount":-101621.1
-      },
-      {  
-         "version":"2015",
-         "amount":-99023.3
-      },
-      {  
-         "version":"2016",
-         "amount":-95532.7
-      }
-   ],
-   "hasPart":[  
-
-   ],
-   "um":"EUR"
+{
+	"code": "17ebc01323e2a557a0e8cc2000a04413",
+	"amount": 1994338,
+	"previousValue": 2219761,
+	"version": "2019",
+	"source": "http://mef.linkeddata.cloud/resource/spd_lbf_spe_elb_cap_01_2019_azione_3906300890_component",
+	"title": "spese di personale per il programma",
+	"subject": "gestione del sistema nazionale di difesa civile",
+	"description": "Iniziative di sviluppo del sistema nazionale ed internazionale di difesa civile. Pianificazione e organizzazione di esercitazioni nazionali e internazionali di difesa civile. Formazione per la gestione di situazioni di crisi. Gestione organizzativa e logistica della struttura operativa centrale di difesa civile. Supporto alle prefetture per la progettazione e il funzionamento delle Sale Operative integrate di protezione civile e di difesa civile e nelle attività di pianificazione di protezione civile. Contributo all'attività normativa in materia di protezione civile. Organizzazione e gestione dei Centri Assistenziali di Pronto Intervento. Partecipazione alla gestione delle emergenze di protezione civile e assistenza alle popolazioni in occasione di pubbliche calamità. Programmazione e gestione delle risorse per l'acquisto di materiali assistenziali.",
+	"partitionLabel": [
+		"Interno",
+		"soccorso civile"
+	],
+	"isVersionOf": [
+		{
+			"version": "2017",
+			"amount": 2446865
+		},
+		{
+			"version": "2018",
+			"amount": 2219761
+		}
+	],
+	"hasPart": [
+		{
+			"title": "1805 - somma occorrente per la concessione dei buoni pasto al personale civile",
+			"amount": 70003
+		},
+		{
+			"title": "1810 - somme dovute a titolo di imposta regionale sulle attivita' produttive sulle retribuzioni corrisposte al personale civile",
+			"amount": 118584
+		},
+		{
+			"title": "1812 - competenze fisse ed accessorie al personale dell'amministrazione civile dell'interno al netto dell'imposta regionale sulle attivita' produttive",
+			"amount": 1805751
+		}
+	],
+	"um": "EUR"
 }
 ```
 
@@ -133,38 +140,15 @@ It calculates partitions total taking into account a filter in {filtersid}.
 {filtersid}  is a string that is compressed with zlib an encoded with base64 that contains required filter in the form of (here sintax) e.g. `here example` producing something like:
 
 ```json
-{  
-   "p1_entrate_uscite":{  
-      "USCITE":-428142366474.04
-   },
-   "p2_categorie":{  
-      "Uscite per prestazioni istituzionali":-312149179257.54,
-      "Uscite aventi natura di partite di giro":-65435115413.92,
-      "Rimborsi di anticipazioni passive":-18307000000,
-      "Poste correttive e compensative di entrate correnti":-15149221355.23,
-      "Concessioni di crediti e anticipazioni":-7650017625.07,
-      "Trasferimenti passivi":-5320196700.41,
-      "Oneri per il personale in attività di servizio":-1652741837.77,
-      "Uscite non classificabili in altre voci":-876634375.79,
-      "Uscite per l'acquisto di beni di consumo e di servizio":-565374646.44,
-      "Oneri per il personale in quiescenza":-287180065.97,
-      "Partecipazioni e acquisto di valori mobiliari":-199000000,
-      "Oneri tributari":-192457713.22,
-      "Acquisizione di immobilizzazioni tecniche":-157172753.13,
-      "Indennità di anzianità e similari al personale cessato dal servizio":-94429185.6,
-      "Estinzione debiti diversi":-83274490.41,
-      "Oneri finanziari":-16079086.09,
-      "Acquisizione beni di uso durevole e opere immobiliari":-4048234.88,
-      "Uscite per gli organi dell'Ente":-3243732.57
-   },
-   "p3_upb":{  
-      "Pensioni":-277997312201.81,
-      "Altre strutture di Direzione Generale":-86791528179.56,
-      "Prestazioni a sostegno del reddito":-43648651463.14,
-      "UPB Entrate":-16236765265.96,
-      "Risorse Umane":-2370288250.45,
-      "Risorse Strumentali":-1097821113.12
-   }
+{
+	"p1_ministero": {
+		"Ambiente e Territorio": 845335357
+	},
+	"p2_missione": {
+		"servizi istituzionali e generali delle amministrazioni pubbliche": 31731260,
+		"ricerca e innovazione": 91179221,
+		"sviluppo sostenibile e tutela del territorio e dell'ambiente": 722424876
+	}
 }
 ```
 
