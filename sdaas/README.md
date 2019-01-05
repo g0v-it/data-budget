@@ -7,7 +7,7 @@ The knowledge base is built around the [g0v application profile](https://github.
 - the g0v-fr application profile is used to describe the semantic of a financial report
 - the Bubble Graph Ontology is used to describe the graphical objects that reprensent financial report components
 
-The data ingestion process is managed by the [LinkedData.Center SDaaS platform](https://linkeddata.center/p/sdaas) (community edition).
+The data ingestion process is managed by the [LinkedData.Center SDaaS platform](https://it.linkeddata.center/p/sdaas) (community edition).
 
 
 ## updating the knowledge base
