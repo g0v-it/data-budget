@@ -12,56 +12,74 @@ returns data in format suitable to be used with LODMAP2D Bubble Graph component:
 
 ```json
 {  
-   "title":"Consuntivo Finanziario Gestionale 2017",
-   "description":"Dati dell'ultimo bilancio consuntivo finanziario gestionale entrate/uscite pubblicato da INPS",
-   "source":"http://inps.linkeddata.cloud/resource/ultimo_bilancio_disponibile",
-   "um":"EUR",
-   "partitionOrderedList":[  
-      "default",
-      "entrate_uscite"
-   ],
-   "partitionScheme":{  
-      "default":{  
-         "title":"INPS",
-         "partitions":[  
-         ]
-      },
-      "entrate_uscite":{  
-         "title":"entrate/uscite",
-         "partitions":[  
-            {  
-               "label":"ENTRATE",
-               "partitionAmount":432152274282.93
-            },
-            {  
-               "label":"USCITE",
-               "partitionAmount":-428142366474.04
-            }
-         ]
-      }
-   },
-   "accounts":[  
-      {  
-         "code":"0015e68ba033ec06ae0d293e4ecf577d",
-         "title":"RIMBORSO DA PARTE DELLE REGIONI DEGLI ONERI DERIVANTI DA ASSEGNI DI UTILIZZO IN ATTIVITA' SOCIALMENTE UTILI, A PARTIRE DAL 1° LUGLIO 2001, AI SENSI DEL D.LGS. 81/2000, CHE ECCEDONO GLI STANZIAMENTI A CARICO DEL FONDO PER L'OCCUPAZIONE",
-         "amount":0,
-         "previousValue":0,
-         "subject":"Trasferimenti da parte delle Regioni (ENTRATE)",
-         "partitionLabel":[  
-            "ENTRATE"
-         ]
-      },
-      {  
-         "code":"0079efb015208cf960dfa5b21d46cacf",
-         "title":"CONTRIBUTI DELL'AGENZIA PER LE RELAZIONI SINDACALI DELLE PUBBLICHE AMMINISTRAZIONI (ARAN) AI SENSI DELL'ART. 50, C. 8, LETT. A), D.LGS N. 29/1993",
-         "amount":-89590,
-         "previousValue":-95532.7,
-         "subject":"Trasferimenti passivi (USCITE)",
-         "partitionLabel":[  
-            "USCITE"
-         ]
-      }
-   ]
+    "title": "Legge di Bilancio 2019",
+    "description": "Dati di Spesa relativi alla Legge di Bilancio Approvata per l'esercizio finanziario 2019",
+    "source": "http://mef.linkeddata.cloud/resource/spd_lbf_spe_elb_cap_01_2019",
+    "um": "EUR",
+    "partitionOrderedList": [
+        "default",
+        "p1_ministero",
+        "p2_missione"
+    ],
+    "partitionScheme": {
+        "default": {
+            "title": "stato",
+            "partitions": []
+        },
+        "p1_ministero": {
+            "title": "ministero",
+            "partitions": [
+                {
+                    "label": "Ambiente e Territorio",
+                    "partitionAmount": 845335357
+                },
+                {
+                    "label": "ministero delle politiche agricole alimentari, forestali e del turismo",
+                    "partitionAmount": 953197064
+                },
+                {
+                    "label": "debito pubblico",
+                    "partitionAmount": 303050130200
+                }
+            ]
+        },     
+        "p2_missione": {
+            "title": "missione",
+            "partitions": [
+                {
+                    "label": "servizi istituzionali e generali delle amministrazioni pubbliche",
+                    "partitionAmount": 42047666908
+                },
+                {
+                    "label": "turismo",
+                    "partitionAmount": 44332450
+                }
+            ]
+        }
+    },
+    "accounts": [
+        {
+            "code": "17ebc01323e2a557a0e8cc2000a04413",
+            "title": "spese di personale per il programma",
+            "amount": 1994338,
+            "previousValue": 2219761,
+            "subject": "gestione del sistema nazionale di difesa civile",
+            "partitionLabel": [
+                "Ambiente e Territorio",
+                "servizi istituzionali e generali delle amministrazioni pubbliche"
+            ]
+        },
+        {
+            "code": "183508262a4be1f81a628c867a6e6318",
+            "title": "salvaguardia e valorizzazione del patrimonio librario",
+            "amount": 11062852,
+            "subject": "tutela del patrimonio culturale",
+            "partitionLabel": [
+                "Ambiente e Territorio",
+                "turismo"
+            ]
+        }
+    ]
 }
 ```
 
