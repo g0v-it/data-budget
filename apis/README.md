@@ -153,10 +153,6 @@ It calculates partitions total taking into account a filter in {filtersid}.
 ```
 
 
-
-
-TBD
-
 ### GET /
 
 Returns some internal information about this interface (not to be used)
