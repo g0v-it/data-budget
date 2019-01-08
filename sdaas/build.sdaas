@@ -24,16 +24,25 @@ function G0V_LEARN_FROM_BDAP {
 	local reportType="$1"
 	local year="$2"
 	
-	local reportName="${reportType}_${year}"	
+	local reportName="spd_${reportType}_spe_elb_cap_01_${year}"	
 	local uri="https://bdap-opendata.mef.gov.it/SpodCkanApi/api/1/rest/dataset/${reportName}"
 	SD_LEARN "http://reference.data.gov.uk/doc/gregorian-interval/${year}-01-01T00:00:00/P1Y"
 	SD_LEARN "${uri}" "${uri}" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' - |php7 gateways/bdap_meta.php"
 	SD_LEARN "${uri}.csv" "${uri}.csv" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' - |php7 gateways/bdap.php ${reportName}"
 }
 
-G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_cap_01 2019
-G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_cap_01 2018
-G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_cap_01 2017
+## Report type:
+##   lbf = Legge Di Bilancio Approvata
+##   dlb = Disegno di Legge Di Bilancio
+##   rnd = Bilancio consolidato
+G0V_LEARN_FROM_BDAP lbf 2019
+G0V_LEARN_FROM_BDAP dlb 2019
+G0V_LEARN_FROM_BDAP lbf 2018
+G0V_LEARN_FROM_BDAP dlb 2018
+G0V_LEARN_FROM_BDAP lbf 2017
+G0V_LEARN_FROM_BDAP dlb 2017
+G0V_LEARN_FROM_BDAP rnd 2017
+G0V_LEARN_FROM_BDAP rnd 2016
 
 
 SD_LEARN urn:mef:programmi data/descrizione_programmi.csv "|||.ttl|php7 gateways/programmi.php spd_lbf_spe_elb_cap_01_2019"

@@ -1,5 +1,5 @@
 #
-# Create bubbles from a Financial Report Component
+# Create bubbles from a Financial Report Component with theme dcat:theme resource:ldb_theme
 #
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX fr: <http://linkeddata.center/botk-fr/v1#>
@@ -10,6 +10,7 @@ PREFIX interval: <http://reference.data.gov.uk/def/intervals/>
 PREFIX time: <http://www.w3.org/2006/time#>
 PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX bgo: <http://linkeddata.center/lodmap-bgo/v1#>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
 
 
 INSERT { 
@@ -20,7 +21,7 @@ INSERT {
 		dct:subject ?subject ;
 		dct:source ?component ;
 		bgo:amount ?amount ;
-		bgo:version ?year ;
+		bgo:version "last"; #?year ;
 		bgo:partitionLabel 
 			?labelMinistero, 
 			?labelMissione
@@ -28,7 +29,8 @@ INSERT {
 WHERE {
 
 	?bgo a bgo:BubbleGraph ; dct:source ?fr .
-  	?fr a fr:FinancialReport .
+  	?fr a fr:FinancialReport.
+  	
 
 	?component a fr:Component ;
 		qb:dataSet ?fr ;
@@ -36,6 +38,7 @@ WHERE {
 		fr:refPeriod/time:hasBeginning/interval:ordinalYear ?year ;
 		fr:amount ?amount 
 	.
+	
 
   	# Il titolo della bolla è la prefLabel della azione.
 	?azione skos:prefLabel ?title .
@@ -77,13 +80,14 @@ WHERE {
 
 #
 # Create history rec
+# N.B. all history records considerd (i.e. also records from different dataset version)
 #
 
 INSERT {
 	?account bgo:isVersionOf ?historyRec .
 	?historyRec a bgo:VersionedAmount ; 
 	  	dct:source ?source2 ;
-		bgo:version ?year ;
+		bgo:version ?version ;
 		bgo:amount ?amount
 	.
 } WHERE {
@@ -91,8 +95,11 @@ INSERT {
     ?source1 fr:concept/skos:notation ?notation .
     ?source2 fr:concept/skos:notation ?notation .
     FILTER( ?source1 != ?source2 )
-    ?source2 fr:amount ?amount ; 
+    ?source2  qb:dataSet ?fr; fr:amount ?amount ; 
     	fr:refPeriod/time:hasBeginning/interval:ordinalYear ?year .
+    	
+    OPTIONAL { ?fr dcat:theme/skos:notation ?frNotation }
+    BIND( CONCAT(STR(?year), ".", STR(?frNotation)) AS ?version)
   	BIND( IRI( CONCAT( STR(?source2),"_bh")) AS ?historyRec )
 }
 
@@ -100,20 +107,29 @@ INSERT {
 
 #
 # Create previousValue
+# N.B only history records with the same theme (i.e. version) in source datasets are considered 
 #
 INSERT { ?account bgo:previousValue ?lastAmount }
 WHERE {
-  {
-		SELECT DISTINCT ?account ( MAX(?year) AS ?last_year )  WHERE {
-			?account a bgo:Account; 
-				bgo:isVersionOf ?historyRec .
-			?historyRec bgo:version ?year
-		} GROUP BY ?account
-  }
-  ?account bgo:isVersionOf ?historyRec .
-  ?historyRec bgo:version ?last_year ; 
-  	bgo:amount ?lastAmount
+    ?account a bgo:Account; 
+		dct:source/qb:dataSet/dcat:theme ?accountSourceTheme;
+		bgo:isVersionOf ?historyRec .
+  
+	?historyRec bgo:version ?version ;
+        bgo:amount ?lastAmount;
+        dct:source/qb:dataSet/dcat:theme ?historySourceTheme .
+  
+    FILTER( ?historySourceTheme = ?accountSourceTheme )
+  
+    FILTER NOT EXISTS {
+		?account bgo:isVersionOf ?historyRec2.
+        ?historyRec2 bgo:version ?version2 ;
+        	dct:source/qb:dataSet/dcat:theme ?historySourceTheme2 .
+    	FILTER( ?historySourceTheme2 = ?accountSourceTheme )
+        FILTER (?version2 > ?version)
+    }             
 }
+
 
 ;
 

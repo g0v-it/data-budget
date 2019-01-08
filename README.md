@@ -40,6 +40,7 @@ If you do not already have Docker on your computer,
 To start all services using [docker Compose](https://docs.docker.com/compose/) type: 
 
 ```
+docker-compose build
 docker-compose up -d
 ```
 
