@@ -1,0 +1,40 @@
+#
+# Create bubbles history records 
+# SPECIFIC IMPLEMENTATION:
+#   - just components from a datasets with spd_lbf_spe_elb_cap_theme are considered.
+#   - the version id is the component reference year
+#
+PREFIX fr: <http://linkeddata.center/botk-fr/v1#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX interval: <http://reference.data.gov.uk/def/intervals/>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX bgo: <http://linkeddata.center/lodmap-bgo/v1#>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+
+INSERT {
+	?account bgo:isVersionOf ?historyRec .
+	?historyRec a bgo:VersionedAmount ; 
+	  	dct:source ?source2 ;
+		bgo:version ?version ;
+		bgo:amount ?amount
+	.
+} WHERE {
+    ?account a bgo:Account; dct:source ?source1 .
+    ?source1 a fr:Component;
+    	fr:concept ?concept ; 
+        qb:dataSet/dcat:theme <http://mef.linkeddata.cloud/resource/spd_lbf_spe_elb_cap_theme> ;
+        fr:refPeriod/time:hasBeginning/interval:ordinalYear ?referenceYear . 
+    ?source2 a fr:Component;
+    	fr:concept/skos:closeMatch ?concept ; 
+    	qb:dataSet/dcat:theme <http://mef.linkeddata.cloud/resource/spd_lbf_spe_elb_cap_theme> ;          
+        fr:amount ?amount ; 
+    	fr:refPeriod/time:hasBeginning/interval:ordinalYear ?year . 
+             
+    FILTER( ?year < ?referenceYear )
+  
+    BIND( ?year AS ?version )
+  	BIND( IRI( CONCAT( STR(?source2),"_bh")) AS ?historyRec )
+}
+

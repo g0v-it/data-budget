@@ -2,14 +2,29 @@
 
 # g0v data-budget
 
-A simple *Smart Data Management Platform* to feed the http://budget.g0v.it/ web application.
+A *Smart Data Management Platform* to feed the http://budget.g0v.it/ web applications.
 
+The plaform is built around a knowledge graph that contains informations about
+some  Italian Government budget and financial reports:
 
-**Reference implementation:**
+- "legge di bilancio"
+- "disegno di legge di bilancio"
+- "consuntivo di bilancio"
 
-- **API endpoint**: https://data.budget.g0v.it/ldp
+The platform extracts and links main financial facts from the official open data provided by the "Ministero dell'Economia e Finance" for 2014-2019 years . 
+
+The knowledge graph is compliant with RDF and Semantic Web Specification.
+
+Applications can access the knowledge graph through a SPARQL interface.
+An example of  RESTfull APIs is also provided as part of the platform. The
+provided APIS integrates with http://budget.g0v.it/ application (source available at https://github.com/g0v-it/web-budget) 
+
+**Reference implementations:**
+
 - **SPARQL endpoint**: https://data.budget.g0v.it/sparql
 - **Linked Data browser**: http://data.budget.g0v.it/welcome 
+- **API endpoint**: https://data.budget.g0v.it/ldp
+- **Example of a data consumer**: https://budget.g0v.it/
 
 ## Development
 
@@ -18,10 +33,10 @@ The project contains the two "core" logical components:
 - **sdaas** (smart data as a service):  the data management platform core providing a RDF store, a [SPARQL endpoint](https://www.w3.org/TR/sparql11-overview), a data ingestion engine, a set of gateways to transform raw data in linked data and a build script that populates the RDF store. See files and docs in [sdaas directory](sdaas)
 - a set of **apis** that query the SPARQL endpoint and produce json data with a schema suitable to be used with the BubbleGraph Component. See files and docs in [apis directory](apis)
 
-Beside these, two optional components may be needed to complete a production system:
+Beside these, two additional optional components may be needed to complete a real production system:
 
-- **LODMAP** server: a linked data browser to navigate the RDF store;
-- a **router** that provides a single acces point to all other services with caching and ssl features.
+- **LODMAP** server: a linked data browser to deferencing URIS and navigate the RDF store;
+- a **router** that provides a single acces point to all services with firewall, caching and ssl features.
 
 This picture shows the components interactions:
 
@@ -56,52 +71,14 @@ Try http://localhost:29321/sdaas to access blazegraph workbench
 Try http://localhost:29322/ to test api endpoint
 
 The first time you start the containers, Docker downloads and builds images for you. It will take some time, but don't worry
-this is done only once. Starting servers will then be lightning fast
+this is done only once. Starting servers will then be lightning fast.
+
+
 
 To shudown the platform type: 
 
 ```
 docker-compose down
-```
-
-### Production deployment hints
-
-For production deployment a SSL reverse proxy server, with caching capability is strongly suggested. Here is a snippet of apache virtual host configuration for http://data.example.org/ that provides two public points:
-
-- **/ldp/ *** that acts as a frontend to the api container 
-- **/sparql** that acts as a frontend to the sparql service
-
-```
-<VirtualHost *:80>
-    ServerName data.example.org
-    ServerAdmin webmaster@example.org
-    ProxyRequests Off
-    ProxyVia Off
-    ProxyPreserveHost On
-    <Proxy *>
-      AddDefaultCharset off
-      Order deny,allow
-      Allow from all
-    </Proxy>
-    ProxyPass /sparql http://docker.example.org:29321/sdaas/sparql
-    ProxyPass /ldp/ http://docker.example.org:29322/
-```
-
-You could also run a service to manage uri dereferencing and linked data content negotiation. For instance the [LODVIEW](https://github.com/dvcama/LodView) application
-
-```
-docker run -d --name lodview  \
-	-p 80:8080 \
-      -e LODVIEW_URISPACE=http://data.example.org/resource/ \
-      -e LODVIEW_URISPACEPREFIX=resource  \
-      -e LODVIEW_SPARQLENDPOINT=https://data.example.org/sparql \
-      -e LODVIEW_HOMEURL=https://example.org/ \
-      -e LODVIEW_DATALICENSE=Contiene dati provenienti da Example.org. \
-      -e LODMAP_HOME_TITLE=Welcome to example knowledge base \
-      -e LODVIEW_PUBLICURLPREFIX=https://lodview.example.org/ \
-      -e LODEVIEW_HEADERLOGO=https://data.example.org/logo.gif \
-      -e LODVIEW_DATALICENSE=Dati estratti da Open Data" \
-	linkeddatacenter/lodview 
 ```
 
 

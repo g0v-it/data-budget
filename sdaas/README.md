@@ -7,35 +7,35 @@ The knowledge base is built around the [g0v application profile](https://github.
 - the g0v-fr application profile is used to describe the semantic of a financial report
 - the Bubble Graph Ontology is used to describe the graphical objects that reprensent financial report components
 
-The data ingestion process is managed by the [LinkedData.Center SDaaS platform community edition](https://github.com/linkeddatacenter/sdaas-ce).
+The data ingestion process is managed by the [LinkedData.Center SDaaS platform community edition](https://github.com/linkeddatacenter/sdaas-ce) according [KEES](http://linkeddata.center/kees) specifications. 
 
 
 ## updating the knowledge base
 
-knowledge base build process requires:
+knowledge base build process requires to:
 
-- to edit files in the *data* directory
-- to develop the *gateways* for transforming web resources in linked data. See [gateways doc.](gateways/README.md)
-- to write *axioms* and rules to generate new data. See [axioms doc.](axioms/README.md)
-- to edit the *build script* that drives the data ingestion process.
-- to run sdaas
+- edit files in the *data* directory
+- develop the *gateways* for transforming web resources in linked data. See [gateways doc.](gateways/README.md)
+- write *axioms* and rules to generate new data. See [axioms doc.](axioms/README.md)
+- edit the *build script* that drives the data ingestion process.
+- run sdaas
 
-### debugging the build script
+### debugging the build script with docker
 
-the test of the build script requires the sdaas-ce container.
+the test of the build script require dat least 2GB of ram available to the docker machine:
 
 ```
 docker run -d -p 9999:8080 -v $PWD/.:/workspace --name kb linkeddatacenter/sdaas-ce
 docker exec -ti kb bash
 apk --no-cache add php7-json
 sdaas --debug -f build.sdaas --reboot
+# Access the workbench pointing browser to http://localhost:9999/sdaas
 exit
 docker rm -f kb
 ```
 
 logs info and debug traces will be created in .cache directory
 
-Access the admin workbench pointing browser to http://localhost:9999/sdaas
 
  
 ### publishing  the knowledge base
@@ -47,7 +47,7 @@ docker build . -t sdaas
 docker run -d -p 8889:8080 --name datastore sdaas
 ```
 
-The resulting container will provide a readonly distribution of the whole knowlede base in a stand-alone graph database with sparql interface.
+The resulting container will provide a read only distribution of the whole knowlede base in a stand-alone graph database with a sparql interface.
 
 
 ## Directory structure

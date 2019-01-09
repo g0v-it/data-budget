@@ -1,16 +1,14 @@
 #
-# Create bubbles from a Financial Report Component with theme dcat:theme resource:ldb_theme
+# Create bubbles from a Financial Report Component 
 #
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX fr: <http://linkeddata.center/botk-fr/v1#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
 PREFIX dct: <http://purl.org/dc/terms/>
-PREFIX prov: <http://www.w3.org/ns/prov#> 
 PREFIX interval: <http://reference.data.gov.uk/def/intervals/>
 PREFIX time: <http://www.w3.org/2006/time#>
 PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX bgo: <http://linkeddata.center/lodmap-bgo/v1#>
-PREFIX dcat: <http://www.w3.org/ns/dcat#>
 
 
 INSERT { 
@@ -75,65 +73,6 @@ WHERE {
 	BIND( COALESCE(?comment, ?label) AS ?description)
 	FILTER NOT EXISTS { ?bubbleUri dct:description [] }
 }
-
-;
-
-#
-# Create history rec
-# N.B. all history records considerd (i.e. also records from different dataset version)
-#
-
-INSERT {
-	?account bgo:isVersionOf ?historyRec .
-	?historyRec a bgo:VersionedAmount ; 
-	  	dct:source ?source2 ;
-		bgo:version ?version ;
-		bgo:amount ?amount
-	.
-} WHERE {
-    ?account a bgo:Account; dct:source ?source1 .
-    ?source1 fr:concept ?concept .
-    ?source2 fr:concept/skos:closeMatch ?concept .
-    FILTER( ?source1 != ?source2 )
-  
-    ?source1 qb:dataSet ?dataset1.
-    ?source2 qb:dataSet ?dataset2.
-
-  	?datase1 dcat:theme ?theme.
-    ?datase2 dcat:theme ?theme.
-
-    ?source2 fr:amount ?amount ; 
-    	fr:refPeriod/time:hasBeginning/interval:ordinalYear ?version . 
-  	BIND( IRI( CONCAT( STR(?source2),"_bh")) AS ?historyRec )
-}
-
-;
-
-#
-# Create previousValue
-# N.B only history records with the same theme (i.e. version) in source datasets are considered 
-#
-INSERT { ?account bgo:previousValue ?lastAmount }
-WHERE {
-    ?account a bgo:Account; 
-		dct:source/qb:dataSet/dcat:theme ?accountSourceTheme;
-		bgo:isVersionOf ?historyRec .
-  
-	?historyRec bgo:version ?version ;
-        bgo:amount ?lastAmount;
-        dct:source/qb:dataSet/dcat:theme ?historySourceTheme .
-  
-    FILTER( ?historySourceTheme = ?accountSourceTheme )
-  
-    FILTER NOT EXISTS {
-		?account bgo:isVersionOf ?historyRec2.
-        ?historyRec2 bgo:version ?version2 ;
-        	dct:source/qb:dataSet/dcat:theme ?historySourceTheme2 .
-    	FILTER( ?historySourceTheme2 = ?accountSourceTheme )
-        FILTER (?version2 > ?version)
-    }             
-}
-
 
 ;
 

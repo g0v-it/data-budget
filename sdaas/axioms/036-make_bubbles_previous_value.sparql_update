@@ -1,0 +1,33 @@
+#
+# Create previousValue detecting the most hight version id. 
+#
+PREFIX fr: <http://linkeddata.center/botk-fr/v1#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX interval: <http://reference.data.gov.uk/def/intervals/>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX bgo: <http://linkeddata.center/lodmap-bgo/v1#>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+
+INSERT { ?account bgo:previousValue ?lastAmount }
+WHERE {
+    ?account a bgo:Account; 
+		dct:source/qb:dataSet/dcat:theme ?accountSourceTheme;
+		bgo:isVersionOf ?historyRec .
+  
+	?historyRec bgo:version ?version ;
+        bgo:amount ?lastAmount;
+        dct:source/qb:dataSet/dcat:theme ?historySourceTheme .
+  
+    FILTER( ?historySourceTheme = ?accountSourceTheme )
+  
+    FILTER NOT EXISTS {
+		?account bgo:isVersionOf ?historyRec2.
+        ?historyRec2 bgo:version ?version2 ;
+        	dct:source/qb:dataSet/dcat:theme ?historySourceTheme2 .
+    	FILTER( ?historySourceTheme2 = ?accountSourceTheme )
+        FILTER (?version2 > ?version)
+    }             
+}
+
