@@ -21,7 +21,7 @@ INSERT {
 		dct:subject ?subject ;
 		dct:source ?component ;
 		bgo:amount ?amount ;
-		bgo:version "last"; #?year ;
+		bgo:version ?year ;
 		bgo:partitionLabel 
 			?labelMinistero, 
 			?labelMissione
