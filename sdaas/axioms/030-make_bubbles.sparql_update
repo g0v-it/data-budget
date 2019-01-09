@@ -91,15 +91,19 @@ INSERT {
 		bgo:amount ?amount
 	.
 } WHERE {
-	?account a bgo:Account; dct:source ?source1 .
-    ?source1 fr:concept/skos:notation ?notation .
-    ?source2 fr:concept/skos:notation ?notation .
+    ?account a bgo:Account; dct:source ?source1 .
+    ?source1 fr:concept ?concept .
+    ?source2 fr:concept/skos:closeMatch ?concept .
     FILTER( ?source1 != ?source2 )
-    ?source2  qb:dataSet ?fr; fr:amount ?amount ; 
-    	fr:refPeriod/time:hasBeginning/interval:ordinalYear ?year .
-    	
-    OPTIONAL { ?fr dcat:theme/skos:notation ?frNotation }
-    BIND( CONCAT(STR(?year), ".", STR(?frNotation)) AS ?version)
+  
+    ?source1 qb:dataSet ?dataset1.
+    ?source2 qb:dataSet ?dataset2.
+
+  	?datase1 dcat:theme ?theme.
+    ?datase2 dcat:theme ?theme.
+
+    ?source2 fr:amount ?amount ; 
+    	fr:refPeriod/time:hasBeginning/interval:ordinalYear ?version . 
   	BIND( IRI( CONCAT( STR(?source2),"_bh")) AS ?historyRec )
 }
 

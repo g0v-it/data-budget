@@ -39,7 +39,7 @@
     "$LOGO_FOOTER_G0V_HREF":"https://copernicani.it/g0v/",
     "$SPARQL_PAGE":"SPARQL",
     "$LOD_PAGE":"Linked Open Data", 
-    "$URL_SPARQL_PAGE":"http://yasgui.org/#query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0ASELECT+*+WHERE+%7B%0A++%3Fsub+%3Fpred+%3Fobj+.%0A%7D+%0ALIMIT+10&contentTypeConstruct=text%2Fturtle&contentTypeSelect=application%2Fsparql-results%2Bjson&endpoint=https%3A%2F%2Fdata.budget.g0v.it%2Fsparql&requestMethod=POST&tabTitle=Query&headers=%7B%7D&outputFormat=table",
-    "$URL_LOD_PAGE":"http://inps.linkeddata.cloud/resource/welcome",
+    "$URL_SPARQL_PAGE":"http://yasgui.org/short/-BrtJVWQY",
+    "$URL_LOD_PAGE":"http://mef.linkeddata.cloud/resource/welcome",
     "$TERMS_URL":"/terms-and-conditions"
 }
