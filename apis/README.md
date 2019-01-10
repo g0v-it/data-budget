@@ -2,7 +2,7 @@ APIs for g0v financial reporter application
 ===========================================
 
 These APIs query an RDF graph database containing data according with [BubbleGraph Ontology](https://github.com/linkeddatacenter/LODMAP-ontologies/tree/master/v1/bgo) and produces
-a json structure suitable to be used with a g0v financial reporter application.
+a json structure suitable to be used with a http://budget.g0v.it/ application.
 
 ## usage
 

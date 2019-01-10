@@ -10,8 +10,9 @@ const partition1 = "p1_ministero",
 partition2 = "p2_missione" ;
 
 //Modules
-const http = require('http'),
-{URL} = require('url'),
+//const http = require('http'),
+
+const {URL} = require('url'),
 csv = require('csvtojson'),
 zip = require('lz-string'),
 querystring = require('querystring');
@@ -85,7 +86,7 @@ function getQueryResult(endpoint, query, format = DEFAULT_ACCEPT){
 		};
 
 		query = querystring.stringify(query);
-
+        const http = require(url.protocol.slice(0, -1));
 		const request = http.request(options, (res)=> {
 			result = ""; //inizialize
 			res.on('data', (chunk) => {

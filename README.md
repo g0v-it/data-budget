@@ -4,20 +4,21 @@
 
 A *Smart Data Management Platform* to feed the http://budget.g0v.it/ web applications.
 
-The plaform is built around a knowledge graph that contains informations about
-some  Italian Government budget and financial reports:
+The plaform is built around a knowledge graph that contains information about
+the Italian Government budget and other similar reports, namely:
 
-- "legge di bilancio"
-- "disegno di legge di bilancio"
-- "consuntivo di bilancio"
+- "disegno di legge di bilancio" (budget proposal)
+- "legge di bilancio" (budget)
+- "consuntivo di bilancio" (consolidated balance)
 
 The platform extracts and links main financial facts from the official open data provided by the "Ministero dell'Economia e Finance" for 2014-2019 years . 
 
 The knowledge graph is compliant with RDF and Semantic Web Specification.
 
 Applications can access the knowledge graph through a SPARQL interface.
-An example of  RESTfull APIs is also provided as part of the platform. The
-provided APIS integrates with http://budget.g0v.it/ application (source available at https://github.com/g0v-it/web-budget) 
+
+An example of RESTfull APIs is also provided as part of the platform. The
+provided API queries the knowledge graph and expose the data as as required by http://budget.g0v.it/ application (source available at https://github.com/g0v-it/web-budget).
 
 **Reference implementations:**
 
@@ -35,8 +36,8 @@ The project contains the two "core" logical components:
 
 Beside these, two additional optional components may be needed to complete a real production system:
 
-- **LODMAP** server: a linked data browser to deferencing URIS and navigate the RDF store;
-- a **router** that provides a single acces point to all services with firewall, caching and ssl features.
+- **LODMAP** server: a linked data web browser to deferencing URIS and navigate the Knowledge Graph;
+- a **router** that provides a single access point to all services with firewall, caching and ssl features.
 
 This picture shows the components interactions:
 
@@ -52,7 +53,7 @@ to get a containerized development environment up and running.
 If you do not already have Docker on your computer, 
 [it's the right time to install it](https://docs.docker.com/install/).
 
-To start all services using [docker Compose](https://docs.docker.com/compose/) type: 
+To start core services using [docker Compose](https://docs.docker.com/compose/) type: 
 
 ```
 docker-compose build
