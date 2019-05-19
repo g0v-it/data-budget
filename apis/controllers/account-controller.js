@@ -13,22 +13,26 @@ partition2 = "p2_missione" ;
 //const http = require('http'),
 
 const {URL} = require('url'),
-csv = require('csvtojson'),
+csv = require('csvjson'),
 zip = require('lz-string'),
 querystring = require('querystring');
 
 //#######################################GET_ROUTES################################################
 exports.getAccounts = async (req, res) => {
 	let queryAccounts, accountsJson;
+	
 	queryAccounts = require('../queries/get-accounts.js');
 	accountsJson = await rdflib.parseAccounts(await getQueryResult(config.endpoint, queryAccounts), DEFAULT_ACCEPT);
+	
 	res.json(accountsJson);
 }
 
 exports.getAccount = async (req, res) => {
 	let queryAccount, outputJson;
+	
 	queryAccount = require('../queries/get-account.js')(req.params.id);
 	outputJson = await rdflib.parseAccount(await getQueryResult(config.endpoint, queryAccount), DEFAULT_ACCEPT);
+	
 	res.json(outputJson);
 }
 
@@ -44,23 +48,20 @@ exports.getStats = async (req, res) => {
 }
 
 exports.getFilter = async (req, res) => {
-	let filters = req.params.filters;
-	filters = JSON.parse(zip.decompressFromBase64(filters));
+	let filters, filter1, filter2, query1, query2, result;
+	
+	result = {};
+	filters = JSON.parse(zip.decompressFromBase64(req.params.filters));
 	//Prepare filters
-	let filter1 = filters[partition1].join('|');
-	let filter2 = filters[partition2].join('|');
+	filter1 = filters[partition1].join('|'); filter2 = filters[partition2].join('|');
 
 	//prepare queries
-	let query1 = require('../queries/filter.js')(filter1, filter2, partition1);
-	let query2 = require('../queries/filter.js')(filter1, filter2, partition2);
+	query1 = require('../queries/filter.js')(filter1, filter2, partition1); 
+	query2 = require('../queries/filter.js')(filter1, filter2, partition2);
 	//prepare data
-	let object1 = await buildJsonFilter(await getQueryResult(config.endpoint, query1, 'text/csv'), partition1);
-	let object2 = await buildJsonFilter(await getQueryResult(config.endpoint, query2, 'text/csv'), partition2);
-	//prepare result
-	let result = {};
-
-	result[partition1] = object1;
-	result[partition2] = object2;
+	result[partition1] = await buildJsonFilter(await getQueryResult(config.endpoint, query1, 'text/csv'), partition1);
+	result[partition2] = await buildJsonFilter(await getQueryResult(config.endpoint, query2, 'text/csv'), partition2);
+	
 
 	res.json(result);
 }
@@ -122,7 +123,13 @@ function getQueryResult(endpoint, query, format = DEFAULT_ACCEPT){
 async function buildJsonFilter(data, group){
 	return new Promise(async (resolve, reject) =>{
 		try{
-			let output, result = await csv().fromString(data);
+			let output, result = await csv.toObject(data, {
+				delimiter : ',',
+  				quote     : '"'
+			});
+
+			console.log(data);
+			console.log(output);
 			
 			output = {};
 			result.map(d => {
