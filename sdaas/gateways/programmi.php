@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 /**
  * Gateway per trasformare il file data/missioni-programmi.csv in rdf g0v-ap

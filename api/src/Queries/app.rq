@@ -1,0 +1,7 @@
+# 
+CONSTRUCT{
+	?s?p?o
+} 
+WHERE {
+	?s?p?o
+} LIMIT 3

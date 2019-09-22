@@ -1,0 +1,105 @@
+#
+# Create bubbles from a Financial Report Component 
+#
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX fr: <http://linkeddata.center/botk-fr/v1#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX interval: <http://reference.data.gov.uk/def/intervals/>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX bgo: <http://linkeddata.center/lodmap-bgo/v1#>
+
+
+INSERT { 
+   ?account a bgo:Account, bgo:ProfiledAccount ;
+		bgo:accountId ?code ;
+		bgo:title ?title ;
+		bgo:description ?description ;
+		bgo:abstract ?abstract ;
+		bgo:source ?component ;
+		bgo:amount ?amount ;
+		bgo:versionLabel ?year .
+
+	
+	?ministeroSubSet a bgo:AccountSet; bgo:title ?labelMinistero ; bgo:hasAccount ?account .
+	?missioneSubSet  a bgo:AccountSet; bgo:title ?labelMissione bgo:hasAccount ?account .
+	
+	<https://data.budget.g0v.it/ldp/partition/ministero#this>  bgo:hasAccountSubSet ?ministeroSubSet .
+	<https://data.budget.g0v.it/ldp/partition/missione#this> bgo:hasAccountSubSet ?missioneSubSet .
+} 
+WHERE {
+
+	?bgo a bgo:BubbleGraph ; dct:source ?fr .
+  	?fr a fr:FinancialReport.
+  	
+
+	?component a fr:Component ;
+		qb:dataSet ?fr ;
+		fr:concept ?azione ;
+		fr:refPeriod/time:hasBeginning/interval:ordinalYear ?year ;
+		fr:amount ?amount 
+	.
+	
+
+  	# Il titolo della bolla è la prefLabel della azione.
+	?azione skos:prefLabel ?title .
+	
+	#la descriptiopn è il programma della azione 
+	?azione skos:broader ?programma . 
+	?programma skos:prefLabel ?description  . 
+	
+	#l'abstract è, opzionalmente  il commento del rpogramma
+	OPTIONAL { ?programma rdfs:comment ?abstract }
+		
+		
+	# la seconda partizione è ricavata dalla notation della m missione del programma è 
+	?programma skos:broader ?missione .
+	?missione skos:prefLabel ?labelMissione ; skos:notation ?missioneId . 
+	BIND( IRI( CONCAT("https://data.budget.g0v.it/ldp/partition/missione#",?missioneId)) AS ?missioneSubSet)
+	
+	# Il ministero della missiome è la prima partizione
+	?missione skos:broader ?ministero .
+  	?ministero skos:prefLabel ?labelMinistero ; skos:notation ?ministeroId . 
+	BIND( IRI( CONCAT("https://data.budget.g0v.it/ldp/partition/ministero#",?ministeroId)) AS ?ministeroSubSet)
+  
+  
+	BIND( MD5(str(?component)) AS ?code)	
+	BIND( IRI( CONCAT("https://data.budget.g0v.it/ldp/account/",?code,"#this")) AS ?account)
+}
+
+;
+
+
+#
+#  Create abstract from programma comments
+#
+INSERT { ?account bgo:abstract ?abstract} 
+WHERE {
+	?account a bgo:Account ; dct:source/fr:concept/skos:broader ?programma .
+	?programma rdfs:comment ?abstract .
+	FILTER NOT EXISTS { ?bubbleUri bgo:abstract [] }
+}
+
+;
+
+#
+# Create account parts
+#
+INSERT {
+  ?account bgo:hasPart ?part .
+  ?part a bgo:PartialAmount ; 
+	  dct:source ?fact ; 
+	  dct:title ?partTitle ; 
+	  bgo:amount ?partAmount .
+} 
+WHERE {
+	?account a bgo:Account ; dct:source ?component . 
+	?fact a fr:Fact; 
+		fr:isPartOf ?component ;
+		fr:concept/skos:prefLabel ?partTitle ;
+		fr:amount ?partAmount
+	.
+	BIND( IRI( CONCAT( STR(?fact),"_bp")) AS ?part )
+}
+

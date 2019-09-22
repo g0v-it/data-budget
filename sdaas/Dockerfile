@@ -1,8 +1,9 @@
-FROM linkeddatacenter/sdaas-ce:2.1.0
+FROM linkeddatacenter/sdaas-ce:2.4.0
 
 COPY ./ /tmp/g0v
 
 RUN apk --no-cache add \
+	php7 \
 	php7-json
 	
 # start a temporary sdaas instance to rebuild the knowledge base  

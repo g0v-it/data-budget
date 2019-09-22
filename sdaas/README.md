@@ -1,4 +1,4 @@
-# data.budget.gov.it knowledge Base (smart data as a service)
+# data.budget.gov.it knowledge graph
 
 This project contains all needed for setting up and update a knowledge base ready to be used by the budget.g0v.it APIs.
 
@@ -25,9 +25,9 @@ knowledge base build process requires to:
 the test of the build script require dat least 2GB of ram available to the docker machine:
 
 ```
-docker run -d -p 9999:8080 -v $PWD/.:/workspace --name kb linkeddatacenter/sdaas-ce
+docker run -d -p 9999:8080 -v $PWD/.:/workspace --name kb linkeddatacenter/sdaas-ce:2.4.0
 docker exec -ti kb bash
-apk --no-cache add php7-json
+apk --no-cache add php7 php7-json
 sdaas --debug -f build.sdaas --reboot
 # Access the workbench pointing browser to http://localhost:9999/sdaas
 exit
@@ -63,4 +63,4 @@ The resulting container will provide a read only distribution of the whole knowl
 ## Credits and license
 
 - the dockerfile reuse [Docker Blazegraph](https://github.com/lyrasis/docker-blazegraph)
-- the sdaas platform is derived from [LinkedData.Center SDaas Product](https://it.linkeddata.center/p/sdaas) and licensed with CC-by-nd-nc by LinkedData.Center to g0v community
+- the sdaas platform is derived from [LinkedData.Center SDaas Product](https://it.linkeddata.center/p/sdaas)

@@ -1,0 +1,21 @@
+{
+    "name": "e-artspace/pimple-env-provider",
+    "description": "A super simple, uSilex compatible, lightweight service provider to override Pimple container parameters with the value of environment variables.",
+    "keywords": ["uSilex", "pimple", "environment", "service provider", "12factor", "twelve-factor app"],
+    "license": "MIT",
+    "require": {
+        "pimple/pimple": "^3.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7"
+    },
+    "autoload": {
+        "psr-4": { "EnvProvider\\": "src/" }
+    },
+    "authors": [
+        {
+            "name": "Enrico Fagnoni",
+            "email": "e.fagnoni@e-artspace.com"
+        }   
+    ]
+}

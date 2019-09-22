@@ -1,4 +1,6 @@
+#!/usr/bin/env php
 <?php
+
 /**
  * Gateway per trasformare i disegni di legge di bilancio, le leggi di bilancio 
  * e rendiconti spesa per capitolo su BDAP da  formato csv a rdf g0v-ap

@@ -21,7 +21,7 @@ resource:welcome a kees:KnowledgeBase;
     dct:license <https://creativecommons.org/licenses/by/3.0/>;
 	rdfs:comment 
 		"Dati estratti da OpenBDAP by © RGS Ragioneria Generale dello Stato."@it,
-		"La base della conoscenza è stata costruita utilizzando la piattaforma SDaaS™ di LinkedData.Center "@it ,
+		"La base della conoscenza è stata costruita utilizzando la piattaforma SDaaS™ di LinkedData.Center"@it ,
 		"La conoscenza è formalizzata attraverso Linked Data RDF e serve per alimentare l'applicazione https://budget.g0v.it/. Per maggiori dettagli sulle ontologie e sugli strumenti utilizzati vedi https://github.com/g0v-it/data-budget."@it ;
 	void:vocabulary <https://github.com/g0v-it/ontologies/tree/master/fr-ap>, <https://github.com/linkeddatacenter/kees>; 
 	dct:publisher resource:Copernicani ;
@@ -115,20 +115,3 @@ resource:descrizione_programmi_csv a  dcat:Distribution ;
 		]
 	]
 .
-
-
-resource:nomi_azioni a dcat:Dataset;
-        dct:description  "Ottimizzazione dei nomi delle azioni riscritte dai Copernicani"@it ;
-        dct:identifier   "nomi_azioni" ;
-        dct:publisher    resource:Copernicani ;
-        dct:title        "Nomi azioni ottimizzati"@it ;
-        dcat:accessUrl    <https://docs.google.com/spreadsheets/d/1JpmdYjNkc-Yr4JlQdFhn0jgcJ0tuMZZ5Y9IWmc57BTA/edit?usp=sharing> ;
-        dcat:distribution    resource:nomi_azioni_csv
-.
-resource:nomi_azioni_csv a  dcat:Distribution ;
-        dct:format "text/csv" ;
-        dcat:downloadUrl <https://docs.google.com/spreadsheets/d/e/2PACX-1vTs9jWocG_xYjgp4JmKcH6o_7piJ9b4t--c-kx_xf6Erkp_-ad-4Fj0MRY2Eyd0AA9-LZ94pTwDv4na/pub?output=csv> ;
-        dcat:license <http://creativecommons.org/licenses/by/3.0> 
-.
-
-	

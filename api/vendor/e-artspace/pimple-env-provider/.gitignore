@@ -1,0 +1,6 @@
+composer.lock
+coverage
+vendor
+.project
+.project/
+.vagrant/

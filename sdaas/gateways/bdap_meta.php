@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 /**
  * Gateway per leggere i metadata di un report su bdap usando le api CKAN v1

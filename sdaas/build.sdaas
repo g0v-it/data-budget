@@ -3,6 +3,8 @@ set -a
 
 GRAPH="http://mef.linkeddata.cloud/resource/"
 
+SD_INCLUDE ruleset
+SD_INCLUDE testing
 
 ####################################################
 SD_LOG  "Loading external resources..."
@@ -27,50 +29,42 @@ function G0V_LEARN_FROM_BDAP {
 	local reportName="spd_${reportType}_spe_elb_cap_01_${year}"	
 	local uri="https://bdap-opendata.mef.gov.it/SpodCkanApi/api/1/rest/dataset/${reportName}"
 	SD_LEARN "http://reference.data.gov.uk/doc/gregorian-interval/${year}-01-01T00:00:00/P1Y"
-	SD_LEARN "${uri}" "${uri}" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' - |php7 gateways/bdap_meta.php"
-	SD_LEARN "${uri}.csv" "${uri}.csv" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' - |php7 gateways/bdap.php ${reportName}"
+	SD_LEARN "${uri}" "${uri}" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' - |gateways/bdap_meta.php"
+	SD_LEARN "${uri}.csv" "${uri}.csv" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' - |gateways/bdap.php ${reportName}"
 }
 
 ## Report type:
 ##   lbf = Legge Di Bilancio Approvata
 ##   dlb = Disegno di Legge Di Bilancio
 ##   rnd = Bilancio consolidato
+#G0V_LEARN_FROM_BDAP dlb 2020
 G0V_LEARN_FROM_BDAP lbf 2019
-G0V_LEARN_FROM_BDAP dlb 2019
+#G0V_LEARN_FROM_BDAP dlb 2019
+#G0V_LEARN_FROM_BDAP rnd 2018
 G0V_LEARN_FROM_BDAP lbf 2018
-G0V_LEARN_FROM_BDAP dlb 2018
+#G0V_LEARN_FROM_BDAP dlb 2018
+#G0V_LEARN_FROM_BDAP rnd 2017
 G0V_LEARN_FROM_BDAP lbf 2017
-G0V_LEARN_FROM_BDAP dlb 2017
-G0V_LEARN_FROM_BDAP rnd 2017
-G0V_LEARN_FROM_BDAP rnd 2016
-G0V_LEARN_FROM_BDAP rnd 2015
-G0V_LEARN_FROM_BDAP rnd 2014
+#G0V_LEARN_FROM_BDAP dlb 2017
+#G0V_LEARN_FROM_BDAP rnd 2016
+#G0V_LEARN_FROM_BDAP rnd 2015
+#G0V_LEARN_FROM_BDAP rnd 2014
 
 
 SD_LEARN urn:mef:programmi data/descrizione_programmi.csv "|||.ttl|php7 gateways/programmi.php spd_lbf_spe_elb_cap_01_2019"
-#SD_LEARN urn:copernicani:nomi_azioni "https://docs.google.com/spreadsheets/d/e/2PACX-1vTs9jWocG_xYjgp4JmKcH6o_7piJ9b4t--c-kx_xf6Erkp_-ad-4Fj0MRY2Eyd0AA9-LZ94pTwDv4na/pub?output=csv" "|||.ttl|php7 gateways/account_names.php"
 
 
+exit
 
 ####################################################
-SD_LOG  "Starting reasoning window: computing axioms "
+SD_LOG  "Starting reasoning window"
 ####################################################
-for axiomFile in $(ls -v axioms/*sparql_update); do
-	SD_LOG  "Reasoning about $axiomFile"
-	SD_SPARQL_UPDATE @$axiomFile
-done
-
+SD_EVAL_RULESET "${GRAPH}" "axioms"
 
 ####################################################
 SD_LOG  "Testing..."
 ####################################################
-for testFile in $(ls -v tests/*ask); do
-    echo -n "   $(basename $testFile)..."
-    case "$(SD_SPARQL_QUERY xml @$testFile)" in
-        *true* ) echo "OK";;
-        *false* ) echo "FAIL";;
-    esac
-done
+SD_DATA_TEST
 
 
 SD_THATS_ALL_FOLKS

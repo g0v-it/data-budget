@@ -5,8 +5,8 @@ services:
     ports:
       - "29321:8080"
   api:
-    build: ./apis
+    build: ./api
     ports:
-      - "29322:80"
+      - "29322:8000"
     depends_on:
       - "sdaas"
