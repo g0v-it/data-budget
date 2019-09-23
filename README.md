@@ -13,7 +13,7 @@ the Italian Government budget and other similar reports, namely:
 
 The platform extracts and links main financial facts from the official open data provided by the "Ministero dell'Economia e Finance" producing a knowledge graph that is compliant with the [g0v Financial Report application profile](https://github.com/g0v-it/ontologies/tree/master/fr-ap) and with the [Bubble Graph Ontology](http://linkeddata.center/lodmap-bgo/v1)
 
-Applications can access the knowledge graph through a SPARQL interface or as Linked Data through some RESTfull APIs.
+Applications can access the knowledge graph through a SPARQL interface.
 
 
 **Reference implementations:**
@@ -23,15 +23,12 @@ Applications can access the knowledge graph through a SPARQL interface or as Lin
 - **API endpoint**: https://data.budget.g0v.it/ldp
 - **Example of a data consumer**: https://budget.g0v.it/
 
-## Development
 
-The project contains the two "core" logical components:
-
-- **sdaas** (smart data as a service):  the data management platform core providing a RDF store, a [SPARQL endpoint](https://www.w3.org/TR/sparql11-overview), a data ingestion engine, a set of gateways to transform raw data in linked data and a build script that populates the RDF store. See files and docs in [sdaas directory](sdaas)
-- a set of **apis** that query the SPARQL endpoint and expose a linked data interface. See files and docs in [apis directory](apis)
+The **sdaas** (smart data as a service) platform  provides a RDF store, a [SPARQL endpoint](https://www.w3.org/TR/sparql11-overview), a data ingestion engine, a set of gateways to transform raw data in linked data and a build script that populates the RDF store.
 
 Additional optional components may complete a production system:
 
+- a set of **apis** that query the SPARQL endpoint and expose a linked data interface. 
 - a **reverse proxy** that provides a single access point to sparql and api services with security and caching.
 - a **linked data web browser** to deferencing URIS and navigate the Knowledge Graph (e.g. LODVIEW).
 - an **interactive SPARQL interface** to query the knowledge graph and generating static reports (e.g. YasGui)

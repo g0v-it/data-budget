@@ -1,11 +1,11 @@
 version: '3'
 services:
   sdaas:
-    build: ./sdaas
+    build: .
     ports:
       - "29321:8080"
   api:
-    build: ./api
+    image: linkeddatacenter/lodmap2d-api:1.0.0
     ports:
       - "29322:8000"
     depends_on:
