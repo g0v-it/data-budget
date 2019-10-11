@@ -35,14 +35,7 @@ We kindly ask you to add following sentence to your pull request:
 
 This project contains all needed for setting up and update a knowledge base ready to be used by the budget.g0v.it APIs.
 
-The knowledge base is built around the [g0v application profile](https://github.com/g0v-it/ontologies/tree/master/fr-ap) and  [LODMAP Bubble Graph Ontology](https://github.com/linkeddatacenter/LODMAP-ontologies/tree/master/v1/bgo):
-
-- the g0v-fr application profile is used to describe the semantic of a financial report
-- the Bubble Graph Ontology is used to describe the graphical objects that reprensent financial report components
-
 The data ingestion process is managed by the [LinkedData.Center SDaaS platform community edition](https://github.com/linkeddatacenter/sdaas-ce) according [KEES](http://linkeddata.center/kees) specifications. 
-
-
 
 knowledge base build process requires to:
 

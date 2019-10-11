@@ -5,7 +5,7 @@ services:
     ports:
       - "29321:8080"
   api:
-    image: linkeddatacenter/lodmap2d-api:1.0.0
+    image: linkeddatacenter/lodmap2d-api
     ports:
       - "29322:8000"
     depends_on:
