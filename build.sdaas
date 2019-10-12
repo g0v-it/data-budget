@@ -13,24 +13,24 @@ SD_LEARN http://publications.europa.eu/resource/authority/currency/EUR
 
 
 ####################################################
-SD_LOG  "Starting learning window: loading facts. This will take a while..."
+SD_LOG  "Loading facts from local data..."
 ####################################################
 SD_LEARN urn:sdaas:config "data/kees.ttl"
 SD_LEARN $GRAPH/g0v_app "data/g0v_app.ttl"
 
 
 ####################################################
-SD_LOG  "Starting learning window: loading facts. This will take a while..."
+SD_LOG  "Loading facts from BDAP portal..."
 ####################################################
 function G0V_LEARN_FROM_BDAP {
-	local reportType="$1"
+	local bdapReportType="$1"
 	local year="$2"
-	
-	local reportName="spd_${reportType}_spe_elb_cap_01_${year}"	
-	local uri="https://bdap-opendata.mef.gov.it/SpodCkanApi/api/1/rest/dataset/${reportName}"
+
+	local datasetName="spd_${bdapReportType}_spe_elb_cap_01_${year}"	
+	local uri="https://bdap-opendata.mef.gov.it/SpodCkanApi/api/1/rest/dataset/${datasetName}"
 	SD_LEARN "http://reference.data.gov.uk/doc/gregorian-interval/${year}-01-01T00:00:00/P1Y"
 	SD_LEARN "${uri}" "${uri}" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' - |gateways/bdap_meta.php"
-	SD_LEARN "${uri}.csv" "${uri}.csv" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' - |gateways/bdap.php ${reportName}"
+	SD_LEARN "${uri}.csv" "${uri}.csv" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' - |gateways/bdap.php ${datasetName}"
 }
 
 ## Report type:

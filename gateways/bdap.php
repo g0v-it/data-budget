@@ -16,16 +16,33 @@ include "Helper.php";
 
 $bdapDatasetId = $argv[1];
 
+// extract  $bdapDatasetYear and bdapDatasetType from $bdapDatasetId
+preg_match("/^spd_(lbf|rnd|dlb)_spe_elb_cap_01_(20[0-9]{2})$/", $bdapDatasetId, $matches) || die("Unreconized dataset id $bdapDatasetId");
+$bdapDatasetYear= intval($matches[2]);
+$bdapDatasetType= $matches[1];
+
+
+// detect $mefReportClass
+switch ($bdapDatasetType) {
+    case "dlb":
+        $mefReportClass="DisegnoLeggeDiBilancio";
+        break;
+    case "lbf":
+        $mefReportClass="LeggeDiBilancio";
+        break;
+    case "rnd":
+        $mefReportClass="RendicontoFinanziario";
+        break;
+}
+
+
+// detect the csv scheme form year and dataset type
 $a = "amministrazione";
 $m = "missione";
 $p = "programma";
 $az = "azione";
 $c = "capitolo";
 $b = "fact";
-
-preg_match("/^spd_(lbf|rnd|dlb)_spe_elb_cap_01_20[0-9]{2}$/", $bdapDatasetId) || die("Unreconized dataset id $bdapDatasetId");
-$bdapDatasetYear= intval(substr($bdapDatasetId,-4));
-$bdapDatasetType= substr($bdapDatasetId,0,-8);
 if ($bdapDatasetYear >= 2017) {
     $match = array(
         $a => 2,
@@ -35,15 +52,15 @@ if ($bdapDatasetYear >= 2017) {
         $c => 6
     );
     switch ($bdapDatasetType) {
-        case "spd_lbf_spe_elb_cap":
+        case "lbf":
             $match[$b]=20;
             break;
             
-        case "spd_rnd_spe_elb_cap":
+        case "rnd":
             $match[$b]=35;
             break;
             
-        case "spd_dlb_spe_elb_cap":
+        case "dlb":
             $match[$b]=52;
             ;
             break;
@@ -57,11 +74,11 @@ if ($bdapDatasetYear >= 2017) {
         $c => 6
     );
     switch ($bdapDatasetType) {
-        case "spd_lbf_spe_elb_cap":
+        case "lbf":
             $match[$b]=21;
             break;
             
-        case "spd_rnd_spe_elb_cap":
+        case "rnd":
             $match[$b]=36;
             break;
             

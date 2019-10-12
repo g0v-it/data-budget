@@ -1,11 +1,11 @@
-# gateways
+# bdap gateways
 
-This directory contains the gateways that transform the raw data provided by the Italian government (BDAP catalog) and othr data providers into linked data compliant with the [g0v financial report application profile](https://github.com/g0v-it/ontologies/tree/master/fr-ap):
+This directory contains the gateways that transform the raw data provided by the Italian government (BDAP catalog) and other data providers into linked data compliant with the [g0v financial report application profile for MEF data](../fr-ap-mef) (fr-ap-mef)
 
 Gateways are simple stand-alone php7 scripts that read a csv stream row by row from STDIN and 
 write RDF turtle statements to STDOUT. Following gateways are available:
 
-- the **bdap** gateway requires as a mandatory parameters an id of a dataset define in https://bdap-opendata.mef.gov.it/SpodCkanApi/api/1/rest/dataset/
+- the **bdap** gateway requires as a mandatory parameters an id of a dataset defined in https://bdap-opendata.mef.gov.it/SpodCkanApi/api/1/rest/dataset/
 - The **bdap_meta** gateway requires in input a json structure containing the metadata about a dataset according CKAN v1 api.
 - **programmi** gateway reads verbose program descriptions from data/descrizione_programmi.csv
 
