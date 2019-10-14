@@ -17,14 +17,6 @@ ASK {
         FILTER NOT EXISTS { ?obs qb:dataSet ?dataset2 FILTER (?dataset1 != ?dataset2) }
     }
     
-    # Every fr:Fact has exactly one associated valid reference period.   
-    {
-        ?obs fr:refPeriod ?refPeriod1.
-        ?refPeriod1 time:hasBeginning ?begins; time:hasEnd ?ends
-        FILTER( ?begins != ?ends )
-        FILTER NOT EXISTS { ?obs fr:refPeriod ?refPeriod2 FILTER (?refPeriod1 != ?refPeriod2) }
-    }
-    
 
     # Every fr:Fact has exactly one fr:concept    
     {

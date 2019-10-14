@@ -1,39 +1,11 @@
 #
-# Inps application configuration
+# Mef bgo application configuration
 #
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix bgo: <http://linkeddata.center/lodmap-bgo/v1#> .
 @prefix resource: <http://mef.linkeddata.cloud/resource/> .
-@base <https://data.budget.g0v.it/ldp/> .
+@prefix : <urn:bgo:> .
 
 
-<accounts#bubbleGraph> a bgo:BubbleGraph ;
-	dct:source resource:spd_lbf_spe_elb_cap_01_2019;
-	dct:title "Legge di Bilancio 2019"@it ;
-	dct:description "Dati di Spesa relativi alla Legge di Bilancio Approvata per l'esercizio finanziario 2019"@it ;
-	bgo:um "EUR";
-    bgo:partitionScheme 
-        <accounts#default> ,
-        <accounts#ministero> ,
-        <accounts#missione>
-.
-
-#
-# NOTE: the partitionSchemeId lexical order determines the order of the buttons in the bubble graph.
-#
-<accounts#default>
-	bgo:partitionSchemeId "default" ;
-	dct:title "stato"@it
-.
-	
-<accounts#ministero>
-	bgo:partitionSchemeId "p1_ministero" ;
-	dct:title "ministero"@it
-.
-
-<accounts#missione>
-	bgo:partitionSchemeId "p2_missione" ;
-	dct:title "missione"@it
-.
-
+:domain a bgo:Domain .

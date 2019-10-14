@@ -30,12 +30,12 @@ resource:$datasetId
 $missione = $programma = '';
 fgets(STDIN);
 while ($rawdata = fgetcsv(STDIN, 2048)) {
-    $missione = $rawdata[0]?substr($rawdata[0], 4):$missione;
-    $programma = $rawdata[1]?substr($rawdata[1], 4):$programma;
-    $amministrazione = $rawdata[2];
+    $missione = $rawdata[0]?substr($rawdata[0], 0, 3):$missione;
+    $programma = $rawdata[1]?substr($rawdata[1], 0, 3):$programma;
+    $amministrazione = crc32($rawdata[2]);
     $descrizione = Helper::FILTER_SANITIZE_TURTLE_STRING($rawdata[3]); 
 
     //Codes then used in notation and uri construction
-    $p_code =Helper::getUri($amministrazione . $missione . $programma);
-    echo "resource:{$datasetId}_programma_${p_code} rdfs:comment \"$descrizione\"@it .\n";
+    $notation  = "$amministrazione-$missione-$programma";
+    echo "resource:{$datasetId}_{$notation} skos:editorialNote \"$descrizione\"@it .\n";
 }

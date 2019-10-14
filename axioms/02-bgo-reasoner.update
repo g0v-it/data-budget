@@ -4,6 +4,7 @@ PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX mef: <http://w3id.org/g0v/it/mef#> 
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX bgo: <http://linkeddata.center/lodmap-bgo/v1#>
 
 ##
 ## Hinerit domain metadata from last available report
@@ -15,6 +16,7 @@ INSERT {
 		bgo:description ?description ;		
 		bgo:abstract ?abstract 
 	. 
+} 
 WHERE {
 
 	{
@@ -45,29 +47,35 @@ INSERT {
 WHERE { 
 	
 	{
-		SELECT ?azione (GROUP_CONCAT(?capitolo, "\n- ") AS ?capitoli) WHERE {
+		SELECT ?azione (GROUP_CONCAT(?capitolo;separator= "\n- ") AS ?capitoli) WHERE {
 			?azione a mef:Azione; qb:dataSet ?report .
-			?domain a bgo:Domain; dct:source ?report;
-			?fact fr:isPartOf ?azione; skos:definition ?capitolo
-		} GROUP BY ?azione
+			?domain a bgo:Domain; dct:source ?report .
+			?fact fr:isPartOf ?azione; skos:definition ?definition ; skos:notation ?notation ; fr:amount ?amount
+			BIND( CONCAT(?definition," (*",?notation,"*)") AS ?capitolo)		
+		} GROUP BY ?azione ORDER BY ?amount
 	}
 	
 	OPTIONAL { ?azione skos:prefLabel ?title }
 	OPTIONAL { ?azione skos:definition ?description }
 	OPTIONAL { ?azione fr:amount ?amount }
-	OPTIONAL { ?azione fr:isPartOf/skos:definition ?programma }
+	OPTIONAL { 
+		?azione fr:isPartOf ?p . 
+		?p skos:definition ?programmaDefinition ;
+		OPTIONAL { ?p skos:editorialNote ?programmaEditorialNote }
+		BIND( CONCAT( ?programmaDefinition, "\n\n", COALESCE(?programmaEditorialNote ,"")) AS ?programma)
+	}
 	OPTIONAL { ?azione fr:isPartOf/fr:isPartOf/skos:definition ?missione }
-	OPTIONAL { ?azione fr:isPartOf/fr:isPartOf/fr:isPartOf/skos:title ?ministero }
+	OPTIONAL { ?azione fr:isPartOf/fr:isPartOf/fr:isPartOf/skos:definition ?ministero }
 	BIND ( STRDT(CONCAT(
-		"### ", ?ministero,
-		"\n#### Programma\n", ?programma,
-		"\n#### Missione\n", ?missione,
-		"\n#### Capitolo di spesa\n- ", ?capitoli,
-		"\n\n[More info...](",STR(?azione),")"
+		?ministero,
+		"\n\n**Programma**:\n\n", ?programma,
+		"\n\n**Missione**:\n\n", ?missione,
+		"\n\n**Capitoli di spesa**:\n\n- ", ?capitoli,
+		"\n\n[Maggiori informazioni...](",STR(?azione),")"
 	), bgo:MDString) AS ?abstract )
 	
 	
-	BIND ( IRI(CONCAT(STR(?azione)."_bgo") as ?account) 
+	BIND ( IRI(CONCAT(STR(?azione),"_bgo")) as ?account) 
 }
 
 ;
@@ -82,35 +90,42 @@ INSERT {
 		bgo:hasHistoryRec ?historyRec 
 	.
 		
-	?historyRec ;
+	?historyRec 
 		bgo:versionLabel ?historyRecVersion ;		
 		bgo:amount ?historyRecAmount 
 	.
-
 }
 WHERE { 
+	VALUES ( ?type ?abbr ) {
+		( mef:DisegnoLeggeDiBilancio "D" )
+		( mef:LeggeDiBilancio "L" )
+		( mef:RendicontoFinanziario "R")
+	}
+
 	?account a bgo:Account ;
 		dct:source/skos:notation ?notation .
-	?domain a bgo:Domain 
-		dct:source/fr:refPeriod/time:hasBeginning/time:inXSDDateTime ?refdate ;
-		dct:source a ?type .
+		
+	?domain a bgo:Domain ; dct:source ?report .
+    ?report a ?type ; 
+        fr:refPeriod/time:hasBeginning/time:inXSDDateTime ?refdate .
 		
 	?hr skos:notation ?notation ;
 		fr:amount ?historyRecAmount ;
-		qb:dataSet/fr:refPeriod/time:hasBeginning/time:inXSDDateTime ?date .
-		qb:dataSet/dct:source a ?type .
+		qb:dataSet ?historyReport .
+		
+    ?historyReport a ?type ;
+        fr:refPeriod/time:hasBeginning/time:inXSDDateTime ?date .
 	
 	FILTER ( ?date < ?refdate )
-	BIND( STR(YEAR(?refdate)) AS ?version)
-	BIND( STR(YEAR(?date)) AS ?historyRecVersion)
-	BIND( IRI(CONCAT(STR(?hr)."_bgo") AS ?historyRec) 
-	
+	BIND( CONCAT(?abbr, STR(YEAR(?refdate))) AS ?version)
+	BIND( CONCAT(?abbr, STR(YEAR(?date))) AS ?historyRecVersion)
+	BIND( IRI(CONCAT(STR(?hr), "_bgo")) AS ?historyRec)
 }
 
 ;
 
 ##
-## Create account breackdown
+## Create account breakdown
 ##
 INSERT { 
 	?account bgo:hasBreakdown ?breakdown .
@@ -120,12 +135,12 @@ INSERT {
 	.
 }
 WHERE { 
-	?account a bgo:Account 
+	?account a bgo:Account ;
 		dct:source ?azione .
 	?azione skos:narrower ?fact .
-	?fact skos:prefLabel ?breakdownTitle 
+	?fact skos:prefLabel ?breakdownTitle ;
 		fr:amount ?breakdownAmount .
 		
-	BIND( IRI(CONCAT(STR(?fact)."_bgo") AS ?breakdown) 
+	BIND( IRI(CONCAT(STR(?fact), "_bgo")) AS ?breakdown) 
 	
 }

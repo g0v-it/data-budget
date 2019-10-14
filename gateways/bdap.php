@@ -169,7 +169,7 @@ $c_uri a mef:Capitolo;
     fr:isPartOf $az_uri ;
     fr:amount $amount ;
     skos:notation \"$c_code\" ;
-    skos:perfLabel \"Cap. $c_code\"@it ;
+    skos:prefLabel \"Cap. $c_code\"@it ;
     skos:definition \"$capitolo\"@it 
 .
 " ;
@@ -178,7 +178,7 @@ if ($last_az != $az_uri) { $last_az = $az_uri; echo "
 $az_uri
     fr:isPartOf $p_uri ;
     skos:notation \"$az_code\" ;
-    skos:perfLabel \"Azione $az_code\"@it;
+    skos:prefLabel \"Azione $az_code\"@it;
     skos:definition \"$azione\"@it
 .
 ";}
@@ -195,6 +195,7 @@ if ($last_m != $m_uri) { $last_m = $m_uri; echo "
 $m_uri 
     fr:isPartOf $a_uri ;
     skos:notation \"$m_code\" ;
+    skos:prefLabel \"Missione $m_code\"@it;
     skos:definition \"$missione\"@it 
 .
 ";}
@@ -202,7 +203,9 @@ $m_uri
 if ($last_a != $a_uri) { $last_a = $a_uri; echo "
 $a_uri 
     skos:notation \"$a_code\" ;
-    skos:definition \"$amministrazione\"@it ;
+    skos:prefLabel \"Amministrazione $a_code\"@it;
+    skos:definition \"$amministrazione\"@it 
+.
 ";}
     
 }

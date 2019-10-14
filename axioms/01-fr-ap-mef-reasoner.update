@@ -59,9 +59,9 @@ WHERE {
 
 INSERT { ?component fr:amount ?calculatedAmount }
 WHERE {
-	SELECT ?component (SUM(?amount) as ?calculatedAmount {
-		?fact a mef:Capitolo ; 
-			fr:isPartOf* ?component  
+	SELECT ?component (SUM(?amount) as ?calculatedAmount) WHERE {
+		?fact a mef:Capitolo ;  
+			fr:isPartOf+ ?component  ;
 			fr:amount ?amount .		
 	} GROUP BY ?component
 }

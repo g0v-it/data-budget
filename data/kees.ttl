@@ -27,9 +27,7 @@ resource:welcome a kees:KnowledgeBase;
 	dct:publisher resource:Copernicani ;
 	dct:creator resource:SDaaS ;
 	dct:contributor resource:MEF ;
- 	void:exampleResource 
-		resource:spd_lbf_spe_elb_cap_01_2019 ,
-		resource:spd_lbf_spe_elb_cap_01_2019_schema ;
+ 	void:exampleResource resource:spd_lbf_spe_elb_cap_01_2019 ;
 	void:uriSpace "http://mef.linkeddata.cloud/resource/";
 	dct:subject <https://it.wikipedia.org/wiki/Bilancio_dello_Stato>;
 	foaf:page <https://budget.g0v.it/>
@@ -39,21 +37,6 @@ resource:welcome a kees:KnowledgeBase;
 #######################################################
 # Individuals
 #######################################################
-resource:spd_dlb_spe_elb_cap_theme a skos:Concept;
-	skos:prefLabel "Disegno di legge di bilancio, spese per capitolo"@it ;
-	skos:notation "dlb"
-.
-
-resource:spd_lbf_spe_elb_cap_theme a skos:Concept;
-	skos:prefLabel "Legge di bilancio approvata, spese per capitolo"@it ;
-	skos:notation "lbf"
-.
-
-resource:spd_rnd_spe_rnd_cap_theme a skos:Concept;
-	skos:prefLabel "Rendicondo spese per capitolo"@it ;
-	skos:notation "rnd"
-.
-
 resource:MEF a foaf:Organization; 
     foaf:homepage <http://www.mef.gov.it/>;
     foaf:name "Ragioneria Generale dello Stato"@it ;
@@ -80,9 +63,8 @@ resource:SDaaS a foaf:Agent;
     
 .
 
-
 resource:descrizione_programmi a dcat:Dataset;
-        dct:description  "Ultima descrizione disponibile per i programmi relative alle missioni dei m inisteri."@it ;
+        dct:description  "Ultima descrizione disponibile per i programmi relative alle missioni dei ministeri."@it ;
         dct:identifier   "descrizione_programmi" ;
         dct:modified	 "2019-09-27T10:55:01Z"^^xsd:dateTime;
         dct:publisher    resource:MEF ;
