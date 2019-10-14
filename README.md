@@ -10,13 +10,13 @@ The platform builds a knowledge base about the Italian Government budget conside
 - "legge di bilancio" (the actual budget)
 - "consuntivo di bilancio" (consolidated balance)
 
-The platform extracts main financial facts from the official [open data portal](https://bdap-opendata.mef.gov.it) provided 
+The platform extracts the main financial facts from the official [open data portal](https://bdap-opendata.mef.gov.it) provided 
 by the "Ministero dell'Economia e Finance" and produces a knowledge graph according with the 
 [fr-ap-mef profile](fr-ap-mef)
 
-Any application access such knowledge through a SPARQL interface as suggested by the Semantic Web standards.
+Application access such knowledge through a SPARQL interface, as suggested by the Semantic Web standards.
 
-The data-budget is built using the [Smart Data as a Service platform (SDaaS)](https://github.com/linkeddatacenter/sdaas-ce) and provides:
+The data-budget project uses the [Smart Data as a Service platform (SDaaS)](https://github.com/linkeddatacenter/sdaas-ce) and provides:
 
 - a persistent RDF store for the knowledge graph; 
 - a data ingestion engine; 
@@ -26,10 +26,9 @@ The data-budget is built using the [Smart Data as a Service platform (SDaaS)](ht
 
 data-budget exposes three interfaces:
 
-- a web workbench to interact with the knowledge graph
+- a web workbench to interact with the knowledge graph;
 - a command line interface to the a data ingestion engine; 
 - a [SPARQL service](https://www.w3.org/TR/sparql11-overview) endpoint; 
-
 
 data-budget is designed to be the data provider component of a general system architecture composed by:
 
