@@ -11,6 +11,11 @@ $bdapDatasetId = $data->name;
 $title=Helper::FILTER_SANITIZE_TURTLE_STRING($data->title);
 $description=Helper::FILTER_SANITIZE_TURTLE_STRING($data->notes);
 $accessUrl = str_replace('rgspod','bdap-opendata.mef.gov.it', $data->ckan_url);
+$downloadUrl = "https://bdap-opendata.mef.gov.it/SpodCkanApi/api/1/rest/dataset/{$bdapDatasetId}.csv";
+
+// do some cosmetics to title and description..
+$title = preg_replace('/ Pubblicata Elaborabile Spese Capitolo/','',$title);
+$description =preg_replace('/ - Atto dovuto in formato elaborabile.*/','.',$description);
 
 echo "@prefix fr: <http://linkeddata.center/botk-fr/v1#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> . 
@@ -33,7 +38,7 @@ resource:{$bdapDatasetId} a dcat:Dataset;
 resource:{$bdapDatasetId}_csv a dcat:Distribution ;
     dcat:license <http://creativecommons.org/licenses/by/3.0>;
     dcat:accessUrl <$accessUrl> ;
-    dcat:downloadUrl <https://bdap-opendata.mef.gov.it/SpodCkanApi/api/1/rest/dataset/{$bdapDatasetId}.csv>;
+    dcat:downloadUrl <$downloadUrl> ;
     dct:format \"text/csv\"
 .
 ";

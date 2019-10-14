@@ -1,0 +1,131 @@
+PREFIX fr: <http://linkeddata.center/botk-fr/v1#> 
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX qb: <http://purl.org/linked-data/cube#> 
+PREFIX mef: <http://w3id.org/g0v/it/mef#> 
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX time: <http://www.w3.org/2006/time#>
+
+##
+## Hinerit domain metadata from last available report
+##
+INSERT { 
+	?domain 
+		dct:source ?report ;
+		bgo:title ?title ;
+		bgo:description ?description ;		
+		bgo:abstract ?abstract 
+	. 
+WHERE {
+
+	{
+		SELECT ?report WHERE {
+			?report a fr:FinancialReport ; fr:refPeriod ?refPeriod
+		} ORDER BY DESC(?refPeriod) LIMIT 1
+	}
+	
+	?domain a bgo:Domain .
+	OPTIONAL { ?report dct:title ?title }
+	OPTIONAL { ?report dct:description ?description }
+}
+
+;
+
+##
+## Create bgo accounts with core metadata
+##
+INSERT { 
+	?account a bgo:Account ;
+		dct:source ?azione ;
+		bgo:title ?title ;
+		bgo:description ?description ;		
+		bgo:abstract ?abstract ;
+		bgo:amount ?amount 
+	.
+}
+WHERE { 
+	
+	{
+		SELECT ?azione (GROUP_CONCAT(?capitolo, "\n- ") AS ?capitoli) WHERE {
+			?azione a mef:Azione; qb:dataSet ?report .
+			?domain a bgo:Domain; dct:source ?report;
+			?fact fr:isPartOf ?azione; skos:definition ?capitolo
+		} GROUP BY ?azione
+	}
+	
+	OPTIONAL { ?azione skos:prefLabel ?title }
+	OPTIONAL { ?azione skos:definition ?description }
+	OPTIONAL { ?azione fr:amount ?amount }
+	OPTIONAL { ?azione fr:isPartOf/skos:definition ?programma }
+	OPTIONAL { ?azione fr:isPartOf/fr:isPartOf/skos:definition ?missione }
+	OPTIONAL { ?azione fr:isPartOf/fr:isPartOf/fr:isPartOf/skos:title ?ministero }
+	BIND ( STRDT(CONCAT(
+		"### ", ?ministero,
+		"\n#### Programma\n", ?programma,
+		"\n#### Missione\n", ?missione,
+		"\n#### Capitolo di spesa\n- ", ?capitoli,
+		"\n\n[More info...](",STR(?azione),")"
+	), bgo:MDString) AS ?abstract )
+	
+	
+	BIND ( IRI(CONCAT(STR(?azione)."_bgo") as ?account) 
+}
+
+;
+
+
+##
+## Create account history
+##
+INSERT { 
+	?account 
+		bgo:versionLabel ?version ;
+		bgo:hasHistoryRec ?historyRec 
+	.
+		
+	?historyRec ;
+		bgo:versionLabel ?historyRecVersion ;		
+		bgo:amount ?historyRecAmount 
+	.
+
+}
+WHERE { 
+	?account a bgo:Account ;
+		dct:source/skos:notation ?notation .
+	?domain a bgo:Domain 
+		dct:source/fr:refPeriod/time:hasBeginning/time:inXSDDateTime ?refdate ;
+		dct:source a ?type .
+		
+	?hr skos:notation ?notation ;
+		fr:amount ?historyRecAmount ;
+		qb:dataSet/fr:refPeriod/time:hasBeginning/time:inXSDDateTime ?date .
+		qb:dataSet/dct:source a ?type .
+	
+	FILTER ( ?date < ?refdate )
+	BIND( STR(YEAR(?refdate)) AS ?version)
+	BIND( STR(YEAR(?date)) AS ?historyRecVersion)
+	BIND( IRI(CONCAT(STR(?hr)."_bgo") AS ?historyRec) 
+	
+}
+
+;
+
+##
+## Create account breackdown
+##
+INSERT { 
+	?account bgo:hasBreakdown ?breakdown .
+	?breakdown 
+		bgo:title ?breakdownTitle ;
+		bgo:amount ?breakdownAmount
+	.
+}
+WHERE { 
+	?account a bgo:Account 
+		dct:source ?azione .
+	?azione skos:narrower ?fact .
+	?fact skos:prefLabel ?breakdownTitle 
+		fr:amount ?breakdownAmount .
+		
+	BIND( IRI(CONCAT(STR(?fact)."_bgo") AS ?breakdown) 
+	
+}

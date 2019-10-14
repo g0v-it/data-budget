@@ -30,25 +30,31 @@ $bdapDatasetType= $matches[1];
 switch ($bdapDatasetType) {
     case "dlb":
         $mefReportClass="DisegnoLeggeDiBilancio";
+        $reportTitle= "Disegno di Legge di Bilancio $bdapDatasetYear" ;
         break;
     case "lbf":
         $mefReportClass="LeggeDiBilancio";
+        $reportTitle= "Legge di Bilancio $bdapDatasetYear" ;
         break;
     case "rnd":
         $mefReportClass="RendicontoFinanziario";
+        $reportTitle= "Rendiconto spese anno $bdapDatasetYear" ;
         break;
 }
 
+/**
+ * labels
+ */ 
+$a = "Amministrazione";
+$m = "Missione";
+$p = "Programma";
+$az = "Azione";
+$c = "Capitolo di spesa";
+$b = "fact";
 
 /**
  * Detect the csv scheme form year and dataset type
  */
-$a = "amministrazione";
-$m = "missione";
-$p = "programma";
-$az = "azione";
-$c = "capitolo";
-$b = "fact";
 if ($bdapDatasetYear >= 2017) {
     $match = array(
         $a => 2,
@@ -112,78 +118,91 @@ echo "#
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> . 
 @prefix sdmx-attribute:	<http://purl.org/linked-data/sdmx/2009/attribute#> .
 @prefix mef: <http://w3id.org/g0v/it/mef#> .
+@prefix bgo: <http://linkeddata.center/lodmap-bgo/v1#> .
 @prefix resource: <http://mef.linkeddata.cloud/resource/> .
+@prefix report: <http://mef.linkeddata.cloud/resource/{$bdapDatasetId}_> .
 
 
 <> foaf:primaryTopic resource:$bdapDatasetId .
 
 resource:$bdapDatasetId a mef:$mefReportClass ;
     fr:refPeriod <http://reference.data.gov.uk/id/gregorian-interval/{$bdapDatasetYear}-01-01T00:00:00/P1Y> ;  
-    sdmx-attribute:unitMeasure <http://publications.europa.eu/resource/authority/currency/EUR> 
+    sdmx-attribute:unitMeasure <http://publications.europa.eu/resource/authority/currency/EUR> ;
 .
-
-
-
 ";
 
 //skips header
 fgets(STDIN);$recordNum=0;
+$last_a=$last_m=$last_p=$last_az='';
 
 while ($rawdata = fgetcsv(STDIN, 2048, ';')) {
     $recordNum++;
-    $esercizio = $rawdata[0];
+    
+    // descriptions
     $amministrazione = Helper::FILTER_SANITIZE_TURTLE_STRING($rawdata[$match[$a]]);
     $missione = Helper::FILTER_SANITIZE_TURTLE_STRING($rawdata[$match[$m]]);
     $programma = Helper::FILTER_SANITIZE_TURTLE_STRING($rawdata[$match[$p]]);
     $azione = Helper::FILTER_SANITIZE_TURTLE_STRING($rawdata[$match[$az]]); 
-    $capitolo = Helper::FILTER_SANITIZE_TURTLE_STRING($rawdata[$match[$c]-1] . " - " . $rawdata[$match[$c]]);
-    $budget = round( floatval($rawdata[$match[$b]]),2);
-
-    //Codes then used in notation and uri construction
-    $a_code  = Helper::STRING_SIGNATURE($amministrazione);
-    $m_code  = Helper::STRING_SIGNATURE($a_code . $missione);
-    $p_code  = Helper::STRING_SIGNATURE($m_code . $programma);
-    $az_code = Helper::STRING_SIGNATURE($p_code . $azione);
-    $c_code  = Helper::STRING_SIGNATURE($az_code . $capitolo);
+    $capitolo = Helper::FILTER_SANITIZE_TURTLE_STRING($rawdata[$match[$c]]);
     
+    $amount = Helper::NORMALIZE_AMOUNT($rawdata[$match[$b]]);
+
+    // skos notations
+    $a_code  = crc32($rawdata[$match[$a]]);
+    $m_code  = $a_code . '-' . $rawdata[$match[$m]-1];
+    $p_code  = $m_code . '-' . $rawdata[$match[$p]-1];
+    $az_code = $p_code . '-' . $rawdata[$match[$az]-1] ;
+    $c_code  = $az_code . '-' . $rawdata[$match[$c]-1] ;
+       
     //Uris
-    $r_uri  = "resource:{$bdapDatasetId}_{$recordNum}"
-    $a_uri  = "{$r_uri}_ministero";
-    $m_uri  = "{$r_uri}_missione";
-    $p_uri  = "{$r_uri}_programma";
-    $az_uri = "{$r_uri}_azione";
-    $c_uri  = "{$r_uri}_capitolo"";
+    $a_uri  = "report:$a_code";
+    $m_uri  = "report:$m_code";
+    $p_uri  = "report:$p_code";
+    $az_uri = "report:$az_code"; 
+    $c_uri  = "report:fact$recordNum";
 
  
     echo "
-#### Source: record number $recordNum
+#### record number $recordNum
 $c_uri a mef:Capitolo;
-    qb:dataSet resource:{$bdapDatasetId} ;
-    skos:notation \"$c_code\" ;
-    skos:altLabel \"$capitolo\"@it ;
+    qb:dataSet resource:$bdapDatasetId ;
     fr:isPartOf $az_uri ;
-    fr:amount $budget ."
+    fr:amount $amount ;
+    skos:notation \"$c_code\" ;
+    skos:perfLabel \"Cap. $c_code\"@it ;
+    skos:definition \"$capitolo\"@it 
 .
-$az_uri a mef:Azione ;
-    skos:notation \"$az_code\" ;
-    fr:isPartOf $p_uri ;
-    skos:altLabel \"$azione\"@it
-.
-$p_uri a mef:Programma ;
-    skos:notation \"$p_code\" ;
-    fr:isPartOf $m_uri ;
-    skos:altLabel \"$programma\"@it 
-.
-$m_uri a mef:Missione ;
-    skos:notation \"$m_code\" ;
-    fr:isPartOf $a_uri ;
-    skos:altLabel \"$missione\"@it 
-.
-$a_uri a mef:Ministero ;
-    skos:notation \"$a_code\" ;
-    skos:altLabel \"$amministrazione\"@it 
-.
-resource:{$bdapDatasetId} skos:hasTopConcept $a_uri .
 " ;
+
+if ($last_az != $az_uri) { $last_az = $az_uri; echo "
+$az_uri
+    fr:isPartOf $p_uri ;
+    skos:notation \"$az_code\" ;
+    skos:perfLabel \"Azione $az_code\"@it;
+    skos:definition \"$azione\"@it
+.
+";}
+
+if ($last_p != $p_uri) { $last_p = $p_uri; echo "
+$p_uri 
+    fr:isPartOf $m_uri ;
+    skos:notation \"$p_code\" ;
+    skos:definition \"$programma\"@it 
+.
+";}
+
+if ($last_m != $m_uri) { $last_m = $m_uri; echo "
+$m_uri 
+    fr:isPartOf $a_uri ;
+    skos:notation \"$m_code\" ;
+    skos:definition \"$missione\"@it 
+.
+";}
+
+if ($last_a != $a_uri) { $last_a = $a_uri; echo "
+$a_uri 
+    skos:notation \"$a_code\" ;
+    skos:definition \"$amministrazione\"@it ;
+";}
     
 }
