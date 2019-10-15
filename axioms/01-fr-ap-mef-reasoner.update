@@ -1,3 +1,6 @@
+########################################################################################
+##@ inferences using fr-ap-mef axioms
+########################################################################################
 PREFIX fr: <http://linkeddata.center/botk-fr/v1#> 
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX qb: <http://purl.org/linked-data/cube#> 
@@ -65,4 +68,6 @@ WHERE {
 			fr:amount ?amount .		
 	} GROUP BY ?component
 }
-	
+
+
+#trust=1.00	

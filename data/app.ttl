@@ -100,14 +100,12 @@ Power by:
 	]
 .
 
-:amount_formatter
-    # a bgo:NumberFormatter ;
+:amount_formatter a bgo:NumberFormatter ;
 	bgo:format "€ %s"^^bgo:Template  ;
 	bgo:precision 2 ;
 .
 
-:smart_formatter 
-	# a bgo:NumberFormatter ;
+:smart_formatter a bgo:NumberFormatter ;
 	bgo:format "%sM€"^^bgo:Template  ;
 	bgo:precision 3 ;
 	bgo:scaleFactor 0.000001 ;
@@ -116,8 +114,7 @@ Power by:
 	bgo:lessThanMinFormat "meno di 10K€"^^bgo:Template
 .
 
-:trend_formatter 
-	# a bgo:NumberFormatter ;
+:trend_formatter a bgo:NumberFormatter ;
 	bgo:format "%s%"^^bgo:Template  ;
 	bgo:scaleFactor 100 ;
 	bgo:precision 2 ;
@@ -132,8 +129,7 @@ Power by:
 # Credits
 ############################################
 
-:credits_page 
-	# a bgo:CreditsView ;
+:credits_page a bgo:CreditsView ;
     bgo:icon "fas fa-users";
 	bgo:title "Credits"@en ;
 	bgo:abstract
@@ -225,8 +221,7 @@ Ogni violazione sarà segnalata alle Forze di Polizia ed alle Autorità Giudizia
 """^^bgo:MDString.
 
 
-:table_view 
-	# a bgo:TableView ;
+:table_view a bgo:TableView ;
 	bgo:title "Table view";
     bgo:hasTotalizer :filtered_total_formatter ;
     bgo:amountFormatter :amount_formatter;
@@ -240,8 +235,7 @@ Ogni violazione sarà segnalata alle Forze di Polizia ed alle Autorità Giudizia
 .
 
 
-:overview 
-	# a bgo:Overview ;
+:overview a bgo:Overview ;
 	bgo:label "Stato" ;	
 	bgo:icon "fas fa-atom" ;
 	bgo:title "Overview" ;
@@ -284,8 +278,7 @@ Ogni violazione sarà segnalata alle Forze di Polizia ed alle Autorità Giudizia
 
 
 ###### Trend Color Scheme #######
-:trend_color_scheme 
-	# a bgo:TrendColorScheme ;
+:trend_color_scheme a bgo:TrendColorScheme ;
     bgo:title "Variazione percentuale rispetto alll'anno precedente." ;
     bgo:noTrendColor "#cdcdcd"^^bgo:RGB ;
     bgo:rateTreshold # all are bgo:RateTreshold
@@ -303,38 +296,20 @@ Ogni violazione sarà segnalata alle Forze di Polizia ed alle Autorità Giudizia
 .
 
 
-:search_pane 
-	# a bgo:SearchPane ;
+:search_pane  a bgo:SearchPane ;
     bgo:label "Cerca"
 .
 
-
-:tag_cloud 
-	# a bgo:TagCloud ;
-	bgo:hasTag # all are bgo:tags
+# here force buzzwords
+:tag_cloud  a bgo:TagCloud ;
+	bgo:hasTag 
 		[ bgo:label "debito"; bgo:tagWeight 1.0 ] ,
-		[ bgo:label "interessi"; bgo:tagWeight 0.5 ] ,
-		[ bgo:label "stipendi"; bgo:tagWeight 1.0 ] ,
-        [ bgo:label "salute"; bgo:tagWeight 0.9 ] ,
-		[ bgo:label "arma"; bgo:tagWeight 0.2 ] ,
-		[ bgo:label "forz"; bgo:tagWeight 0.7 ] ,
-		[ bgo:label "immigra"; bgo:tagWeight 0.3 ],
-		[ bgo:label "giustizia"; bgo:tagWeight 0.3 ],
-		[ bgo:label "sviluppo"; bgo:tagWeight 0.3 ],
-        [ bgo:label "povertà"; bgo:tagWeight 0.2 ] ,
+		[ bgo:label "interessi"; bgo:tagWeight 0.8 ] ,
+		[ bgo:label "immigra"; bgo:tagWeight 1.0 ],
+		[ bgo:label "giustizia"; bgo:tagWeight 0.8 ],
 		[ bgo:label "scuola"; bgo:tagWeight 0.7 ] ,
-		[ bgo:label "universit"; bgo:tagWeight 0.7 ] ,
 		[ bgo:label "lavoro"; bgo:tagWeight 0.7 ] ,
-		[ bgo:label "pensioni"; bgo:tagWeight 0.7 ] ,
-		[ bgo:label "reddito"; bgo:tagWeight 0.3 ],
-        [ bgo:label "tassa"; bgo:tagWeight 0.2 ] ,
-        [ bgo:label "commerc"; bgo:tagWeight 0.2 ] ,
-        [ bgo:label "econom"; bgo:tagWeight 0.2 ] ,
-        [ bgo:label "banche"; bgo:tagWeight 0.2 ] ,
-        [ bgo:label "estero"; bgo:tagWeight 0.2 ] ,
-        [ bgo:label "europa"; bgo:tagWeight 0.2 ] ,
-        [ bgo:label "turismo"; bgo:tagWeight 0.2 ] ,
-        [ bgo:label "personale"; bgo:tagWeight 0.2 ] ,
+		[ bgo:label "reddito"; bgo:tagWeight 0.8 ],
         [ bgo:label "salute"; bgo:tagWeight 0.9 ] 
 .
 

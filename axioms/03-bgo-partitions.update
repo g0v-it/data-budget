@@ -1,3 +1,6 @@
+########################################################################################
+##@ bgo partitions
+########################################################################################
 PREFIX fr: <http://linkeddata.center/botk-fr/v1#> 
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX qb: <http://purl.org/linked-data/cube#> 
@@ -105,3 +108,6 @@ WHERE {
       BIND( IRI(CONCAT(STR(:p2), "_", STRAFTER(?notation, "-"))) AS ?subset)
     }
 }
+
+
+#trust=1.00	

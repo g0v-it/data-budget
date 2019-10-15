@@ -1,3 +1,6 @@
+########################################################################################
+##@ inferences using bgo axioms
+########################################################################################
 PREFIX fr: <http://linkeddata.center/botk-fr/v1#> 
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX qb: <http://purl.org/linked-data/cube#> 
@@ -144,3 +147,6 @@ WHERE {
 	BIND( IRI(CONCAT(STR(?fact), "_bgo")) AS ?breakdown) 
 	
 }
+
+
+#trust=1.00	

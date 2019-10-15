@@ -1,0 +1,20 @@
+# Reasoning controller. Defined vars:
+#	graphNS
+#	rule
+#	axiomExtension
+#	axiomName
+#	ruleName
+#	graphName
+
+########################################################################################
+##@ tag cloud population with most used keywords in account description
+# required resources:
+local data="${rule}/tagcloud_strings.select"
+local processor="${rule}/tagcloud_processor.php"
+
+###################################################################
+_SD_ACTIVITY_LOG "Generating tagcloud..." 
+###################################################################
+SD_SPARQL_QUERY csv-h "@$data" | $processor "$graphName" | SD_SPARQL_UPDATE "@-"
+
+#trust=1.00	

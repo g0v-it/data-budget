@@ -1,0 +1,6 @@
+PREFIX bgo: <http://linkeddata.center/lodmap-bgo/v1#>
+
+SELECT ?description
+WHERE { 
+	?account a bgo:Account; bgo:description ?description
+}
