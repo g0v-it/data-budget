@@ -7,15 +7,15 @@ services:
   api:
     image: linkeddatacenter/lodmap2d-api
     ports:
-      - "29322:8000"
+      - "29322:80"
     depends_on:
       - "sdaas"
   webapp:
     image: linkeddatacenter/lodmap2d
     ports:
-      - "29323:8080"
+      - "29323:80"
     depends_on:
       - "api"
     environment:
-      - LODMAP2D_DATA=http://api:8000/
+      - LODMAP2D_DATA=http://localhost:29322/
       

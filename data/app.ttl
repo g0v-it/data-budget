@@ -1,0 +1,341 @@
+#
+# Mef bgo application configuration
+#
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix bgo: <http://linkeddata.center/lodmap-bgo/v1#> .
+@prefix resource: <http://mef.linkeddata.cloud/resource/> .
+@prefix : <http://mef.linkeddata.cloud/resource/bgo_> .
+
+
+:domain a bgo:Domain ;
+    bgo:abstract """
+Power by:
+
+[![](https://budget.g0v.it/logos/copernicani_orizzontale.png)](https://copernicani.it/g0v)
+
+[Elaborazione su dati del Ministero dell'Economia e delle Finanze](https://bdap-opendata.mef.gov.it/)
+"""^^bgo:MDString ;
+
+    # add an item to default navigation menu
+    bgo:hasNavigationMenu [ 
+    	# a bgo:NavigationMenu ;
+    	bgo:withCustomMenuItem 
+    		[
+				bgo:icon "mdi-database-search" ;
+				bgo:title "Analisi personalizzate..." ;
+				bgo:link <http://yasgui.org/short/06jf7CtF2>
+			],
+    		[
+				bgo:icon "mdi-webhook" ;
+				bgo:title "Linked data..." ;
+				bgo:link <https://data.budget.g0v.it/resource/welcome>
+			]	
+    ] ;
+
+    # Use the Option menu with two external links
+    bgo:hasOptionMenu [
+    	# a bgo:OptionMenu ;
+    	bgo:withCustomMenuItem 
+    		[
+				bgo:icon "mda-orbit" ;
+				bgo:title "about G0V..." ;
+				bgo:link <https://copernicani.it/g0v>
+			] ,
+    		[
+				bgo:icon "mda-database" ;
+				bgo:title "fork data platform..." ;
+				bgo:link <https://github.com/g0v-it/data-budget>
+			] ,
+    		[
+				bgo:icon "mda-chart-bubble" ;
+				bgo:title "fork frontend..." ;
+				bgo:link <https://github.com/g0v-it/web-budget>
+			]
+
+    ] ;
+
+    # Add just a couple of shortcuts icons to footer
+    bgo:hasFooterMenu [
+    	# a bgo:FooterMenu ;
+    	bgo:withCustomMenuItem 
+    		[
+		    	bgo:title "Termini d'uso" ;
+				bgo:link "/terms"^^bgo:route
+			]
+    ] ;
+
+    # This domain likes social
+    bgo:hasSocialSharing true ;
+
+    # This should be used if copyright is not present
+    bgo:hasCopyrigth "(c) [Copernicani.it](https://copernicani.it/)![](https://i.creativecommons.org/l/by/4.0/80x15.png)"^^bgo:MDString ;
+    
+    bgo:hasOverview :overview ;
+    bgo:hasTableView :table_view ;
+    bgo:hasCredits :credits_page ;
+    bgo:hasTerms :terms_page ;
+    bgo:hasAccountView  :account_view ;
+.
+
+
+############################################
+# Account view
+############################################
+:account_view a bgo:AccountView ;
+    bgo:amountFormatter :amount_formatter;
+    bgo:referenceFormatter :amount_formatter;
+    bgo:trendFormatter :trend_formatter;
+    
+	bgo:hasHistoricalPerspective [
+		a bgo:HistoricalPerspective ;
+		bgo:title "Storico dell'azione" ;
+	    bgo:amountFormatter :smart_formatter
+	];
+	bgo:hasBreakdownPerspective [
+		a bgo:BreakdownPerspective ;
+		bgo:title "Dettaglio capitoli di spesa" ;
+	    bgo:amountFormatter :smart_formatter;
+	    bgo:hasTotalizer :filtered_total_formatter ;
+	]
+.
+
+:amount_formatter
+    # a bgo:NumberFormatter ;
+	bgo:format "€ %s"^^bgo:Template  ;
+	bgo:precision 2 ;
+.
+
+:smart_formatter 
+	# a bgo:NumberFormatter ;
+	bgo:format "%sM€"^^bgo:Template  ;
+	bgo:precision 3 ;
+	bgo:scaleFactor 0.000001 ;
+	bgo:minValue 0.001 ; 
+	bgo:nanFormat "non definito" ;
+	bgo:lessThanMinFormat "meno di 10K€"^^bgo:Template
+.
+
+:trend_formatter 
+	# a bgo:NumberFormatter ;
+	bgo:format "%s%"^^bgo:Template  ;
+	bgo:scaleFactor 100 ;
+	bgo:precision 2 ;
+	bgo:maxValue 200;
+	bgo:minValue -200 ; 
+	bgo:nanFormat "non disponibile" ;
+	bgo:moreThanMaxFormat ">200%"^^bgo:Template ;
+	bgo:lessThanMinFormat "<-200%"^^bgo:Template
+.
+
+############################################
+# Credits
+############################################
+
+:credits_page 
+	# a bgo:CreditsView ;
+    bgo:icon "fas fa-users";
+	bgo:title "Credits"@en ;
+	bgo:abstract
+"""
+This code was written by the [G0V-it Team](https://copernicani.it/g0v):
+
+- [Miah Mohd Ehtesham](https://github.com/miahmohd)
+- [Leonardo Longhi](https://github.com/LeonardoLonghi)
+- [Yassine Ouahidi](https://github.com/YassineOuahidi)
+- [Luca Mearelli](https://github.com/luca)
+- [Enrico Fagnoni](https://github.com/ecow)
+
+
+Using the following great open source components:
+
+- The [D3.js library](https://d3js.org/)
+- The [Vue javascript framework](https://vuejs.org)
+- [rdflib project](https://github.com/linkeddata/rdflib.js) by TimBL & LinkedData team
+- the [SOLID](https://github.com/solid/solid-spec) specifications
+- the [SDaaS platform](https://github.com/linkeddatacenter/sdaas-ce) by LinkedData.Center
+	
+
+Raw data provided by the [Italian Ministero dell'Economia e delle Finanze](https://bdap-opendata.mef.gov.it/) with [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/)  license.
+
+
+--------------------------------------------------
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
+"""^^bgo:MDString.
+
+
+############################################
+# Terms
+############################################
+
+
+:terms_page a bgo:TermsView ;
+    bgo:icon  "fas fa-gavel" ;
+	bgo:title "Terms & conditions" ;
+	bgo:abstract
+"""
+## CONDIZIONI DI ACCESSO E FINALITÀ D’USO
+
+L'Associazione Copernicani, con sede in Via Giuseppe Verdi 3/bis, Busto Arsizio, C.F. 97803240155 (di seguito “**Associazione Copernicani**”), ha realizzato questa applicazione web (di seguito l’”**Applicazione**”) per analizzare informazioni e dati pubblicamente disponibili.
+
+L'utilizzo della Applicazione è gratuito. L’Applicazione ha carattere puramente informativo e ha lo scopo di favorire la trasparenza nella Pubblica Amministrazione.
+
+L'Associazione Copernicani, titolare della Applicazione, ha l’esclusivo ed insindacabile diritto di modificare, in tutto o in parte, senza alcun preavviso ed a propria assoluta discrezione, il contenuto, le immagini, i termini e/o le condizioni di accesso alla Applicazione. L’Associazione Copernicani, anche per il tramite di suoi rappresentanti o delegati potrà pertanto in qualunque momento intervenire sulla Applicazione e sulle presenti condizioni di accesso e finalità d’uso al fine, ad esempio, di modificarne i contenuti, sospenderne l’accesso, prevedere diversi criteri di accesso o funzionalità, ovvero effettuarne la disconnessione nei confronti di ciascun utilizzatore (d’ora in poi “**Utente**”).
+
+## PROPRIETÀ INTELLETTUALE
+
+1.  I contenuti del sito – codice di script, grafica, testi, tabelle, immagini, video, layout grafici, nonchè il logo della Associazione Copernicani e ogni altra informazione visualizzata in qualunque forma nella applicazione (i “**Contenuti Protetti**”) – con esclusione dei Dati – sono riservati all’Associazione Copernicani o ai singoli soggetti terzi (“i “Terzi”) che hanno realizzato i Contenuti Protetti ai sensi della normativa in materia di diritto d’autore (Legge n. 633/1941 s.m.i.);
+
+2.  Se non diversamente indicato, è garantito il permesso di copiare e distribuire i Dati di Spesa Pubblica così come catalogati per il tramite dell’Applicazione (il “Database”), secondo le condizioni della licenza Creative Commons Attribuzione-Non Commerciale – Condividi allo stesso modo 3.0 (CC BY-NC-SA 3.0 IT), il cui testo è disponibile a questo indirizzo [https://creativecommons.org/licenses/by-nc-sa/3.0/it/legalcode](https://creativecommons.org/licenses/by-nc-sa/3.0/it/legalcode) ![Licenza Creative Commons](https://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png).
+
+    Inoltre il Database è liberamente utilizzabile da qualunque testata giornalistica, sia distribuita su internet che in cartaceo e sia che abbia finalità lucrative o meno, secondo le condizioni della licenza Creative Commons Attribuzione 3.0 Unported (CC BY 3.0), il cui testo è disponibile a questo indirizzo [https://creativecommons.org/licenses/by/3.0/legalcode](https://creativecommons.org/licenses/by/3.0/legalcode) ![Licenza Creative Commons](https://i.creativecommons.org/l/by/3.0/88x31.png).
+
+    Il Database è inoltre liberamente riproducibile su siti internet che abbiano contenuto principalmente divulgativo e informativo (“Blog”), anche attraverso contenuti “embedded”, secondo le condizioni della licenza Creative Commons Attribuzione 3.0 Unported (CC BY 3.0), il cui testo è disponibile a questo indirizzo [https://creativecommons.org/licenses/by/3.0/legalcode](https://creativecommons.org/licenses/by/3.0/legalcode) ![Licenza Creative Commons](https://i.creativecommons.org/l/by/3.0/88x31.png).
+
+3.  E’ inoltre garantito il permesso di copiare e distribuire i Dati , secondo le condizioni della licenza Creative Commons Attribuzione 3.0 Unported (CC BY 3.0), il cui testo è disponibile a questo indirizzo [https://creativecommons.org/licenses/by/3.0/legalcode](https://creativecommons.org/licenses/by/3.0/legalcode) ![Licenza Creative Commons](https://i.creativecommons.org/l/by/3.0/88x31.png). o secondo la diversa licenza richiamata sul sito internet del MEF in relazione ai suoi Open Data.
+
+## LIMITAZIONI DI RESPONSABILITÀ
+
+L’Associazione Copernicani non è in alcun modo responsabile della correttezza dei Dati, di eventuali errori di catalogazione o di altre informazioni fornite agli Utenti per il tramite della Applicazione.
+
+I servizi della Applicazione non hanno alcuno scopo di lucro e sono erogati senza alcuna garanzia, esplicita o implicita. L’Associazione Copernicani non sarà responsabile per qualsiasi danno, perdita o mancato guadagno non dovuti a propria colpa e/o indiretti subiti dall’Utente o da terzi in relazione all’utilizzo della Applicazione, del Database o dei Dati ivi contenuti o altri contenuti della Applicazione, tra i quali, a titolo esemplificativo e non esaustivo, utilizzo di informazioni non corrette, perdite economiche, perdita o corruzione di dati, perdita di benefici o di interessi. Esiste la possibilità che malintenzionati o pirati informatici si introducano nel sistema di gestione della Applicazione, modificandone il contenuto e/o integrandovi materiale dannoso per lo stesso di qualunque genere, ad esempio virus, trojan horses, worms, time bombs, file corrotti, contenuti illeciti, inserimento dati di spesa pubblica non corretti o alterazione delle categorie di spesa o inserimento di qualsiasi altro tipo di software distruttivo che possa danneggiare dispositivi informatici o la proprietà intellettuale di terzi. In tal caso, l’Associazione Copernicani non sarà in alcun caso responsabile dei danni, perdite o modifiche da questi generati all’Utente o a terzi. Qualora le circostanze lo permettano, l’Associazione Copernicani avvertirà gli Utenti dell’interruzione del normale funzionamento della Applicazione e dei suoi servizi. L’Associazione Copernicani non risponderà in nessun caso qualora l’Utente cerchi di connettersi alla Applicazione e di utilizzarla con un computer o programmi obsoleti rispetto a quelli normalmente utilizzati per una connessione a Internet sulla base della tecnologia disponibile al tempo della connessione. L’Associazione Copernicani non risponderà della rapidità e affidabilità dell’accesso dell’Utente a Internet o a qualsiasi tipo di rete di comunicazione. L’Associazione Copernicani non risponde in nessun caso per danni e pregiudizi di qualsiasi natura provocati dalla mancata continuità, disponibilità, affidabilità, utilizzabilità della Applicazione, in particolare, a titolo esemplificativo ma non esaustivo, per gli errori di accesso alla Applicazione stessa. L’Associazione Copernicani non risponderà delle perdite o di qualsiasi altra circostanza derivante dalla sottrazione, furto o uso di qualsiasi dato identificativo dell’Utente (nome utente e password) relativo alla Applicazione (ove esistenti) e all’accesso al programma e ai database contenuti nella parte riservata della stessa, qualora tale perdita sia dipesa da fatto e colpa non imputabili alla Associazione Copernicani. Sarà responsabilità dell’Utente mantenere confidenziali i dati identificativi relativi all’accesso all’area riservata (qualora tale area riservata sia prevista).
+
+## UTILIZZO DELLA APPLICAZIONE
+
+L’Utente s’impegna a:
+
+1.  non utilizzare l’Applicazione o il materiale in essa inserito per perseguire scopi illegali ovvero per divulgare o diffondere in qualsiasi modo materiale o contenuti preordinati alla commissione di attività illecita;
+
+2.  non utilizzare l’Applicazione in modo da interrompere, danneggiare o rendere meno efficiente una parte o la totalità della stessa o in modo da pregiudicarne in qualche modo l’efficacia o la funzionalità;
+
+3.  non utilizzare l’Applicazione per la trasmissione o il collocamento di virus o qualsiasi altro materiale diffamatorio, offensivo, osceno o minaccioso o che in qualche modo possa danneggiare o disturbare altri Utenti.
+
+4.  non utilizzare l’Applicazione in modo da costituire una violazione dei diritti di persone fisiche o giuridiche o ditte (compresi, ad esempio, i diritti di copyright o riservatezza).
+
+Ogni violazione sarà segnalata alle Forze di Polizia ed alle Autorità Giudiziarie competenti. Nel caso in cui l’Utente non accetti, in tutto o in parte, le suddette condizioni, è pregato di non utilizzare l’Applicazione.
+"""^^bgo:MDString.
+
+
+:table_view 
+	# a bgo:TableView ;
+	bgo:title "Table view";
+    bgo:hasTotalizer :filtered_total_formatter ;
+    bgo:amountFormatter :amount_formatter;
+    bgo:referenceFormatter :amount_formatter;
+    bgo:trendFormatter :trend_formatter;
+    bgo:hasSearchPane :search_pane ;
+    bgo:headerTitle "Capitolo di spesa" ;
+    bgo:headerAmount "Spesa" ;
+    bgo:headerTrend "Trend" ;
+    bgo:headerDescription "Descrizione" ;
+.
+
+
+:overview 
+	# a bgo:Overview ;
+	bgo:label "Stato" ;	
+	bgo:icon "fas fa-atom" ;
+	bgo:title "Overview" ;
+	bgo:hasPartitions [
+		a bgo:Partitions ;
+		bgo:icon "fas fa-atom" ;
+		bgo:label "Partizioni"
+    ];
+	bgo:hasTrendColorScheme :trend_color_scheme ;
+    bgo:hasTotalizer :filtered_total_formatter ;
+    bgo:hasTagCloud :tag_cloud ;
+    bgo:hasSearchPane :search_pane ;
+    bgo:hasTooltip [
+    	a bgo:Tooltip ;
+	    bgo:amountFormatter :amount_formatter;
+	    bgo:referenceFormatter :amount_formatter;
+	    bgo:trendFormatter :trend_formatter
+	] ;
+.
+
+
+
+:filtered_total_formatter
+    a bgo:Totalizer ;
+	bgo:format "Totale: %sM€" ;
+	bgo:filteredFormat "In evidenza: %sM€"^^bgo:Template  ;
+	bgo:precision 2 ;
+	bgo:ratioFormatter [
+		# a bgo:NumberFormatter
+		bgo:format " ( %s% del tot.)"^^bgo:Template  ;
+		bgo:precision 2 ;
+		bgo:scaleFactor 100 ;
+		bgo:maxValue 100 ;
+		bgo:minValue 1 ; 
+		bgo:moreThanMaxFormat "" ;
+		bgo:lessThanMinFormat " (< 1% del tot.)"
+	]
+.
+
+
+
+###### Trend Color Scheme #######
+:trend_color_scheme 
+	# a bgo:TrendColorScheme ;
+    bgo:title "Variazione percentuale rispetto alll'anno precedente." ;
+    bgo:noTrendColor "#cdcdcd"^^bgo:RGB ;
+    bgo:rateTreshold # all are bgo:RateTreshold
+		[ bgo:rate -1.00 ; 	bgo:colorId "#a50026"^^bgo:RGB ] ,
+		[ bgo:rate -0.50 ;	bgo:colorId "#d73027"^^bgo:RGB ] ,
+		[ bgo:rate -0.25 ;	bgo:colorId "#f46d43"^^bgo:RGB ] ,
+		[ bgo:rate -0.10 ; bgo:colorId "#fdae61"^^bgo:RGB ] ,
+		[ bgo:rate -0.05 ; bgo:colorId "#fee08b"^^bgo:RGB ] ,
+		[ bgo:rate  0.0 ;	bgo:colorId "#ffffbf"^^bgo:RGB ] ,
+		[ bgo:rate  0.05 ;	bgo:colorId "#d9ef8b"^^bgo:RGB ] ,
+		[ bgo:rate  0.10 ;	bgo:colorId "#a6d96a"^^bgo:RGB ] ,
+		[ bgo:rate 0.25 ;	bgo:colorId "#66bd63"^^bgo:RGB ] ,
+		[ bgo:rate 0.50	;	bgo:colorId "#1a9850"^^bgo:RGB ] ,
+		[ bgo:rate 10.00 ;	bgo:colorId "#006837"^^bgo:RGB ] 
+.
+
+
+:search_pane 
+	# a bgo:SearchPane ;
+    bgo:label "Cerca"
+.
+
+
+:tag_cloud 
+	# a bgo:TagCloud ;
+	bgo:hasTag # all are bgo:tags
+		[ bgo:label "debito"; bgo:tagWeight 1.0 ] ,
+		[ bgo:label "interessi"; bgo:tagWeight 0.5 ] ,
+		[ bgo:label "stipendi"; bgo:tagWeight 1.0 ] ,
+        [ bgo:label "salute"; bgo:tagWeight 0.9 ] ,
+		[ bgo:label "arma"; bgo:tagWeight 0.2 ] ,
+		[ bgo:label "forz"; bgo:tagWeight 0.7 ] ,
+		[ bgo:label "immigra"; bgo:tagWeight 0.3 ],
+		[ bgo:label "giustizia"; bgo:tagWeight 0.3 ],
+		[ bgo:label "sviluppo"; bgo:tagWeight 0.3 ],
+        [ bgo:label "povertà"; bgo:tagWeight 0.2 ] ,
+		[ bgo:label "scuola"; bgo:tagWeight 0.7 ] ,
+		[ bgo:label "universit"; bgo:tagWeight 0.7 ] ,
+		[ bgo:label "lavoro"; bgo:tagWeight 0.7 ] ,
+		[ bgo:label "pensioni"; bgo:tagWeight 0.7 ] ,
+		[ bgo:label "reddito"; bgo:tagWeight 0.3 ],
+        [ bgo:label "tassa"; bgo:tagWeight 0.2 ] ,
+        [ bgo:label "commerc"; bgo:tagWeight 0.2 ] ,
+        [ bgo:label "econom"; bgo:tagWeight 0.2 ] ,
+        [ bgo:label "banche"; bgo:tagWeight 0.2 ] ,
+        [ bgo:label "estero"; bgo:tagWeight 0.2 ] ,
+        [ bgo:label "europa"; bgo:tagWeight 0.2 ] ,
+        [ bgo:label "turismo"; bgo:tagWeight 0.2 ] ,
+        [ bgo:label "personale"; bgo:tagWeight 0.2 ] ,
+        [ bgo:label "salute"; bgo:tagWeight 0.9 ] 
+.
+
+

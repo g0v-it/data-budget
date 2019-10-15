@@ -39,9 +39,9 @@ The data ingestion process is managed by the [LinkedData.Center SDaaS platform c
 
 knowledge base build process requires to:
 
-- edit files in the *data* directory to describe metadata and static stuffs
-- develop the *gateways* for transforming MEF open data resources in linked data. See [gateways doc.](gateways/README.md)
-- write *axioms* and rules to generate new data. See [axioms doc.](axioms/README.md)
+- edit files in the *data* directory to describe web app configuration data and otherstatic stuffs
+- develop the *gateways* for transforming raw data resources in linked data. See [gateways doc.](gateways/README.md)
+- write *axioms* and rules to generate new data. See [axioms directory](axioms)
 - edit the *build script* that drives the data ingestion process.
 - run sdaas
 
@@ -68,8 +68,8 @@ logs info and debug traces will be created in .cache directory
 You can pack data and services with :
 
 ```
-docker build . -t sdaas
-docker run -d -p 8889:8080 --name datastore sdaas
+docker build . -t my_sdaas
+docker run -d -p 8889:8080 --name datastore my_sdaas
 ```
 
 The resulting container will provide a read only distribution of the whole knowledge base in a stand-alone graph database with a sparql interface.

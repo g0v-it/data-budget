@@ -147,12 +147,19 @@ while ($rawdata = fgetcsv(STDIN, 2048, ';')) {
     
     $amount = Helper::NORMALIZE_AMOUNT($rawdata[$match[$b]]);
 
+    // numercc id for notation
+    $a_id  = crc32($rawdata[$match[$a]]);
+    $m_id  = $rawdata[$match[$m]-1];
+    $p_id  = $rawdata[$match[$p]-1];
+    $az_id = $rawdata[$match[$az]-1] ;
+    $c_id  = $rawdata[$match[$c]-1] ;
+    
     // skos notations
-    $a_code  = crc32($rawdata[$match[$a]]);
-    $m_code  = $a_code . '-' . $rawdata[$match[$m]-1];
-    $p_code  = $m_code . '-' . $rawdata[$match[$p]-1];
-    $az_code = $p_code . '-' . $rawdata[$match[$az]-1] ;
-    $c_code  = $az_code . '-' . $rawdata[$match[$c]-1] ;
+    $a_code  = crc32($a_id);
+    $m_code  = $a_code . '-' . $m_id;
+    $p_code  = $m_code . '-' . $p_id;
+    $az_code = $p_code . '-' . $az_id ;
+    $c_code  = $az_code . '-' . $c_id ;
        
     //Uris
     $a_uri  = "report:$a_code";

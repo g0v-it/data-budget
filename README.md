@@ -4,7 +4,7 @@
 
 data-budget is a *Smart Data Management Platform* to feed the http://budget.g0v.it/ web application.
 
-The platform builds a knowledge base about the Italian Government budget considering :
+The platform builds a knowledge base about the Italian Government budget, considering :
 
 - "disegno di legge di bilancio" (budget proposal)
 - "legge di bilancio" (the actual budget)
@@ -73,6 +73,7 @@ To shudown the platform type:
 docker-compose down
 ```
 
+Developers should read [CONTRIBUTING file](CONTRIBUTING.md)
 
 ## Support
 
