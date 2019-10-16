@@ -12,12 +12,12 @@ PREFIX : <http://mef.linkeddata.cloud/resource/bgo_>
 
 
 ##
-## Assign partitions to overview
+## Assign two partitions to overview
 ##
 INSERT { ?partitions bgo:hasPartition :p1 , :p2 }
 WHERE {
 	?domain a bgo:Domain; 
-		bgo:has:overview/bgo:hasPartitions ?partitions .
+		bgo:hasOverview/bgo:hasPartitions ?partitions .
 }
 
 
@@ -27,8 +27,7 @@ WHERE {
 ## create a partition to store ministero
 ##
 INSERT DATA {
-	:p1
-		a bgo:Partition ;
+	:p1 a bgo:Partition ;
 		bgo:partitionId "ministero" ;
 		bgo:label "Ministero" ;
 		bgo:title "Suddivisione per Ministero" 
@@ -46,7 +45,8 @@ INSERT {
 	.
 }
 WHERE {
-	?ministero a mef:Ministero ; skos:notation ?notation ; skos:definition ?title.
+	?ministero a mef:Ministero ; skos:notation ?notation .
+	OPTIONAL { ?ministeroskos:definition ?title }
 	BIND( IRI(CONCAT(STR(:p1), "_", ?notation)) AS ?subset)
 }
 
@@ -89,7 +89,9 @@ INSERT {
 WHERE {
 	{
 		SELECT DISTINCT ?missioneId ?title WHERE {
-			?missione a mef:Missione ; skos:notation ?notation ; skos:definition ?title.
+			?account a bgo:Account; dct:source/fr:isPartOf/fr:isPartOf ?missione .
+			?missione skos:notation ?notation 
+			OPTIONAL { ?missione skos:definition ?title }
 			BIND( STRAFTER(?notation, "-") AS ?missioneId )
 		}
 	}
@@ -103,10 +105,9 @@ WHERE {
 ##
 INSERT { ?subset bgo:hasAccount ?account }
 WHERE {
-  	SELECT DISTINCT ?subset ?account WHERE {
-      ?account a bgo:Account; dct:source/fr:isPartOf/fr:isPartOf/skos:notation ?notation;
-      BIND( IRI(CONCAT(STR(:p2), "_", STRAFTER(?notation, "-"))) AS ?subset)
-    }
+	?account a bgo:Account; dct:source/fr:isPartOf/fr:isPartOf/skos:notation ?missioneNotation;
+	BIND( STRAFTER(?missioneNotation, "-") AS ?missioneId )
+	BIND( IRI(CONCAT(STR(:p2), "_", ?missioneId)) AS ?subset)
 }
 
 

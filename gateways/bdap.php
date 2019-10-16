@@ -176,43 +176,34 @@ $c_uri a mef:Capitolo;
     fr:isPartOf $az_uri ;
     fr:amount $amount ;
     skos:notation \"$c_code\" ;
-    skos:prefLabel \"Cap. $c_code\"@it ;
-    skos:definition \"$capitolo\"@it 
-.
+    skos:definition \"$capitolo\"@it .
 " ;
 
 if ($last_az != $az_uri) { $last_az = $az_uri; echo "
 $az_uri
     fr:isPartOf $p_uri ;
     skos:notation \"$az_code\" ;
-    skos:prefLabel \"Azione $az_code\"@it;
-    skos:definition \"$azione\"@it
-.
+    skos:definition \"$azione\"@it .
 ";}
 
 if ($last_p != $p_uri) { $last_p = $p_uri; echo "
 $p_uri 
     fr:isPartOf $m_uri ;
     skos:notation \"$p_code\" ;
-    skos:definition \"$programma\"@it 
-.
+    skos:definition \"$programma\"@it .
 ";}
 
 if ($last_m != $m_uri) { $last_m = $m_uri; echo "
 $m_uri 
     fr:isPartOf $a_uri ;
     skos:notation \"$m_code\" ;
-    skos:prefLabel \"Missione $m_code\"@it;
-    skos:definition \"$missione\"@it 
-.
+    skos:definition \"$missione\"@it .
 ";}
 
 if ($last_a != $a_uri) { $last_a = $a_uri; echo "
 $a_uri 
     skos:notation \"$a_code\" ;
-    skos:prefLabel \"Amministrazione $a_code\"@it;
-    skos:definition \"$amministrazione\"@it 
-.
+    skos:definition \"$amministrazione\"@it .
 ";}
     
 }

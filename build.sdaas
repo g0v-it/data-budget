@@ -40,10 +40,10 @@ function G0V_LEARN_FROM_BDAP {
 #G0V_LEARN_FROM_BDAP dlb 2020
 G0V_LEARN_FROM_BDAP lbf 2019
 #G0V_LEARN_FROM_BDAP dlb 2019
-G0V_LEARN_FROM_BDAP rnd 2018
+#G0V_LEARN_FROM_BDAP rnd 2018
 G0V_LEARN_FROM_BDAP lbf 2018
-G0V_LEARN_FROM_BDAP dlb 2018
-G0V_LEARN_FROM_BDAP rnd 2017
+#G0V_LEARN_FROM_BDAP dlb 2018
+#G0V_LEARN_FROM_BDAP rnd 2017
 #G0V_LEARN_FROM_BDAP lbf 2017
 #G0V_LEARN_FROM_BDAP dlb 2017
 #G0V_LEARN_FROM_BDAP rnd 2016
@@ -62,7 +62,7 @@ SD_EVAL_RULESET "${GRAPH}" "axioms"
 ####################################################
 SD_LOG  "Testing..."
 ####################################################
-SD_DATA_TEST
+SD_DATA_TEST tests/knowledge
 
 
 SD_THATS_ALL_FOLKS

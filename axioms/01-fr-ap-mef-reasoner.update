@@ -43,7 +43,7 @@ INSERT {
 		qb:dataSet ?report;
 		fr:concept ?ministero
 	.
-	?report a fr:FinancialReport, skos:ConceptScheme, mef:Budget ;
+	?report a fr:FinancialReport, mef:FinancialReport, skos:ConceptScheme, mef:Budget ;
 		skos:hasTopConcept ?ministero
 	.
 	
@@ -69,5 +69,14 @@ WHERE {
 	} GROUP BY ?component
 }
 
+;
+
+# find close concepts. Limit analysis to Azioni to maximize performances
+INSERT { ?concept1 skos:closeConcept ?concept1  }
+WHERE {
+	?concept1 a mef:Azione ; skos:notatation ?notation .
+	?concept2 a mef:Azione ; skos:notatation ?notation .
+	FILTER( ?concept1 != ?concept2 )
+}
 
 #trust=1.00	
