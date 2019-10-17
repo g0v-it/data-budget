@@ -40,6 +40,8 @@ data-budget is designed to be the data provider component of a general system ar
 
 All used software components are available with **Open Source License**, all data are provided with an **Open Data License**
 
+## Try it with Docker
+
 The platform is shipped with a [Docker](https://docker.com) setup that makes it easy 
 to get a containerized development environment up and running. 
 If you do not already have Docker on your computer, 
