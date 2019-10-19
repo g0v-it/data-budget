@@ -17,5 +17,5 @@ services:
     depends_on:
       - "api"
     environment:
-      - LODMAP2D_DATA=http://localhost:29322/
+      - LODMAP2D_DATA=http://localhost:29322/data.ttl
       
