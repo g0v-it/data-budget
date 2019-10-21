@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+set -a
+
+GRAPH="http://mef.linkeddata.cloud/resource/"
+
+SD_INCLUDE ruleset
+SD_INCLUDE testing
+
+####################################################
+SD_LOG  "Loading external resources..."
+####################################################
+SD_LEARN http://publications.europa.eu/resource/authority/currency/EUR
+
+
+####################################################
+SD_LOG  "Loading facts from local data..."
+####################################################
+SD_LEARN urn:sdaas:config "data/kees.ttl"
+SD_LEARN $GRAPH/app "data/app.ttl"
+
+
+####################################################
+SD_LOG  "Loading facts from BDAP portal..."
+####################################################
+function G0V_LEARN_FROM_BDAP {
+	local bdapReportType="$1"
+	local year="$2"
+
+	local datasetName="spd_${bdapReportType}_spe_elb_cap_01_${year}"	
+	local uri="https://bdap-opendata.mef.gov.it/SpodCkanApi/api/1/rest/dataset/${datasetName}"
+	SD_LEARN "http://reference.data.gov.uk/doc/gregorian-interval/${year}-01-01T00:00:00/P1Y"
+	SD_LEARN "${uri}" "${uri}" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' - |gateways/bdap_meta.php"
+	SD_LEARN "${uri}.csv" "${uri}.csv" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' - |gateways/bdap.php ${datasetName}"
+}
+
+## Report type:
+##   lbf = Legge Di Bilancio Approvata
+##   dlb = Disegno di Legge Di Bilancio
+##   rnd = Bilancio consolidato
+#G0V_LEARN_FROM_BDAP dlb 2020
+G0V_LEARN_FROM_BDAP lbf 2019
+G0V_LEARN_FROM_BDAP lbf 2018
+G0V_LEARN_FROM_BDAP lbf 2017
+
+#G0V_LEARN_FROM_BDAP dlb 2019
+#G0V_LEARN_FROM_BDAP rnd 2018
+#G0V_LEARN_FROM_BDAP dlb 2018
+#G0V_LEARN_FROM_BDAP rnd 2017
+#G0V_LEARN_FROM_BDAP dlb 2017
+#G0V_LEARN_FROM_BDAP rnd 2016
+#G0V_LEARN_FROM_BDAP rnd 2015
+
+
+SD_LEARN urn:mef:programmi data/descrizione_programmi.csv "|||.ttl|php7 gateways/programmi.php spd_lbf_spe_elb_cap_01_2019"
+
+
+
+####################################################
+SD_LOG  "Starting reasoning window"
+####################################################
+SD_EVAL_RULESET "${GRAPH}" "axioms"
+
+####################################################
+SD_LOG  "Testing..."
+####################################################
+SD_DATA_TEST tests/knowledge
+
+
+SD_THATS_ALL_FOLKS

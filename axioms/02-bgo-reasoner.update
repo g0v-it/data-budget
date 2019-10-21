@@ -1,0 +1,195 @@
+########################################################################################
+##@ inferences using bgo axioms
+########################################################################################
+PREFIX fr: <http://linkeddata.center/botk-fr/v1#> 
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX qb: <http://purl.org/linked-data/cube#> 
+PREFIX mef: <http://w3id.org/g0v/it/mef#> 
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX bgo: <http://linkeddata.center/lodmap-bgo/v1#>
+PREFIX resource: <http://mef.linkeddata.cloud/resource/>
+
+##
+## Hinerit domain metadata from last available report
+## Note: the a Domain object must exists (it should be created lodaing data/app.ttl)
+##
+INSERT { 
+	?domain 
+		dct:source ?report ;
+		bgo:title ?title ;
+		bgo:description ?description 
+	. 
+} 
+WHERE {
+	?report a mef:FinancialReport ; fr:refPeriod/time:hasBeginning/time:inXSDDateTime ?refdate .
+
+    FILTER NOT EXISTS {
+		?report2 a mef:FinancialReport ; fr:refPeriod/time:hasBeginning/time:inXSDDateTime ?refdate2 ;
+        FILTER (?refdate2 > ?refdate)
+    } 	
+	
+	?domain a bgo:Domain .
+	OPTIONAL { ?report dct:title ?title }
+	OPTIONAL { ?report dct:description ?description }
+}
+
+;
+
+##
+## Create bgo accounts with core metadata
+##
+INSERT { 
+	?account a bgo:Account ;
+		dct:source ?azione ;
+		bgo:accountId ?accountId ;
+		bgo:title ?title ;
+		bgo:description ?description ;
+		bgo:amount ?amount 
+	.
+}
+WHERE { 
+	?azione a mef:Azione; qb:dataSet ?report .
+	?domain a bgo:Domain; dct:source ?report .	
+	
+	OPTIONAL { ?azione fr:isPartOf/fr:isPartOf/fr:isPartOf/skos:definition ?ministero . BIND (?ministero AS ?description ) }
+	OPTIONAL { ?azione skos:definition ?title }
+	OPTIONAL { ?azione fr:amount ?amount }
+	
+	BIND( MD5(STR(?azione)) AS ?accountId)
+	BIND ( IRI(CONCAT(STR(resource:),?accountId)) as ?account) 
+}
+
+;
+
+##
+## Create bgo abstract as a bgo:MDString
+##
+INSERT { ?account bgo:abstract ?abstract }
+WHERE {
+	?account a bgo:Account ; dct:source ?azione .
+	?azione fr:isPartOf ?programma .
+	?programma fr:isPartOf ?missione .
+		
+	OPTIONAL { ?azione skos:editorialNote ?azioneEditorialNote }
+	OPTIONAL { ?programma  skos:definition ?programmaDefinition }
+	OPTIONAL { ?programma skos:editorialNote ?programmaEditorialNote }
+	OPTIONAL { ?missione skos:definition ?missioneDescription }
+	
+	{
+		SELECT ?account ?azione (GROUP_CONCAT(?capitoloDescription;separator= "\n- ") AS ?capitoliList) WHERE {
+			?account a bgo:Account ; dct:source ?azione .
+			?fact fr:isPartOf ?azione; skos:notation ?notation .
+			OPTIONAL { ?fact skos:definition ?definition }
+			BIND( CONCAT(COALESCE(?definition,"")," (*",?notation,"*)") AS ?capitoloDescription)		
+		} GROUP BY ?account ?azione
+	}
+		
+	BIND( COALESCE(?azioneEditorialNote , "") AS ?azioneExtraNotes)
+	BIND( CONCAT( 
+		COALESCE(?programmaDefinition, ""),
+		COALESCE(CONCAT("\n\n",?programmaEditorialNote) ,"")
+	) AS ?programmaDescription)
+	BIND( COALESCE(?missioneDescription , "N.A.") AS ?missioneDescription)
+	BIND( COALESCE(?capitoliList , "N.A.") AS ?capitoliDescription)
+	BIND ( STRDT(CONCAT(
+		?azioneExtraNotes ,
+		"\n\n**Programma**:\n\n", ?programmaDescription ,
+		"\n\n**Missione**:\n\n", ?missioneDescription ,
+		"\n\n**Capitoli di spesa**:\n\n- ", ?capitoliDescription ,
+		"\n\n[Maggiori informazioni...](",STR(?azione),")"
+	), bgo:MDString) AS ?abstract )
+	
+	
+	
+	BIND( MD5(STR(?azione)) AS ?accountId)
+	BIND ( IRI(CONCAT(STR(resource:),?accountId)) as ?account)
+}
+
+
+;
+
+
+##
+## Create account history
+##
+INSERT { 
+	?account 
+		bgo:versionLabel ?version ;
+		bgo:hasHistoryRec ?historyRec 
+	.
+		
+	?historyRec 
+		bgo:versionLabel ?historyRecVersion ;		
+		bgo:amount ?historyRecAmount 
+	.
+}
+WHERE { 
+	VALUES ( ?type ?abbr ) {
+		( mef:DisegnoLeggeDiBilancio "D" )
+		( mef:LeggeDiBilancio "L" )
+		( mef:RendicontoFinanziario "R")
+	}
+
+	?account a bgo:Account ;
+		dct:source/skos:notation ?notation .
+		
+	?domain a bgo:Domain ; dct:source ?report .
+    ?report a ?type ; 
+        fr:refPeriod/time:hasBeginning/time:inXSDDateTime ?refdate .
+		
+	?hr skos:notation ?notation ;
+		fr:amount ?historyRecAmount ;
+		qb:dataSet ?historyReport .
+		
+    ?historyReport a ?type ;
+        fr:refPeriod/time:hasBeginning/time:inXSDDateTime ?date .
+	
+	FILTER ( ?date < ?refdate )
+	BIND( CONCAT(?abbr, STR(YEAR(?refdate))) AS ?version)
+	BIND( CONCAT(?abbr, STR(YEAR(?date))) AS ?historyRecVersion)
+	BIND( IRI(CONCAT(STR(?hr), "_bgo")) AS ?historyRec)
+}
+
+;
+
+
+##
+## Create reference value from the newest history record
+##
+INSERT { ?account bgo:referenceAmount ?value }
+WHERE {
+    ?account bgo:hasHistoryRec ?historyRec .
+	?historyRec bgo:versionLabel ?version ; bgo:amount ?value  .
+  
+    FILTER NOT EXISTS {
+		?account bgo:hasHistoryRec ?historyRec2 .
+        ?historyRec2 bgo:versionLabel ?version2  .
+        FILTER (?version2 > ?version)
+    }             
+}
+
+;
+
+##
+## Create account breakdown
+##
+INSERT { 
+	?account bgo:hasBreakdown ?breakdown .
+	?breakdown 
+		bgo:title ?breakdownTitle ;
+		bgo:amount ?breakdownAmount
+	.
+}
+WHERE { 
+	?account a bgo:Account ;
+		dct:source ?azione .
+	?azione skos:narrower ?fact .
+	?fact skos:notation ?notation ;
+		fr:amount ?breakdownAmount .
+	BIND (CONCAT ("Cap.", ?notation) AS ?breakdownTitle )
+		
+	BIND( IRI(CONCAT(STR(?fact), "_bgo")) AS ?breakdown) 
+	
+}
+#trust=1.00	

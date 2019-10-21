@@ -1,12 +1,11 @@
 version: '3'
 services:
   sdaas:
-    build: ./sdaas
+    image: copernicani/data-budget-sdaas
     ports:
       - "29321:8080"
   api:
-    build: ./apis
+    image: linkeddatacenter/lodmap2d-api
     ports:
       - "29322:80"
-    depends_on:
-      - "sdaas"
+      
