@@ -16,8 +16,8 @@ PREFIX : <http://mef.linkeddata.cloud/resource/bgo_>
 ##
 INSERT { ?partitions bgo:hasPartition :p1 , :p2 }
 WHERE {
-	?domain a bgo:Domain; 
-		bgo:hasOverview/bgo:hasPartitions ?partitions .
+	?domain a bgo:Domain .
+	?domain bgo:hasOverview/bgo:hasPartitions ?partitions .
 }
 
 
@@ -30,7 +30,9 @@ INSERT DATA {
 	:p1 a bgo:Partition ;
 		bgo:partitionId "ministero" ;
 		bgo:label "Ministero" ;
-		bgo:title "Suddivisione per Ministero" 
+		bgo:title "Suddivisione per Ministero" ;
+		bgo:withGroupFunction :grouping_function
+	.
 }
 
 ;
@@ -39,14 +41,15 @@ INSERT DATA {
 ## create a p1 partition subsets to store ministero
 ##
 INSERT {
-	:p1 bgo:hasAccountSubset ?subset .
+	:p1 bgo:hasAccountSubSet ?subset .
 	?subset a bgo:AccountSet ;
-		bgo:title ?title
-	.
+		bgo:title ?title .
 }
 WHERE {
+	?domain a bgo:Domain .
+	?domain dct:source/skos:hasTopConcept ?ministero .
 	?ministero a mef:Ministero ; skos:notation ?notation .
-	OPTIONAL { ?ministeroskos:definition ?title }
+	OPTIONAL { ?ministero skos:definition ?title }
 	BIND( IRI(CONCAT(STR(:p1), "_", ?notation)) AS ?subset)
 }
 
@@ -71,7 +74,8 @@ INSERT DATA {
 		a bgo:Partition;
 		bgo:partitionId "missione" ;
 		bgo:label "Missione" ;
-		bgo:title "Suddivisione per missione" 
+		bgo:title "Suddivisione per missione" ;
+		bgo:withGroupFunction :grouping_function
 	.
 }
 
@@ -81,7 +85,7 @@ INSERT DATA {
 ## create a p2 partition subsets to store missione
 ##
 INSERT {
-	:p2 bgo:hasAccountSubset ?subset .
+	:p2 bgo:hasAccountSubSet ?subset .
 	?subset a bgo:AccountSet ;
 		bgo:title ?title
 	.

@@ -1,21 +1,11 @@
 version: '3'
 services:
   sdaas:
-    build: .
+    image: copernicani/data-budget-sdaas
     ports:
       - "29321:8080"
   api:
     image: linkeddatacenter/lodmap2d-api
     ports:
       - "29322:80"
-    depends_on:
-      - "sdaas"
-  webapp:
-    image: linkeddatacenter/lodmap2d
-    ports:
-      - "29323:80"
-    depends_on:
-      - "api"
-    environment:
-      - LODMAP2D_DATA=http://localhost:29322/data.ttl
       

@@ -47,10 +47,9 @@ to get a containerized development environment up and running.
 If you do not already have Docker on your computer, 
 [it's the right time to install it](https://docs.docker.com/install/).
 
-To try the platform, an example stack of services is provided. Just type: 
+To try the latest platform release, an example stack of services is provided. Just type: 
 
 ```
-docker-compose build
 docker-compose up -d
 ```
 
@@ -59,23 +58,30 @@ This will start locally the following services:
 
 | Name        | Description                                                   | Port 
 | ----------- | ------------------------------------------------------------- | ------- 
-| sdaas       | the data-budget management platform                           | 29321    
+| sdaas       | the lastest release of data-budget management platform        | 29321    
 | api         | an  example API microservice to feed webapp                   | 29322 
-| webapp      | a sample web server using LODMAP2D application                | 20323
 
 - try http://localhost:29321/sdaas to access sdaas workbench
-- try http://localhost:29322/app.ttl to test a [LODMAP2D-api](https://github.com/linkeddatacenter/LODMAP2D-api) endpoint
-- try http://localhost:29323/partition/overview to see [LODMAP2D](https://github.com/linkeddatacenter/LODMAP2D) explorer in actions.
-- access sdaas cli interface  typing `docker exec -ti "here the id of the docker instance running sdaas platform" sdaas`
+- try http://localhost:29322/app.ttl to test the [LODMAP2D-api](https://github.com/linkeddatacenter/LODMAP2D-api) endpoint
+
+
+To test the platform with  LODMAP2D type:
+
+```
+docker run -d --name lodmap2d -e LODMAP2D_DATA=http://localhost:29322/ -p 29323:80 linkeddatacenter/lodmap2d
+```
+
+Point your browser to http://localhost:29323/ and enjoy.
 
 The first time you start the containers, Docker downloads and builds images for you. It will take some time, but don't worry
 this is done only once. Starting servers will then be lightning fast.
 
 
-To shudown the platform type: 
+To shuydown the platform type: 
 
 ```
 docker-compose down
+docker rm -f lodmap2d
 ```
 
 Developers should read [CONTRIBUTING file](CONTRIBUTING.md)

@@ -13,7 +13,7 @@ ASK {
      	dct:source ?report ;
         bgo:title [] ;
         bgo:description [];
-  		bgo:hasOverview/bgo:hasPartitions/bgo:hasPartition/bgo:hasAccountSubset/bgo:hasAccount ?account ;
+  		bgo:hasOverview/bgo:hasPartitions/bgo:hasPartition/bgo:hasAccountSubSet/bgo:hasAccount ?account ;
   		bgo:hasTableView [] ;
     	bgo:hasCredits [] ;
     	bgo:hasTerms [] ;

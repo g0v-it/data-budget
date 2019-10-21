@@ -10,16 +10,24 @@
 
 :domain a bgo:Domain ;
     bgo:abstract """
-Power by:
 
-[![](https://budget.g0v.it/logos/copernicani_orizzontale.png)](https://copernicani.it/g0v)
+&nbsp;
 
-[Elaborazione su dati del Ministero dell'Economia e delle Finanze](https://bdap-opendata.mef.gov.it/)
+Valori espressi in milioni di Euro.
+
+&nbsp;
+
+  
+[Elaborazione su open data del Ministero dell'Economia e delle Finanze](https://bdap-opendata.mef.gov.it/)
+
+Pubblicato da [Copernicani.it](https://copernicani.it/)
+
+![copernicani](https://g0v-it.github.io/home/logo/copernicani-motto-250x70.png)
+
 """^^bgo:MDString ;
 
     # add an item to default navigation menu
     bgo:hasNavigationMenu [ 
-    	# a bgo:NavigationMenu ;
     	bgo:withCustomMenuItem 
     		[
 				bgo:icon "mdi-database-search" ;
@@ -29,27 +37,21 @@ Power by:
     		[
 				bgo:icon "mdi-webhook" ;
 				bgo:title "Linked data..." ;
-				bgo:link <https://data.budget.g0v.it/resource/welcome>
+				bgo:link <http://mef.linkeddata.cloud/resource/welcome>
 			]	
     ] ;
 
     # Use the Option menu with two external links
     bgo:hasOptionMenu [
-    	# a bgo:OptionMenu ;
     	bgo:withCustomMenuItem 
     		[
-				bgo:icon "mda-orbit" ;
-				bgo:title "about G0V..." ;
-				bgo:link <https://copernicani.it/g0v>
-			] ,
-    		[
-				bgo:icon "mda-database" ;
-				bgo:title "fork data platform..." ;
+				bgo:icon "mdi-github-box" ;
+				bgo:title "data management platform..." ;
 				bgo:link <https://github.com/g0v-it/data-budget>
 			] ,
     		[
-				bgo:icon "mda-chart-bubble" ;
-				bgo:title "fork frontend..." ;
+				bgo:icon "mdi-github-box" ;
+				bgo:title "codice frontend..." ;
 				bgo:link <https://github.com/g0v-it/web-budget>
 			]
 
@@ -57,8 +59,12 @@ Power by:
 
     # Add just a couple of shortcuts icons to footer
     bgo:hasFooterMenu [
-    	# a bgo:FooterMenu ;
     	bgo:withCustomMenuItem 
+    		[
+		    	bgo:icon "mdi-github-box" ;
+		    	bgo:title "Seguici su GitHub" ;
+				bgo:link <https://github.com/g0v-it>
+			] ,
     		[
 		    	bgo:title "Termini d'uso" ;
 				bgo:link "/terms"^^bgo:route
@@ -66,10 +72,10 @@ Power by:
     ] ;
 
     # This domain likes social
-    bgo:hasSocialSharing true ;
+    bgo:hasSocialSharing 1 ;
 
     # This should be used if copyright is not present
-    bgo:hasCopyrigth "(c) [Copernicani.it](https://copernicani.it/)![](https://i.creativecommons.org/l/by/4.0/80x15.png)"^^bgo:MDString ;
+    bgo:hasCopyrigth "[Credits...](/credits)"^^bgo:MDString ;
     
     bgo:hasOverview :overview ;
     bgo:hasTableView :table_view ;
@@ -83,8 +89,8 @@ Power by:
 # Account view
 ############################################
 :account_view a bgo:AccountView ;
-    bgo:amountFormatter :amount_formatter;
-    bgo:referenceFormatter :amount_formatter;
+    bgo:amountFormatter :smart_formatter;
+    bgo:referenceFormatter :smart_formatter;
     bgo:trendFormatter :trend_formatter;
     
 	bgo:hasHistoricalPerspective [
@@ -100,18 +106,17 @@ Power by:
 	]
 .
 
-:amount_formatter a bgo:NumberFormatter ;
-	bgo:format "€ %s"^^bgo:Template  ;
-	bgo:precision 2 ;
-.
 
+############################################
+# Formatters and totalizers
+############################################
 :smart_formatter a bgo:NumberFormatter ;
 	bgo:format "%sM€"^^bgo:Template  ;
-	bgo:precision 3 ;
+	bgo:precision 0 ;
 	bgo:scaleFactor 0.000001 ;
-	bgo:minValue 0.001 ; 
-	bgo:nanFormat "non definito" ;
-	bgo:lessThanMinFormat "meno di 10K€"^^bgo:Template
+	bgo:minValue 1 ; 
+	bgo:nanFormat "-" ;
+	bgo:lessThanMinFormat "meno di 1M€"^^bgo:Template
 .
 
 :trend_formatter a bgo:NumberFormatter ;
@@ -125,16 +130,42 @@ Power by:
 	bgo:lessThanMinFormat "<-200%"^^bgo:Template
 .
 
+
+:filtered_total_formatter
+    a bgo:Totalizer ;
+	bgo:format "Totale: %sM€"^^bgo:Template ;
+	bgo:filteredFormat "In evidenza: %sM€"^^bgo:Template  ;
+	bgo:precision 0 ;
+	bgo:scaleFactor 0.000001 ;
+	bgo:minValue 1 ; 
+	bgo:nanFormat "-" ;
+	bgo:lessThanMinFormat "meno di 1M€"^^bgo:Template	;
+	bgo:ratioFormatter [
+		# a bgo:NumberFormatter
+		bgo:format " ( %s% del tot.)"^^bgo:Template  ;
+		bgo:precision 2 ;
+		bgo:scaleFactor 100 ;
+		bgo:maxValue 100 ;
+		bgo:minValue 1 ; 
+		bgo:moreThanMaxFormat "" ;
+		bgo:lessThanMinFormat " (< 1% del tot.)"
+	]
+.
+
+:grouping_function a bgo:AmountsSum ;
+	bgo:hasTotalizer :filtered_total_formatter			
+.
+
 ############################################
 # Credits
 ############################################
 
 :credits_page a bgo:CreditsView ;
-    bgo:icon "fas fa-users";
+    bgo:icon "mdi-account-multiple";
 	bgo:title "Credits"@en ;
-	bgo:abstract
-"""
-This code was written by the [G0V-it Team](https://copernicani.it/g0v):
+	bgo:abstract"""
+Il codice di questa applicazione è stato scritto dal 
+[team italiano di G0V](https://copernicani.it/g0v) ![G0V it](https://g0v-it.github.io/home/logo/g0v-it-logo-100x50.png) con il supporto di [LinkedData.Center](http://LinkedData.Center):
 
 - [Miah Mohd Ehtesham](https://github.com/miahmohd)
 - [Leonardo Longhi](https://github.com/LeonardoLonghi)
@@ -142,17 +173,24 @@ This code was written by the [G0V-it Team](https://copernicani.it/g0v):
 - [Luca Mearelli](https://github.com/luca)
 - [Enrico Fagnoni](https://github.com/ecow)
 
+&nbsp;
 
-Using the following great open source components:
+Usando i seguenti componenti open source:
 
-- The [D3.js library](https://d3js.org/)
-- The [Vue javascript framework](https://vuejs.org)
+- [D3.js library](https://d3js.org/)
+- [Vue javascript framework](https://vuejs.org)
 - [rdflib project](https://github.com/linkeddata/rdflib.js) by TimBL & LinkedData team
-- the [SOLID](https://github.com/solid/solid-spec) specifications
-- the [SDaaS platform](https://github.com/linkeddatacenter/sdaas-ce) by LinkedData.Center
-	
+- [SOLID](https://github.com/solid/solid-spec) specifications
+- [SDaaS platform](https://github.com/linkeddatacenter/sdaas-ce) by LinkedData.Center
 
-Raw data provided by the [Italian Ministero dell'Economia e delle Finanze](https://bdap-opendata.mef.gov.it/) with [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/)  license.
+&nbsp;
+	
+budget.g0v.it è un servizio di:
+
+![](https://g0v-it.github.io/home/logo/copernicani-motto-250x70.png)](https://copernicani.it/g0v)
+
+I dati di bilancio sono forniti dal [Ministero dell'Economia e delle Finanze](https://bdap-opendata.mef.gov.it/) con licenza
+ [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).
 
 
 --------------------------------------------------
@@ -175,8 +213,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 
 :terms_page a bgo:TermsView ;
-    bgo:icon  "fas fa-gavel" ;
-	bgo:title "Terms & conditions" ;
+    bgo:icon  "mdi-comment-eye-outline" ;
+	bgo:title "Termini e condizioni" ;
 	bgo:abstract
 """
 ## CONDIZIONI DI ACCESSO E FINALITÀ D’USO
@@ -190,13 +228,9 @@ L'Associazione Copernicani, titolare della Applicazione, ha l’esclusivo ed ins
 ## PROPRIETÀ INTELLETTUALE
 
 1.  I contenuti del sito – codice di script, grafica, testi, tabelle, immagini, video, layout grafici, nonchè il logo della Associazione Copernicani e ogni altra informazione visualizzata in qualunque forma nella applicazione (i “**Contenuti Protetti**”) – con esclusione dei Dati – sono riservati all’Associazione Copernicani o ai singoli soggetti terzi (“i “Terzi”) che hanno realizzato i Contenuti Protetti ai sensi della normativa in materia di diritto d’autore (Legge n. 633/1941 s.m.i.);
-
 2.  Se non diversamente indicato, è garantito il permesso di copiare e distribuire i Dati di Spesa Pubblica così come catalogati per il tramite dell’Applicazione (il “Database”), secondo le condizioni della licenza Creative Commons Attribuzione-Non Commerciale – Condividi allo stesso modo 3.0 (CC BY-NC-SA 3.0 IT), il cui testo è disponibile a questo indirizzo [https://creativecommons.org/licenses/by-nc-sa/3.0/it/legalcode](https://creativecommons.org/licenses/by-nc-sa/3.0/it/legalcode) ![Licenza Creative Commons](https://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png).
-
     Inoltre il Database è liberamente utilizzabile da qualunque testata giornalistica, sia distribuita su internet che in cartaceo e sia che abbia finalità lucrative o meno, secondo le condizioni della licenza Creative Commons Attribuzione 3.0 Unported (CC BY 3.0), il cui testo è disponibile a questo indirizzo [https://creativecommons.org/licenses/by/3.0/legalcode](https://creativecommons.org/licenses/by/3.0/legalcode) ![Licenza Creative Commons](https://i.creativecommons.org/l/by/3.0/88x31.png).
-
     Il Database è inoltre liberamente riproducibile su siti internet che abbiano contenuto principalmente divulgativo e informativo (“Blog”), anche attraverso contenuti “embedded”, secondo le condizioni della licenza Creative Commons Attribuzione 3.0 Unported (CC BY 3.0), il cui testo è disponibile a questo indirizzo [https://creativecommons.org/licenses/by/3.0/legalcode](https://creativecommons.org/licenses/by/3.0/legalcode) ![Licenza Creative Commons](https://i.creativecommons.org/l/by/3.0/88x31.png).
-
 3.  E’ inoltre garantito il permesso di copiare e distribuire i Dati , secondo le condizioni della licenza Creative Commons Attribuzione 3.0 Unported (CC BY 3.0), il cui testo è disponibile a questo indirizzo [https://creativecommons.org/licenses/by/3.0/legalcode](https://creativecommons.org/licenses/by/3.0/legalcode) ![Licenza Creative Commons](https://i.creativecommons.org/l/by/3.0/88x31.png). o secondo la diversa licenza richiamata sul sito internet del MEF in relazione ai suoi Open Data.
 
 ## LIMITAZIONI DI RESPONSABILITÀ
@@ -210,11 +244,8 @@ I servizi della Applicazione non hanno alcuno scopo di lucro e sono erogati senz
 L’Utente s’impegna a:
 
 1.  non utilizzare l’Applicazione o il materiale in essa inserito per perseguire scopi illegali ovvero per divulgare o diffondere in qualsiasi modo materiale o contenuti preordinati alla commissione di attività illecita;
-
 2.  non utilizzare l’Applicazione in modo da interrompere, danneggiare o rendere meno efficiente una parte o la totalità della stessa o in modo da pregiudicarne in qualche modo l’efficacia o la funzionalità;
-
 3.  non utilizzare l’Applicazione per la trasmissione o il collocamento di virus o qualsiasi altro materiale diffamatorio, offensivo, osceno o minaccioso o che in qualche modo possa danneggiare o disturbare altri Utenti.
-
 4.  non utilizzare l’Applicazione in modo da costituire una violazione dei diritti di persone fisiche o giuridiche o ditte (compresi, ad esempio, i diritti di copyright o riservatezza).
 
 Ogni violazione sarà segnalata alle Forze di Polizia ed alle Autorità Giudiziarie competenti. Nel caso in cui l’Utente non accetti, in tutto o in parte, le suddette condizioni, è pregato di non utilizzare l’Applicazione.
@@ -224,8 +255,8 @@ Ogni violazione sarà segnalata alle Forze di Polizia ed alle Autorità Giudizia
 :table_view a bgo:TableView ;
 	bgo:title "Table view";
     bgo:hasTotalizer :filtered_total_formatter ;
-    bgo:amountFormatter :amount_formatter;
-    bgo:referenceFormatter :amount_formatter;
+    bgo:amountFormatter :smart_formatter;
+    bgo:referenceFormatter :smart_formatter;
     bgo:trendFormatter :trend_formatter;
     bgo:hasSearchPane :search_pane ;
     bgo:headerTitle "Capitolo di spesa" ;
@@ -250,40 +281,18 @@ Ogni violazione sarà segnalata alle Forze di Polizia ed alle Autorità Giudizia
     bgo:hasSearchPane :search_pane ;
     bgo:hasTooltip [
     	a bgo:Tooltip ;
-	    bgo:amountFormatter :amount_formatter;
-	    bgo:referenceFormatter :amount_formatter;
+	    bgo:amountFormatter :smart_formatter;
+	    bgo:referenceFormatter :smart_formatter;
 	    bgo:trendFormatter :trend_formatter
 	] ;
 .
-
-
-
-:filtered_total_formatter
-    a bgo:Totalizer ;
-	bgo:format "Totale: %sM€" ;
-	bgo:filteredFormat "In evidenza: %sM€"^^bgo:Template  ;
-	bgo:precision 2 ;
-	bgo:ratioFormatter [
-		# a bgo:NumberFormatter
-		bgo:format " ( %s% del tot.)"^^bgo:Template  ;
-		bgo:precision 2 ;
-		bgo:scaleFactor 100 ;
-		bgo:maxValue 100 ;
-		bgo:minValue 1 ; 
-		bgo:moreThanMaxFormat "" ;
-		bgo:lessThanMinFormat " (< 1% del tot.)"
-	]
-.
-
-
 
 ###### Trend Color Scheme #######
 :trend_color_scheme a bgo:TrendColorScheme ;
     bgo:title "Variazione percentuale rispetto alll'anno precedente." ;
     bgo:noTrendColor "#cdcdcd"^^bgo:RGB ;
     bgo:rateTreshold # all are bgo:RateTreshold
-		[ bgo:rate -1.00 ; 	bgo:colorId "#a50026"^^bgo:RGB ] ,
-		[ bgo:rate -0.50 ;	bgo:colorId "#d73027"^^bgo:RGB ] ,
+		[ bgo:rate -0.50 ; 	bgo:colorId "#a50026"^^bgo:RGB ] ,
 		[ bgo:rate -0.25 ;	bgo:colorId "#f46d43"^^bgo:RGB ] ,
 		[ bgo:rate -0.10 ; bgo:colorId "#fdae61"^^bgo:RGB ] ,
 		[ bgo:rate -0.05 ; bgo:colorId "#fee08b"^^bgo:RGB ] ,
@@ -291,8 +300,7 @@ Ogni violazione sarà segnalata alle Forze di Polizia ed alle Autorità Giudizia
 		[ bgo:rate  0.05 ;	bgo:colorId "#d9ef8b"^^bgo:RGB ] ,
 		[ bgo:rate  0.10 ;	bgo:colorId "#a6d96a"^^bgo:RGB ] ,
 		[ bgo:rate 0.25 ;	bgo:colorId "#66bd63"^^bgo:RGB ] ,
-		[ bgo:rate 0.50	;	bgo:colorId "#1a9850"^^bgo:RGB ] ,
-		[ bgo:rate 10.00 ;	bgo:colorId "#006837"^^bgo:RGB ] 
+		[ bgo:rate 0.50 ;	bgo:colorId "#006837"^^bgo:RGB ] 
 .
 
 

@@ -52,8 +52,8 @@ WHERE {
 	?azione a mef:Azione; qb:dataSet ?report .
 	?domain a bgo:Domain; dct:source ?report .	
 	
-	OPTIONAL { ?azione skos:notation ?notation . BIND (CONCAT ("Azione ", ?notation) AS ?title ) }
-	OPTIONAL { ?azione skos:definition ?description }
+	OPTIONAL { ?azione fr:isPartOf/fr:isPartOf/fr:isPartOf/skos:definition ?ministero . BIND (?ministero AS ?description ) }
+	OPTIONAL { ?azione skos:definition ?title }
 	OPTIONAL { ?azione fr:amount ?amount }
 	
 	BIND( MD5(STR(?azione)) AS ?accountId)
@@ -70,13 +70,11 @@ WHERE {
 	?account a bgo:Account ; dct:source ?azione .
 	?azione fr:isPartOf ?programma .
 	?programma fr:isPartOf ?missione .
-	?missione fr:isPartOf ?ministero .
 		
 	OPTIONAL { ?azione skos:editorialNote ?azioneEditorialNote }
 	OPTIONAL { ?programma  skos:definition ?programmaDefinition }
 	OPTIONAL { ?programma skos:editorialNote ?programmaEditorialNote }
 	OPTIONAL { ?missione skos:definition ?missioneDescription }
-	OPTIONAL { ?ministero skos:definition ?ministeroDescription }	
 	
 	{
 		SELECT ?account ?azione (GROUP_CONCAT(?capitoloDescription;separator= "\n- ") AS ?capitoliList) WHERE {
@@ -93,10 +91,8 @@ WHERE {
 		COALESCE(CONCAT("\n\n",?programmaEditorialNote) ,"")
 	) AS ?programmaDescription)
 	BIND( COALESCE(?missioneDescription , "N.A.") AS ?missioneDescription)
-	BIND( COALESCE(?ministeroDescription , "N.A.") AS ?ministeroDescription)
 	BIND( COALESCE(?capitoliList , "N.A.") AS ?capitoliDescription)
 	BIND ( STRDT(CONCAT(
-		?ministeroDescription ,
 		?azioneExtraNotes ,
 		"\n\n**Programma**:\n\n", ?programmaDescription ,
 		"\n\n**Missione**:\n\n", ?missioneDescription ,
@@ -161,7 +157,7 @@ WHERE {
 ##
 ## Create reference value from the newest history record
 ##
-INSERT { ?account bgo:referenceValue ?value }
+INSERT { ?account bgo:referenceAmount ?value }
 WHERE {
     ?account bgo:hasHistoryRec ?historyRec .
 	?historyRec bgo:versionLabel ?version ; bgo:amount ?value  .

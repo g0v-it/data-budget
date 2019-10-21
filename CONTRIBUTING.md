@@ -77,7 +77,7 @@ apk --no-cache add php7 php7-json
 
 Access the SDaaS workbench pointing browser to http://localhost:9999/sdaas
 
-To exit cli and free doker resouce:
+To exit cli and free docker resouce:
 
 ```
 exit
@@ -160,7 +160,7 @@ docker tag copernicani/data-budget-sdaas copernicani/data-budget-sdaas:x.y.z
 docker push copernicani/data-budget-sdaas
 ```
 
-for x.y.z use [SemVer](http://semver.org/) versioning scheme
+for x.y.z use [SemVer](http://semver.org/) specification.
 
 The resulting container will provide a read only distribution of the whole knowledge base in a stand-alone graph database with a sparql interface.
 
