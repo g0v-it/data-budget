@@ -19,24 +19,21 @@ The following picture summarizes the mappings introduced by fr-ap-mef profile:
 
 The following axioms extend the fr-ap ones :
 
-- the financial report hierarchy maps exactly the financial report taxonomy; as corollary the *fr:concept* is reflexive (`(x a fr:StructuralComponent) ⇒  (x fr:concept x)`)
-- *part of* means *broader* (`(x fr:isPartOf y) ⇒ (x skos:broader y)`)
+- the financial report hierarchy maps exactly the financial report taxonomy;
+- *part of* means *broader* (`(x fr:isPartOf y) ⇒ (x skos:broader y)`);
 - sdmx-attribute:unitMeasure is always <http://publications.europa.eu/resource/authority/currency/EUR>
-- the fr:refPeriod of a mef:Report is always a full year (from 1. to 31.12)
-- similar concepts in different report taxonomies have the same skos:notation
-- the official description of a fr:StructuralComponent is annotated with the skos:definiton property
-- the MEF notes of a fr:StructuralComponent is annotated with the skos:editorialNote property
-- skos:notation act like as an inverse functional object property
+- the fr:refPeriod of a mef:Report is always a full solar year (from 1.1 to 31.12)
+- similar concepts in different taxonomies use the same skos:notation
 
 the following axioms should be used to derive a Bubble Graph Ontology:
 
 
 - the source of the BGO Domain must be is the newest *MEF Financial Report* in the knowledge graph;
-- the source of a bgo:Account must be a a *Missione* (i.e. the fourh level of a MEF financial reports);
+- the source of a bgo:Account must be an *Azione* (i.e. the fourth level of a MEF financial reports);
 - *capitolo di spesa* is a breakdown of a bgo:Account;
-- account history is inferred taking into account related components by close concepts;
-- the bgo:referenceValue is, if present, the value of the newest amount in the account history ;
-- for bgo generating editorial properties these rules should be used:
+- account history is inferred taking into account similar components concepts ;
+- the bgo:referenceValue, if present, is the amount of the newest entry in the account history ;
+- in bgo editorial properties, these rules should be used:
     - the bgo:versionLabel is built from report class and report year.
     - the bgo:title can be  derived from skos:notation
     - the bgo:description for an account can be derived from skos:definition 
