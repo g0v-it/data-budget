@@ -4,7 +4,7 @@
 
 data-budget is a *Smart Data Management Platform* to feed the http://budget.g0v.it/ web application.
 
-**WARNING: this is a complete project refactory. The 2.x versions are no more supported. Please migrate to the new architecture **
+**WARNING: this is a complete project refactory. The 2.x versions are no more supported. Please migrate to the new architecture**
 
 The platform builds a *semantic network* (i.e. a knowledge graph) a about the Italian Government budget, considering :
 
