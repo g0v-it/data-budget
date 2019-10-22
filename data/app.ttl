@@ -169,8 +169,7 @@ budget.g0v.it è un servizio di:
 
 [![](https://g0v-it.github.io/home/logo/copernicani-motto-250x70.png)](https://copernicani.it/g0v)
 
-Il codice di questa applicazione è stato scritto dal 
-[team italiano di G0V](https://copernicani.it/g0v) con il supporto di [LinkedData.Center](http://LinkedData.Center):
+Il codice di questa applicazione è stato scritto :
 
 - [Miah Mohd Ehtesham](https://github.com/miahmohd)
 - [Leonardo Longhi](https://github.com/LeonardoLonghi)
@@ -180,9 +179,11 @@ Il codice di questa applicazione è stato scritto dal
 
 &nbsp;
 
+Dati di bilancio estratti da:
+
 ![](https://bdap-opendata.mef.gov.it/sites/default/files/images/logo-open-bdap.PNG)
 
-I dati di bilancio sono forniti dal [Ministero dell'Economia e delle Finanze](https://bdap-opendata.mef.gov.it/) con licenza
+su dati del [Ministero dell'Economia e delle Finanze](https://bdap-opendata.mef.gov.it/) con licenza
  [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).
 
 """^^bgo:MDString.
