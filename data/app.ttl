@@ -111,7 +111,7 @@ Pubblicato da [Copernicani.it](https://copernicani.it/)
 # Formatters and totalizers
 ############################################
 :smart_formatter a bgo:NumberFormatter ;
-	bgo:format "%sM€"^^bgo:Template  ;
+	bgo:format "%s M€"^^bgo:Template  ;
 	bgo:precision 0 ;
 	bgo:scaleFactor 0.000001 ;
 	bgo:minValue 1 ; 
@@ -133,13 +133,13 @@ Pubblicato da [Copernicani.it](https://copernicani.it/)
 
 :filtered_total_formatter
     a bgo:Totalizer ;
-	bgo:format "Totale: %sM€"^^bgo:Template ;
+	bgo:format "Totale: %s M€"^^bgo:Template ;
 	bgo:filteredFormat "In evidenza: %sM€"^^bgo:Template  ;
 	bgo:precision 0 ;
 	bgo:scaleFactor 0.000001 ;
 	bgo:minValue 1 ; 
 	bgo:nanFormat "-" ;
-	bgo:lessThanMinFormat "meno di 1M€"^^bgo:Template	;
+	bgo:lessThanMinFormat "meno di 1 M€"^^bgo:Template	;
 	bgo:ratioFormatter [
 		# a bgo:NumberFormatter
 		bgo:format " ( %s% del tot.)"^^bgo:Template  ;
@@ -147,6 +147,7 @@ Pubblicato da [Copernicani.it](https://copernicani.it/)
 		bgo:scaleFactor 100 ;
 		bgo:maxValue 100 ;
 		bgo:minValue 1 ; 
+		bgo:nanFormat "" ;
 		bgo:moreThanMaxFormat "" ;
 		bgo:lessThanMinFormat " (< 1% del tot.)"
 	]
@@ -164,8 +165,12 @@ Pubblicato da [Copernicani.it](https://copernicani.it/)
     bgo:icon "mdi-account-multiple";
 	bgo:title "Credits"@en ;
 	bgo:abstract"""
+budget.g0v.it è un servizio di:
+
+[![](https://g0v-it.github.io/home/logo/copernicani-motto-250x70.png)](https://copernicani.it/g0v)
+
 Il codice di questa applicazione è stato scritto dal 
-[team italiano di G0V](https://copernicani.it/g0v) ![G0V it](https://g0v-it.github.io/home/logo/g0v-it-logo-100x50.png) con il supporto di [LinkedData.Center](http://LinkedData.Center):
+[team italiano di G0V](https://copernicani.it/g0v) con il supporto di [LinkedData.Center](http://LinkedData.Center):
 
 - [Miah Mohd Ehtesham](https://github.com/miahmohd)
 - [Leonardo Longhi](https://github.com/LeonardoLonghi)
@@ -175,34 +180,10 @@ Il codice di questa applicazione è stato scritto dal
 
 &nbsp;
 
-Usando i seguenti componenti open source:
-
-- [D3.js library](https://d3js.org/)
-- [Vue javascript framework](https://vuejs.org)
-- [rdflib project](https://github.com/linkeddata/rdflib.js) by TimBL & LinkedData team
-- [SOLID](https://github.com/solid/solid-spec) specifications
-- [SDaaS platform](https://github.com/linkeddatacenter/sdaas-ce) by LinkedData.Center
-
-&nbsp;
-	
-budget.g0v.it è un servizio di:
-
-![](https://g0v-it.github.io/home/logo/copernicani-motto-250x70.png)](https://copernicani.it/g0v)
+![](https://bdap-opendata.mef.gov.it/sites/default/files/images/logo-open-bdap.PNG)
 
 I dati di bilancio sono forniti dal [Ministero dell'Economia e delle Finanze](https://bdap-opendata.mef.gov.it/) con licenza
  [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).
-
-
---------------------------------------------------
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.
 
 """^^bgo:MDString.
 
