@@ -250,12 +250,12 @@ Ogni violazione sarà segnalata alle Forze di Polizia ed alle Autorità Giudizia
 
 :overview a bgo:Overview ;
 	bgo:label "Stato" ;	
-	bgo:icon "fas fa-atom" ;
+	bgo:icon "mdi-chart-bubble" ;
 	bgo:title "Overview" ;
 	bgo:hasPartitions [
 		a bgo:Partitions ;
-		bgo:icon "fas fa-atom" ;
-		bgo:label "Partizioni"
+		bgo:icon "mdi-drag-horizontal" ;
+		bgo:label "Ripartizioni"
     ];
 	bgo:hasTrendColorScheme :trend_color_scheme ;
     bgo:hasTotalizer :filtered_total_formatter ;

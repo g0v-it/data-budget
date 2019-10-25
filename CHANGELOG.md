@@ -5,17 +5,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-## 3.0.0
+- Disegno di Legge di bilancio 2020
+
+## 3.0.0-RC1
 
 A major release with a complete project refactory. 
 
-
-- Disegno di Legge di bilancio 2020
 - removed API (now you use LODMAP2D-api)
 - Aligned with new releases of mef, fr, and bgo ontologies.
 - compatible with LODMAP2D and LODMAP2D-api project
-- support to fr-ap-mef profile
-- support to latest release of BGO
+- support to fr-ap-mef profile 1.0.0RC1
+- support to latest release of BGO 1.0.0RC1
 
 **WARNING this release IS NOT compatible with web-budget 2.x**
 
