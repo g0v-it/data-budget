@@ -4,8 +4,6 @@
 
 data-budget is a *Smart Data Management Platform* to feed the http://budget.g0v.it/ web application.
 
-**WARNING: this is a complete project refactory. The 2.x versions are no more supported. Please migrate to the new architecture**
-
 The platform builds a *semantic network* (i.e. a knowledge graph) a about the Italian Government budget, considering :
 
 - **disegno di legge di bilancio** (budget proposal)
@@ -20,7 +18,6 @@ Data consumer agents (e.g. http://budget.g0v.it/), access such knowledge through
 
 The data-budget project uses the [Smart Data as a Service platform (SDaaS)](https://github.com/linkeddatacenter/sdaas-ce) to provide:
 
-- the Semantic Web application profile (i.e. fr-ap-mef ) to define the meaning of Italian Government budget data ;
 - a set of gateways to transform the raw data provided by from the [MEF Open Data Portal](https://openbdap.mef.gov.it) into fr-ap-mef linked data;
 - a data ingestion engine and a knowledge graph building script to drive the learning and reasoning of Italian Government budget data; 
 - an RDF quad-store for persist the knowledge graph; 
