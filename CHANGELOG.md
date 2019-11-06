@@ -3,9 +3,12 @@ Change Log
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## 3.0.0-RC1
 
 - Disegno di Legge di bilancio 2020
+- cambiata notation per miisteri
+- cambiata policy label
+- rimossa descrizione programmi (in attesa integrazioni da note di bilancio)
 
 ## 3.0.0-RC1
 

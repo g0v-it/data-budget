@@ -77,7 +77,7 @@ The first time you start the containers, Docker downloads and builds images for 
 this is done only once. Starting servers will then be lightning fast.
 
 
-To shuydown the platform type: 
+To shutdown the platform type: 
 
 ```
 docker-compose down

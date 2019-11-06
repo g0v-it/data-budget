@@ -128,7 +128,9 @@ echo "#
 resource:$bdapDatasetId a mef:$mefReportClass ;
     fr:refPeriod <http://reference.data.gov.uk/id/gregorian-interval/{$bdapDatasetYear}-01-01T00:00:00/P1Y> ;  
     sdmx-attribute:unitMeasure <http://publications.europa.eu/resource/authority/currency/EUR> ;
+    mef:versionLabel \"{$bdapDatasetType}{$bdapDatasetYear}\" 
 .
+
 ";
 
 //skips header
@@ -148,14 +150,14 @@ while ($rawdata = fgetcsv(STDIN, 2048, ';')) {
     $amount = Helper::NORMALIZE_AMOUNT($rawdata[$match[$b]]);
 
     // numercc id for notation
-    $a_id  = crc32($rawdata[$match[$a]]);
+    $a_id  = $rawdata[$match[$a]-1]; #crc32($rawdata[$match[$a]]);
     $m_id  = $rawdata[$match[$m]-1];
     $p_id  = $rawdata[$match[$p]-1];
     $az_id = $rawdata[$match[$az]-1] ;
     $c_id  = $rawdata[$match[$c]-1] ;
     
     // skos notations
-    $a_code  = crc32($a_id);
+    $a_code  = $a_id;
     $m_code  = $a_code . '-' . $m_id;
     $p_code  = $m_code . '-' . $p_id;
     $az_code = $p_code . '-' . $az_id ;

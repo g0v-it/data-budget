@@ -110,6 +110,7 @@ WHERE {
 ;
 
 
+
 ##
 ## Create account history
 ##
@@ -125,29 +126,23 @@ INSERT {
 	.
 }
 WHERE { 
-	VALUES ( ?type ?abbr ) {
-		( mef:DisegnoLeggeDiBilancio "D" )
-		( mef:LeggeDiBilancio "L" )
-		( mef:RendicontoFinanziario "R")
-	}
-
-	?account a bgo:Account ;
-		dct:source/skos:notation ?notation .
-		
-	?domain a bgo:Domain ; dct:source ?report .
-    ?report a ?type ; 
-        fr:refPeriod/time:hasBeginning/time:inXSDDateTime ?refdate .
+	?account a bgo:Account ; 
+		dct:source ?azione .
+    ?azione  
+    	skos:notation ?notation ; 
+    	qb:dataSet ?report .
+    ?report 
+    	fr:refPeriod/time:hasBeginning/time:inXSDDateTime ?refdate ;
+		mef:versionLabel ?version.
 		
 	?hr skos:notation ?notation ;
-		fr:amount ?historyRecAmount ;
-		qb:dataSet ?historyReport .
-		
-    ?historyReport a ?type ;
-        fr:refPeriod/time:hasBeginning/time:inXSDDateTime ?date .
+    	qb:dataSet ?hreport ;	
+		fr:amount ?historyRecAmount .
 	
+	?hreport fr:refPeriod/time:hasBeginning/time:inXSDDateTime ?date ;
+		mef:versionLabel ?historyRecVersion .
+		
 	FILTER ( ?date < ?refdate )
-	BIND( CONCAT(?abbr, STR(YEAR(?refdate))) AS ?version)
-	BIND( CONCAT(?abbr, STR(YEAR(?date))) AS ?historyRecVersion)
 	BIND( IRI(CONCAT(STR(?hr), "_bgo")) AS ?historyRec)
 }
 

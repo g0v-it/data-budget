@@ -37,7 +37,7 @@ function G0V_LEARN_FROM_BDAP {
 ##   lbf = Legge Di Bilancio Approvata
 ##   dlb = Disegno di Legge Di Bilancio
 ##   rnd = Bilancio consolidato
-#G0V_LEARN_FROM_BDAP dlb 2020
+G0V_LEARN_FROM_BDAP dlb 2020
 G0V_LEARN_FROM_BDAP lbf 2019
 G0V_LEARN_FROM_BDAP lbf 2018
 G0V_LEARN_FROM_BDAP lbf 2017
@@ -51,7 +51,7 @@ G0V_LEARN_FROM_BDAP lbf 2017
 #G0V_LEARN_FROM_BDAP rnd 2015
 
 
-SD_LEARN urn:mef:programmi data/descrizione_programmi.csv "|||.ttl|php7 gateways/programmi.php spd_lbf_spe_elb_cap_01_2019"
+#SD_LEARN urn:mef:programmi data/descrizione_programmi.csv "|||.ttl|php7 gateways/programmi.php spd_lbf_spe_elb_cap_01_2020"
 
 
 

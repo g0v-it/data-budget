@@ -115,7 +115,7 @@ Pubblicato da [Copernicani.it](https://copernicani.it/)
 	bgo:precision 0 ;
 	bgo:scaleFactor 0.000001 ;
 	bgo:minValue 1 ; 
-	bgo:nanFormat "-" ;
+	bgo:nanFormat " " ;
 	bgo:lessThanMinFormat "meno di 1M€"^^bgo:Template
 .
 
@@ -125,7 +125,7 @@ Pubblicato da [Copernicani.it](https://copernicani.it/)
 	bgo:precision 2 ;
 	bgo:maxValue 200;
 	bgo:minValue -200 ; 
-	bgo:nanFormat "non disponibile" ;
+	bgo:nanFormat " " ;
 	bgo:moreThanMaxFormat ">200%"^^bgo:Template ;
 	bgo:lessThanMinFormat "<-200%"^^bgo:Template
 .
@@ -138,7 +138,7 @@ Pubblicato da [Copernicani.it](https://copernicani.it/)
 	bgo:precision 0 ;
 	bgo:scaleFactor 0.000001 ;
 	bgo:minValue 1 ; 
-	bgo:nanFormat "-" ;
+	bgo:nanFormat " " ;
 	bgo:lessThanMinFormat "meno di 1 M€"^^bgo:Template	;
 	bgo:ratioFormatter [
 		# a bgo:NumberFormatter
@@ -147,8 +147,8 @@ Pubblicato da [Copernicani.it](https://copernicani.it/)
 		bgo:scaleFactor 100 ;
 		bgo:maxValue 100 ;
 		bgo:minValue 1 ; 
-		bgo:nanFormat "" ;
-		bgo:moreThanMaxFormat "" ;
+		bgo:nanFormat " " ;
+		bgo:moreThanMaxFormat "-" ;
 		bgo:lessThanMinFormat " (< 1% del tot.)"
 	]
 .
@@ -296,11 +296,7 @@ Ogni violazione sarà segnalata alle Forze di Polizia ed alle Autorità Giudizia
 		[ bgo:label "debito"; bgo:tagWeight 1.0 ] ,
 		[ bgo:label "interessi"; bgo:tagWeight 0.8 ] ,
 		[ bgo:label "immigra"; bgo:tagWeight 1.0 ],
-		[ bgo:label "giustizia"; bgo:tagWeight 0.8 ],
-		[ bgo:label "scuola"; bgo:tagWeight 0.7 ] ,
-		[ bgo:label "lavoro"; bgo:tagWeight 0.7 ] ,
-		[ bgo:label "reddito"; bgo:tagWeight 0.8 ],
-        [ bgo:label "salute"; bgo:tagWeight 0.9 ] 
+		[ bgo:label "reddito"; bgo:tagWeight 0.8 ]
 .
 
 

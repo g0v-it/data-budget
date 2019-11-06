@@ -14,7 +14,7 @@ $accessUrl = str_replace('rgspod','bdap-opendata.mef.gov.it', $data->ckan_url);
 $downloadUrl = "https://bdap-opendata.mef.gov.it/SpodCkanApi/api/1/rest/dataset/{$bdapDatasetId}.csv";
 
 // do some cosmetics to title and description..
-$title = preg_replace('/ Pubblicata Elaborabile Spese Capitolo/','',$title);
+$title = preg_replace('/Bilancio.*/i','Bilancio: capitoli di spesa',$title);
 $description =preg_replace('/ - Atto dovuto in formato elaborabile.*/','.',$description);
 
 echo "@prefix fr: <http://linkeddata.center/botk-fr/v1#> .

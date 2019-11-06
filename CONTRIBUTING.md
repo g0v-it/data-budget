@@ -65,7 +65,7 @@ Useful learning starting points:
 
 
 
-### Start and stop the SDaaS platform
+### Start the SDaaS platform
 
 To start sdaas cli:
 
@@ -77,12 +77,6 @@ apk --no-cache add php7 php7-json
 
 Access the SDaaS workbench pointing browser to http://localhost:9999/sdaas
 
-To exit cli and free docker resouce:
-
-```
-exit
-docker rm -f kb
-```
 
 ### Edit locat data
 
@@ -149,6 +143,13 @@ sdaas --debug -f build.sdaas --reboot
 logs info and debug traces will be created in .cache directory
 
 
+### Stop the SDaaS platform
+To exit cli and free docker resouce:
+
+```
+exit
+docker rm -f kb
+```
 
 ### publishing the knowledge base
 
