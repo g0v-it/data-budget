@@ -274,15 +274,15 @@ Ogni violazione sarà segnalata alle Forze di Polizia ed alle Autorità Giudizia
     bgo:title "Variazione percentuale rispetto alll'anno precedente." ;
     bgo:noTrendColor "#cdcdcd"^^bgo:RGB ;
     bgo:rateTreshold # all are bgo:RateTreshold
-		[ bgo:rate -0.50 ; 	bgo:colorId "#a50026"^^bgo:RGB ] ,
-		[ bgo:rate -0.25 ;	bgo:colorId "#f46d43"^^bgo:RGB ] ,
-		[ bgo:rate -0.10 ; bgo:colorId "#fdae61"^^bgo:RGB ] ,
-		[ bgo:rate -0.05 ; bgo:colorId "#fee08b"^^bgo:RGB ] ,
+		[ bgo:rate 0.50 ; 	bgo:colorId "#a50026"^^bgo:RGB ] ,
+		[ bgo:rate 0.25 ;	bgo:colorId "#f46d43"^^bgo:RGB ] ,
+		[ bgo:rate 0.10 ; bgo:colorId "#fdae61"^^bgo:RGB ] ,
+		[ bgo:rate 0.05 ; bgo:colorId "#fee08b"^^bgo:RGB ] ,
 		[ bgo:rate  0.0 ;	bgo:colorId "#ffffbf"^^bgo:RGB ] ,
-		[ bgo:rate  0.05 ;	bgo:colorId "#d9ef8b"^^bgo:RGB ] ,
-		[ bgo:rate  0.10 ;	bgo:colorId "#a6d96a"^^bgo:RGB ] ,
-		[ bgo:rate 0.25 ;	bgo:colorId "#66bd63"^^bgo:RGB ] ,
-		[ bgo:rate 0.50 ;	bgo:colorId "#006837"^^bgo:RGB ] 
+		[ bgo:rate -0.05 ;	bgo:colorId "#d9ef8b"^^bgo:RGB ] ,
+		[ bgo:rate -0.10 ;	bgo:colorId "#a6d96a"^^bgo:RGB ] ,
+		[ bgo:rate -0.25 ;	bgo:colorId "#66bd63"^^bgo:RGB ] ,
+		[ bgo:rate -0.50 ;	bgo:colorId "#006837"^^bgo:RGB ] 
 .
 
 

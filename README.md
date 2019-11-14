@@ -4,28 +4,21 @@
 
 data-budget is a *Smart Data Management Platform* to feed the http://budget.g0v.it/ web application.
 
-The platform builds a *semantic network* (i.e. a knowledge graph) a about the Italian Government budget, considering :
-
-- **disegno di legge di bilancio** (budget proposal)
-- **legge di bilancio** (the actual budget)
-- **consuntivo di bilancio** (consolidated balance)
-
 The platform extracts the main financial facts from the official [open data portal](https://bdap-opendata.mef.gov.it) provided 
-by the "Ministero dell'Economia e Finance" and produces a knowledge graph according with the 
-[fr-ap-mef profile](fr-ap-mef/README.md).
+by the "Ministero dell'Economia e Finance" and produces a knowledge graph according with the [mef-ap profile](mef-ap/README.md).
 
 Data consumer agents (e.g. http://budget.g0v.it/), access such knowledge through a SPARQL service, as suggested by the Semantic Web standards.
 
 The data-budget project uses the [Smart Data as a Service platform (SDaaS)](https://github.com/linkeddatacenter/sdaas-ce) to provide:
 
-- a set of gateways to transform the raw data provided by from the [MEF Open Data Portal](https://openbdap.mef.gov.it) into fr-ap-mef linked data;
-- a data ingestion engine and a knowledge graph building script to drive the learning and reasoning of Italian Government budget data; 
+- a set of gateways to transform the raw data provided by from the [MEF Open Data Portal](https://openbdap.mef.gov.it) into mef-ap;
+- a data ingestion engine and a knowledge graph building script to drive the learning and of Italian Government budget; 
 - an RDF quad-store for persist the knowledge graph; 
 
 data-budget exposes three interfaces:
 
 - a web workbench to interact with the knowledge graph;
-- a command line interface to the a data ingestion engine; 
+- a command line interface to the data ingestion engine; 
 - a [SPARQL service](https://www.w3.org/TR/sparql11-overview) endpoint; 
 
 data-budget is designed to be the data provider component of a general system architecture composed by:

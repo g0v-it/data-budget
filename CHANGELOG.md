@@ -17,7 +17,7 @@ A major release with a complete project refactory.
 - removed API (now you use LODMAP2D-api)
 - Aligned with new releases of mef, fr, and bgo ontologies.
 - compatible with LODMAP2D and LODMAP2D-api project
-- support to fr-ap-mef profile 1.0.0RC1
+- support to mef-ap profile 1.0.0RC1
 - support to latest release of BGO 1.0.0RC1
 
 **WARNING this release IS NOT compatible with web-budget 2.x**

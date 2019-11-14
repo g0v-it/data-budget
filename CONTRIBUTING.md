@@ -121,7 +121,7 @@ SDaaS recognizes three types of axioms containers:
 
 - **.construct** file that contains a SPARQL QUERY 1.1 construct directive. The Construct query is evaluated and the result pumped in the knowledge graph. This axiom type is not used in data-budget project.
 - **.update** a file containing a set of SPARQL QUERY update. There three update files:
-    - **01-fr-ap-mef-reasoner.update** that computes basic axiom in fr-ap-mef profile;
+    - **01-mef-ap-reasoner.update** that computes basic axiom in mef-ap profile;
     - **02-bgo-reasoner.update** that creates bgo:Accounts ad populate the bog:Domain
     - **03-bgo-partitions.update** that creates and populates bgo partitions in the domain
 - **.reasoner** a bash script that execute any process finalized to materialize inferences in the knowledge graph. Usually a reasoner extract some 

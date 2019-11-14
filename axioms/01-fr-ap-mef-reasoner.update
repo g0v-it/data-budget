@@ -1,5 +1,5 @@
 ########################################################################################
-##@ inferences using fr-ap-mef axioms
+##@ inferences using mef-ap axioms
 ########################################################################################
 PREFIX fr: <http://linkeddata.center/botk-fr/v1#> 
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
