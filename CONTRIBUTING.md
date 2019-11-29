@@ -70,9 +70,9 @@ Useful learning starting points:
 To start sdaas cli:
 
 ```
-docker run -d -p 9999:8080 -v $PWD/.:/workspace --name kb linkeddatacenter/sdaas-ce
+docker run -d -p 9999:8080 -e JAVA_OPTS="-Xmx2g" -v $PWD/.:/workspace --name kb linkeddatacenter/sdaas-ce
 docker exec -ti kb bash
-apk --no-cache add php7 php7-json
+apk --no-cache add php7 php7-json php7-mbstring
 ```
 
 Access the SDaaS workbench pointing browser to http://localhost:9999/sdaas
@@ -82,48 +82,29 @@ Access the SDaaS workbench pointing browser to http://localhost:9999/sdaas
 
 There are some data file local to this project in the *data* directory:
 
-- **app.ttl** contains the bgo static objects (domains, views and UI components) 
+- **app.ttl** contains the bgo static objects (menues, views and UI components) 
 - **kees.ttl** contains some metadata about the knowledge base itself
-- **descrizione_programmi.csv** it is an extra data file forvided us by MEF that contains some editorial notes about some *Programmi*. 
-to be usedd. It neeeds to be transformed in RDF by the **programmi.php** gateway (see above)
 
 
 The `SD_LEARN` SDaaS command automates the data ingestion process. 
 
 ### Stand alone gateways development and testing
 
+Gateways that transform the raw data provided by the Italian government (BDAP catalog) into linked data compliant with the [g0v financial report application profile for MEF data](../mef-ap) (mef-ap)
+
 Gateways are simple stand-alone php7 scripts that read a csv stream row by row from STDIN and 
 write RDF turtle statements to STDOUT. Following gateways are available:
 
-- the **bdap.php** gateway requires as a mandatory parameters an id of a dataset defined in https://bdap-opendata.mef.gov.it/SpodCkanApi/api/1/rest/dataset/
-- The **bdap_meta.php** gateway requires in input a json structure containing the metadata about a dataset according CKAN v1 api.
-- **programmi.php** gateway reads verbose program descriptions from data/descrizione_programmi.csv
+See more in [README file in gateways directory](gateways/READEME.md)
 
-Gateways can be tested stand alone just with any host providing php7; e.g.:
-
-```
-./gateways/bdap.php spd_lbf_spe_elb_cap_01_2018 < tests/data/legge-di-bilancio.csv
-./gateways/bdap.php spd_dlb_spe_elb_cap_01_2017 < tests/data/disegno-legge-di-bilancio.csv 
-./gateways/bdap.php spd_rnd_spe_elb_cap_01_2017 < tests/data/rendiconto.csv 
-./gateways/bdap.php spd_rnd_spe_elb_cap_01_2016 < tests/data/rendiconto-old.csv 
-./gateways/programmi.php spd_lbf_spe_elb_cap_01_2018 < tests/data/programmi.csv 
-./gateways/bdap_meta.php < tests/data/metadata.json 
-```
-
-The gateways generate RDF statements serialized in turtle. Check the gateway results using an online service like http://rdf-translator.appspot.com/
-
-
-The `SD_LEARN` SDaaS command automates the data trasformation process. 
+The `SD_LEARN` SDaaS command automates the data transformation process. 
  
 ### Axioms develoment
 
 SDaaS recognizes three types of axioms containers:
 
 - **.construct** file that contains a SPARQL QUERY 1.1 construct directive. The Construct query is evaluated and the result pumped in the knowledge graph. This axiom type is not used in data-budget project.
-- **.update** a file containing a set of SPARQL QUERY update. There three update files:
-    - **01-mef-ap-reasoner.update** that computes basic axiom in mef-ap profile;
-    - **02-bgo-reasoner.update** that creates bgo:Accounts ad populate the bog:Domain
-    - **03-bgo-partitions.update** that creates and populates bgo partitions in the domain
+- **.update** a file containing a set of SPARQL QUERY update. 
 - **.reasoner** a bash script that execute any process finalized to materialize inferences in the knowledge graph. Usually a reasoner extract some 
 from the knowledge graph, launch a program that elaborate the data creating some insert statements the finally are executed.
 In data-budget a reasoner is defined to generate the  bgo tag cloud from the  Account descriptions
@@ -137,10 +118,10 @@ The knowledge build script (build.sdaas) is bash script that runs under the cont
 The test of the build script require dat least 2GB of ram available to the docker machine:
 
 ```
-sdaas --debug -f build.sdaas --reboot
+sdaas -f build.sdaas --reboot
 ```
 
-logs info and debug traces will be created in .cache directory
+logs info and debug traces will be created in .cache directory . The  `--debug` option increases the logging features.
 
 
 ### Stop the SDaaS platform
@@ -156,7 +137,7 @@ docker rm -f kb
 You can pack data and services with :
 
 ```
-docker build . -t copernicani/data-budget-sdaas
+docker build . -t copernicani/data-budget-sdaas --no-cache
 docker tag copernicani/data-budget-sdaas copernicani/data-budget-sdaas:x.y.z
 docker push copernicani/data-budget-sdaas
 ```

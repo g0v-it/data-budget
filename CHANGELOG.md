@@ -3,6 +3,25 @@ Change Log
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+
+## 3.1.0
+
+
+### Added
+
+- Aligned with the last release of mef ontology
+- The knowledge base facts now aligned with the MEF "piano di gestione" level
+- added support to "note di bilancio azioni" dataset
+
+### Changed
+
+- complete code refactory to support the full mef ontology
+
+### Fixed
+
+- Some bug fixed
+
 ## 3.0.0-RC2
 
 - Disegno di Legge di bilancio 2020

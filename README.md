@@ -11,7 +11,7 @@ Data consumer agents (e.g. http://budget.g0v.it/), access such knowledge through
 
 The data-budget project uses the [Smart Data as a Service platform (SDaaS)](https://github.com/linkeddatacenter/sdaas-ce) to provide:
 
-- a set of gateways to transform the raw data provided by from the [MEF Open Data Portal](https://openbdap.mef.gov.it) into mef-ap;
+- a set of gateways to transform the raw data provided by from the [MEF Open Data Portal](https://openbdap.mef.gov.it) into linked data;
 - a data ingestion engine and a knowledge graph building script to drive the learning and of Italian Government budget; 
 - an RDF quad-store for persist the knowledge graph; 
 
@@ -23,7 +23,7 @@ data-budget exposes three interfaces:
 
 data-budget is designed to be the data provider component of a general system architecture composed by:
 
-- optional *API interfaces* that query the SPARQL endpoint and expose knowledge graph views as expected by software agents (e.g. LODMAP2D-api). 
+- optional *API interfaces* (e.g. LODMAP2D-api) that query the SPARQL endpoint and expose knowledge graph views as expected by software agents. 
 - one or more software agents to explore the knowledge graph (e.g LODMAP2D, YASGUI, LODVIEW, etc., etc.)
 
 ![architecture](doc/architecture.png)
@@ -61,7 +61,7 @@ To test the platform with  LODMAP2D type:
 docker run -d --name lodmap2d -e LODMAP2D_DATA=http://localhost:29322/ -p 29323:80 linkeddatacenter/lodmap2d
 ```
 
-Point your browser to http://localhost:29323/ and enjoy.
+Point your browser to http://localhost:29323/ refresh the page and enjoy.
 
 The first time you start the containers, Docker downloads and builds images for you. It will take some time, but don't worry
 this is done only once. Starting servers will then be lightning fast.

@@ -23,32 +23,17 @@ ASK {
 	# Just one bgo:Domain exists
     FILTER NOT EXISTS { ?domain2 a bgo:Domain FILTER (?domain != ?domain2) }
     
-    ?report a mef:FinancialReport ;
-    	fr:refPeriod/time:hasBeginning/time:inXSDDateTime ?refdate ;
-    	skos:hasTopConcept ?ministero
+    ?domain a mef:Budget ;
+    	fr:refPeriod/time:hasBeginning/time:inXSDDateTime ?refdate 
     .
     
   
-    ?account a bgo:Account ;
+    ?account a bgo:Account, mef:Azione ;
         bgo:title [] ;
         bgo:description [];
         bgo:amount [] ;
-        dct:source ?azione ;
         bgo:hasBreakdown ?breakdown ;
     .
   
-    ?azione a fr:Component, mef:Azione ;
-       	skos:narrower ?fact ;
-    	qb:dataSet ?report ;
-        skos:broader/skos:broader/skos:broader ?ministero
-  	.
-  
-  	?fact a fr:Fact, mef:Capitolo ;
-    	fr:amount ?factAmount
-    .
-            
-    ?breakdown bgo:title [] ;
-        bgo:amount ?factAmount
-    .
   
  }   

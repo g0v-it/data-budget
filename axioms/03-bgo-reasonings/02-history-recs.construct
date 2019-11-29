@@ -1,0 +1,21 @@
+########################################################################################
+##@ create bgo history records
+########################################################################################
+PREFIX fr: <http://linkeddata.center/botk-fr/v1#> 
+PREFIX qb: <http://purl.org/linked-data/cube#> 
+PREFIX mef: <http://w3id.org/g0v/it/mef#> 
+PREFIX bgo: <http://linkeddata.center/lodmap-bgo/v1#>
+
+CONSTRUCT { 
+	?azione 
+		bgo:versionLabel ?version ;
+		bgo:amount ?amount 
+	.
+}
+WHERE { 
+	?azione a mef:Azione; 
+		qb:dataSet/fr:versionId ?version ;
+		mef:competenza ?amount
+}
+
+#trust=1.00	

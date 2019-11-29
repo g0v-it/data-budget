@@ -4,22 +4,25 @@
 PREFIX fr: <http://linkeddata.center/botk-fr/v1#>
 PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX dct: <http://purl.org/dc/terms/> 
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX sdmx-attribute:	<http://purl.org/linked-data/sdmx/2009/attribute#> 
 PREFIX dcat: <http://www.w3.org/ns/dcat#> 
+PREFIX mef: <http://w3id.org/g0v/it/mef#>
 
 ASK {
-    ?ds a fr:FinancialReport.
+    ?budget a mef:Budget; dct:source ?ds.
 
     # Every financial report has a distribution and a license
     {
-        ?ds dcat:distribution ?distribution.
+    	?ds a dcat:Dataset ;
+        	dcat:distribution ?distribution.
         ?distribution dcat:license  ?license
     }
     
     # Every financial report has exactly one associated valid reference period.   
     {
-        ?ds fr:refPeriod ?refPeriod1.
+        ?budget fr:refPeriod ?refPeriod1.
         ?refPeriod1 time:hasBeginning ?begins; time:hasEnd ?ends
         FILTER( ?begins != ?ends )
         FILTER NOT EXISTS { ?obs fr:refPeriod ?refPeriod2 FILTER (?refPeriod1 != ?refPeriod2) }
@@ -28,7 +31,7 @@ ASK {
  
     # Every financial report exactly  unitMeasure attribute .    
     {
-        ?ds sdmx-attribute:unitMeasure ?unit1 .
+        ?budget sdmx-attribute:unitMeasure ?unit1 .
         ?unit1 skos:inScheme <http://publications.europa.eu/resource/authority/currency>;
             skos:prefLabel ?label
         FILTER NOT EXISTS { ?ds sdmx-attribute:unitMeasure ?unit2 FILTER (?unit1 != ?unit2) }

@@ -42,14 +42,12 @@ INSERT DATA {
 ##
 INSERT {
 	:p1 bgo:hasAccountSubSet ?subset .
-	?subset a bgo:AccountSet ;
-		bgo:title ?title .
+	?subset a bgo:AccountSet ; bgo:title ?title .
 }
 WHERE {
 	?domain a bgo:Domain .
-	?domain dct:source/skos:hasTopConcept ?ministero .
-	?ministero a mef:Ministero ; skos:notation ?notation .
-	OPTIONAL { ?ministero skos:definition ?title }
+	?ministero a mef:Ministero; qb:dataSet ?domain; skos:notation ?notation .
+	OPTIONAL { ?ministero skos:prefLabel ?title }
 	BIND( IRI(CONCAT(STR(:p1), "_", ?notation)) AS ?subset)
 }
 
@@ -60,7 +58,8 @@ WHERE {
 ##
 INSERT { ?subset bgo:hasAccount ?account }
 WHERE {
-	?account a bgo:Account; dct:source/fr:isPartOf/fr:isPartOf/fr:isPartOf/skos:notation ?notation;
+	?account a bgo:Account; fr:isPartOf+ ?ministero .
+	?ministero a mef:Ministero ; skos:notation ?notation;
 	BIND( IRI(CONCAT(STR(:p1), "_", ?notation)) AS ?subset)
 }
 
@@ -86,20 +85,13 @@ INSERT DATA {
 ##
 INSERT {
 	:p2 bgo:hasAccountSubSet ?subset .
-	?subset a bgo:AccountSet ;
-		bgo:title ?title
-	.
+	?subset a bgo:AccountSet ; bgo:title ?title .
 }
 WHERE {
-	{
-		SELECT DISTINCT ?missioneId ?title WHERE {
-			?account a bgo:Account; dct:source/fr:isPartOf/fr:isPartOf ?missione .
-			?missione skos:notation ?notation 
-			OPTIONAL { ?missione skos:definition ?title }
-			BIND( STRAFTER(?notation, "-") AS ?missioneId )
-		}
-	}
-	BIND( IRI(CONCAT(STR(:p2), "_", ?missioneId)) AS ?subset)
+	?domain a bgo:Domain .
+	?missione a mef:Missione; qb:dataSet ?domain; skos:notation ?notation .
+	OPTIONAL { ?missione skos:prefLabel ?title }
+	BIND( IRI(CONCAT(STR(:p2), "_", ?notation)) AS ?subset)	
 }
 
 ;
@@ -109,10 +101,9 @@ WHERE {
 ##
 INSERT { ?subset bgo:hasAccount ?account }
 WHERE {
-	?account a bgo:Account; dct:source/fr:isPartOf/fr:isPartOf/skos:notation ?missioneNotation;
-	BIND( STRAFTER(?missioneNotation, "-") AS ?missioneId )
-	BIND( IRI(CONCAT(STR(:p2), "_", ?missioneId)) AS ?subset)
+	?account a bgo:Account; fr:isPartOf+ ?missione .
+	?missione a mef:Missione ; skos:notation ?notation .
+	BIND( IRI(CONCAT(STR(:p2), "_", ?notation)) AS ?subset)
 }
-
 
 #trust=1.00	

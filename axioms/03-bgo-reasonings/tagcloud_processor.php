@@ -26,7 +26,7 @@ function extractTags ($string, &$tags )
         'davanti', 'dietro','dopo','fuori','lontano','lungo','mediante','prima','sopra','sotto',
         'del','dello','della','dell','dei','degli','delle','allo','alla','agli','alle','all','dal','dallo','dalla','dall','dai',
         'dagli','dalle','nel','nello','nella','nell','nei','negli','nelle','sul','sullo','sulla','sull','sui','sugli','sulle',
-        'attività', 'attivita', 'programma', 'missione'
+        'attività', 'attivita', 'programma', 'missione', 'ministero', 'finanze'
     ];
       
     $delimeter=" \n\t'.-_:!?\"=()/\|&*[]{}";

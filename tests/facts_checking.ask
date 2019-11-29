@@ -6,23 +6,16 @@ PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX time: <http://www.w3.org/2006/time#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX sdmx-attribute:	<http://purl.org/linked-data/sdmx/2009/attribute#> 
+PREFIX mef: <http://w3id.org/g0v/it/mef#>
 
 ASK {
-    ?obs a fr:Fact.
+    ?obs a mef:Fact.
 
-    # Every fr:Fact has exactly one associated financial report.
+    # Every mef:Fact has exactly one associated financial report.
     {
         ?obs qb:dataSet ?dataset1.
-        ?dataset1 a fr:FinancialReport.
+        ?dataset1 a mef:Budget.
         FILTER NOT EXISTS { ?obs qb:dataSet ?dataset2 FILTER (?dataset1 != ?dataset2) }
-    }
-    
-
-    # Every fr:Fact has exactly one fr:concept    
-    {
-        ?obs fr:concept ?concept1.
-        ?concept1 a skos:Concept.
-        FILTER NOT EXISTS { ?obs fr:concept ?concept1 FILTER (?concept1 != ?concept2) }
     }
     
  
