@@ -62,7 +62,7 @@ direttamente sugli elementi del grafico a bolle.
 
 ## Ricerca semantica
 
-Esegue una ricerca lessicale dei termini contenuti nella definizione di un Piano di Gestione (`mef:PianoDiGestione`) che rappresenta il livello più atomico in cui sono contenuti i fatti di bilancio. Viene anche stampato il ministero responsabile.
+Esegue una ricerca lessicale dei termini contenuti nella definizione di un Piano di Gestione (`mef:PianoDiGestione`) che rappresenta il livello più atomico in cui sono contenuti i fatti di bilancio. 
 
 ```sparql
 PREFIX bds: <http://www.bigdata.com/rdf/search#>
