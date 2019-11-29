@@ -8,82 +8,66 @@
 @prefix : <http://mef.linkeddata.cloud/resource/bgo_> .
 
 
-:domain a bgo:Domain ;
-    bgo:abstract """
+############################################
+# dome strings dor domain
+############################################
+:domain_template
+	dct:license "[Credits...](/credits)"^^bgo:MDString ;
+	dct:description "Spese per le azioni previste nel budget dello Stato (%title%)"@it ;
+	dct:abstract """&nbsp;
+	
+I valori sono espressi in milioni di Euro e fanno riferimento alle spese per competenza dell'esercizio. 
 
-&nbsp;
+%comment%
 
-Valori espressi in milioni di Euro.
+Esplora tutti i [Linked Data](%uri%) 
 
-&nbsp;
-
-  
-[Elaborazione su open data del Ministero dell'Economia e delle Finanze](https://bdap-opendata.mef.gov.it/)
-
-Pubblicato da [Copernicani.it](https://copernicani.it/)
+Open Data del Ministero dell'Economia e delle Finanze.
+Elaborazione pubblicata da [Copernicani.it](https://copernicani.it/)
 
 ![copernicani](https://g0v-it.github.io/home/logo/copernicani-motto-250x70.png)
+"""^^bgo:MDString .
 
-"""^^bgo:MDString ;
 
-    # add an item to default navigation menu
-    bgo:hasNavigationMenu [ 
-    	bgo:withCustomMenuItem 
-    		[
-				bgo:icon "mdi-database-search" ;
-				bgo:title "Analisi personalizzate..." ;
-				bgo:link <http://yasgui.org/short/06jf7CtF2>
-			],
-    		[
-				bgo:icon "mdi-webhook" ;
-				bgo:title "Linked data..." ;
-				bgo:link <http://mef.linkeddata.cloud/resource/welcome>
-			]	
-    ] ;
+############################################
+# Menu
+############################################
 
-    # Use the Option menu with two external links
-    bgo:hasOptionMenu [
-    	bgo:withCustomMenuItem 
-    		[
-				bgo:icon "mdi-github-box" ;
-				bgo:title "data management platform..." ;
-				bgo:link <https://github.com/g0v-it/data-budget>
-			] ,
-    		[
-				bgo:icon "mdi-github-box" ;
-				bgo:title "codice frontend..." ;
-				bgo:link <https://github.com/g0v-it/web-budget>
-			]
-
-    ] ;
-
-    # Add just a couple of shortcuts icons to footer
-    bgo:hasFooterMenu [
-    	bgo:withCustomMenuItem 
-    		[
-		    	bgo:icon "mdi-github-box" ;
-		    	bgo:title "Seguici su GitHub" ;
-				bgo:link <https://github.com/g0v-it>
-			] ,
-    		[
-		    	bgo:title "Termini d'uso" ;
-				bgo:link "/terms"^^bgo:route
-			]
-    ] ;
-
-    # This domain likes social
-    bgo:hasSocialSharing 1 ;
-
-    # This should be used if copyright is not present
-    bgo:hasCopyrigth "[Credits...](/credits)"^^bgo:MDString ;
-    
-    bgo:hasOverview :overview ;
-    bgo:hasTableView :table_view ;
-    bgo:hasCredits :credits_page ;
-    bgo:hasTerms :terms_page ;
-    bgo:hasAccountView  :account_view ;
+:option_menu bgo:withCustomMenuItem 
+	[
+		bgo:icon "mdi-database-search" ;
+		bgo:title "SPARQl processor..." ;
+		bgo:link <http://yasgui.org/short/K-9k5XVOz>
+	],
+	[
+		bgo:icon "mdi-webhook" ;
+		bgo:title "Linked data..." ;
+		bgo:link <http://mef.linkeddata.cloud/resource/welcome>
+	],
+	[
+		bgo:icon "mdi-github-box" ;
+		bgo:title "Ontologia del Bilancio..." ;
+		bgo:link <http://w3id.org/g0v/it/mef>
+	] ,
+	[
+		bgo:icon "mdi-github-box" ;
+		bgo:title "Esempi di query..." ;
+		bgo:link <https://g0v-it.github.io/data-budget/doc/sparql-samples/>
+	] 
 .
 
+
+:footer_menu bgo:withCustomMenuItem 
+	[
+    	bgo:icon "mdi-github-box" ;
+    	bgo:title "Seguici su GitHub" ;
+		bgo:link <https://github.com/g0v-it/data-budget>
+	] ,
+	[
+    	bgo:title "Termini d'uso" ;
+		bgo:link "/terms"^^bgo:route
+	]
+.
 
 ############################################
 # Account view
@@ -149,7 +133,7 @@ Pubblicato da [Copernicani.it](https://copernicani.it/)
 		bgo:minValue 1 ; 
 		bgo:nanFormat " " ;
 		bgo:moreThanMaxFormat "-" ;
-		bgo:lessThanMinFormat " (< 1% del tot.)"
+		bgo:lessThanMinFormat " "
 	]
 .
 
@@ -274,15 +258,15 @@ Ogni violazione sarà segnalata alle Forze di Polizia ed alle Autorità Giudizia
     bgo:title "Variazione percentuale rispetto alll'anno precedente." ;
     bgo:noTrendColor "#cdcdcd"^^bgo:RGB ;
     bgo:rateTreshold # all are bgo:RateTreshold
-		[ bgo:rate -0.50 ; 	bgo:colorId "#a50026"^^bgo:RGB ] ,
-		[ bgo:rate -0.25 ;	bgo:colorId "#f46d43"^^bgo:RGB ] ,
-		[ bgo:rate -0.10 ; bgo:colorId "#fdae61"^^bgo:RGB ] ,
-		[ bgo:rate -0.05 ; bgo:colorId "#fee08b"^^bgo:RGB ] ,
+		[ bgo:rate 0.50 ; 	bgo:colorId "#a50026"^^bgo:RGB ] ,
+		[ bgo:rate 0.25 ;	bgo:colorId "#f46d43"^^bgo:RGB ] ,
+		[ bgo:rate 0.10 ; bgo:colorId "#fdae61"^^bgo:RGB ] ,
+		[ bgo:rate 0.05 ; bgo:colorId "#fee08b"^^bgo:RGB ] ,
 		[ bgo:rate  0.0 ;	bgo:colorId "#ffffbf"^^bgo:RGB ] ,
-		[ bgo:rate  0.05 ;	bgo:colorId "#d9ef8b"^^bgo:RGB ] ,
-		[ bgo:rate  0.10 ;	bgo:colorId "#a6d96a"^^bgo:RGB ] ,
-		[ bgo:rate 0.25 ;	bgo:colorId "#66bd63"^^bgo:RGB ] ,
-		[ bgo:rate 0.50 ;	bgo:colorId "#006837"^^bgo:RGB ] 
+		[ bgo:rate -0.05 ;	bgo:colorId "#d9ef8b"^^bgo:RGB ] ,
+		[ bgo:rate -0.10 ;	bgo:colorId "#a6d96a"^^bgo:RGB ] ,
+		[ bgo:rate -0.25 ;	bgo:colorId "#66bd63"^^bgo:RGB ] ,
+		[ bgo:rate -0.50 ;	bgo:colorId "#006837"^^bgo:RGB ] 
 .
 
 
@@ -294,9 +278,11 @@ Ogni violazione sarà segnalata alle Forze di Polizia ed alle Autorità Giudizia
 :tag_cloud  a bgo:TagCloud ;
 	bgo:hasTag 
 		[ bgo:label "debito"; bgo:tagWeight 1.0 ] ,
-		[ bgo:label "interessi"; bgo:tagWeight 0.8 ] ,
-		[ bgo:label "immigra"; bgo:tagWeight 1.0 ],
-		[ bgo:label "reddito"; bgo:tagWeight 0.8 ]
+		[ bgo:label "oneri"; bgo:tagWeight 0.9 ] ,
+		[ bgo:label "immigra"; bgo:tagWeight 0.7 ],
+		[ bgo:label "reddito"; bgo:tagWeight 0.8 ],
+		[ bgo:label "territori"; bgo:tagWeight 0.8 ],
+		
 .
 
 

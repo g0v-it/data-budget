@@ -2,68 +2,64 @@
 set -a
 
 GRAPH="http://mef.linkeddata.cloud/resource/"
-
 SD_INCLUDE ruleset
 SD_INCLUDE testing
 
-####################################################
-SD_LOG  "Loading external resources..."
-####################################################
-SD_LEARN http://publications.europa.eu/resource/authority/currency/EUR
-
-
-####################################################
-SD_LOG  "Loading facts from local data..."
-####################################################
+##############################################################################
+SD_LOG "Starting booting window: loading knowledge TBOX...."
+##############################################################################
 SD_LEARN urn:sdaas:config "data/kees.ttl"
-SD_LEARN $GRAPH/app "data/app.ttl"
+SD_LEARN http://w3id.org/g0v/it/mef
 
 
-####################################################
-SD_LOG  "Loading facts from BDAP portal..."
-####################################################
+##############################################################################
+SD_LOG  "Starting learning window: loading known facts..."
+##############################################################################
+
+SD_LOG  "... from Linked Data..." ############################################
+SD_LEARN http://publications.europa.eu/resource/authority/currency/EUR
+SD_LEARN "${GRAPH}app_graph" "data/app.ttl"
+for (( i=2017; i<=$(date +"%Y")+1; i++ )); do
+	SD_LEARN "http://reference.data.gov.uk/doc/gregorian-interval/${i}-01-01T00:00:00/P1Y"
+done
+
+SD_LOG  "... from BDAP portal..." ############################################
+## Known report types (from 2017):
+##   spd_dlb_spe_elb_pig = Disegno Legge di Bilancio Presentato Elaborabile Spese Piano di Gestione (schema 2017)
+##   spd_lbf_spe_elb_pig = Legge di Bilancio Pubblicata Elaborabile Elaborabile Spese Piano di Gestione (schema 2017)
+##   spd_pas_spe_elb_pig = Provvedimento di Assestamento Approvato Elaborabile Spese Piano di Gestione (schema 2017)
+##   spd_rnd_spe_elb_pig = RENDICONTO PUBBLICATO ELABORABILE SPESE PIANO DI GESTIONE (schema 2017)
+##   spd_dlb_not_azi     = Note Integrative al Disegno Legge di Bilancio - Azioni
 function G0V_LEARN_FROM_BDAP {
-	local bdapReportType="$1"
-	local year="$2"
-
-	local datasetName="spd_${bdapReportType}_spe_elb_cap_01_${year}"	
-	local uri="https://bdap-opendata.mef.gov.it/SpodCkanApi/api/1/rest/dataset/${datasetName}"
-	SD_LEARN "http://reference.data.gov.uk/doc/gregorian-interval/${year}-01-01T00:00:00/P1Y"
-	SD_LEARN "${uri}" "${uri}" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' - |gateways/bdap_meta.php"
-	SD_LEARN "${uri}.csv" "${uri}.csv" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' - |gateways/bdap.php ${datasetName}"
+	local gw="$1"
+	local uri="$(gateways/bdap.php -u $2)"  # CKAN API for metadata
+	SD_LEARN "${uri}" "${uri}" "|in|out|.ttl|gateways/ckan-meta.php"
+	SD_LEARN "${uri}.csv" "${uri}.csv" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' - |gateways/${gw}.php ${uri}.csv"
 }
 
-## Report type:
-##   lbf = Legge Di Bilancio Approvata
-##   dlb = Disegno di Legge Di Bilancio
-##   rnd = Bilancio consolidato
-G0V_LEARN_FROM_BDAP dlb 2020
-G0V_LEARN_FROM_BDAP lbf 2019
-G0V_LEARN_FROM_BDAP lbf 2018
-G0V_LEARN_FROM_BDAP lbf 2017
+G0V_LEARN_FROM_BDAP spd_dlb_spe_elb_pig spd_dlb_spe_elb_pig_01_2020
+G0V_LEARN_FROM_BDAP spd_dlb_not_azi     spd_dlb_not_azi_azioni_01_2020
+G0V_LEARN_FROM_BDAP spd_pas_spe_elb_pig spd_pas_spe_elb_pig_01_2019
+G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_pig spd_lbf_spe_elb_pig_01_2019
 
-#G0V_LEARN_FROM_BDAP dlb 2019
-#G0V_LEARN_FROM_BDAP rnd 2018
-#G0V_LEARN_FROM_BDAP dlb 2018
-#G0V_LEARN_FROM_BDAP rnd 2017
-#G0V_LEARN_FROM_BDAP dlb 2017
-#G0V_LEARN_FROM_BDAP rnd 2016
-#G0V_LEARN_FROM_BDAP rnd 2015
+G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_pig spd_lbf_spe_elb_pig_01_2018
+G0V_LEARN_FROM_BDAP spd_rnd_spe_elb_pig spd_rnd_spe_elb_pig_01_2018
+G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_pig spd_lbf_spe_elb_pig_01_2017
+G0V_LEARN_FROM_BDAP spd_rnd_spe_elb_pig spd_rnd_spe_elb_pig_01_2017
 
 
-#SD_LEARN urn:mef:programmi data/descrizione_programmi.csv "|||.ttl|php7 gateways/programmi.php spd_lbf_spe_elb_cap_01_2020"
-
-
-
-####################################################
+##############################################################################
 SD_LOG  "Starting reasoning window"
-####################################################
-SD_EVAL_RULESET "${GRAPH}" "axioms"
+##############################################################################
+SD_EVAL_RULESET "${GRAPH}" "axioms/01-rdfs-reasonings"
+SD_EVAL_RULESET "${GRAPH}" "axioms/02-mef-reasonings"
+SD_EVAL_RULESET "${GRAPH}" "axioms/03-bgo-reasonings"
 
-####################################################
-SD_LOG  "Testing..."
-####################################################
-SD_DATA_TEST tests/knowledge
+
+##############################################################################
+SD_LOG  "Preparing teaching window: testing..."
+##############################################################################
+SD_DATA_TEST
 
 
 SD_THATS_ALL_FOLKS

@@ -1,0 +1,17 @@
+#
+# (c)2019 Enrico Fagnoni (enrico at LinkedData.Center) with CC-BY license
+#
+##############################################################################
+##  The value of the component metrics is computed as the sum of the  facts
+##############################################################################
+PREFIX fr: <http://linkeddata.center/botk-fr/v1#>
+PREFIX mef: <http://w3id.org/g0v/it/mef#>
+
+CONSTRUCT { ?component mef:residui ?sum }
+WHERE {
+	SELECT ?component (SUM(?metric) AS ?sum ) WHERE {
+		?fact a mef:Fact ;  
+			fr:isPartOf+ ?component ;
+			mef:residui ?metric .
+	} GROUP BY ?component
+}	

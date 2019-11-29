@@ -1,0 +1,80 @@
+#
+# (c)2019 Enrico Fagnoni (enrico at LinkedData.Center) with CC-BY license
+#
+##############################################################################
+##  all component are related to one or more taxonomies exposed by budget
+##############################################################################
+PREFIX qb: <http://purl.org/linked-data/cube#> 
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX mef: <http://w3id.org/g0v/it/mef#>
+
+CONSTRUCT {?concept skos:inScheme ?scheme }
+WHERE  { 
+	{		
+		?concept a ?component; qb:dataSet/mef:hasSchemeSMMPACP ?scheme .
+		VALUES ?component {
+			mef:Ministero
+			mef:MissioneMinistero
+			mef:Programma
+			mef:Azione
+			mef:CapitoloDiSpesa
+			mef:PianoDiGestione
+		}
+	} 
+	UNION
+	{
+		?concept a ?component; qb:dataSet/mef:hasSchemeSMRMP ?scheme .
+		VALUES ?component {
+			mef:Ministero
+			mef:CentroResponsabilita
+			mef:MissioneMinistero
+			mef:Programma
+		}
+	} 
+	UNION
+	{
+		?concept a ?component; qb:dataSet/mef:hasSchemeSMTC ?scheme  .
+		VALUES ?component {
+			mef:TitoloSpesa
+			mef:CategoriaSpesa
+		}
+	} 
+	UNION
+	{
+		?concept a ?component; qb:dataSet/mef:hasSchemeSTCCP ?scheme  .
+		VALUES ?component {
+			mef:TitoloSpesa
+			mef:CategoriaSpesa
+			mef:CapitoloDiSpesa
+			mef:PianoDiGestione
+		}		
+	} 
+	UNION
+	{
+		?concept a ?component; qb:dataSet/mef:hasSchemeSMP ?scheme  .
+		VALUES ?component {
+			mef:Missione
+			mef:Programma
+		}		
+	} 
+	UNION
+	{
+		?concept a ?component; qb:dataSet/mef:hasSchemeETNT ?scheme  .
+		VALUES ?component {
+			mef:TitoloEntrata
+			mef:Natura
+			mef:Tipologia
+		}
+	} 
+	UNION
+	{
+		?concept a ?component; qb:dataSet/mef:hasSchemeETTPCA ?scheme  .
+		VALUES ?component {
+			mef:TitoloEntrata
+			mef:Tipologia
+			mef:Provento
+			mef:CapitoloEntrata
+			mef:Articolo
+		}		
+	} 
+}

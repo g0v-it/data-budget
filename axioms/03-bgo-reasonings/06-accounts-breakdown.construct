@@ -1,0 +1,24 @@
+########################################################################################
+##@ Create account breakdown
+########################################################################################
+PREFIX fr: <http://linkeddata.center/botk-fr/v1#> 
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX mef: <http://w3id.org/g0v/it/mef#> 
+PREFIX bgo: <http://linkeddata.center/lodmap-bgo/v1#>
+
+CONSTRUCT { 
+	?account bgo:hasBreakdown ?cds.
+	?cds 
+		bgo:title ?title ;
+		bgo:amount ?amount 
+	.
+}WHERE { 
+	?account a bgo:Account .
+	?cds a mef:CapitoloDiSpesa; 
+		fr:isPartOf ?account ;
+		mef:competenza ?amount ;
+		skos:notation ?notation 
+	.
+	BIND ( CONCAT("Capitolo ",STR(?notation)) AS ?title) 
+}
+#trust=1.00	

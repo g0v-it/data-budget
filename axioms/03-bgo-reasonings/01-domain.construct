@@ -1,0 +1,57 @@
+########################################################################################
+##@ create bgo breakdown records
+########################################################################################
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX mef: <http://w3id.org/g0v/it/mef#> 
+PREFIX fr: <http://linkeddata.center/botk-fr/v1#> 
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX bgo: <http://linkeddata.center/lodmap-bgo/v1#>
+PREFIX app: <http://mef.linkeddata.cloud/resource/bgo_> 
+
+CONSTRUCT { 
+	?budget a bgo:Domain ;
+		bgo:title ?title ;
+		bgo:description ?description ;
+		bgo:abstract ?abstract ;
+	    bgo:hasCopyrigth ?copyright ;
+
+	    bgo:hasOptionMenu app:option_menu ;
+	    bgo:hasFooterMenu app:footer_menu ;
+	    bgo:hasSocialSharing 1 ;
+	    bgo:hasOverview app:overview ;
+	    bgo:hasTableView app:table_view ;
+	    bgo:hasCredits app:credits_page ;
+	    bgo:hasTerms app:terms_page ;
+	    bgo:hasAccountView app:account_view 
+	.
+} WHERE { 
+	?budget a mef:Budget ; 
+		fr:refPeriod/time:hasBeginning/time:inXSDDateTime ?refdate .
+	
+    FILTER NOT EXISTS {
+		?budget2 a mef:Budget ; fr:refPeriod/time:hasBeginning/time:inXSDDateTime ?refdate2 ;
+        FILTER (?refdate2 > ?refdate)
+    }
+    
+    ?budget a ?budgetType .
+    ?budgetType rdfs:subClassOf mef:Budget ;
+    	rdfs:isDefinedBy <http://w3id.org/g0v/it/mef> ;
+    	rdfs:label ?label ;
+    	rdfs:comment ?comment
+    .
+    
+    # Get defaults from the resource:bgo_domain_template individual
+   app:domain_template 
+    	dct:description ?descriptionTemplate ;
+    	dct:abstract ?abstractTemplate ;
+    	dct:license ?copyright .
+    
+	BIND( CONCAT( STR(?label), " ", STR(YEAR(?refdate))) AS ?title )
+    BIND( REPLACE(STR(?descriptionTemplate), "%title%", STR(?title) ) AS ?description )
+    BIND( REPLACE(REPLACE(STR(?abstractTemplate), "%comment%", STR(?comment) ), "%uri%", STR(?budget)) AS ?abstract )
+    
+    FILTER NOT EXISTS { [] a bgo:Domain }
+}
+
+#trust=1.00	

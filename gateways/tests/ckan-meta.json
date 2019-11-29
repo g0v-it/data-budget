@@ -1,0 +1,65 @@
+{
+  "license_title": "Creative Commons Attribution",
+  "id": "facb7497-0a06-4f40-ad12-1ffe96152367",
+  "private": false,
+  "metadata_created": "2018-12-31T12:40:10.000000",
+  "license": "cc-by",
+  "metadata_modified": "2019-09-13T11:00:09.000000",
+  "author": "Ragioneria Generale dello Stato",
+  "state": "active",
+  "license_id": "cc-by",
+  "resources": [
+    {
+      "package_id": "facb7497-0a06-4f40-ad12-1ffe96152367",
+      "id": "9291",
+      "size": "13914213",
+      "last_modified": "",
+      "format": "csv",
+      "mimetype": "text/csv",
+      "name": "spd_lbf_spe_elb_pig_01_2019.csv",
+      "created": "2018-12-31T12:40:59.000000",
+      "url": "http://bdap-opendata.mef.gov.it/SpodCkanApi/api/1/rest/dataset/spd_lbf_spe_elb_pig_01_2019.csv",
+      "position": 0
+    },
+    {
+      "package_id": "facb7497-0a06-4f40-ad12-1ffe96152367",
+      "id": "11059",
+      "size": "634113",
+      "last_modified": "",
+      "format": "CSV",
+      "mimetype": "application/pdf",
+      "name": "2670_Legge di Bilancio Pubblicata Elaborabile Spese_0.pdf",
+      "created": "2019-09-13T11:00:09.000000",
+      "url": "http://bdap-opendata.mef.gov.it/sites/default/files/metadata_updfile/report/2670_Legge di Bilancio Pubblicata Elaborabile Spese_0.pdf",
+      "position": 0
+    }
+  ],
+  "tags": [
+    "Bilancio",
+    "Bilancio Finanziario dello Stato",
+    "Legge di Bilancio (LB)",
+    "Piano di Gestione",
+    "Spesa"
+  ],
+  "tracking_summary": {
+    "total": 0,
+    "recent": 0
+  },
+  "groups": [
+    "Bilancio Finanziario dello Stato"
+  ],
+  "organization": {
+    "name": "Data Warehouse RGS",
+    "is_organization": true,
+    "id": "69"
+  },
+  "name": "spd_lbf_spe_elb_pig_01_2019",
+  "isopen": true,
+  "notes_rendered": "\u003cp\u003e\u003cp\u003eDati di Spesa relativi alla Legge di Bilancio Pubblicata per l\u0027esercizio finanziario di riferimento - Atto dovuto in formato elaborabile - [2019_LBF_SPE_ELB_CAPPG_001]\u003c/p\u003e\r\n\u003c/p\u003e",
+  "ckan_url": "http://rgspod/opendata/spd_lbf_spe_elb_pig_01_2019",
+  "notes": "Dati di Spesa relativi alla Legge di Bilancio Pubblicata per l\u0027esercizio finanziario di riferimento - Atto dovuto in formato elaborabile - [2019_LBF_SPE_ELB_CAPPG_001]\r\n",
+  "title": "2019 - Legge di Bilancio Pubblicata Elaborabile Spese Piano di Gestione",
+  "extras": {},
+  "license_url": "http://www.opendefinition.org/licenses/cc-by",
+  "ratings_cout": 0
+}

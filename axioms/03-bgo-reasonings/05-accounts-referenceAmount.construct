@@ -1,0 +1,20 @@
+########################################################################################
+##@ create reference value from the newest history record 
+########################################################################################
+PREFIX bgo: <http://linkeddata.center/lodmap-bgo/v1#>
+
+CONSTRUCT { ?account bgo:referenceAmount ?value }
+WHERE {
+    ?account bgo:hasHistoryRec ?historyRec .
+    ?historyRec bgo:versionLabel ?version ; bgo:amount ?value  .
+    FILTER( ?account != ?historyRec)
+
+  
+    FILTER NOT EXISTS {
+		?account bgo:hasHistoryRec ?historyRec2 .
+        ?historyRec2 bgo:versionLabel ?version2  
+        FILTER ( STR(?version2) > STR(?version))
+        FILTER( ?account != ?historyRec2)
+    }     
+}
+#trust=1.00	

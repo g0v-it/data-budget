@@ -1,0 +1,12 @@
+########################################################################################
+##@ Create account history
+########################################################################################
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX mef: <http://w3id.org/g0v/it/mef#> 
+PREFIX bgo: <http://linkeddata.center/lodmap-bgo/v1#>
+
+CONSTRUCT { ?account bgo:hasHistoryRec ?historyRec }
+WHERE { 
+	?account a bgo:Account; skos:notation ?notation .
+	?historyRec a mef:Azione; skos:notation ?notation .
+}
