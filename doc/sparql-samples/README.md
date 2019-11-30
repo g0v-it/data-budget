@@ -78,18 +78,17 @@ PREFIX mef: <http://w3id.org/g0v/it/mef#>
 
 SELECT DISTINCT ?pdg ?competenza ?cassa ?residui ?definition 
 WHERE { 
-	?definition bds:search "vigili del fuoco" ;
-		bds:matchAllTerms "true" ; 
-		bds:minRelevance 0.25 .
+    ?definition bds:search "vigili del fuoco" ;
+        bds:matchAllTerms "true" ; 
+        bds:minRelevance 0.25 .
 
-	?budget a bgo:Domain .
+    ?budget a bgo:Domain .
     ?pdg a mef:PianoDiGestione ; 
-		qb:dataSet ?budget ;  
-		skos:definition ?definition ;
-		mef:competenza ?competenza ;
-		mef:cassa ?cassa ; 
-		mef:residui ?residui .
-	
+        qb:dataSet ?budget ;  
+        skos:definition ?definition ;
+        mef:competenza ?competenza ;
+        mef:cassa ?cassa ; 
+        mef:residui ?residui .
 } ORDER BY DESC(?competenza)
 ```
 
