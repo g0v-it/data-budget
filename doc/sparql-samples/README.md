@@ -34,7 +34,7 @@ Entrambi i link sono navigabili, il primo come Linked Data, il secondo su https:
 [Provala su YasGUI](http://yasgui.org/short/fDdbWcvdw)
 
 
-## Le dieci spese con il maggior incremento in assoluto (report grafico)
+## I dieci maggiori incrementi di spesa in valore assoluto (report grafico)
 
 Individua quali sono le 10 azioni che hanno avuto il più alto incremento di spesa rispetto alla legge di bilancio precedente.
 Le cifre sono espresse in euro
@@ -53,7 +53,7 @@ WHERE {
 } ORDER BY DESC(?difference) LIMIT 10
 ```
 
-Queasta query usa la ontologia [Bubble Graph Ontology](http://linkeddata.center/lodmap-bgo/v1) per effettuare ricerche 
+Questa query usa la ontologia [Bubble Graph Ontology](http://linkeddata.center/lodmap-bgo/v1) per effettuare ricerche 
 direttamente sugli elementi del grafico a bolle.
 
 [Provala su YasGUI](http://yasgui.org/short/K-9k5XVOz) , con grafico a torta
@@ -62,11 +62,12 @@ direttamente sugli elementi del grafico a bolle.
 
 ## Ricerca semantica
 
-Cerca stringhe simili a *vigili del fuoco* nella definizione nei fatti dell'ultimo bilancio pubblicato. Per ciascun fatto rilevante trovato, esprime il valore di bilancio per cassa, per competenza e per residui (in euro).
+Cerca stringhe simili a *vigili del fuoco* nella definizione nei fatti dell'ultimo bilancio pubblicato (`bgo:Domain`). 
+Per ciascun fatto rilevante trovato, esprime il valore di bilancio per cassa, per competenza e per residui (in euro).
 
-I fatti sono definiti nei *Piani di Gestione*  (`mef:PianoDiGestione`) che rappresentano il livello più dettagliato  delle voci di spesa nel bilancio. 
+I fatti sono definiti nei *Piani di Gestione*  (`mef:PianoDiGestione`) che rappresentano il livello più dettagliato  delle voci di spesa
+presenti nella Legge di Bilancio. 
 
-La queri cerca stringhe simili a "vigili del fuoco" 
 
 ```sparql
 PREFIX bgo: <http://linkeddata.center/lodmap-bgo/v1#>
@@ -77,23 +78,24 @@ PREFIX mef: <http://w3id.org/g0v/it/mef#>
 
 SELECT DISTINCT ?pdg ?competenza ?cassa ?residui ?definition 
 WHERE { 
-  ?definition bds:search "vigili del fuoco" .
-  # vincoli semantici:
-  ?pdg a mef:PianoDiGestione ; qb:dataSet ?budget ;  
-  	skos:definition ?definition ;
-    mef:competenza ?competenza ; mef:cassa ?cassa ; mef:residui ?residui .
-  ?budget a bgo:Domain . # considero solo ultimo budget disponibile
-  FILTER (?competenza>0)
-  # parametri di ricerca:
-  ?definition
-  	bds:matchAllTerms "true" ;
-    bds:minRelevance 0.25 
+	?definition bds:search "vigili del fuoco" ;
+		bds:matchAllTerms "true" ; 
+		bds:minRelevance 0.25 .
+
+	?budget a bgo:Domain .
+    ?pdg a mef:PianoDiGestione ; 
+		qb:dataSet ?budget ;  
+		skos:definition ?definition ;
+		mef:competenza ?competenza ;
+		mef:cassa ?cassa ; 
+		mef:residui ?residui .
+	
 } ORDER BY DESC(?competenza)
 ```
 
 Questa query utilizza una estensione di BLAZEGRAPH al linguaggio SPARQL standard e
 l'[Ontologia del Bilancio (mef)](http://w3id.org/g0v/it/mef).
 
-Le informazioni ritrovate non sono direttamente visibili dall'intefaccia a bolle perchè riguadano una analisi più profonda del bilancio
+Le informazioni ritornate non sono direttamente visibili dall'interfaccia a bolle perchè riguardano un'analisi più profonda del bilancio
 
-[Provala su YasGUI](http://yasgui.org/short/PDdbtkyNP)
+[Provala su YasGUI](http://yasgui.org/short/2QGjSggsB)
