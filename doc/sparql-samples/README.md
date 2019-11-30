@@ -62,29 +62,33 @@ direttamente sugli elementi del grafico a bolle.
 
 ## Ricerca semantica
 
-Esegue una ricerca lessicale dei termini contenuti nella definizione di un Piano di Gestione (`mef:PianoDiGestione`) che rappresenta il livello più atomico in cui sono contenuti i fatti di bilancio. 
+Cerca stringhe simili a *vigili del fuoco* nella definizione nei fatti dell'ultimo bilancio pubblicato. Per ciascun fatto rilevante trovato, esprime il valore di bilancio per cassa, per competenza e per residui (in euro).
+
+I fatti sono definiti nei *Piani di Gestione*  (`mef:PianoDiGestione`) che rappresentano il livello più dettagliato  delle voci di spesa nel bilancio. 
+
+La queri cerca stringhe simili a "vigili del fuoco" 
 
 ```sparql
+PREFIX bgo: <http://linkeddata.center/lodmap-bgo/v1#>
+PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX bds: <http://www.bigdata.com/rdf/search#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX mef: <http://w3id.org/g0v/it/mef#>
 
-SELECT ?pdg ?score ?definition 
+SELECT DISTINCT ?pdg ?competenza ?cassa ?residui ?definition 
 WHERE { 
-
   ?definition bds:search "vigili del fuoco" .
-
   # vincoli semantici:
-  ?pdg a mef:PianoDiGestione ; 
-  	skos:definition ?definition .
-  
+  ?pdg a mef:PianoDiGestione ; qb:dataSet ?budget ;  
+  	skos:definition ?definition ;
+    mef:competenza ?competenza ; mef:cassa ?cassa ; mef:residui ?residui .
+  ?budget a bgo:Domain . # considero solo ultimo budget disponibile
+  FILTER (?competenza>0)
   # parametri di ricerca:
   ?definition
   	bds:matchAllTerms "true" ;
-    bds:minRelevance 0.25 ;
-    bds:relevance ?score ;
-    bds:rank ?rank .
-} ORDER BY ?rank
+    bds:minRelevance 0.25 
+} ORDER BY DESC(?competenza)
 ```
 
 Questa query utilizza una estensione di BLAZEGRAPH al linguaggio SPARQL standard e
@@ -92,4 +96,4 @@ l'[Ontologia del Bilancio (mef)](http://w3id.org/g0v/it/mef).
 
 Le informazioni ritrovate non sono direttamente visibili dall'intefaccia a bolle perchè riguadano una analisi più profonda del bilancio
 
-[Provala su YasGUI](http://yasgui.org/short/86nuttEZ0)
+[Provala su YasGUI](http://yasgui.org/short/PDdbtkyNP)
