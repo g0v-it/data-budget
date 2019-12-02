@@ -5,8 +5,26 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
-## 3.1.0
 
+## 3.2.0
+
+### Added
+
+- checksum
+
+### Changed
+
+- Aligned with the last release of mef ontology
+- refactory
+- sample queries
+
+### Removed
+
+- dependencies to skos and fr
+
+
+
+## 3.1.0
 
 ### Added
 
@@ -22,12 +40,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Some bug fixed
 
+
 ## 3.0.0-RC2
 
 - Disegno di Legge di bilancio 2020
 - cambiata notation per miisteri
 - cambiata policy label
 - rimossa descrizione programmi (in attesa integrazioni da note di bilancio)
+
 
 ## 3.0.0-RC1
 

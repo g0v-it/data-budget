@@ -1,0 +1,65 @@
+    ########################################################################################
+    ##@ Create bgo accounts with core metadata
+    ########################################################################################
+    PREFIX mef: <http://w3id.org/g0v/it/mef#> 
+    PREFIX bgo: <http://linkeddata.center/lodmap-bgo/v1#>
+    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+    PREFIX resource: <http://mef.linkeddata.cloud/resource/>
+    PREFIX bubbleApp: <https://budget.g0v.it/account/>
+    
+    
+    CONSTRUCT { 
+    	?azione a bgo:Account ;
+    		bgo:accountId ?accountId ;
+    		bgo:title ?title ;
+    		bgo:description ?description ;
+    		bgo:abstract ?abstract ;
+    		foaf:isPrimaryTopicOf ?bubble ;
+    	.
+    } WHERE { 
+    	?azione a mef:Azione; 
+    		mef:inBudget ?domain ;
+    		mef:definition ?title ;
+    		mef:notation ?notation ;
+    		mef:isPartOf ?programma
+    	.
+        BIND( STRAFTER(STR(?azione), STR(resource:)) AS ?accountId )
+    	?domain a bgo:Domain .
+    	
+    	?programma a mef:Programma ; mef:isPartOf ?missione .
+    	?missione a mef:MissioneMinistero ; mef:isPartOf ?ministero .
+    	?ministero a mef:Ministero ; mef:definition ?description .
+    
+    	BIND( IRI(CONCAT(STR(bubbleApp:),?accountId)) AS ?bubble)
+    	OPTIONAL { ?azione mef:criteri ?criteriAzione }
+    	OPTIONAL { ?programma  mef:definition ?programmaDefinition }
+    	OPTIONAL { ?missione mef:definition ?missioneDescription }
+    	
+    	{
+    		SELECT ?azione (GROUP_CONCAT(?capitoloDescription;separator= "\n- ") AS ?capitoliList) WHERE {
+    			?azione a mef:Azione ; mef:inBudget ?domain .
+    			?domain a bgo:Domain .
+    			?cds a mef:CapitoloDiSpesa ;
+    				mef:isPartOf ?azione ; 
+    				mef:notation ?notation .
+    			OPTIONAL { ?cds mef:definition ?definition }
+    			BIND( CONCAT(COALESCE(?definition,"")," (*",?notation,"*)") AS ?capitoloDescription)		
+    		} GROUP BY ?azione
+    	}
+    	
+    	BIND( COALESCE(?criteriAzione , "") AS ?azioneExtraNotes)
+    	BIND( COALESCE(?programmaDefinition, "") AS ?programmaDescription)
+    	BIND( COALESCE(?missioneDescription , "N.A.") AS ?missioneDescription)
+    	BIND( COALESCE(?capitoliList , "N.A.") AS ?capitoliDescription)
+    	BIND ( STRDT(CONCAT(
+    		?azioneExtraNotes ,
+    		"\n\n**Programma**:\n\n", ?programmaDescription ,
+    		"\n\n**Missione**:\n\n", ?missioneDescription ,
+    		"\n\n**Capitoli di spesa**:\n\n- ", ?capitoliDescription ,
+    		"\n\n[Maggiori informazioni...](",STR(?azione),")"
+    	), bgo:MDString) AS ?abstract )
+    	
+    	
+    }
+    
+    #trust=1.00	

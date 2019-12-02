@@ -6,11 +6,11 @@ This directory contains the gateways that transform the raw data provided by the
 Gateways are simple stand-alone php7 scripts that read a csv stream row by row from STDIN and 
 write RDF turtle statements to STDOUT. Following gateways are available:
 
-
-- the **ckan-meta.php** gateway processess input a json structure containing the metadata about a dataset retrived from  CKAN v1 api.
-- the **bdap.php** gateway requires as a mandatory parameters an id of a dataset defined in https://bdap-opendata.mef.gov.it/SpodCkanApi/api/1/rest/dataset/
-- **programmi.php** gateway reads verbose program descriptions from data/descrizione_programmi.csv
-
+- spd_dlb_spe_elb_pig = Disegno Legge di Bilancio Presentato Elaborabile Spese Piano di Gestione (schema 2017)
+- spd_lbf_spe_elb_pig = Legge di Bilancio Pubblicata Elaborabile Elaborabile Spese Piano di Gestione (schema 2017)
+- spd_pas_spe_elb_pig = Provvedimento di Assestamento Approvato Elaborabile Spese Piano di Gestione (schema 2017)
+- spd_rnd_spe_elb_pig = RENDICONTO PUBBLICATO ELABORABILE SPESE PIANO DI GESTIONE (schema 2017)
+- spd_dlb_not_azi     = Note Integrative al Disegno Legge di Bilancio - Azioni
 
 Retrieve gateways dependencies using [Composer](http://getcomposer.org/):
 

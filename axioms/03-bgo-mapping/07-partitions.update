@@ -1,12 +1,7 @@
 ########################################################################################
 ##@ bgo partitions
 ########################################################################################
-PREFIX fr: <http://linkeddata.center/botk-fr/v1#> 
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-PREFIX qb: <http://purl.org/linked-data/cube#> 
 PREFIX mef: <http://w3id.org/g0v/it/mef#> 
-PREFIX dct: <http://purl.org/dc/terms/>
-PREFIX time: <http://www.w3.org/2006/time#>
 PREFIX bgo: <http://linkeddata.center/lodmap-bgo/v1#>
 PREFIX : <http://mef.linkeddata.cloud/resource/bgo_> 
 
@@ -46,8 +41,8 @@ INSERT {
 }
 WHERE {
 	?domain a bgo:Domain .
-	?ministero a mef:Ministero; qb:dataSet ?domain; skos:notation ?notation .
-	OPTIONAL { ?ministero skos:prefLabel ?title }
+	?ministero a mef:Ministero; mef:inBudget ?domain; mef:notation ?notation .
+	OPTIONAL { ?ministero mef:definition ?title }
 	BIND( IRI(CONCAT(STR(:p1), "_", ?notation)) AS ?subset)
 }
 
@@ -58,8 +53,8 @@ WHERE {
 ##
 INSERT { ?subset bgo:hasAccount ?account }
 WHERE {
-	?account a bgo:Account; fr:isPartOf+ ?ministero .
-	?ministero a mef:Ministero ; skos:notation ?notation;
+	?account a bgo:Account; mef:isPartOf+ ?ministero .
+	?ministero a mef:Ministero ; mef:notation ?notation;
 	BIND( IRI(CONCAT(STR(:p1), "_", ?notation)) AS ?subset)
 }
 
@@ -89,8 +84,8 @@ INSERT {
 }
 WHERE {
 	?domain a bgo:Domain .
-	?missione a mef:Missione; qb:dataSet ?domain; skos:notation ?notation .
-	OPTIONAL { ?missione skos:prefLabel ?title }
+	?missione a mef:Missione; mef:inBudget ?domain; mef:notation ?notation .
+	OPTIONAL { ?missione mef:definition ?title }
 	BIND( IRI(CONCAT(STR(:p2), "_", ?notation)) AS ?subset)	
 }
 
@@ -101,8 +96,8 @@ WHERE {
 ##
 INSERT { ?subset bgo:hasAccount ?account }
 WHERE {
-	?account a bgo:Account; fr:isPartOf+ ?missione .
-	?missione a mef:Missione ; skos:notation ?notation .
+	?account a bgo:Account; mef:isPartOf+ ?missione .
+	?missione a mef:Missione ; mef:notation ?notation .
 	BIND( IRI(CONCAT(STR(:p2), "_", ?notation)) AS ?subset)
 }
 

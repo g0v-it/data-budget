@@ -1,11 +1,9 @@
 ########################################################################################
 ##@ create bgo breakdown records
 ########################################################################################
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX mef: <http://w3id.org/g0v/it/mef#> 
-PREFIX fr: <http://linkeddata.center/botk-fr/v1#> 
-PREFIX time: <http://www.w3.org/2006/time#>
 PREFIX bgo: <http://linkeddata.center/lodmap-bgo/v1#>
 PREFIX app: <http://mef.linkeddata.cloud/resource/bgo_> 
 
@@ -26,13 +24,8 @@ CONSTRUCT {
 	    bgo:hasAccountView app:account_view 
 	.
 } WHERE { 
-	?budget a mef:Budget ; 
-		fr:refPeriod/time:hasBeginning/time:inXSDDateTime ?refdate .
-	
-    FILTER NOT EXISTS {
-		?budget2 a mef:Budget ; fr:refPeriod/time:hasBeginning/time:inXSDDateTime ?refdate2 ;
-        FILTER (?refdate2 > ?refdate)
-    }
+	?budget a mef:Budget ; mef:esercizio ?refdate .	
+    FILTER NOT EXISTS {?budget2 mef:esercizio ?refdate2 FILTER (?refdate2 > ?refdate)}
     
     ?budget a ?budgetType .
     ?budgetType rdfs:subClassOf mef:Budget ;
@@ -47,7 +40,7 @@ CONSTRUCT {
     	dct:abstract ?abstractTemplate ;
     	dct:license ?copyright .
     
-	BIND( CONCAT( STR(?label), " ", STR(YEAR(?refdate))) AS ?title )
+	BIND( CONCAT( STR(?label), " ", STR(?refdate)) AS ?title )
     BIND( REPLACE(STR(?descriptionTemplate), "%title%", STR(?title) ) AS ?description )
     BIND( REPLACE(REPLACE(STR(?abstractTemplate), "%comment%", STR(?comment) ), "%uri%", STR(?budget)) AS ?abstract )
     

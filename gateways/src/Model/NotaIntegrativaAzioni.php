@@ -10,7 +10,8 @@ class NotaIntegrativaAzioni extends PianoDiGestione
       
     protected static $DEFAULT_OPTIONS  = array(
         'criteri' => array(
-            'filter'    => FILTER_DEFAULT,
+            'filter'    => FILTER_CALLBACK,
+            'options' 	=> '\MEF\Filters::FILTER_SANITIZE_DEFINITION',
             'flags'  	=> FILTER_REQUIRE_SCALAR
 		)
         
@@ -30,7 +31,7 @@ class NotaIntegrativaAzioni extends PianoDiGestione
 		        intval($this->data['codiceAzione'])
 		    );
 
-		    $this->addFragment("resource:$idAzione skos:editorialNote \"%s\" .", $this->data['criteri'], true);
+		    $this->addFragment("resource:$idAzione mef:criteri \"%s\"@it .", $this->data['criteri'], true);
 
 		}
 

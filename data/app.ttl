@@ -36,12 +36,12 @@ Elaborazione pubblicata da [Copernicani.it](https://copernicani.it/)
 :option_menu bgo:withCustomMenuItem 
 	[
 		bgo:icon "mdi-database-search" ;
-		bgo:title "SPARQl processor..." ;
-		bgo:link <http://yasgui.org/short/K-9k5XVOz>
+		bgo:title "Ricerca semantica..." ;
+		bgo:link <http://yasgui.org/short/lYxSMkpoc>
 	],
 	[
 		bgo:icon "mdi-webhook" ;
-		bgo:title "Linked data..." ;
+		bgo:title "Linked Data..." ;
 		bgo:link <http://mef.linkeddata.cloud/resource/welcome>
 	],
 	[
@@ -79,7 +79,7 @@ Elaborazione pubblicata da [Copernicani.it](https://copernicani.it/)
     
 	bgo:hasHistoricalPerspective [
 		a bgo:HistoricalPerspective ;
-		bgo:title "Storico dell'azione" ;
+		bgo:title "Storia (D=disegno,L=legge,P=assestamento,R=rendiconto)" ;
 	    bgo:amountFormatter :smart_formatter
 	];
 	bgo:hasBreakdownPerspective [
@@ -255,7 +255,7 @@ Ogni violazione sarà segnalata alle Forze di Polizia ed alle Autorità Giudizia
 
 ###### Trend Color Scheme #######
 :trend_color_scheme a bgo:TrendColorScheme ;
-    bgo:title "Variazione percentuale rispetto alll'anno precedente." ;
+    bgo:title "Variazione percentuale rispetto all'anno precedente." ;
     bgo:noTrendColor "#cdcdcd"^^bgo:RGB ;
     bgo:rateTreshold # all are bgo:RateTreshold
 		[ bgo:rate 0.50 ; 	bgo:colorId "#a50026"^^bgo:RGB ] ,
