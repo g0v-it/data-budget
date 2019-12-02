@@ -4,14 +4,13 @@
 ##############################################################################
 ##  The value of the component metrics is computed as the sum of the  facts
 ##############################################################################
-PREFIX fr: <http://linkeddata.center/botk-fr/v1#>
 PREFIX mef: <http://w3id.org/g0v/it/mef#>
 
 CONSTRUCT { ?component mef:competenza ?sum }
 WHERE {
 	SELECT ?component (SUM(?metric) AS ?sum ) WHERE {
 		?fact a mef:Fact ;  
-			fr:isPartOf+ ?component ;
+			mef:isPartOf+ ?component ;
 			mef:competenza ?metric .
 	} GROUP BY ?component
 }	

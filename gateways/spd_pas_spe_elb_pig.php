@@ -8,13 +8,17 @@ require_once __DIR__.'/vendor/autoload.php';
 
 
 isset($argv[1]) || die("Gateway usage: bdap {dataset url}");
-$source=$argv[1];
+\MEF\BDAP::parseBdapId($argv[1], $parsedSource) || die("unexpected source format $source");
 
 
 $options = array(
-	'factsProfile' => array(
-		'model'			=> '\\MEF\\Model\\PianoDiGestione',
-	    'datamapper'	=> function(array $rawdata) use ($source){
+    'factsProfile' => array(
+        'model'			=> '\\MEF\\Model\\PianoDiGestione',
+        'modelOptions'		=> array(
+            'budgetId' => array( 'default'=> $parsedSource['budgetId'] ),
+            'budgetType' => array( 'default'=> \MEF\BDAP::stateId2MefType($parsedSource['stateId']) )
+        ),
+	    'datamapper'	=> function(array $rawdata) {
 			$data = [];
 			$data['source'] = $source;
 			

@@ -4,88 +4,40 @@
 ##############################################################################
 ##  Builds budget taxonomy
 ##############################################################################
-PREFIX fr: <http://linkeddata.center/botk-fr/v1#>
-PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX mef: <http://w3id.org/g0v/it/mef#>
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX resource: <http://mef.linkeddata.cloud/resource/>
 
 CONSTRUCT { 
-	?budget dct:identifier ?budgetId ;
-		mef:hasSchemeSMMPACP ?schemeSMMPACP ;
-		mef:hasSchemeSMRMP ?schemeSMRMP ;
-		mef:hasSchemeSMTC ?schemeSMTC ;
-		mef:hasSchemeSTCCP ?schemeSTCCP ;
-		mef:hasSchemeSMP ?schemeSMP ;
-		mef:hasSchemeETNT ?schemeETNT ;
-		mef:hasSchemeETTPCA ?schemeETTPCA 
-	.
-	
-	?schemeSMMPACP a skos:ConceptScheme ; 
-		dct:identifier ?schemeSMMPACP_id ;
-		dct:title ?schemeSMMPACP_title; 
-		dct:description ?schemeSMMPACP_description
-	.
-	?schemeSMRMP a skos:ConceptScheme ;
-		dct:identifier ?schemeSMRMP_id ;
-		dct:title ?schemeSMRMP_title; 
-		dct:description ?schemeSMRMP_description
-	.
-	?schemeSMTC a skos:ConceptScheme ; 
-		dct:identifier ?schemeSMTC_id ;
-		dct:title ?schemeSMTC_title; 
-		dct:description ?schemeSMTC_description
-	.
-	?schemeSTCCP a skos:ConceptScheme ; 
-		dct:identifier ?schemeSTCCP_id ;
-		dct:title ?schemeSTCCP_title; 
-		dct:description ?schemeSTCCP_description
-	.
-	?schemeSMP a skos:ConceptScheme ; 
-		dct:identifier ?schemeSMP_id ;
-		dct:title ?schemeSMP_title; 
-		dct:description ?schemeSMP_description
-	.
-	?schemeETNT a skos:ConceptScheme ;
-		dct:identifier ?schemeETNT_id ;
-		dct:title ?schemeETNT_title; 
-		dct:description ?schemeETNT_description
-	.
-	?schemeETTPCA a skos:ConceptScheme ; 
-		dct:identifier ?schemeETTPCA_id ;
-		dct:title ?schemeETTPCA_title; 
-		dct:description ?schemeETTPCA_description
-	
-
-
+    ?budget 
+        mef:hasSchemeSMMPACP ?schemeSMMPACP ;
+        mef:hasSchemeSMRMP ?schemeSMRMP ;
+        mef:hasSchemeSMTC ?schemeSMTC ;
+        mef:hasSchemeSTCCP ?schemeSTCCP ;
+        mef:hasSchemeSMP ?schemeSMP ;
+        mef:hasSchemeETNT ?schemeETNT ;
+        mef:hasSchemeETTPCA ?schemeETTPCA 
+    .
+    
+    ?schemeSMMPACP a mef:Taxonomy .
+    ?schemeSMRMP a mef:Taxonomy .
+    ?schemeSMTC a mef:Taxonomy .
+    ?schemeSTCCP a mef:Taxonomy .
+    ?schemeSMP a mef:Taxonomy .
+    ?schemeETNT a mef:Taxonomy .
+    ?schemeETTPCA a mef:Taxonomy .
 }
 WHERE {
-	?budget a mef:Budget.
-	
-	BIND( STRAFTER(STR(?budget), STR(resource:)) AS ?budgetId )
+    ?budget a mef:Budget.
+    
+    BIND( STRAFTER(STR(?budget), STR(resource:)) AS ?budgetId )
 
-	BIND( CONCAT(?budgetId, "SMMPACP") AS ?schemeSMMPACP_id )
-	BIND( CONCAT(?budgetId, "SMRMP") AS ?schemeSMRMP_id )
-	BIND( CONCAT(?budgetId, "SMTC") AS ?schemeSMTC_id )
-	BIND( CONCAT(?budgetId, "STCCP") AS ?schemeSTCCP_id )
-	BIND( CONCAT(?budgetId, "SMP") AS ?schemeSMP_id )
-	BIND( CONCAT(?budgetId, "ETNT") AS ?schemeETNT_id )
-	BIND( CONCAT(?budgetId, "ETTPCA") AS ?schemeETTPCA_id )
-	
-	BIND( IRI(CONCAT(STR(resource:), ?schemeSMMPACP_id)) AS ?schemeSMMPACP )
-	BIND( IRI(CONCAT(STR(resource:), ?schemeSMRMP_id)) AS ?schemeSMRMP )
-	BIND( IRI(CONCAT(STR(resource:), ?schemeSMTC_id)) AS ?schemeSMTC )
-	BIND( IRI(CONCAT(STR(resource:), ?schemeSTCCP_id)) AS ?schemeSTCCP )
-	BIND( IRI(CONCAT(STR(resource:), ?schemeSMP_id)) AS ?schemeSMP )
-	BIND( IRI(CONCAT(STR(resource:), ?schemeETNT_id)) AS ?schemeETNT )
-	BIND( IRI(CONCAT(STR(resource:), ?schemeETTPCA_id)) AS ?schemeETTPCA )
-	
-	BIND( CONCAT("Gerarchia spese per Ministero/Missione/Programma/Azione/Capitolo/Piano di gestione in budget ", ?budgetId ) AS ?schemeSMMPACP_description )
-	BIND( CONCAT("Gerarchia spese per Ministero/Centro di responsabilità/Missione/Programma in budget ", ?budgetId ) AS ?schemeSMRMP_description )
-	BIND( CONCAT("Gerarchia spese per  da Ministero/Titolo/Categoria in budget ", ?budgetId ) AS ?schemeSMTC_description )
-	BIND( CONCAT("Gerarchia spese per Titolo/Categoria/Capitolo/Piano di gestione in budget ", ?budgetId ) AS ?schemeSTCCP_description )
-	BIND( CONCAT("Gerarchia spese per Missione/Programma in budget ", ?budgetId ) AS ?schemeSMP_description )
-	BIND( CONCAT("Gerarchia entrate per Titolo/Natura/Tipologia in budget ", ?budgetId ) AS ?schemeETNT_description )
-	BIND( CONCAT("Gerarchia entrate per Titolo/Tipologia/Provento/Capitolo/Articolo in budget ", ?budgetId ) AS ?schemeETTPCA_description )
-}	
+    BIND( IRI(CONCAT(STR(resource:), ?budgetId, "SMMPACP"))  AS ?schemeSMMPACP )
+    BIND( IRI(CONCAT(STR(resource:), ?budgetId, "SMRMP")) AS ?schemeSMRMP )
+    BIND( IRI(CONCAT(STR(resource:), ?budgetId, "SMTC")) AS ?schemeSMTC )
+    BIND( IRI(CONCAT(STR(resource:), ?budgetId, "STCCP")) AS ?schemeSTCCP )
+    BIND( IRI(CONCAT(STR(resource:), ?budgetId, "SMP")) AS ?schemeSMP )
+    BIND( IRI(CONCAT(STR(resource:), ?budgetId, "ETNT")) AS ?schemeETNT )
+    BIND( IRI(CONCAT(STR(resource:), ?budgetId, "ETTPCA")) AS ?schemeETTPCA )
+    
+}   
 

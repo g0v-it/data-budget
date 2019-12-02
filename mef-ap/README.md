@@ -6,33 +6,31 @@ g0v mef-ap
 **g0v mef-ap** is a *Semantic Web application profile*, that is a trimmed down version existing formal vocabularies (*ontologies*) to trades some expressive power for the efficiency of reasoning.
 
 g0v mef-ap builds on  the [MEF vocabulary](http://w3id.org/g0v/it/mef) to capture the specific Italian budget semantic.
-g0v mef-ap reuses some individual references to linked open data provided by [UK e-gov](https://github.com/alphagov/datagovuk_reference) and by 
-[Currency EU vocabulary](http://publications.europa.eu/resource/authority/currency).
 
 g0v mef-ap provides a mapping to a [Bubble Graph Ontology](http://linkeddata.center/lodmap-bgo/v1) (BGO) for data exploration concepts.
 In order to get a manageable number of bgo:Accounts, mef-ap considers the fourth level of the italian budget taxonomy (i.e. "azioni") 
 as the focus for the Bubble Graph Ontology; the financial facts (i.e. mef:capitoli) are modeled as bgo:Account breakdowns.
 
+## Additional restrictions
+
+Following axioms are added to mef ontology ones:
+
+- mef:Budget should be related (dct:source) with some documents described with [DCAT](https://www.dati.gov.it/content/dcat-ap-it-v10-profilo-italiano-dcat-ap-0) (according with DCAT-AP_IT v1.0 profile) vocabulary.
+- the bgo:accountId must be defined as the distinguish part of the account uri.
+- mef:Accoung has foaf:isPrimaryTopicOf attribute pointing to the URL of a visualization tool (e.g. https://budget.g0v.it/)
+
 ## Bubble Graph Ontology mapping
 
-In this release only budget expense with a reduced taxonomy  is used.
+In this release only budget expense with a reduced taxonomy is used.
 The following axioms should be used to derive a Bubble Graph Ontology:
 
 - the BGO Domain is the newest known *MEF Financial Report* ;
-- each *mef:Azione* is a *bgo:HistoryRec* ;
-- each *bgo:HistoryRec* referring a bgo:Domain in the qb:dataSet property is a bgo:Account;
+- each *mef:Azione* is a *bgo:HistoryRec* having *bgo:versionLabel* equals to the referred mef:Budget mer:versionId property ;
 - *bgo:account* a sub-property of *mef:competenza*;
 - *mef:CapitoloDiSpesa* that are parts of a bgo:Account are bgo:Amount that are used to compose the account breakdown perspective;
-- account history is inferred from *mef:Azione* versioning (dct:isVersionOf) ;
-- the bgo:referenceValue, if present, is the amount of the newest entry in the account history ;
-- in inferring bgo properties, these rules should be used:
-	- the skos:prefLabel can be derived from the class rdfs:label;
-    - bgo:label := coalesce(skos:prefLabel, rdfs:label STRAFTER(?uri, "http://mef.linkeddata.cloud/resource/"))
-    - bgo:versionLabel := qb:dataSet/fr:versionId ;
-    - bgo:title := coalesce(dct:title || bgo:label)
-    - bgo:description := coalesce((dct:title, skos:definition)
-    - bgo:abstract := coalesce( dct:abstratct,  skos:editorialNote , rdfs:comment )
- 
+- the account history perspective is composed by all *bgo:HistoryRec* sharing the same *bgo:versionLabel* of the account ;
+- the bgo:referenceValue, if present, is the amount of the newest history rec in the ccount history perspective ;
+
     
 
 ## URIs and naming convention
@@ -46,7 +44,7 @@ g0v mef-ap defines a set of naming convention for:
 
 **Naming conventions for notations **
 
-Every skos concept  must have a notation. Following rules apply:
+Every struttural component  must have a notation. Following rules apply:
 
 - two concepts with the same notation are related with the skos:closeConcept property.
 - all concept related with the same budget ( qb:dataset) mus have an unique notation.
@@ -115,82 +113,71 @@ From this fact :
 ```
 
 
-here are some of the new rdf triples that a **g0v mef-ap reasoner** should be able to derive looking to the fact, ontology, axioms and conventions:
+here are **some** of the new rdf triples that a **g0v mef-ap reasoner** should be able to derive looking to the fact, ontology, axioms and conventions:
 
 ```turtle 
 
 :19La1c123p1 a mef:PianoDiGestione ;
-	rdfs:comment "Piano di gestione del Ministero 1  nel capitolo di spesa 123 della Legge di Bilancio 2019"@it ;
-	dtc:identifier "2019BSa1c123p1"
-	
-	# skos inferred properties:	
-	skos:notation "a1c123p1";
-	skos:inScheme :19LTSMMPACP, :19LTSTCCP ;
-    
-    # fr related inferred properties:
-    qb:dataSet :19L ;
-    fr:isPartOf :19La1c123 
+	mef:notation "a1c123p1";
+    mef:inBudget :19L ;
+	mef:inTaxonomy :19LTSMMPACP, :19LTSTCCP ;
+    mef:isPartOf :19La1c123 
 .
 
-:19L a mef:LeggeBilancio;
-	dct:title "Legge di Bilancio 2019"@it ;
-	dct:description "Legge di Bilancio per l'anno 2019 approvata dalle Camere"@it ;
-	
+:19L a mef:LeggeBilancio ;
+	mef:versionId "19L" ;
+	mef:esercizio 2019 ;
 	mef:hasSchemeSMMPACP :19LTSMMPACP ;
+	mef:hasSchemeSMRMP :19LTSMRMP ;
+	mef:hasSchemeSMTC :19LTSMTC ;
 	mef:hasSchemeSTCCP :19LTSTCCP ;
-	mef:spese :19LSs ;
-	
-	fr:refPeriod <http://reference.data.gov.uk/id/gregorian-interval/2019-01-01T00:00:00/P1Y> ;
-	sdmx-attribute:unitMeasure <http://publications.europa.eu/resource/authority/currency/EUR> ;
-	fr:versionId "2019B"^^mef:BudgetVersion ;
+	mef:hasSchemeSMP :19LTSMP ;
+	mef:hasSchemeETNT :19LTETNT ;
+	mef:hasSchemeETTPCA :19LTETTPCA ;
+	mef:spese :19LSs 
 .
+:19LTSMMPACP a mef:Taxonomy .
+:19LTSMRMP a mef:Taxonomy .
+:19LTSMTC a mef:Taxonomy .
+:19LTSTCCP a mef:Taxonomy .
+:19LTSMP a mef:Taxonomy .
+:19LTETNT a mef:Taxonomy .
+:19LTETTPCA  a mef:Taxonomy .
 
-:19LBTSMMPACP a skos:ConcetpScheme ;
-	rdfs:comment "Spese in Legge di bilancio 2019 per Ministero/Missione/Programma/Azione/Capitolo/pdg"@it ;
-	skos:hastTopConcept :19LBSA1 ;
-.
-	
-
-:19Ls a mef:Spesa;
-    qb:dataSet :19L ;
-	rdfs:comment "Legge di Bilancio 2019: spese"@it ;
+:19Ls a mef:Spesa ;
+    mef:inBudget :19L ;
 	mef:competenza 200000000000.00  ;
 	mef:cassa 200000000000.00 ;
-	mef:residui 0.00 .
+	mef:residui 0.00 ;
+	mef:notation "s" 
 .
 	
-:19La1 a mef:Ministero;
-    qb:dataSet :19L ;
+:19La1 a mef:Ministero ;
+    mef:inBudget :19L ;
 	mef:competenza 200000000000.00  ;
 	mef:cassa 200000000000.00 ;
-	mef:residui 0.00 .
+	mef:residui 0.00 ;
+	mef:inTaxonomy :19LTSMMPACP ;
+	mef:notation "a1" 
 .
 
-:19La1c123 a mef:CapitoloDiSpesa;
-    qb:dataSet :19L ;
-	rdfs:comment "Voce di spesa del Ministero 1 relativa al capitolo di spesa 123 riportata nella prima edizione della Legge di Bilancio dell'anno 2019"@it ; 
+:19La1c123 a mef:CapitoloDiSpesa ;
+    mef:inBudget :19L ;
 	mef:competenza 200000000000.00  ;
 	mef:cassa 200000000000.00 ;
-	mef:residui 0.00 .
-	
-	skos:notation "a1c123" ;
-	skos:narrower :19La1c123p1 ;
+	mef:residui 0.00 ;
+	mef:inTaxonomy :19LTSMMPACP, :19LTSTCCP ;
+	mef:notation "a1c123" 
 .
 
+...
 
 # Bgo related inferences:
 
-:19L a bgo:Domain ;
-	rdfs:seeAlso <https://budget.g0v.it/> ;
-	bgo:title "Legge di Bilancio 2019"@it
-	bgo:description "Legge di Bilancio per l'anno 2019 approvata dalle Camere"@it ;
-.
+:19L a bgo:Domain .
+:19La1c123 a bgo:Amount ; bgo:amount 200000000000.00 .
 
-:19La1c123 a bgo:Amount ;
-	bgo:title  "2019BSa1c123p1" ;
-	bgo:amount 200000000000.00  ;
-.
-
+...
 
 ```
 

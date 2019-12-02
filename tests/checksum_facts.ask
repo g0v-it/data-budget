@@ -1,0 +1,17 @@
+# Check the values with mef ones usin  Bilancio Aperto app
+PREFIX mef: <http://w3id.org/g0v/it/mef#> 
+PREFIX resource: <http://mef.linkeddata.cloud/resource/>
+
+ASK {
+  # Competenze legge di bilancio 2020
+  resource:20D a mef:Budget; mef:spese/mef:competenza ?20D_competenza .
+  FILTER( ?20D_competenza = 896893690280.00  )
+  
+  # Assestamento 2019
+  resource:19P a mef:Budget; mef:spese/mef:competenza ?19P_competenza .
+  FILTER( ?19P_competenza = 863960336140.00  )
+  
+  # Rendiconto 2018
+  resource:18R a mef:Budget; mef:spese/mef:competenza ?18R_competenza .
+  FILTER( ?18R_competenza = 816701526202.57  )
+}

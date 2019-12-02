@@ -1,21 +1,22 @@
 ########################################################################################
-##@ create bgo history records
+##@ Create account breakdown
 ########################################################################################
-PREFIX fr: <http://linkeddata.center/botk-fr/v1#> 
-PREFIX qb: <http://purl.org/linked-data/cube#> 
 PREFIX mef: <http://w3id.org/g0v/it/mef#> 
 PREFIX bgo: <http://linkeddata.center/lodmap-bgo/v1#>
 
 CONSTRUCT { 
-	?azione 
-		bgo:versionLabel ?version ;
+	?account bgo:hasBreakdown ?cds.
+	?cds 
+		bgo:title ?title ;
 		bgo:amount ?amount 
 	.
+}WHERE { 
+	?account a bgo:Account .
+	?cds a mef:CapitoloDiSpesa; 
+		mef:isPartOf ?account ;
+		mef:competenza ?amount ;
+		mef:notation ?notation 
+	.
+	BIND ( CONCAT("Capitolo ",STR(?notation)) AS ?title) 
 }
-WHERE { 
-	?azione a mef:Azione; 
-		qb:dataSet/fr:versionId ?version ;
-		mef:competenza ?amount
-}
-
 #trust=1.00	

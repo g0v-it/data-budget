@@ -1,0 +1,19 @@
+########################################################################################
+##@ create bgo history records
+########################################################################################
+PREFIX mef: <http://w3id.org/g0v/it/mef#> 
+PREFIX bgo: <http://linkeddata.center/lodmap-bgo/v1#>
+
+CONSTRUCT { 
+	?azione 
+		bgo:versionLabel ?version ;
+		bgo:amount ?amount 
+	.
+}
+WHERE { 
+	?azione a mef:Azione; 
+		mef:inBudget/mef:versionId ?version ;
+		mef:competenza ?amount
+}
+
+#trust=1.00	

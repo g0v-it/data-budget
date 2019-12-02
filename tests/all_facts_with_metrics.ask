@@ -1,6 +1,0 @@
-PREFIX mef: <http://w3id.org/g0v/it/mef#>
-
-ASK { FILTER NOT EXISTS {
-  { ?fact a mef:PianoDiGestione } UNION  { ?fact a mef:Articolo }
-  FILTER NOT EXISTS { ?fact mef:competenza [] }	
-}}
