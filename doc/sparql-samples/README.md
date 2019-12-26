@@ -35,20 +35,22 @@ Le cifre sono espresse in euro
 
 
 ```sparql
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX bgo: <http://linkeddata.center/lodmap-bgo/v1#>
 
-SELECT ?title  ?difference
+SELECT ?title  ?difference 
 WHERE { 
   ?account a bgo:Account ; 
            bgo:title ?title ;
            bgo:amount ?amount; 
-           bgo:referenceAmount ?previousAmount.
+           bgo:referenceAmount ?previousAmount .
   BIND( ?amount - ?previousAmount AS ?difference)
-} ORDER BY DESC(?difference) LIMIT 10
+  FILTER (?difference != 0)
+} ORDER BY DESC(ABS(?difference)) LIMIT 10
 ```
 
 
-[Provala su YasGUI](http://yasgui.org/short/BSAgDyK3R) , con grafico a torta
+[Provala su YasGUI](http://yasgui.org/short/eNVXTwtHt) , con grafico 
 
 
 
