@@ -23,6 +23,7 @@ function G0V_LEARN_FROM_BDAP {
 	SD_LEARN "${uri}.csv" "${uri}.csv" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' - |gateways/${gw}.php ${uri}.csv"
 }
 
+G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_pig spd_lbf_spe_elb_pig_01_2020
 G0V_LEARN_FROM_BDAP spd_dlb_spe_elb_pig spd_dlb_spe_elb_pig_01_2020
 G0V_LEARN_FROM_BDAP spd_dlb_not_azi spd_dlb_not_azi_azioni_01_2020
 G0V_LEARN_FROM_BDAP spd_pas_spe_elb_pig spd_pas_spe_elb_pig_01_2019

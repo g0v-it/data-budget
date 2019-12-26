@@ -24,8 +24,8 @@ CONSTRUCT {
 	    bgo:hasAccountView app:account_view 
 	.
 } WHERE { 
-	?budget a mef:Budget ; mef:esercizio ?refdate .	
-    FILTER NOT EXISTS {?budget2 mef:esercizio ?refdate2 FILTER (?refdate2 > ?refdate)}
+	?budget a mef:Budget ; mef:versionId ?refdate ;	mef:esercizio ?esercizio .
+    FILTER NOT EXISTS {?budget2 mef:versionId  ?refdate2 FILTER (STR(?refdate2) > STR(?refdate))}
     
     ?budget a ?budgetType .
     ?budgetType rdfs:subClassOf mef:Budget ;
@@ -40,7 +40,7 @@ CONSTRUCT {
     	dct:abstract ?abstractTemplate ;
     	dct:license ?copyright .
     
-	BIND( CONCAT( STR(?label), " ", STR(?refdate)) AS ?title )
+	BIND( CONCAT( STR(?label), " ", STR(?esercizio)) AS ?title )
     BIND( REPLACE(STR(?descriptionTemplate), "%title%", STR(?title) ) AS ?description )
     BIND( REPLACE(REPLACE(STR(?abstractTemplate), "%comment%", STR(?comment) ), "%uri%", STR(?budget)) AS ?abstract )
     

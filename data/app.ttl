@@ -255,7 +255,8 @@ Ogni violazione sarà segnalata alle Forze di Polizia ed alle Autorità Giudizia
 
 ###### Trend Color Scheme #######
 :trend_color_scheme a bgo:TrendColorScheme ;
-    bgo:title "Variazione percentuale rispetto all'anno precedente." ;
+#    bgo:title "Variazione percentuale rispetto all'anno precedente." ;
+    bgo:title "Variazione percentuale rispetto alla versione precedente." ;
     bgo:noTrendColor "#cdcdcd"^^bgo:RGB ;
     bgo:rateTreshold # all are bgo:RateTreshold
 		[ bgo:rate 0.50 ; 	bgo:colorId "#a50026"^^bgo:RGB ] ,

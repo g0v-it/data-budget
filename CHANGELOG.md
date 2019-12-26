@@ -5,6 +5,22 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## 3.2.1
+
+n.b. questa versione mantiene sia il disegno di legge che la legge per evidenziare
+le differenze intercorse tra le due aprovazioni.
+
+E' prevista la versione 3.2.2 in cui il disegno di legge sarà rimosso.
+
+### Added
+
+- Legge di bilancio 2020 releases (keept disegno di legge)
+
+
+### Changed
+
+- STRINGA LEGENDA TREND (DA VARIARE ALLA VERSIONE 3.2.2)
+
 
 ## 3.2.0
 
