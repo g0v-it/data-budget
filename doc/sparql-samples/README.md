@@ -119,4 +119,25 @@ WHERE{
 
 ```
 
-[Provala su YasGUI](http://yasgui.org/short/lYxSMkpoc)
+## quali sono le nuove azioni create ?
+
+Questa query identifica le azioni che non erano presenti in precedenti edizioni del bilancio:
+
+```sparql
+PREFIX bgo: <http://linkeddata.center/lodmap-bgo/v1#>
+PREFIX mef: <http://w3id.org/g0v/it/mef#>
+
+SELECT DISTINCT ?visualizza ?ministero ?descrizione_azione ?valore 
+WHERE{ 
+    ?azione a mef:Azione;
+      mef:definition ?descrizione_azione ;
+      foaf:isPrimaryTopicOf ?visualizza ;
+      mef:competenza ?valore ;
+  	  mef:isPartOf/mef:isPartOf/mef:isPartOf ?amministrazione .
+    ?amministrazione a mef:Ministero ;
+  		mef:definition ?ministero ;
+  FILTER NOT EXISTS { ?azione bgo:referenceAmount [] }
+} ORDER BY ?ministero DESC(?valore)  
+```
+
+[Provala su YasGUI](http://yasgui.org/short/VHI7NsfUm)
