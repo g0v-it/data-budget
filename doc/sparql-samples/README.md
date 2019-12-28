@@ -126,6 +126,7 @@ Questa query identifica le azioni che non erano presenti in precedenti edizioni 
 ```sparql
 PREFIX bgo: <http://linkeddata.center/lodmap-bgo/v1#>
 PREFIX mef: <http://w3id.org/g0v/it/mef#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 SELECT DISTINCT ?visualizza ?ministero ?descrizione_azione ?valore 
 WHERE{ 
@@ -140,4 +141,4 @@ WHERE{
 } ORDER BY ?ministero DESC(?valore)  
 ```
 
-[Provala su YasGUI](http://yasgui.org/short/VHI7NsfUm)
+[Provala su YasGUI](http://yasgui.org/short/Tsa8ti6Mz)
