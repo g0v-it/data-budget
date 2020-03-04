@@ -35,20 +35,22 @@ Le cifre sono espresse in euro
 
 
 ```sparql
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX bgo: <http://linkeddata.center/lodmap-bgo/v1#>
 
-SELECT ?title  ?difference
+SELECT ?title  ?difference 
 WHERE { 
   ?account a bgo:Account ; 
            bgo:title ?title ;
            bgo:amount ?amount; 
-           bgo:referenceAmount ?previousAmount.
+           bgo:referenceAmount ?previousAmount .
   BIND( ?amount - ?previousAmount AS ?difference)
-} ORDER BY DESC(?difference) LIMIT 10
+  FILTER (?difference != 0)
+} ORDER BY DESC(ABS(?difference)) LIMIT 10
 ```
 
 
-[Provala su YasGUI](http://yasgui.org/short/BSAgDyK3R) , con grafico a torta
+[Provala su YasGUI](http://yasgui.org/short/eNVXTwtHt) , con grafico 
 
 
 
@@ -117,4 +119,26 @@ WHERE{
 
 ```
 
-[Provala su YasGUI](http://yasgui.org/short/lYxSMkpoc)
+## quali sono le nuove azioni create ?
+
+Questa query identifica le azioni che non erano presenti in precedenti edizioni del bilancio:
+
+```sparql
+PREFIX bgo: <http://linkeddata.center/lodmap-bgo/v1#>
+PREFIX mef: <http://w3id.org/g0v/it/mef#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT DISTINCT ?visualizza ?ministero ?descrizione_azione ?valore 
+WHERE{ 
+    ?azione a mef:Azione;
+      mef:definition ?descrizione_azione ;
+      foaf:isPrimaryTopicOf ?visualizza ;
+      mef:competenza ?valore ;
+  	  mef:isPartOf/mef:isPartOf/mef:isPartOf ?amministrazione .
+    ?amministrazione a mef:Ministero ;
+  		mef:definition ?ministero ;
+  FILTER NOT EXISTS { ?azione bgo:referenceAmount [] }
+} ORDER BY ?ministero DESC(?valore)  
+```
+
+[Provala su YasGUI](http://yasgui.org/short/Tsa8ti6Mz)
