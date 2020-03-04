@@ -18,14 +18,26 @@ SD_LOG  "Starting learning window: loading known facts..."
 ##############################################################################
 function G0V_LEARN_FROM_BDAP {
 	local gw="$1"
-	local uri="$(gateways/bdap.php -u $2)"  # CKAN API for metadata
+	local uri="$(gateways/bdap.php -u $2)"  # Get CKAN API endpoint for metadata
 	SD_LEARN "${uri}" "${uri}" "|in|out|.ttl|gateways/ckan-meta.php"
 	SD_LEARN "${uri}.csv" "${uri}.csv" "|in|out|.ttl|iconv -f 'windows-1252' -t 'UTF-8' - |gateways/${gw}.php ${uri}.csv"
 }
 
+# Acronimi:
+#  - lbf : Legge di bilancio
+#  - dlb : Disegno legge di bilancio
+#  - rnd : Rendiconto
+#  - spe : spese
+#  - pig : piano di gestione
+#  - not : note integrative
+#  - azi : azioni
+#
+# Formato comando:
+# G0V_LEARN_FROM_BDAP <gateway to be used> <document code in the BDAP CKAN archive>
+
 G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_pig spd_lbf_spe_elb_pig_01_2020
-G0V_LEARN_FROM_BDAP spd_dlb_spe_elb_pig spd_dlb_spe_elb_pig_01_2020
-G0V_LEARN_FROM_BDAP spd_dlb_not_azi spd_dlb_not_azi_azioni_01_2020
+#G0V_LEARN_FROM_BDAP spd_dlb_spe_elb_pig spd_dlb_spe_elb_pig_01_2020
+G0V_LEARN_FROM_BDAP spd_dlb_not_azi     spd_dlb_not_azi_azioni_01_2020
 G0V_LEARN_FROM_BDAP spd_pas_spe_elb_pig spd_pas_spe_elb_pig_01_2019
 
 G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_pig spd_lbf_spe_elb_pig_01_2019

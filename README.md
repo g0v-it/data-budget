@@ -2,7 +2,7 @@
 
 # G0V data-budget
 
-data-budget is a *Smart Data Management Platform* to feed the http://budget.g0v.it/ web application.
+data-budget is the *Smart Data Management Platform* that feeds the http://budget.g0v.it/ web application.
 
 The platform extracts the main financial facts from the official [open data portal](https://bdap-opendata.mef.gov.it) provided 
 by the "Ministero dell'Economia e Finance" and produces a knowledge graph according with the [mef-ap profile](mef-ap/README.md).
@@ -12,7 +12,7 @@ Data consumer agents (e.g. http://budget.g0v.it/), access such knowledge through
 The data-budget project uses the [Smart Data as a Service platform (SDaaS)](https://github.com/linkeddatacenter/sdaas-ce) to provide:
 
 - a set of gateways to transform the raw data provided by from the [MEF Open Data Portal](https://openbdap.mef.gov.it) into linked data;
-- a data ingestion engine and a knowledge graph building script to drive the learning and of Italian Government budget; 
+- a data ingestion engine and a knowledge graph building script to drive the learning of the Italian Government budget data; 
 - an RDF quad-store for persist the knowledge graph; 
 
 data-budget exposes three interfaces:
@@ -23,7 +23,7 @@ data-budget exposes three interfaces:
 
 data-budget is designed to be the data provider component of a general system architecture composed by:
 
-- optional *API interfaces* (e.g. LODMAP2D-api) that query the SPARQL endpoint and expose knowledge graph views as expected by software agents. 
+- optional *API interfaces* (e.g. LODMAP2D-api) that queries the SPARQL endpoint and exposes knowledge graph portions as expected by software agents. 
 - one or more software agents to explore the knowledge graph (e.g LODMAP2D, YASGUI, LODVIEW, etc., etc.)
 
 ![architecture](doc/architecture.png)
@@ -63,8 +63,8 @@ docker run -d --name lodmap2d -e LODMAP2D_DATA=http://localhost:29322/ -p 29323:
 
 Point your browser to http://localhost:29323/ refresh the page and enjoy.
 
-The first time you start the containers, Docker downloads and builds images for you. It will take some time, but don't worry
-this is done only once. Starting servers will then be lightning fast.
+The first time you start the containers, Docker downloads and runs the latest versin of the required docker images. 
+It will take some time, but don't worry this is done only once. Starting servers will then be lightning fast.
 
 
 To shutdown the platform type: 

@@ -8,7 +8,6 @@ Pull requests for bug fixes must be based on the current stable branch whereas
 pull requests for new features must be based on `master`.
 
 
-
 ## Pull Request Process
 
 1. Ensure any install or build dependencies are removed before the end of the layer when doing a 
@@ -55,6 +54,7 @@ The following skills are suggested in developing this project:
     - Turtle 1.1 primer
     - Sparql 1.1 (for axioms develoment)
 - base php 7 ( for gateway development)
+- SDaaS Platform Community edition
 
 Useful learning starting points:
 
@@ -62,7 +62,7 @@ Useful learning starting points:
 - https://docs.docker.com/get-started/
 - http://rubenverborgh.github.io/WebFundamentals/semantic-web/
 - https://www.php.net/manual/en/tutorial.php
-
+- https://github.com/linkeddatacenter/sdaas-ce
 
 
 ### Start the SDaaS platform
@@ -70,7 +70,7 @@ Useful learning starting points:
 To start sdaas cli:
 
 ```
-docker run -d -p 9999:8080 -e JAVA_OPTS="-Xmx2g" -v $PWD/.:/workspace --name kb linkeddatacenter/sdaas-ce
+docker run -d -p 9999:8080 -e JAVA_OPTS="-Xmx2g" -v ${PWD}:/workspace --name kb linkeddatacenter/sdaas-ce
 docker exec -ti kb bash
 apk --no-cache add php7 php7-json php7-mbstring
 ```

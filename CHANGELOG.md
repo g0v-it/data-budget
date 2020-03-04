@@ -5,6 +5,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+
+## 3.2.2
+
+Rimosso il disegno di legge e evidenziate le differenze tra anni precedenti.
+
+
 ## 3.2.1
 
 n.b. questa versione mantiene sia il disegno di legge che la legge per evidenziare
