@@ -5,7 +5,7 @@
 data-budget is the *Smart Data Management Platform* that feeds the http://budget.g0v.it/ web application.
 
 The platform extracts the main financial facts from the official [open data portal](https://bdap-opendata.mef.gov.it) provided 
-by the "Ministero dell'Economia e Finance" and produces a knowledge graph according with the [mef-ap profile](mef-ap/README.md).
+by the "Ministero dell'Economia e Finance" and produces a Knowledge Graph according with the [mef-ap profile](mef-ap/README.md).
 
 Data consumer agents (e.g. http://budget.g0v.it/), access such knowledge through a SPARQL service, as suggested by the Semantic Web standards.
 
