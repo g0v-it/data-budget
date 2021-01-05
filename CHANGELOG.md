@@ -5,6 +5,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## 4.0.0
+
+Allineato a legge di bilancio 2021. Confronto con leggi di bilancio dal 2017
 
 ## 3.2.2
 

@@ -27,6 +27,7 @@ function G0V_LEARN_FROM_BDAP {
 #  - lbf : Legge di bilancio
 #  - dlb : Disegno legge di bilancio
 #  - rnd : Rendiconto
+#  - pas : provvedimento di assestamento elaborabile
 #  - spe : spese
 #  - pig : piano di gestione
 #  - not : note integrative
@@ -34,17 +35,20 @@ function G0V_LEARN_FROM_BDAP {
 #
 # Formato comando:
 # G0V_LEARN_FROM_BDAP <gateway to be used> <document code in the BDAP CKAN archive>
-
-G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_pig spd_lbf_spe_elb_pig_01_2020
+# Esempi:
+#G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_pig spd_lbf_spe_elb_pig_01_2020
 #G0V_LEARN_FROM_BDAP spd_dlb_spe_elb_pig spd_dlb_spe_elb_pig_01_2020
-G0V_LEARN_FROM_BDAP spd_dlb_not_azi     spd_dlb_not_azi_azioni_01_2020
-G0V_LEARN_FROM_BDAP spd_pas_spe_elb_pig spd_pas_spe_elb_pig_01_2019
+#G0V_LEARN_FROM_BDAP spd_dlb_not_azi     spd_dlb_not_azi_azioni_01_2020
+#G0V_LEARN_FROM_BDAP spd_pas_spe_elb_pig spd_pas_spe_elb_pig_01_2019
+#G0V_LEARN_FROM_BDAP spd_rnd_spe_elb_pig spd_rnd_spe_elb_pig_01_2018
+#G0V_LEARN_FROM_BDAP spd_rnd_spe_elb_pig spd_rnd_spe_elb_pig_01_2017
 
+G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_pig spd_lbf_spe_elb_pig_01_2021
+G0V_LEARN_FROM_BDAP spd_dlb_not_azi     spd_dlb_not_azi_azioni_01_2021
+G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_pig spd_lbf_spe_elb_pig_01_2020
 G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_pig spd_lbf_spe_elb_pig_01_2019
 G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_pig spd_lbf_spe_elb_pig_01_2018
-G0V_LEARN_FROM_BDAP spd_rnd_spe_elb_pig spd_rnd_spe_elb_pig_01_2018
 G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_pig spd_lbf_spe_elb_pig_01_2017
-G0V_LEARN_FROM_BDAP spd_rnd_spe_elb_pig spd_rnd_spe_elb_pig_01_2017
 
 
 ##############################################################################
