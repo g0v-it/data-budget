@@ -56,7 +56,7 @@ WHERE {
 
 ## Ricerca semantica
 
-Cerca stringhe simili a *vigili del fuoco* nella definizione nei fatti dell'ultimo bilancio pubblicato (`bgo:Domain`). 
+Cerca stringhe riferibili alla pandemia  nella definizione nei fatti dell'ultimo bilancio pubblicato (`bgo:Domain`). 
 Per ciascun fatto rilevante, esprime il valore di budget per competenza(in euro). Il risultato è limitato ai 10 fatti più rilevanti.
 
 I fatti sono definiti nei *Piani di Gestione*  (`mef:PianoDiGestione`) che rappresentano il livello più dettagliato  delle voci di spesa
@@ -70,9 +70,9 @@ PREFIX mef: <http://w3id.org/g0v/it/mef#>
 
 SELECT DISTINCT ?pdg ?competenza ?definition 
 WHERE { 
-    ?definition bds:search "vigili del fuoco" ;
+    ?definition bds:search "vaccino vaccini covid19" ;
         bds:matchAllTerms "true" ; 
-        bds:minRelevance 0.25 .
+        bds:minRelevance 0.10 .
 
     ?budget a bgo:Domain .
     ?pdg a mef:PianoDiGestione ; 
@@ -87,7 +87,7 @@ l'[Ontologia del Bilancio (mef)](http://w3id.org/g0v/it/mef) e una estensione di
 
 Le informazioni ritornate non sono direttamente visibili dall'interfaccia a bolle perchè riguardano un'analisi più profonda del bilancio
 
-[Provala su YasGUI](http://yasgui.org/short/Iov-ZDsb4)
+[Provala su YasGUI](https://api.triplydb.com/s/MMgrtCCtQ)
 
 
 ## Ricerca semantica su azione
