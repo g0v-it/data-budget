@@ -70,8 +70,8 @@ PREFIX mef: <http://w3id.org/g0v/it/mef#>
 
 SELECT DISTINCT ?pdg ?competenza ?definition 
 WHERE { 
-    ?definition bds:search "vaccino vaccini covid19" ;
-        bds:matchAllTerms "true" ; 
+    ?definition bds:search "vaccino vaccini covid19 sars" ;
+        bds:matchAllTerms "false" ; 
         bds:minRelevance 0.10 .
 
     ?budget a bgo:Domain .
@@ -87,7 +87,7 @@ l'[Ontologia del Bilancio (mef)](http://w3id.org/g0v/it/mef) e una estensione di
 
 Le informazioni ritornate non sono direttamente visibili dall'interfaccia a bolle perchè riguardano un'analisi più profonda del bilancio
 
-[Provala su YasGUI](https://api.triplydb.com/s/MMgrtCCtQ)
+[Provala su YasGUI](https://api.triplydb.com/s/5jwhTWvJz)
 
 
 ## Ricerca semantica su azione
