@@ -78,8 +78,8 @@ As corollary, the notation is used to infer links between different budget repor
 
 | base type               | regexp                                                   | esempio         |
 |-------------------------|----------------------------------------------------------|-----------------|
-| mef:Budget              | \d\d(L|D|P|R)*                                           | 19B             |
-| skos:ConceptScheme      | {mef budgetid}T(SMMPACP|SMRMP|SMTC|STCCP|SMP|ETNT|ETTPCA)| 19ATSMMPACP     |
+| mef:Budget              | `\d\d(L|D|P|R)*`                                         | 19B             |
+| skos:ConceptScheme      | `{mef budgetid}T(SMMPACP|SMRMP|SMTC|STCCP|SMP|ETNT|ETTPCA)| 19ATSMMPACP`   |
 | mef:StructuralComponent | {mef budgetid}[SE]{skos:notation}                        | 19A1Sa1m1p1a1   |
 
 
