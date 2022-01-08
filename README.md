@@ -43,6 +43,8 @@ To try the latest platform release, an example stack of services is provided. Ju
 docker-compose up -d
 ```
 
+
+
 This will start locally the following services:
 
 
@@ -55,15 +57,16 @@ This will start locally the following services:
 - try http://localhost:29322/app.ttl to test the [LODMAP2D-api](https://github.com/linkeddatacenter/LODMAP2D-api) endpoint
 
 
-To test the platform with  LODMAP2D type:
+To test the platform with LODMAP2D type:
 
 ```
 docker run -d --name lodmap2d -e LODMAP2D_DATA=http://localhost:29322/ -p 29323:80 linkeddatacenter/lodmap2d
 ```
 
-Point your browser to http://localhost:29323/ refresh the page and enjoy.
+Point your browser to http://localhost:29323/ refresh the page and enjoy. 
+**REMEMBER TO CLEAR THE BROWSE CACHE**
 
-The first time you start the containers, Docker downloads and runs the latest versin of the required docker images. 
+The first time you start the containers, Docker downloads and runs the latest versino of the required docker images. 
 It will take some time, but don't worry this is done only once. Starting servers will then be lightning fast.
 
 
@@ -77,8 +80,6 @@ docker rm -f lodmap2d
 Developers should read [CONTRIBUTING file](CONTRIBUTING.md)
 
 ## Support
-
-For answers you may not find in here or in the Wiki, avoid posting issues. Feel free to ask for support on the [Slack](https://copernicani.slack.com/) general room. Make sure to mention **@enrico** so he is notified
 
 
 ## Credits

@@ -5,6 +5,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## 5.0.0
+
+- Allineato a legge di bilancio 2022. Confronto con leggi di bilancio dal 2017
+- Modificato loading della ontologia
+- eliminata dipendenza composer da php
+- aggiunti chmod per php e rimozione .cache
+- modificati test su kb
+
+ATTENZIONE: la versione di SDaaS é obsolegente...
+
+
 ## 4.0.0
 
 Allineato a legge di bilancio 2021. Confronto con leggi di bilancio dal 2017

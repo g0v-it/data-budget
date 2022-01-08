@@ -6,12 +6,13 @@ ASK {
   # Competenze legge di bilancio 2020
   resource:20L a mef:Budget; mef:spese/mef:competenza ?20L_competenza .
   FILTER( ?20L_competenza = 897423599901.00  )
+
+  # Competenze legge di bilancio 2021
+  resource:21L a mef:Budget; mef:spese/mef:competenza ?21L_competenza .
+  FILTER( ?21L_competenza = 1060697407565.00  )
+
+  # Competenze legge di bilancio 2022
+  resource:22L a mef:Budget; mef:spese/mef:competenza ?22L_competenza .
+  FILTER( ?22L_competenza = 1093956278557.00  )
   
-  # Assestamento 2019
-  resource:19P a mef:Budget; mef:spese/mef:competenza ?19P_competenza .
-  FILTER( ?19P_competenza = 863960336140.00  )
-  
-  # Rendiconto 2018
-  resource:18R a mef:Budget; mef:spese/mef:competenza ?18R_competenza .
-  FILTER( ?18R_competenza = 816701526202.57  )
 }

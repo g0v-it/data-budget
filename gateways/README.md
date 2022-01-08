@@ -16,16 +16,18 @@ Retrieve gateways dependencies using [Composer](http://getcomposer.org/):
 
 
 ```shell
-docker run --rm -ti -v $PWD/.:/app composer install
-docker run --rm -ti -v $PWD/.:/app composer update
+docker run --rm -ti -v $PWD/.:/app composer:2 install --ignore-platform-reqs
+docker run --rm -ti -v $PWD/.:/app composer:2 update --ignore-platform-reqs
 ```
 
 
 Gateways can be tested stand alone just with any host providing php7+; e.g.:
 
 ```
-docker run --rm -ti -v $PWD/.:/app -w /app php bash
-function mef_test { cat tests/$2 | ./$1 $2 | curl -f --data-urlencode content@- http://rdf-translator.appspot.com/convert/n3/n3/content ; }
+docker run --rm -ti -v $PWD/.:/app -w /app php:7 bash
+apt-get update -y && apt-get install -y raptor2-utils
+chmod +x *.php
+function mef_test { cat tests/$2 | ./$1 $2 |  rapper -q -i turtle -o ntriples - urn:null: ; }
 
 mef_test ckan-meta.php ckan-meta.json
 mef_test spd_dlb_spe_elb_pig.php spd_dlb_spe_elb_pig_01_2020.csv 
@@ -40,5 +42,5 @@ exit
 The gateways generate RDF statements serialized in turtle. Check the gateway results using an online service like http://rdf-translator.appspot.com/
 
 
-The `SD_LEARN` SDaaS command automates the data trasformation process. 
+The `SD_LEARN` SDaaS command automates the data transformation process. 
  

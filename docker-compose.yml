@@ -1,6 +1,7 @@
 version: '3'
 services:
   sdaas:
+    build: .
     image: copernicani/data-budget-sdaas
     ports:
       - "29321:8080"

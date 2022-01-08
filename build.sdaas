@@ -9,7 +9,7 @@ SD_INCLUDE testing
 SD_LOG "Starting booting window: loading knowledge TBOX...."
 ##############################################################################
 SD_LEARN urn:sdaas:config "data/kees.ttl"
-SD_LEARN http://w3id.org/g0v/it/mef
+SD_LEARN http://w3id.org/g0v/it/mef https://g0v-it.github.io/ontologies/mef/mef.rdf
 SD_LEARN "${GRAPH}app_graph" "data/app.ttl"
 
 
@@ -43,8 +43,9 @@ function G0V_LEARN_FROM_BDAP {
 #G0V_LEARN_FROM_BDAP spd_rnd_spe_elb_pig spd_rnd_spe_elb_pig_01_2018
 #G0V_LEARN_FROM_BDAP spd_rnd_spe_elb_pig spd_rnd_spe_elb_pig_01_2017
 
+G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_pig spd_lbf_spe_elb_pig_01_2022
+G0V_LEARN_FROM_BDAP spd_dlb_not_azi     spd_dlb_not_azi_azioni_01_2022
 G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_pig spd_lbf_spe_elb_pig_01_2021
-G0V_LEARN_FROM_BDAP spd_dlb_not_azi     spd_dlb_not_azi_azioni_01_2021
 G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_pig spd_lbf_spe_elb_pig_01_2020
 G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_pig spd_lbf_spe_elb_pig_01_2019
 G0V_LEARN_FROM_BDAP spd_lbf_spe_elb_pig spd_lbf_spe_elb_pig_01_2018

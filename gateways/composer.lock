@@ -51,6 +51,10 @@
                 "RDF",
                 "open data"
             ],
+            "support": {
+                "issues": "https://github.com/linkeddatacenter/BOTK-core/issues",
+                "source": "https://github.com/linkeddatacenter/BOTK-core/tree/7.6.1"
+            },
             "time": "2019-08-27T15:11:00+00:00"
         }
     ],
@@ -61,5 +65,6 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.2.0"
 }

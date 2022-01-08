@@ -70,23 +70,23 @@ Useful learning starting points:
 To start sdaas cli:
 
 ```
-docker run -d -p 9999:8080 -e JAVA_OPTS="-Xmx2g" -v ${PWD}:/workspace --name kb linkeddatacenter/sdaas-ce
+docker run -d -p 9999:8080 -e JAVA_OPTS="-Xmx2g" -v ${PWD}:/workspace --name kb linkeddatacenter/sdaas-ce:2.4.0
 docker exec -ti kb bash
 apk --no-cache add php7 php7-json php7-mbstring
+chmod +x gateways/*.php axioms/03-bgo-mapping/*.php
 ```
 
 Access the SDaaS workbench pointing browser to http://localhost:9999/sdaas
 
 
-### Edit locat data
+### Edit local data
 
 There are some data file local to this project in the *data* directory:
 
-- **app.ttl** contains the bgo static objects (menues, views and UI components) 
+- **app.ttl** contains the bgo static objects (menus, views and UI components) 
 - **kees.ttl** contains some metadata about the knowledge base itself
 
 
-The `SD_LEARN` SDaaS command automates the data ingestion process. 
 
 ### Stand alone gateways development and testing
 
@@ -97,9 +97,7 @@ write RDF turtle statements to STDOUT. Following gateways are available:
 
 See more in [README file in gateways directory](gateways/READEME.md)
 
-The `SD_LEARN` SDaaS command automates the data transformation process. 
- 
-### Axioms develoment
+### Axioms development
 
 SDaaS recognizes three types of axioms containers:
 
@@ -125,9 +123,10 @@ logs info and debug traces will be created in .cache directory . The  `--debug` 
 
 
 ### Stop the SDaaS platform
-To exit cli and free docker resouce:
+To exit cli and free docker resource:
 
 ```
+rm -rf .cache
 exit
 docker rm -f kb
 ```
@@ -137,9 +136,10 @@ docker rm -f kb
 You can pack data and services with :
 
 ```
-docker build . -t copernicani/data-budget-sdaas --no-cache
+docker build -t copernicani/data-budget-sdaas --no-cache .
 docker tag copernicani/data-budget-sdaas copernicani/data-budget-sdaas:x.y.z
 docker push copernicani/data-budget-sdaas
+docker push copernicani/data-budget-sdaas:x.y.z
 ```
 
 for x.y.z use [SemVer](http://semver.org/) specification.
