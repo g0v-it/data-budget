@@ -14,5 +14,8 @@ ASK {
   # Competenze legge di bilancio 2022
   resource:22L a mef:Budget; mef:spese/mef:competenza ?22L_competenza .
   FILTER( ?22L_competenza = 1093956278557.00  )
-  
+
+  # Competenze legge di bilancio 2023
+  resource:23L a mef:Budget; mef:spese/mef:competenza ?23L_competenza .
+  FILTER( ?23L_competenza = 1183723964094.00  )
 }

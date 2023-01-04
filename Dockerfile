@@ -19,7 +19,7 @@ ENV JAVA_OPTS="-Xmx2g"
 # start a temporary sdaas instance to rebuild the knowledge base (tith text index) 
 RUN /sdaas-start && \
 	cd /tmp/g0v; \
-	chmod +x gateways/*.php 03-bgo-mapping/*.php : \
+	chmod +x gateways/*.php 03-bgo-mapping/*.php ; \
 	sdaas -f build.sdaas --reboot && \
 	curl -X POST http://localhost:8080/sdaas/namespace/kb/textIndex?force-index-create=true && \
  	/sdaas-stop ; \

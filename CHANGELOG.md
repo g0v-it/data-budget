@@ -5,6 +5,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+
+## 6.0.0
+
+- Allineato a legge di bilancio 2023. Confronto con leggi di bilancio dal 2018
+- rmosso bug da dokerfile
+- modificati test su kb
+
+ATTENZIONE: la versione di SDaaS é obsolegente...
+
 ## 5.0.0
 
 - Allineato a legge di bilancio 2022. Confronto con leggi di bilancio dal 2017
