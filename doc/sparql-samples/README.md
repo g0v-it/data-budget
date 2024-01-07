@@ -25,7 +25,6 @@ WHERE {
 
 Entrambi i link sono navigabili, il primo come Linked Data, il secondo su https://budget.g0v.it/
 
-[Provala su YasGUI](http://yasgui.org/short/amZV357W9)
 
 
 ## I dieci maggiori incrementi di spesa in valore assoluto (report grafico)
@@ -48,9 +47,6 @@ WHERE {
   FILTER (?difference != 0)
 } ORDER BY DESC(ABS(?difference)) LIMIT 10
 ```
-
-
-[Provala su YasGUI](http://yasgui.org/short/eNVXTwtHt) , con grafico 
 
 
 
@@ -86,8 +82,6 @@ Questa query, oltre a BGO,  utilizza
 l'[Ontologia del Bilancio (mef)](http://w3id.org/g0v/it/mef) e una estensione di BLAZEGRAPH al linguaggio SPARQL standard.
 
 Le informazioni ritornate non sono direttamente visibili dall'interfaccia a bolle perchè riguardano un'analisi più profonda del bilancio
-
-[Provala su YasGUI](https://api.triplydb.com/s/5jwhTWvJz)
 
 
 ## Ricerca semantica su azione
@@ -140,5 +134,3 @@ WHERE{
   FILTER NOT EXISTS { ?azione bgo:referenceAmount [] }
 } ORDER BY ?ministero DESC(?valore)  
 ```
-
-[Provala su YasGUI](http://yasgui.org/short/Tsa8ti6Mz)

@@ -35,11 +35,6 @@ Elaborazione pubblicata da [Copernicani.it](https://copernicani.it/)
 
 :option_menu bgo:withCustomMenuItem 
 	[
-		bgo:icon "mdi-database-search" ;
-		bgo:title "Ricerca semantica..." ;
-		bgo:link <http://yasgui.org/short/lYxSMkpoc>
-	],
-	[
 		bgo:icon "mdi-webhook" ;
 		bgo:title "Linked Data..." ;
 		bgo:link <http://mef.linkeddata.cloud/resource/welcome>

@@ -17,7 +17,7 @@
 resource:welcome a kees:KnowledgeBase;
     void:sparqlEndpoint <http://data.budget.g0v.it/sdaas/sparql> ;
 	dct:title "budget.g0v.it knowledge base"@it; 
-	dct:description "Contiene la conoscenza sul Bilancio dello Stato Italiano dal 2018 al 2023."@it;
+	dct:description "Contiene la conoscenza sul Bilancio dello Stato Italiano dal 2019 al 2024."@it;
     dct:license <https://creativecommons.org/licenses/by/3.0/>;
 	rdfs:comment 
 		"Dati estratti da OpenBDAP by © RGS Ragioneria Generale dello Stato."@it,
@@ -27,7 +27,7 @@ resource:welcome a kees:KnowledgeBase;
 	dct:publisher resource:Copernicani ;
 	dct:creator resource:SDaaS ;
 	dct:source resource:openBDAP ;
- 	void:exampleResource resource:23L, resource:23La ;
+ 	void:exampleResource resource:24L, resource:24La ;
 	void:uriSpace "http://mef.linkeddata.cloud/resource/";
 	dct:subject <https://it.wikipedia.org/wiki/Bilancio_dello_Stato>;
 	foaf:page <https://budget.g0v.it/>

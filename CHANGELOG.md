@@ -6,6 +6,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 
 
+## 7.0.0
+
+- Allineato a legge di bilancio 2024. Confronto con leggi di bilancio dal 2019
+- modificati test su kb
+- modificato gateways/src/BDAP.ph per recepire la modifica al TLD ( da bdap-opendata.mef.gov.ita bdap-opendata.rgs.mef.gov.it)
+- eliminato il riferimento a jasgui da viste d'autore
+- eliminato menu ricerca semantica
+
+
 ## 6.0.0
 
 - Allineato a legge di bilancio 2023. Confronto con leggi di bilancio dal 2018

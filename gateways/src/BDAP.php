@@ -6,8 +6,8 @@ namespace MEF;
 
 class BDAP  
 {
-    const CKAN_DATASET = 'https://bdap-opendata.mef.gov.it/SpodCkanApi/api/1/rest/dataset/';
-    const CONTENT_PREFIX = 'https://bdap-opendata.mef.gov.it/content/';
+    const CKAN_DATASET = 'https://bdap-opendata.rgs.mef.gov.it/SpodCkanApi/api/1/rest/dataset/';
+    const CONTENT_PREFIX = 'https://bdap-opendata.rgs.mef.gov.it/content/';
     
     public static function stateId2MefType($stateId)
     {
