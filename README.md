@@ -92,4 +92,4 @@ Thanks to all project contributors, to the [Copernicani community](https://coper
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE) for more information.
+GNU AGPL 3.0 Please see [License File](LICENSE) for more information.
