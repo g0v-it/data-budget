@@ -3,10 +3,6 @@ PREFIX mef: <http://w3id.org/g0v/it/mef#>
 PREFIX resource: <http://mef.linkeddata.cloud/resource/>
 
 ASK {
-  # Competenze legge di bilancio 2020
-  resource:20L a mef:Budget; mef:spese/mef:competenza ?20L_competenza .
-  FILTER( ?20L_competenza = 897423599901.00  )
-
   # Competenze legge di bilancio 2021
   resource:21L a mef:Budget; mef:spese/mef:competenza ?21L_competenza .
   FILTER( ?21L_competenza = 1060697407565.00  )
@@ -22,4 +18,9 @@ ASK {
   # Competenze legge di bilancio 2024
   resource:24L a mef:Budget; mef:spese/mef:competenza ?24L_competenza .
   FILTER( ?24L_competenza = 1215086092281.00  )
+
+  # Competenze legge di bilancio 2025
+  resource:25L a mef:Budget; mef:spese/mef:competenza ?25L_competenza .
+  FILTER( ?25L_competenza = 1199544721805.00 ) 
+
 }

@@ -6,6 +6,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 
 
+## 8.0.0
+
+- Allineato a legge di bilancio 2025. Confronto con leggi di bilancio dal 2020
+- aggiornati test su kb (checksum_facts)
+
+
+
 ## 7.0.0
 
 - Allineato a legge di bilancio 2024. Confronto con leggi di bilancio dal 2019
